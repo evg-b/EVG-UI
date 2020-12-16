@@ -1,12 +1,12 @@
 module.exports = {
   title: 'EVG-UI',
   tagline: 'React компоненты основанная на идеях Material Design.',
-  url: 'https://your-docusaurus-test-site.com',
+  url: 'https://evg-ui.github.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
   favicon: 'img/favicon.ico',
   organizationName: 'EVG-UI', // Usually your GitHub org/user name.
-  projectName: 'EVG-UI', // Usually your repo name.
+  projectName: 'evg-ui.github.io', // Usually your repo name.
   themeConfig: {
     navbar: {
       title: 'EVG-UI',
@@ -23,7 +23,7 @@ module.exports = {
         },
         // {to: 'blog', label: 'Blog', position: 'left'},
         {
-          href: 'https://github.com/facebook/docusaurus',
+          href: 'https://github.com/evg-b/EVG-UI',
           label: 'GitHub',
           position: 'right',
         },
