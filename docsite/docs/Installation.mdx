@@ -1,0 +1,38 @@
+---
+id: Installation
+title: Installation
+sidebar_label: Installation
+---
+
+
+
+```sh
+npm install @evg-b/evg-ui --save или yarn install @evg-b/evg-ui
+```
+
+* Установите React версиий выше 16.9
+
+
+Чтобы сделать сборку компактнее вы можете импортировать в проект только нужные компоненты.
+```jsx
+import { Avatar, Badge, Button } from '@evg-b/evg-ui';
+```
+
+
+### Шрифт
+
+Material Design разрабатывался основываясь на шрифте `Roboto`.
+Подключите шрифт к вашему проекту чтобы все компоненты выглядили так как задумывалось. 
+
+```html
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
+```
+
+### Icon
+
+Так же вы можете использовать все 1.440+ svg иконок от Material Design в своих проектах.
+Подробнее про `icon`
+
+```sh
+npm install @evg-b/evg-icons --save или yarn install @evg-b/evg-icons
+```

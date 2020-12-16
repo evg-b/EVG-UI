@@ -1,0 +1,9 @@
+{
+  "version": "1.0.0",
+  "packages": [
+    "packages/*",
+    "exboard",
+    "docsite"
+  ],
+  "useWorkspaces": true
+}

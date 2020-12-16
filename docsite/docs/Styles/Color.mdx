@@ -1,0 +1,33 @@
+---
+id: Color
+title: Color
+sidebar_label: Color
+---
+import Palettes from '../../Example/Styles/Color/Palettes'
+import Contrast from '../../Example/Styles/Color/Contrast'
+
+## Palettes
+
+Эти цветовые палитры, изначально созданные Material Design в 2014 году, состоят из цветов, гармонично сочетающихся друг с другом.
+Автоконтрастность в нескольких отенках цветов измененна незначительно, для лучшей читаемости.
+
+<Palettes />
+
+## Contrast
+
+Функция Color() принимает на вход цвет и определяет 
+контрастный белый или черный цвет для лучшей читаемости текста. 
+Функция озвращает объект с полями Color и Contrast в hex формате.
+
+```js
+Color('blue700')
+return {
+    Color: '#1976D2',
+    Contrast: '#FFFFFF'
+}
+```
+Форматы цвета которые может принимать функция Color() [NamePalettes/hex/rba(a)/hsl]
+
+<Contrast />
+
+## BrightChange

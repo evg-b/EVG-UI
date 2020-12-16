@@ -1,0 +1,7 @@
+import React from 'react';
+import CreateSvgIcon from '../CreateSvgIcon'
+
+export default CreateSvgIcon({
+    path: <React.Fragment><path d="M0 0h24v24H0V0z" fill="none"/><path d="M5.59 7.41L10.18 12l-4.59 4.59L7 18l6-6-6-6zM16 6h2v12h-2z"/></React.Fragment>,
+    name: 'LastPage',
+})
