@@ -46,11 +46,3 @@ Material Design разрабатывался основываясь на шри�
 ```html
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
 ```
-
-### Icon
-
-Так же вы можете использовать все 1.440+ svg иконок от Material Design в своих проектах.
-
-```sh
-npm install @evg-b/evg-icons --save или yarn install @evg-b/evg-icons
-```

@@ -1,6 +1,6 @@
 <p align="center">
   <a href="">
-    <img width="100%" height="100%" src="https://raw.githubusercontent.com/VKCOM/VKUI/HEAD/styleguide/assets/static/iconsLittle.gif?raw=true">
+    <img width="100%" height="100%" src="https://raw.githubusercontent.com/evg-b/EVG-UI/main/packages/evg-icons/static/icons.gif">
   </a>
 </p>
 
