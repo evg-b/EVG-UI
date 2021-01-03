@@ -1,4 +1,4 @@
-import React, { useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-jss';
 import classNames from 'classnames'
@@ -6,6 +6,7 @@ import Color from '../utils/Color'
 import hexToRGBA from '../utils/hexToRGBA'
 import Elevation from '../utils/Elevation'
 import ButtonBase from '../ButtonBase'
+import Loader from '../Loader'
 
 const styles = {
     base: {
@@ -16,6 +17,7 @@ const styles = {
     },
     buttonLabel: {
         display: 'inline-flex',
+        alignItems: 'center',
         fontFamily: 'Roboto, sans-serif',
         letterSpacing: '.0892857143em',
         lineHeight: '1.7',
@@ -49,24 +51,24 @@ const styles = {
         height: '28px',
         minWidth: '56px',
         fontSize: '.815rem',
-        padding: '6px 10px',
+        padding: '0 10px',
     },
     medium: {
         height: '36px',
         minWidth: '64px',
         fontSize: '.875rem',
-        padding: '0 16px 0 16px',
+        padding: '0 16px',
     },
     large: {
         height: '42px',
         minWidth: '72px',
         fontSize: '1.2rem',
-        padding: '12px 24px',
+        padding: '0 24px',
     },
     extra: {
-        height: '46px',
-        fontSize: '1.4rem',
-        padding: '12px 24px',
+        height: '48px',
+        fontSize: '1.6rem',
+        padding: '0 24px',
         width: '100%',
     },
     // size
@@ -86,26 +88,34 @@ const styles = {
         marginLeft: '8px',
         marginRight: '-4px',
     },
+    loaderFull: {
+        position: 'absolute',
+    }
 
 }
-
+const MapSizeLoader = {
+    'small': 18,
+    'medium': 24,
+    'large': 36,
+    'extra': 48,
+}
 const Button = React.forwardRef(function Button(props, ref) {
     const {
         classes,
         className,
         children,
-        component = 'button',
-        color = 'default', // default || primary || warn || success || fail
-        size = 'medium',
-        uppercase = true,
-        round = false, // true - круглые края
-        variant = 'text', //  text | contained | outlined
-        elevation = true,
+        component,
+        color, // default || primary || warn || success || fail
+        size,
+        uppercase,
+        round, // true - круглые края
+        variant, //  text | contained | outlined
+        elevation,
+        loading,
         startIcon: StartIcon,
         endIcon: EndIcon,
         ...otherProps
     } = props
-    const ButtonRef = ref ? ref : useRef(null)
 
     let Component = otherProps.href ? 'a' : component
 
@@ -123,6 +133,13 @@ const Button = React.forwardRef(function Button(props, ref) {
             })}
         </span>
     )
+    const buttonLabel = (
+        <span className={classes.buttonLabel} style={loading && !StartIcon && !EndIcon ? { visibility: 'hidden' } : null}>
+            {loading && StartIcon ? <Loader className={classes.startIcon} size={MapSizeLoader[size]} depth={size === 'small' ? 2 : 3} /> : startIcon}
+            {children}
+            {endIcon}
+        </span>
+    )
     return (
         <ButtonBase
             className={classNames(
@@ -132,39 +149,82 @@ const Button = React.forwardRef(function Button(props, ref) {
                 {
                     [classes.uppercase]: uppercase,
                     [classes.round]: round,
-                    // [classes.variantContained]: elevation && variant === 'contained',
                     [classes.elevation]: elevation && variant === 'contained',
                 },
                 className
             )}
             color={Color(color).Color}
             contrast={variant === 'contained' || color === 'default' ? true : false}
-            ref={ButtonRef}
+            ref={ref}
             type={Component}
             {...otherProps}
         >
-            {startIcon}
-            <span className={classes.buttonLabel}>
-                {children}
-
-            </span>
-            {endIcon}
+            {loading && !StartIcon && !EndIcon ? <Loader className={classes.loaderFull} size={MapSizeLoader[size]} /> : null}
+            {buttonLabel}
         </ButtonBase >
     )
 })
 
 Button.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+    /**
+     * Корнево узел. Это HTML элемент или компонент.
+    */
     component: PropTypes.elementType,
+    /**
+     * Название цвета в разных форматах.
+    */
     color: PropTypes.string,
+
+    /**
+     * Размер компонента.
+    */
     size: PropTypes.oneOf(['small', 'medium', 'large', 'extra']),
+
+    /**
+     * Регистр текста.
+    */
     uppercase: PropTypes.bool,
+
+    /**
+     * Варианты кнопки.
+    */
     variant: PropTypes.oneOf(['text', 'outlined', 'contained']),
+
+    /**
+     * Круглые края кнопки.
+    */
     round: PropTypes.bool,
+
+    /**
+     * Отображение уровня высоты(тени) у кнопки.
+    */
     elevation: PropTypes.bool,
+
+    /**
+     * Статус загрузки.
+    */
+    loading: PropTypes.bool,
+
+    /**
+     * Контейнер элементов в начале. 
+    */
     startIcon: PropTypes.node,
+
+    /**
+     * Контейнер элементов в конце. 
+    */
     endIcon: PropTypes.node,
 }
 
@@ -176,6 +236,7 @@ Button.defaultProps = {
     round: false, // true - круглые края
     variant: 'text',
     elevation: true,
+    loading: false,
 }
 Button.displayName = 'ButtonEVG'
 export default withStyles(styles)(Button)

@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-jss';
 import ListItem from '../ListItem'
@@ -8,8 +8,6 @@ const styles = {
     base: {
 
     },
-
-
 };
 const SelectOption = React.forwardRef(function SelectOption(props, ref) {
     const {
@@ -37,10 +35,29 @@ const SelectOption = React.forwardRef(function SelectOption(props, ref) {
     )
 })
 SelectOption.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * ?
+    */
     onClick: PropTypes.func,
+
+    /**
+     * Value - number или string.
+    */
     value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
 }
 SelectOption.defaultProps = {

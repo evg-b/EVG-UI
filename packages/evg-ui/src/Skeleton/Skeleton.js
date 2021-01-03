@@ -1,4 +1,3 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-jss';
@@ -59,12 +58,12 @@ const Skeleton = React.forwardRef(function Skeleton(props, ref) {
         classes,
         className,
         component: Component = 'span',
-        type = '', // text | avatar
-        width = 80,
-        height = 80,
-        size = 0,
-        animation = true,
-        borderRadius = 0,
+        type,
+        width,
+        height,
+        size,
+        animation,
+        borderRadius,
         ...otherProps
     } = props
     let sizeStyle = {
@@ -92,7 +91,9 @@ const Skeleton = React.forwardRef(function Skeleton(props, ref) {
                 ...classesList,
                 {
                     [classes.wave]: animation,
-                })}
+                },
+                className
+            )}
             style={{
                 ...sizeStyle,
                 ...otherProps
@@ -101,14 +102,55 @@ const Skeleton = React.forwardRef(function Skeleton(props, ref) {
     )
 })
 Skeleton.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
+    children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * Корнево узел. Это HTML элемент или компонент.
+    */
     component: PropTypes.elementType,
+
+    /**
+     * Тип avatar,text,h1-h6. Можно несколько пример: 'text,h2'
+    */
     type: PropTypes.string,
+
+    /**
+     * Ширина компонента.
+    */
     width: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+    /**
+     * Высота компонента.
+    */
     height: PropTypes.oneOfType([PropTypes.number, PropTypes.string]),
+
+    /**
+     * Размер компонента.
+    */
     size: PropTypes.number,
+
+    /**
+     * Если true, анимация будет включена.
+    */
     animation: PropTypes.bool,
+
+    /**
+     * Style css border-radius
+    */
+    borderRadius: PropTypes.number,
 }
 Skeleton.defaultProps = {
     component: 'span',
@@ -116,7 +158,7 @@ Skeleton.defaultProps = {
     width: 80,
     height: 80,
     size: 0,
-    avatar: false,
+    borderRadius: 0,
     animation: true,
 }
 Skeleton.displayName = 'SkeletonEVG'

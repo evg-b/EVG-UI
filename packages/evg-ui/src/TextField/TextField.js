@@ -1,4 +1,3 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-jss';
@@ -7,14 +6,25 @@ import Color from '../utils/Color'
 
 const styles = {
     base: {
+        position: 'relative',
         display: 'flex',
         flexDirection: 'column',
+        paddingBottom: 20,
         '--evg-text-field-color': props => props.color === 'default' ? Color(props.color).Contrast : Color(props.color).Color,
         '&[disabled] > $textField, &[disabled] > $textField > $input': {
             cursor: 'default',
             pointerEvents: ' none',
             color: 'rgba(0, 0, 0, 0.26)',
-        }
+        },
+        '&[data-error]': {
+            '--evg-text-field-color': Color('red700').Color,
+            '& > $outlined, & > $filled': {
+                borderColor: 'var(--evg-text-field-color)',
+            },
+            '& > $helperLine,& > $textField > $notched > $notchedNotch > $label': {
+                color: 'var(--evg-text-field-color)',
+            }
+        },
     },
     textField: {
         position: 'relative',
@@ -41,7 +51,7 @@ const styles = {
         appearance: 'none',
         caretColor: 'var(--evg-text-field-color)',
         '&::placeholder': {
-            transition: 'opacity 100ms cubic-bezier(0.4, 0, 0.2, 1)',
+            transition: 'opacity 150ms cubic-bezier(0.4, 0, 0.2, 1)',
         },
         '&[data-islabel]::placeholder': {
             opacity: 0,
@@ -67,7 +77,7 @@ const styles = {
             height: 'auto',
             resize: 'vertical',
             padding: '0 16px 16px',
-            margin: '14px 1px 1px 0',
+            margin: '20px 1px 1px 0',
             lineHeight: '1.75rem',
         },
     },
@@ -77,7 +87,6 @@ const styles = {
         maxWidth: '133%',
         pointerEvents: 'none',
         transformOrigin: 'left top',
-        whiteSpace: 'nowrap',
         top: '1.05rem',
         transition: 'transform 150ms cubic-bezier(0.4, 0, 0.2, 1),color 150ms cubic-bezier(0.4, 0, 0.2, 1)',
         willChange: 'transform',
@@ -210,6 +219,9 @@ const styles = {
         },
     },
     helperLine: {
+        position: 'absolute',
+        width: '100%',
+        bottom: 0,
         color: 'rgba(0,0,0,.6)',
         paddingRight: '16px',
         paddingLeft: '16px',
@@ -274,26 +286,28 @@ const TextField = React.forwardRef(function TextField(props, ref) {
         classes,
         className,
         children,
-        component = 'input',
-        id = 'nameInputEVG',
-        color = 'default',
+        component,
+        id,
+        color,
         placeholder,
-        value = '',
+        value,
         labelText: LabelText = '',
         helperText: HelperText = '',
-        outlined = false,
-        fullWidth = false,
-        round = false, // true - круглые края
-        multiline = false,
-        rows = 1,
+        outlined,
+        fullWidth,
+        round, // true - круглые края
+        multiline,
+        error,
+        rows,
         // rowsMax = 1,
-        maxCount = 0,
+        maxCount,
         leadingIcon: LeadingIcon,
         trailingIcon: TrailingIcon,
         onChange,
         ...otherProps
     } = props
-    const Input_ref = ref || useRef()
+    let Input_ref = useRef()
+    Input_ref = ref || Input_ref
     const Component = multiline ? 'textarea' : component
 
     const [inputValue, setInputValue] = useState(value)
@@ -372,8 +386,10 @@ const TextField = React.forwardRef(function TextField(props, ref) {
                 classes.base,
                 {
                     [classes.fullWidth]: fullWidth,
-                }
+                },
+                className
             )}
+            data-error={error ? true : null}
             disabled={otherProps.disabled}
         >
             <div className={classNames(
@@ -414,32 +430,117 @@ const TextField = React.forwardRef(function TextField(props, ref) {
     )
 })
 TextField.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
-    id: PropTypes.string,
+
+    /**
+     * Корнево узел. Это HTML элемент или компонент.
+    */
+    component: PropTypes.elementType,
+
+    /**
+     * Название цвета в разных форматах.
+    */
     color: PropTypes.string,
+
+    /**
+     * id.
+    */
+    id: PropTypes.string,
+
+    /**
+     * Текст внутри поля формы, который исчезает при получении фокуса.
+    */
     placeholder: PropTypes.string,
-    value: PropTypes.string,
+
+    /**
+     * Value - number или string.
+    */
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+    /**
+     * label текст.
+    */
     labelText: PropTypes.string,
+
+    /**
+     * Вспомогательный текст под TextField.
+    */
     helperText: PropTypes.string,
+
+    /**
+     * Если true, примет outlined вид.
+    */
     outlined: PropTypes.bool,
+
+    /**
+     * Если true, TextField займет всю ширину родителя.
+    */
     fullWidth: PropTypes.bool,
+
+    /**
+     * Круглые края TextField.
+    */
     round: PropTypes.bool,
+
+    /**
+     * Если true, включиться многострочный режим.
+    */
     multiline: PropTypes.bool,
+
+    /**
+     * Режим отображения ошибки.
+    */
+    error: PropTypes.bool,
+
+    /**
+     * Количество строк в режиме multiline.
+    */
     rows: PropTypes.number,
+
+    /**
+     * Лимит текста в value.
+    */
     maxCount: PropTypes.number,
+
+    /**
+     * Контейнер элементов в начале. 
+    */
     leadingIcon: PropTypes.node,
+
+    /**
+     * Контейнер элементов в конце. 
+    */
     trailingIcon: PropTypes.node,
+
+    /**
+     * Вызывается при изменении состояния.
+    */
     onChange: PropTypes.func,
 }
 TextField.defaultProps = {
     id: 'nameInputEVG',
     color: 'default',
+    component: 'input',
+    value: '',
+    placeholder: '',
     outlined: false,
     fullWidth: false,
     round: false,
     multiline: false,
+    error: false,
     rows: 1,
     maxCount: 0,
 }

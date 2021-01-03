@@ -1,4 +1,4 @@
-import React, { useEffect } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-jss';
 import classNames from 'classnames';
@@ -62,40 +62,40 @@ const styles = {
     },
     name: 'TestName',
 }
-const metaThemeColor = (color) => {
-    let metaColor = document.querySelector('meta[name="theme-color"]')
-    let meta = document.createElement('meta');
-    if (metaColor && metaColor.content !== color) {
-        metaColor.setAttribute('content', color);
-    } else {
-        meta.name = 'theme-color';
-        meta.setAttribute('content', color);
-        document.getElementsByTagName('head')[0].appendChild(meta);
-    }
-}
+// const metaThemeColor = (color) => {
+//     let metaColor = document.querySelector('meta[name="theme-color"]')
+//     let meta = document.createElement('meta');
+//     if (metaColor && metaColor.content !== color) {
+//         metaColor.setAttribute('content', color);
+//     } else {
+//         meta.name = 'theme-color';
+//         meta.setAttribute('content', color);
+//         document.getElementsByTagName('head')[0].appendChild(meta);
+//     }
+// }
 const AppBar = React.forwardRef(function AppBar(props, ref) {
     const {
         classes,
         className,
         children,
-        color = 'default',
+        color,
         left,
         title,
         right,
-        position = 'fixed', // absolute || fixed || relative || static || sticky
-        titleCenter = false,
-        SystemColorBar = true,
+        position, // absolute || fixed || relative || static || sticky
+        titleCenter,
+        // SystemColorBar = true,
         ...otherProps
     } = props
 
-    useEffect(() => {
-        if (SystemColorBar) {
-            // metaThemeColor(Color(color).Color)
-        }
-    })
+    // useEffect(() => {
+    //     if (SystemColorBar) {
+    //         metaThemeColor(Color(color).Color)
+    //     }
+    // })
 
     return (
-        <div className={classes.base}
+        <div className={classNames(classes.base, className)}
             style={{ position: position }}
             ref={ref}
             {...otherProps}
@@ -119,22 +119,57 @@ const AppBar = React.forwardRef(function AppBar(props, ref) {
     )
 })
 AppBar.propTypes = {
+    /**
+     * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * Позиционирование компонента на странице
+    */
     position: PropTypes.oneOf(['absolute', 'fixed', 'relative', 'static', 'sticky']),
+
+    /**
+     * Название цвета в разных форматах.
+    */
     color: PropTypes.string,
+
+    /**
+     * Контейнер элементов в левой части. 
+    */
     left: PropTypes.node,
+
+    /**
+     * Контейнер элементов между left и right.
+    */
     title: PropTypes.node,
+
+    /**
+     * Контейнер элементов в правой части. 
+    */
     right: PropTypes.node,
+
+    /**
+     * Позиция title в центре или нет.
+    */
     titleCenter: PropTypes.bool,
-    SystemColorBar: PropTypes.bool,
+    // SystemColorBar: PropTypes.bool,
 }
 AppBar.defaultProps = {
     color: 'default',
     position: 'fixed',
     titleCenter: false,
-    SystemColorBar: true,
+    // SystemColorBar: true,
 }
 AppBar.displayName = 'AppBarEVG'
 export default withStyles(styles)(AppBar)

@@ -7,7 +7,7 @@ import List from '../List'
 import SelectOption from '../SelectOption'
 import Elevation from '../utils/Elevation'
 import Popup from '../Popup'
-import { ExpandMore } from '@evg-b/evg-icons';
+import { ExpandMore } from '../internal/icons/Select';
 
 const styles = {
     base: {
@@ -42,13 +42,15 @@ const Select = React.forwardRef(function Select(props, ref) {
         className,
         children,
         value,
-        emptyOption = false,
+        emptyOption,
         onChange,
         color,
         disabled,
         ...otherProps
     } = props
-    const Select_ref = ref || useRef()
+
+    let Select_ref = useRef()
+    Select_ref = ref || Select_ref
 
     const [open, setOpen] = useState(false)
     const [minWidth, setMminWidth] = useState(0)
@@ -84,7 +86,7 @@ const Select = React.forwardRef(function Select(props, ref) {
         setMminWidth(Select_ref.current.clientWidth)
     }, [])
     return (
-        <div className={classes.base}>
+        <div className={classNames(classes.base, className)}>
             <TextField
                 ref={Select_ref}
                 readOnly
@@ -131,14 +133,49 @@ const Select = React.forwardRef(function Select(props, ref) {
     )
 })
 Select.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * Название цвета в разных форматах.
+    */
+    color: PropTypes.string,
+
+    /**
+     * Если true, в список добавиться пустой SelectOption.
+    */
     emptyOption: PropTypes.bool,
+
+    /**
+     * Вызывается при изменении состояния.
+    */
     onChange: PropTypes.func,
+
+    /**
+     * Value - number или string.
+    */
+    value: PropTypes.oneOfType([PropTypes.string, PropTypes.number]),
+
+    /**
+     * Если true, принимает состоянии disabled.
+    */
+    disabled: PropTypes.bool,
 }
 Select.defaultProps = {
     emptyOption: false,
+    disabled: false,
 }
 Select.displayName = 'SelectEVG'
 export default withStyles(styles)(Select)

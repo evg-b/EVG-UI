@@ -1,8 +1,8 @@
 import React, { useEffect, useRef } from 'react';
 import { withStyles } from 'react-jss';
 import { TouchDriver } from '@evg-b/evg-ui';
-import Elevation from '@evg-b/evg-ui/src/utils/Elevation'
-import Color from '@evg-b/evg-ui/src/utils/Color'
+import Elevation from '@evg-b/evg-ui/dist/utils/Elevation'
+import Color from '@evg-b/evg-ui/dist/utils/Color'
 
 const styles = {
     touch: {
@@ -46,7 +46,6 @@ const TouchDriverBase = (props) => {
             className={classes.touch}
             moveStart={onMoveStar}
             moveXY={onMove}
-        // moveEnd={onMoveEnd}
         >
             <div ref={circle_ref} className={classes.touchCircle}>MOVE</div>
         </TouchDriver>

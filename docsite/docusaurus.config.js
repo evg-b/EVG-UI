@@ -1,6 +1,6 @@
 module.exports = {
   title: 'EVG-UI',
-  tagline: 'React компоненты основанная на идеях Material Design.',
+  tagline: 'React компоненты основанные на идеях Material Design.',
   url: 'https://evg-ui.github.io',
   baseUrl: '/',
   onBrokenLinks: 'throw',
@@ -18,13 +18,20 @@ module.exports = {
         {
           to: 'docs/',
           activeBasePath: 'docs',
-          label: 'Docs',
+          label: 'Installation',
+          position: 'left',
+        },
+        {
+          to: 'docs/Components',
+          activeBasePath: 'docs/Components',
+          label: 'Components',
           position: 'left',
         },
         // {to: 'blog', label: 'Blog', position: 'left'},
         {
           href: 'https://github.com/evg-b/EVG-UI',
-          label: 'GitHub',
+          // label: 'GitHub',
+          className: 'header-github-link header-icon-link',
           position: 'right',
         },
       ],

@@ -1,26 +1,17 @@
-
-
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-jss';
 import classNames from 'classnames';
-import TouchDriver from '../TouchDriver'
 import ButtonBase from '../ButtonBase'
 import Color from '../utils/Color'
-import hexToRGBA from '../utils/hexToRGBA'
-import Ripple from '../Ripple'
 
 const styles = {
     base: {
         position: 'relative',
         display: 'flex',
         alignItems: 'center',
-        // justifyContent: 'space-between',
-
         padding: '0 16px', // 0 16
-        // margin: 0,
         color: props => props.active && Color(props.color).Color,
-        // color: props => props.color === 'default' ? 'inherit' : Color(props.color).Color,
     },
     avatarLine: {
         height: '56px',
@@ -41,7 +32,7 @@ const ListItem = React.forwardRef(function ListItem(props, ref) {
         classes,
         className,
         children,
-        component = 'li',
+        component,
         color,
         // swiping = false,
         button = true,
@@ -49,14 +40,9 @@ const ListItem = React.forwardRef(function ListItem(props, ref) {
         // secondaryText: SecondaryTextProp,
         ...otherProps
     } = props
-    console.log('[ListItem] color', color);
     const Component = button ? ButtonBase : component
     const componentProp = button ? component : null
-    // const Component = swiping ? TouchDriver : component
-    // const componentSwiping = swiping ? { component: TouchDriver } : null
-    // const swipingSettings = swiping ? { autoMove: true, strict: 'v' } : null
     const isButtonSettings = button ? { active, color: color, contrast: color === 'default' } : null
-    console.log('isButtonSettings:', isButtonSettings);
     // const swipingContainer = (
     //     <div
     //         className={classes.swipingContainer}
@@ -68,35 +54,60 @@ const ListItem = React.forwardRef(function ListItem(props, ref) {
         <Component
             ref={ref}
             component={componentProp}
-            className={classNames(
-                classes.base,
-            )}
+            className={classNames(classes.base, className)}
             // {...swipingSettings}
             {...isButtonSettings}
             {...otherProps}
         >
             {children}
-            {/* {
-                !button ? <Ripple color={otherProps.color} isActive={otherProps.active} /> : null
-            } */}
-            {/* {swipingContainer} */}
+
         </Component>
     )
 })
 ListItem.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
-    color: PropTypes.string,
+
+    /**
+     * Корнево узел. Это HTML элемент или компонент.
+    */
     component: PropTypes.elementType,
-    // swiping: PropTypes.bool,
+
+    /**
+     * Название цвета в разных форматах. Подробнее <a>link</a>
+    */
+    color: PropTypes.string,
+
+    /**
+     * Активное состояние.
+    */
     active: PropTypes.bool,
+
+    /**
+     * Если true, ListItem наследует поведение Button.
+    */
+    button: PropTypes.bool,
+
+    // swiping: PropTypes.bool,
 }
 ListItem.defaultProps = {
     component: 'li',
+    color: 'default',
     // swiping: false,
     active: false,
-    color: 'default',
+    button: true,
 }
 ListItem.displayName = 'ListItemEVG'
 export default withStyles(styles)(ListItem)

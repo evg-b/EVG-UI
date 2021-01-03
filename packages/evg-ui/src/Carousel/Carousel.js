@@ -6,7 +6,7 @@ import Color from '../utils/Color';
 import TouchDriver from '../TouchDriver';
 import hexToRGBA from '../utils/hexToRGBA';
 import calcMaxSizeRatio from '../utils/calcMaxSizeRatio';
-import { ChevronLeft, ChevronRight, } from '@evg-b/evg-icons';
+import { ChevronLeft, ChevronRight, } from '../internal/icons/Carousel';
 
 const absolutePosition = {
     position: 'absolute',
@@ -131,7 +131,8 @@ const Carousel = React.forwardRef(function Carousel(props, ref) {
     const [animationMove, setAnimationMove] = useState(false)
     const [animationBack, setAnimationBack] = useState(false)
 
-    const ViewerEVG_ref = ref || useRef() // для --var-css
+    let ViewerEVG_ref = useRef() // для --var-css
+    ViewerEVG_ref = ref || ViewerEVG_ref
     const ViewerEVGZone_ref = useRef()
 
     const nowCoord = useRef(0)
@@ -182,6 +183,7 @@ const Carousel = React.forwardRef(function Carousel(props, ref) {
             }
         }
     }
+
     const onKeypress = (e) => {
         e.preventDefault()
         if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
@@ -225,10 +227,12 @@ const Carousel = React.forwardRef(function Carousel(props, ref) {
         clearNowCoord()
     }
     useEffect(() => {
+        console.log('Carusel[useEffect] event');
         window.addEventListener('keyup', onKeypress)
         return () => {
             window.removeEventListener('keyup', onKeypress)
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
     /*
@@ -309,13 +313,44 @@ const Carousel = React.forwardRef(function Carousel(props, ref) {
     )
 })
 Carousel.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * Массив изображений.
+    */
     imgs: PropTypes.arrayOf(PropTypes.string),
+
+    /**
+     * Index стартавого изображения в массиве.
+    */
     imgStart: PropTypes.number,
+
+    /**
+     * Цвет заденго фона.
+    */
     backgroundColor: PropTypes.string,
+
+    /**
+     * Вызывается при изменении img.
+    */
     onChangeImg: PropTypes.func,
+
+    /**
+     * 
+    */
     mode: PropTypes.string,
 }
 Carousel.defaultProps = {

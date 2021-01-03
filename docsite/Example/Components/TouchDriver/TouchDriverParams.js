@@ -1,8 +1,8 @@
 import React, { useEffect, useRef, useState } from 'react';
 import { withStyles } from 'react-jss';
 import { TouchDriver } from '@evg-b/evg-ui';
-import Elevation from '@evg-b/evg-ui/src/utils/Elevation'
-import Color from '@evg-b/evg-ui/src/utils/Color'
+import Elevation from '@evg-b/evg-ui/dist/utils/Elevation'
+import Color from '@evg-b/evg-ui/dist/utils/Color'
 
 const styles = {
     touch: {
@@ -28,7 +28,6 @@ const styles = {
         gridTemplateColumns: '1fr 1fr',
         gridTemplateRows: '1fr 1fr 1fr',
         padding: '10px',
-        // backgroundColor: Color('--ifm-color-primary').Contrast,
         boxSizing: 'border-box',
         '& >* span': {
             color: Color('--ifm-color-primary').Color,
@@ -56,17 +55,10 @@ const TouchDriverParams = (props) => {
         const circle_S = circle_ref.current
         circle_S.style.transform = `translate3d(${250 - sizeCircke}px, ${200 - sizeCircke}px, 0px)`
     }, [])
-    useEffect(() => {
-        // console.log('params:', params)
-    })
+
     return (
         <div>
             <div className={classes.info}>
-                {/* <div><span>startTime: </span>{params.startTime}</div> */}
-                {/* <div><span>startItXorY: </span>{params.startItXorY}</div> */}
-                {/* <div><span>itXorY: </span>{params.itXorY}</div> */}
-                {/* <div><span>startDirection: </span>{params.startDirection}</div> */}
-                {/* <div><span>direction: </span>{params.direction}</div> */}
                 <div><span>startX: </span>{params.startX}</div>
                 <div><span>startY: </span>{params.startY}</div>
                 <div><span>nowX: </span>{params.nowX}</div>
@@ -75,13 +67,11 @@ const TouchDriverParams = (props) => {
                 <div><span>shiftY: </span>{params.shiftY}</div>
                 <div><span>deltaX: </span>{params.deltaX}</div>
                 <div><span>deltaY: </span>{params.deltaY}</div>
-                {/* <div><span>inertia: </span>{params.inertia}</div> */}
             </div>
             <TouchDriver
                 className={classes.touch}
                 moveStart={onMoveStar}
                 moveXY={onMove}
-            // moveEnd={onMoveEnd}
             >
                 <div ref={circle_ref} className={classes.touchCircle}>MOVE</div>
             </TouchDriver>

@@ -3,6 +3,7 @@ import { CodeExample } from '@evg-b/evg-ui';
 import Snippets from './snippets'
 import ScrollAutoHide from './ScrollAutoHide'
 import ScrollBase from './ScrollBase'
+import ScrollMaxHeight from './ScrollMaxHeight'
 import ScrollTrackSizeAndColor from './ScrollTrackSizeAndColor'
 import ScrollVerticalAndHorizontal from './ScrollVerticalAndHorizontal'
 
@@ -23,6 +24,16 @@ const ScrollBaseExample = () => {
 			title='Base'
 			demo={<ScrollBase />}
 			snippet={Snippets.ScrollBase}
+		/>
+	)
+}
+
+const ScrollMaxHeightExample = () => {
+	return (
+		<CodeExample
+			title='MaxHeight'
+			demo={<ScrollMaxHeight />}
+			snippet={Snippets.ScrollMaxHeight}
 		/>
 	)
 }
@@ -50,6 +61,7 @@ const ScrollVerticalAndHorizontalExample = () => {
 export { 
 	ScrollAutoHideExample,
 ScrollBaseExample,
+ScrollMaxHeightExample,
 ScrollTrackSizeAndColorExample,
 ScrollVerticalAndHorizontalExample,
 

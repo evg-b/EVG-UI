@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-jss';
 import classNames from 'classnames';
@@ -19,14 +19,14 @@ const ListItemAvatar = React.forwardRef(function ListItemAvatar(props, ref) {
         classes,
         className,
         children,
-        component = 'span',
+        component,
         ...otherProps
     } = props
 
     let Component = component
     return (
         <Component
-            className={classes.base}
+            className={classNames(classes.base, className)}
             {...otherProps}
             ref={ref}
         >
@@ -35,9 +35,21 @@ const ListItemAvatar = React.forwardRef(function ListItemAvatar(props, ref) {
     )
 })
 ListItemAvatar.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+    /**
+     * Корнево узел. Это HTML элемент или компонент.
+    */
     component: PropTypes.elementType,
 }
 ListItemAvatar.defaultProps = {

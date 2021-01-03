@@ -1,8 +1,7 @@
-import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
+import React from 'react';
 import { withStyles } from 'react-jss';
 import classNames from 'classnames'
-import Color from '@evg-b/evg-ui/src/utils/Color';
+import Color from '@evg-b/evg-ui/dist/utils/Color';
 
 const styles = {
     base: {
@@ -63,15 +62,5 @@ const Contrast = React.forwardRef(function Contrast(props, ref) {
         </Component >
     )
 })
-
-Contrast.propTypes = {
-    children: PropTypes.node,
-    classes: PropTypes.object,
-    className: PropTypes.string,
-    component: PropTypes.elementType,
-}
-
-Contrast.defaultProps = {
-}
 
 export default withStyles(styles)(Contrast)

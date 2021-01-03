@@ -5,9 +5,7 @@ import classNames from 'classnames';
 
 const styles = {
     base: {
-        '&:hover': {
-            // zIndex: 999,
-        }
+        zIndex: 1,
     },
     start: {
         order: -1,
@@ -24,8 +22,8 @@ const ListItemAction = React.forwardRef(function ListItemAction(props, ref) {
         classes,
         className,
         children,
-        component = 'span',
-        position = 'end',
+        component,
+        position,
         ...otherProps
     } = props
 
@@ -35,6 +33,7 @@ const ListItemAction = React.forwardRef(function ListItemAction(props, ref) {
             className={classNames(
                 classes.base,
                 classes[position],
+                className
             )}
             {...otherProps}
             ref={ref}
@@ -44,13 +43,34 @@ const ListItemAction = React.forwardRef(function ListItemAction(props, ref) {
     )
 })
 ListItemAction.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * Корнево узел. Это HTML элемент или компонент.
+    */
     component: PropTypes.elementType,
+
+    /**
+     * Позиционирование в нутри родительского  компонента.
+    */
+    position: PropTypes.oneOf(['start', 'end']),
 }
 ListItemAction.defaultProps = {
     component: 'span',
+    position: 'end'
 }
 ListItemAction.displayName = 'ListItemActionEVG'
 export default withStyles(styles)(ListItemAction)

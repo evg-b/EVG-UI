@@ -5,18 +5,31 @@ sidebar_label: List
 ---
 
 import {
-    ListActionsExample,
-	ListAvatarExample,
 	ListBaseExample,
-	ListMetaExample,
+	ListColorExample,
+	ListHeightExample,
 	ListSecondaryTextExample,
+	ListAvatarExample,
+    ListActionsExample,
+	ListMetaExample,
 } from '../../Example/Components/List/Examples'
+import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
 Списки представляют собой множество компонентов с однородными типами данных в вертикальной плоскости. Элементы списка поддерживают события взаимодействия мыши и жестов.
 
 ## Base List
 
 <ListBaseExample />
+
+## Color
+
+<ListColorExample />
+
+## Height
+
+`List` содержит в нутри себя компонент `Scroll`
+
+<ListHeightExample />
 
 ## SecondaryText
 
@@ -33,3 +46,7 @@ import {
 ## Meta
 
 <ListMetaExample />
+
+## API
+
+<ApiDoc name='List' />

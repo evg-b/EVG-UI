@@ -2,6 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-jss';
 import classNames from 'classnames';
+
 const secondaryStyle = {
     fontSize: '.875rem',
     lineHeight: '1.25rem',
@@ -92,7 +93,8 @@ const ListItemText = React.forwardRef(function ListItemText(props, ref) {
                 {
                     [classes.singleLine]: !SecondaryTextProp,
                     [classes.twoLine]: SecondaryTextProp,
-                }
+                },
+                className
             )}
             {...otherProps}
         >
@@ -105,11 +107,40 @@ const ListItemText = React.forwardRef(function ListItemText(props, ref) {
     )
 })
 ListItemText.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * Корнево узел. Это HTML элемент или компонент.
+    */
     component: PropTypes.elementType,
+
+    /**
+     * Вспомогательный текст.
+    */
     secondaryText: PropTypes.string,
+
+    /**
+     * Контейнер для Metadata.
+    */
+    meta: PropTypes.node,
+
+    /**
+     * Вспомогательный контейнер для Metadata.
+    */
+    secondaryMeta: PropTypes.node,
 }
 ListItemText.defaultProps = {
     secondaryText: '',

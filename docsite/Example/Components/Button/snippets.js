@@ -110,6 +110,7 @@ const ButtonIconButton = (props) => {
 export default withStyles(styles)(ButtonIconButton)`,'ButtonLoading' : `import React from 'react';
 import { withStyles } from 'react-jss';
 import { Button } from '@evg-b/evg-ui';
+import { Check } from '@evg-b/evg-icons';
 
 const styles = {
     base: {
@@ -124,7 +125,8 @@ const ButtonLoading = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <Button>text</Button>
+            <Button loading variant='contained' color='--ifm-color-primary' startIcon={<Check />}>loading</Button>
+            <Button loading variant='contained' color='--ifm-color-primary'>loading</Button>
         </div>
     )
 }

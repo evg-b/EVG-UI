@@ -7,12 +7,12 @@ import Color from '../utils/Color'
 import IconButton from '../IconButton'
 import Elevation from '../utils/Elevation'
 
-const MapSize = {
-    'small': '18px',
-    'medium': '24px',
-    'large': '36px',
-    'extra': '48px',
-}
+// const MapSize = {
+//     'small': '18px',
+//     'medium': '24px',
+//     'large': '36px',
+//     'extra': '48px',
+// }
 const styles = {
     base: {
         position: 'relative',
@@ -74,24 +74,25 @@ const Switch = React.forwardRef(function Switch(props, ref) {
         classes,
         className,
         children,
-        label, // text
-        name = 'switch',
         // size = 'medium',
         onChange,
-        color = 'default',
+        color,
         ...otherProps
     } = props
-    const Switch_ref = ref || useRef()
+
+    let Switch_ref = useRef()
+    Switch_ref = ref || Switch_ref
+
     const [isActive, SetIsActive] = useState(otherProps.defaultChecked || otherProps.checked || false)
     useEffect(() => {
         SetIsActive(Switch_ref.current.checked)
-    })
+    }, [])
     const onChangeChecked = (e) => {
         onChange && onChange(e)
         SetIsActive(Switch_ref.current.checked)
     }
     return (
-        <div className={classes.base} disabled={otherProps.disabled}>
+        <div className={classNames(classes.base, className)} disabled={otherProps.disabled}>
             <span className={classNames(classes.track, {
                 [classes.active]: isActive,
             })} />
@@ -120,12 +121,31 @@ const Switch = React.forwardRef(function Switch(props, ref) {
     )
 })
 Switch.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * Название цвета в разных форматах.
+    */
+    color: PropTypes.string,
+
+    /**
+     * Вызывается при изменении состояния.
+    */
     onChange: PropTypes.func,
     // size: PropTypes.oneOf(['small', 'medium', 'large', 'extra']),
-    color: PropTypes.string,
 }
 Switch.defaultProps = {
     color: 'default',

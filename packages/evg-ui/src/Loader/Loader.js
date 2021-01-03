@@ -1,4 +1,4 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-jss';
 import classNames from 'classnames';
@@ -50,20 +50,18 @@ const Loader = React.forwardRef(function Loader(props, ref) {
         depth,
         ...otherProps
     } = props
-    const Loader_ref = ref || useRef()
-    let perimeter = 2 * Math.PI * (size / 2 - depth)
+    let Loader_ref = useRef()
+    Loader_ref = ref || Loader_ref
+
     useEffect(() => {
         const Loader_S = Loader_ref.current
-        perimeter = 2 * Math.PI * (size / 2 - depth)
-        console.log('Loader_ref :', Loader_ref);
+        let perimeter = 2 * Math.PI * (size / 2 - depth)
         Loader_S.style.setProperty('--evg-stroke-dasharray', `${perimeter}px`)
     }, [size, depth])
     return (
         <svg
             ref={Loader_ref}
-            className={classNames(classes.base,
-                {
-                })}
+            className={classNames(classes.base, className)}
             style={{ width: size, height: size }}
             {...otherProps}
         >
@@ -80,11 +78,34 @@ const Loader = React.forwardRef(function Loader(props, ref) {
     )
 })
 Loader.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * Название цвета в разных форматах. Подробнее <a>link</a>
+    */
     color: PropTypes.string,
+
+    /**
+     * Размер компонента.
+    */
     size: PropTypes.number,
+
+    /**
+     * Толщина  линни.
+    */
     depth: PropTypes.number,
 }
 Loader.defaultProps = {

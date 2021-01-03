@@ -21,8 +21,8 @@ import {
     brown,
     gray,
     blueGray,
-} from '@evg-b/evg-ui/src/colors';
-import Color from '@evg-b/evg-ui/src/utils/Color'
+} from '@evg-b/evg-ui/dist/colors';
+import Color from '@evg-b/evg-ui/dist/utils/Color'
 const MapColor = {
     'red': red,
     'pink': pink,

@@ -20,8 +20,7 @@ const ScrollTrackSizeAndColor = () => {
             autoHide={false}
             trackSize={20}
             color="purple700"
-            width={300}
-            height={400}
+            style={{ width: 300, height: 400, backgroundColor: 'rgba(0,0,0,.1)' }}
         >
             {
                 [...Array(25)].map((n, i) =>

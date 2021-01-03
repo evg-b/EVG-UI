@@ -28,8 +28,19 @@ const MenuItem = React.forwardRef(function MenuItem(props, ref) {
     )
 })
 MenuItem.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
 }
 MenuItem.defaultProps = {

@@ -61,7 +61,7 @@ function Home() {
       <main className='container'>
         <div className='content-box'>
           <h2>{siteConfig.tagline}</h2>
-          <p className='billboard'>Вдохновленна интерсными техническими решениями Material Design, Material-UI, VK-UI, yandex-ui, Angular Material, Vue Material, Vuetify и др.</p>
+          <p className='billboard'>Библиотека вдохновленна интерсными техническими решениями Material Design, Material-UI, VK-UI, yandex-ui, Angular Material, Vue Material, Vuetify, Ant и др.</p>
           <div className='components_stand'>
             {
               showDemo.map((demo, index) => {

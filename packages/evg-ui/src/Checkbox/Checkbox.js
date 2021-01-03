@@ -1,16 +1,14 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-jss';
 import classNames from 'classnames';
 import SwitchBase from '../SwitchBase'
 import Color from '../utils/Color'
-
 import {
+    CheckBoxCheck,
     CheckBoxOutlineBlank,
     IndeterminateCheckBox
-} from '@evg-b/evg-icons';
-import CheckBox from '@evg-b/evg-icons/src/internal/CheckBox'
+} from '../internal/icons/Checkbox'
 
 const MapSize = {
     'small': '12px',
@@ -61,15 +59,15 @@ const Checkbox = React.forwardRef(function Checkbox(props, ref) {
         classes,
         className,
         children,
-        name = 'checkbox',
+        name,
         size,
-        color = 'default',
-        indeterminate = false,
+        color,
+        indeterminate,
         disabled,
         ...otherProps
     } = props
 
-    const CheckBoxIcon = indeterminate ? IndeterminateCheckBox : CheckBox
+    const CheckBoxIcon = indeterminate ? IndeterminateCheckBox : CheckBoxCheck
     const CheckBoxCheckedIcon = (
         <CheckBoxIcon
             size={size}
@@ -100,15 +98,48 @@ const Checkbox = React.forwardRef(function Checkbox(props, ref) {
     )
 })
 Checkbox.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * Название цвета в разных форматах.
+    */
     color: PropTypes.string,
+
+    /**
+     * Название компонента.
+    */
+    name: PropTypes.string,
+
+    /**
+     * Размер компонента.
+    */
     size: PropTypes.oneOf(['small', 'medium', 'large', 'extra']),
+
+    /**
+     * indeterminate состояние.
+    */
     indeterminate: PropTypes.bool,
+
+    /**
+     * Если true, принимает состоянии disabled.
+    */
     disabled: PropTypes.bool,
 }
 Checkbox.defaultProps = {
+    name: 'checkbox',
     color: 'default',
     size: 'medium',
     indeterminate: false,

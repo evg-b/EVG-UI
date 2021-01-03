@@ -122,8 +122,8 @@ const styles = {
     base: {
         display: 'flex',
         flexWrap: 'wrap',
-        '&>*': {
-            margin: '5px'
+        '&>*,&>div>*': {
+            margin: '10px'
         }
     }
 }
@@ -135,13 +135,11 @@ const TextFieldIcon = (props) => {
                 <TextField leadingIcon={<Check />} labelText='TextField' placeholder='placeholder' color='primary' />
                 <TextField trailingIcon={<Close />} labelText='TextField' placeholder='placeholder' color='primary' />
                 <TextField leadingIcon={<Check />} trailingIcon={<Close />} labelText='TextField' placeholder='placeholder' color='primary' />
-                {/* <TextField leadingIcon={<Check />} trailingIcon={<Close />} rows={4} multiline labelText='multiline base' placeholder='placeholder' color='primary' /> */}
             </div>
             <div>
                 <TextField leadingIcon={<Check />} labelText='TextField outlined' placeholder='placeholder' color='primary' outlined />
                 <TextField trailingIcon={<Close />} labelText='TextField outlined' placeholder='placeholder' color='primary' outlined />
                 <TextField leadingIcon={<Check />} trailingIcon={<Close />} labelText='TextField outlined' placeholder='placeholder' color='primary' outlined />
-                {/* <TextField leadingIcon={<Check />} trailingIcon={<Close />} rows={4} multiline labelText='multiline outlined' placeholder='placeholder' color='primary' outlined /> */}
             </div>
         </div>
     )
@@ -177,10 +175,10 @@ const styles = {
     base: {
         display: 'flex',
         flexWrap: 'wrap',
-        '&>*': {
-            margin: '5px'
+        '&>*,&>div>*': {
+            margin: '10px'
         }
-    }
+    },
 }
 const TextFieldMultiline = (props) => {
     const { classes } = props

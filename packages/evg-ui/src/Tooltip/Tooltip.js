@@ -32,28 +32,39 @@ const Tooltip = React.forwardRef(function Tooltip(props, ref) {
         classes,
         className,
         children,
-        titel,
         specs,
-        animation,
         ...otherProps
     } = props
 
-    return <Popup ref={ref} animation={animation} shift={8} {...otherProps}>
-        <div className={classNames(classes.base, classes[specs])}>
+    return <Popup ref={ref} shift={8} {...otherProps}>
+        <div className={classNames(classes.base, classes[specs], className)}>
             {children}
         </div>
     </Popup>
 })
 Tooltip.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * Размер для mobile и desktop.
+    */
     specs: PropTypes.oneOf(['desktop', 'mobile']),
-    animation: PropTypes.string,
 }
 Tooltip.defaultProps = {
     specs: 'desktop',
-    animation: 'fade',
 }
 Tooltip.displayName = 'TooltipEVG'
 export default withStyles(styles)(Tooltip)

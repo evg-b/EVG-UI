@@ -23,8 +23,19 @@ const Notify = React.forwardRef(function Notify(props, ref) {
     )
 })
 Notify.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
 }
 Notify.defaultProps = {

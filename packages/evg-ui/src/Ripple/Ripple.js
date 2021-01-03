@@ -149,7 +149,8 @@ const Ripple = React.forwardRef(function Ripple(props, ref) {
         contrast = true,
         ...otherProps
     } = props
-    const RippleRef = ref || useRef(null)
+    let RippleRef = useRef()
+    RippleRef = ref || RippleRef
     const [startRipple, setStartRipple] = useState(false)
     const [endRipple, setEndRipple] = useState(false)
     const isEndTouch = useRef(false)
@@ -215,6 +216,7 @@ const Ripple = React.forwardRef(function Ripple(props, ref) {
             isEndTouch.current = true
             animationStartRippleDone()
         }
+        // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [isPressed])
 
     return (
@@ -238,15 +240,55 @@ const Ripple = React.forwardRef(function Ripple(props, ref) {
     )
 })
 Ripple.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * Корнево узел. Это HTML элемент или компонент.
+    */
     component: PropTypes.elementType,
+
+    /**
+     * Если true, Ripple эффект стартует в центре.
+    */
     rippleCenter: PropTypes.bool,
+
+    /**
+     * Если true, примет состояние для focus.
+    */
     isFocus: PropTypes.bool,
+
+    /**
+     * Если true, примет состояние для pressed.
+    */
     isPressed: PropTypes.bool,
+
+    /**
+     * Если true, примет состояние для active.
+    */
     isActive: PropTypes.bool,
+
+    /**
+     * Название цвета в разных форматах.
+    */
     color: PropTypes.string,
+
+    /**
+     * Если true, цвет волны будет белым или серым автоматически. 
+     * Для лучшео восприятия в зависимости от основного цвета.  
+    */
     contrast: PropTypes.bool,
 }
 Ripple.defaultProps = {

@@ -1,11 +1,10 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-jss';
 import classNames from 'classnames';
 import SwitchBase from '../SwitchBase'
-import { RadioButtonUnchecked } from '@evg-b/evg-icons';
-import RadioButtonCircle from '@evg-b/evg-icons/src/internal/RadioButtonCircle'
+import { RadioButtonCircle, RadioButtonUnchecked } from '../internal/icons/Radio'
+
 const styles = {
     base: {
         position: 'relative',
@@ -27,9 +26,9 @@ const Radio = React.forwardRef(function Radio(props, ref) {
         classes,
         className,
         children,
-        name = 'radio',
-        size = 'medium',
-        color = 'default',
+        name,
+        color,
+        size,
         ...otherProps
     } = props
 
@@ -65,13 +64,38 @@ const Radio = React.forwardRef(function Radio(props, ref) {
     )
 })
 Radio.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * Название компонента.
+    */
+    name: PropTypes.string,
+
+    /**
+     * Размер компонента.
+    */
     size: PropTypes.oneOf(['small', 'medium', 'large', 'extra']),
+
+    /**
+     * Название цвета в разных форматах.
+    */
     color: PropTypes.string,
 }
 Radio.defaultProps = {
+    name: 'radio',
     color: 'default',
     size: 'medium',
 }

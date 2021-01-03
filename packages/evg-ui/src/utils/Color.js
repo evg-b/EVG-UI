@@ -66,10 +66,11 @@ function getCssVar(cssVarName) {
         поиск cssVar ведется в корневом эелемнте документа.
         предполагается что все cssVar создаются через :root в css файле
     */
-    let cssVar = getComputedStyle(document.documentElement).getPropertyValue(cssVarName).trim()
+    let cssVar = typeof window !== "undefined" ? window.getComputedStyle(document.documentElement).getPropertyValue(cssVarName).trim() : ''
     return cssVar ? cssVar : notFoundColor
 }
 export default function Color(colorName = '') {
+    // if (colorName) {
     if (colorName.indexOf('--') === 0) {
         colorName = getCssVar(colorName)
     }
@@ -83,6 +84,7 @@ export default function Color(colorName = '') {
     for (let key in MapColor) {
         if (colorName.includes(key)) {
             let colorKey = colorName.replace(key, '')
+            // let colorKey = 700
             let resultColor = MapColor[key][colorKey]
             resultColor = resultColor ? resultColor : MapColor[key][DefaultLevelColor]
             return ConstructorColor(resultColor)
@@ -90,4 +92,6 @@ export default function Color(colorName = '') {
     }
     // если мы не распознали цвет то применяем для него дефолтное значение чтобы хоть что-то вернуть
     return ConstructorColor(colorName)
+    // return ConstructorColor(notFoundColor)
+    // }
 }

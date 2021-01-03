@@ -1,7 +1,7 @@
 import React from 'react';
 import { withStyles } from 'react-jss';
 import { Ripple } from '@evg-b/evg-ui';
-import Elevation from '@evg-b/evg-ui/src/utils/Elevation';
+import Elevation from '@evg-b/evg-ui/dist/utils/Elevation';
 
 const styles = {
     base: {

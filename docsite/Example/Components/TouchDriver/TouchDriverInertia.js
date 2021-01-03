@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef } from 'react';
 import { withStyles } from 'react-jss';
 import classNames from 'classnames';
 import { TouchDriver, Switch } from '@evg-b/evg-ui';
-import Elevation from '@evg-b/evg-ui/src/utils/Elevation'
-import Color from '@evg-b/evg-ui/src/utils/Color'
+import Elevation from '@evg-b/evg-ui/dist/utils/Elevation'
+import Color from '@evg-b/evg-ui/dist/utils/Color'
 
 const styles = {
     touch: {
@@ -11,9 +11,6 @@ const styles = {
         width: '500px',
         height: '400px',
         overflow: 'hidden',
-        // display: 'flex',
-        // alignItems: 'center',
-        // justifyContent: 'center',
         ...Elevation(2),
     },
     touchCircle: {
@@ -41,7 +38,6 @@ const styles = {
         width: '100px',
         height: '100px',
         borderRadius: '50%',
-        // backgroundColor: Color('--ifm-color-primary').Color,
         border: `4px dashed ${Color('--ifm-color-primary').Color}`,
     },
     holeLeft: {
@@ -95,7 +91,6 @@ const TouchDriverInertia = (props) => {
 
     const onChangeInertia = (e) => {
         setUseInertia(e.target.checked)
-        console.log(`[onChangeInertia]`, e.target.checked);
     }
 
     const onMove = ({ shiftX, deltaX }) => {

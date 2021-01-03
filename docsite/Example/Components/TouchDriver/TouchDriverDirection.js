@@ -2,8 +2,8 @@ import React, { useEffect, useRef, useState } from 'react';
 import { withStyles } from 'react-jss';
 import classNames from 'classnames';
 import { TouchDriver } from '@evg-b/evg-ui';
-import Elevation from '@evg-b/evg-ui/src/utils/Elevation'
-import Color from '@evg-b/evg-ui/src/utils/Color'
+import Elevation from '@evg-b/evg-ui/dist/utils/Elevation'
+import Color from '@evg-b/evg-ui/dist/utils/Color'
 
 const styles = {
     touch: {

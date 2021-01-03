@@ -1,30 +1,9 @@
 import React, { useState, useEffect, useRef } from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from 'react-jss';
 import classNames from 'classnames'
-import {
-    red,
-    pink,
-    purple,
-    deepPurple,
-    indigo,
-    blue,
-    lightBlue,
-    cyan,
-    teal,
-    green,
-    lightGreen,
-    lime,
-    yellow,
-    amber,
-    orange,
-    deepOrange,
-    brown,
-    gray,
-    blueGray,
-} from '@evg-b/evg-ui/src/colors';
-import brightChange from '@evg-b/evg-ui/src/utils/brightChange'
-import Color from '@evg-b/evg-ui/src/utils/Color'
+
+import brightChange from '@evg-b/evg-ui/dist/utils/brightChange'
+import Color from '@evg-b/evg-ui/dist/utils/Color'
 
 const styles = {
     base: {
@@ -77,15 +56,5 @@ const brightChange = React.forwardRef(function brightChange(props, ref) {
         </Component >
     )
 })
-
-brightChange.propTypes = {
-    children: PropTypes.node,
-    classes: PropTypes.object,
-    className: PropTypes.string,
-    component: PropTypes.elementType,
-}
-
-brightChange.defaultProps = {
-}
 
 export default withStyles(styles)(brightChange)

@@ -109,7 +109,7 @@ const TooltipPosition = (props) => {
             <Button
                 ref={btnBig_ref}
                 variant='outlined'
-                style={{ height: '150px', width: '150px' }}
+                style={{ height: '150px', width: '150px', margin: 20 }}
             >
                 position
             </Button>

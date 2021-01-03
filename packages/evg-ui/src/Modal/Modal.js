@@ -24,9 +24,9 @@ const Modal = React.forwardRef(function Modal(props, ref) {
         className,
         children,
         component: Component = 'div',
-        open = false,
-        onClose = f => f,
-        isEsc = false,
+        open,
+        onClose,
+        isEsc,
         ...otherProps
     } = props
 
@@ -34,11 +34,11 @@ const Modal = React.forwardRef(function Modal(props, ref) {
         e.preventDefault()
         if (isEsc && 'Escape' === e.key) {
             console.log('[modal] onClose-start Esc');
-            onClose()
+            onClose && onClose()
         }
         if (e.target === e.currentTarget) {
             console.log('[modal] onClose-start target');
-            onClose()
+            onClose && onClose()
         }
     }
     useEffect(() => {
@@ -59,12 +59,39 @@ const Modal = React.forwardRef(function Modal(props, ref) {
     ) : null
 })
 Modal.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * Корнево узел. Это HTML элемент или компонент.
+    */
     component: PropTypes.elementType,
+
+    /**
+     * Если true, modal открыт.
+    */
     open: PropTypes.bool,
+
+    /**
+     * onClose() вызывается при попытки закрыть modal.
+    */
     onClose: PropTypes.func,
+
+    /**
+     * Если true, modal закрывается клавишей Esc.
+    */
     isEsc: PropTypes.bool,
 }
 Modal.defaultProps = {

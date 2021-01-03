@@ -17,9 +17,8 @@ const ScrollAutoHide = () => {
     }
     return (
         <Scroll
-            autoHide={false}
-            width={200}
-            height={400}
+            autoHide={true}
+            style={{ width: 200, height: 400, backgroundColor: 'rgba(0,0,0,.1)' }}
         >
             {
                 [...Array(25)].map((n, i) =>

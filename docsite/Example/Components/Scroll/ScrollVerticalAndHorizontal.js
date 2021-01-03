@@ -2,7 +2,7 @@ import React from 'react';
 import { Scroll } from '@evg-b/evg-ui';
 
 const styles = {
-    width: '150%',
+    width: '800px',
     height: '100px',
     margin: '10px',
     color: 'white',
@@ -18,8 +18,7 @@ const ScrollVerticalAndHorizontal = () => {
     return (
         <Scroll
             color="#FFFFFF"
-            width={400}
-            height={400}
+            style={{ width: 400, height: 400 }}
         >
             {
                 [...Array(25)].map((n, i) =>

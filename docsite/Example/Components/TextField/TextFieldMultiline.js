@@ -6,10 +6,10 @@ const styles = {
     base: {
         display: 'flex',
         flexWrap: 'wrap',
-        '&>*': {
-            margin: '5px'
+        '&>*,&>div>*': {
+            margin: '10px'
         }
-    }
+    },
 }
 const TextFieldMultiline = (props) => {
     const { classes } = props

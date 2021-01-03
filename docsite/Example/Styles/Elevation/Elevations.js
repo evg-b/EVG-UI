@@ -1,8 +1,7 @@
 import React from 'react';
-import PropTypes from 'prop-types';
 import { withStyles } from 'react-jss';
 import classNames from 'classnames'
-import Elevation from '@evg-b/evg-ui/src/utils/Elevation'
+import Elevation from '@evg-b/evg-ui/dist/utils/Elevation'
 
 const styles = {
     base: {
@@ -49,15 +48,5 @@ const Elevations = React.forwardRef(function Palettes(props, ref) {
         </Component>
     )
 })
-
-Elevations.propTypes = {
-    children: PropTypes.node,
-    classes: PropTypes.object,
-    className: PropTypes.string,
-    component: PropTypes.elementType,
-}
-
-Elevations.defaultProps = {
-}
 
 export default withStyles(styles)(Elevations)

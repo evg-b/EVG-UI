@@ -5,7 +5,7 @@ import classNames from 'classnames';
 import IconButton from '../IconButton'
 import Scroll from '../Scroll'
 import Tooltip from '../Tooltip'
-import { Code, Visibility } from '@evg-b/evg-icons'
+import { Code, Visibility } from '../internal/icons/CodeExample'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import SyntaxStyle from 'react-syntax-highlighter/dist/esm/styles/prism/okaidia';
 
@@ -56,6 +56,7 @@ const styles = {
     panelCode: {
         // opacity: 'hidde',
         display: 'none',
+        backgroundColor: '#272822'
         // padding: '20px',
         // height: '300px',
         // minHeight: '100px',
@@ -63,7 +64,10 @@ const styles = {
     },
     visible: {
         display: 'block',
-        // opacity: 'visible',
+    },
+    styleCodeFix: {
+        display: 'inline-block',
+        // padding: '0 !important',
     }
 
 }
@@ -73,10 +77,10 @@ const CodeExample = React.forwardRef(function CodeExample(props, ref) {
         classes,
         className,
         children,
-        title = 'Title',
+        title,
         demo,
-        snippet = '',
-        language = 'jsx',
+        snippet,
+        language,
         ...otherProps
     } = props
 
@@ -108,11 +112,13 @@ const CodeExample = React.forwardRef(function CodeExample(props, ref) {
         })}>
             <Scroll
                 autoHide={false}
-                maxHeight={600}
+                style={{ maxHeight: 600 }}
                 ref={Syntax_ref}
                 color='#FFFFFF'
             >
+                {/* <div style={{ backgroundColor: '#272822' }}> */}
                 <SyntaxHighlighter
+                    className={classes.styleCodeFix}
                     language='jsx'
                     style={SyntaxStyle}
                     customStyle={{
@@ -122,6 +128,7 @@ const CodeExample = React.forwardRef(function CodeExample(props, ref) {
                 >
                     {snippet.trim()}
                 </SyntaxHighlighter>
+                {/* </div> */}
             </Scroll>
         </div>
     )
@@ -155,12 +162,45 @@ const CodeExample = React.forwardRef(function CodeExample(props, ref) {
     )
 })
 CodeExample.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
 
+    /**
+     * title демки.
+    */
+    title: PropTypes.string,
+
+    /**
+     * Демка с компонентом.
+    */
+    demo: PropTypes.node,
+
+    /**
+     * Исходный код компонента в ввиде текста.
+    */
+    snippet: PropTypes.string,
+
+    /**
+     * Язык разметки для react-syntax-highlighter.
+    */
+    language: PropTypes.string,
 }
 CodeExample.defaultProps = {
+    title: 'Title',
+    snippet: '',
+    language: 'jsx',
 }
 CodeExample.displayName = 'CodeExampleEVG'
 export default withStyles(styles)(CodeExample)

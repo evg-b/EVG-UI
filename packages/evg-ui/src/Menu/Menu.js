@@ -24,8 +24,6 @@ const Menu = React.forwardRef(function Menu(props, ref) {
         classes,
         className,
         children,
-        titel,
-        specs = 'desktop',
         ...otherProps
     } = props
 
@@ -36,8 +34,17 @@ const Menu = React.forwardRef(function Menu(props, ref) {
     </Popup>
 })
 Menu.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
 }
 Menu.defaultProps = {

@@ -25,12 +25,12 @@ const SwitchBase = React.forwardRef(function SwitchBase(props, ref) {
         classes,
         className,
         children,
-        color = 'default',
-        size = 'medium',
+        color,
+        size,
         type,
         icon: Icon,
         iconChecked: IconChecked,
-        rippleOff = false,
+        rippleOff,
         ...otherProps
     } = props
 
@@ -70,14 +70,49 @@ const SwitchBase = React.forwardRef(function SwitchBase(props, ref) {
     )
 })
 SwitchBase.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * Название цвета в разных форматах. Подробнее <a>link</a>
+    */
     color: PropTypes.string,
+
+    /**
+     * Размер компонента.
+    */
     size: PropTypes.oneOf(['small', 'medium', 'large', 'extra']),
+
+    /**
+     * Тип input.
+    */
     type: PropTypes.oneOf(['checkbox', 'radio']),
+
+    /**
+     * Иконка которая отображается всегда.
+    */
     icon: PropTypes.node,
+
+    /**
+     * Иконка которая отображается при Checked=true.
+    */
     iconChecked: PropTypes.node,
+
+    /**
+     * Если true, Ripple эффект отключен.
+    */
     rippleOff: PropTypes.bool,
 }
 SwitchBase.defaultProps = {

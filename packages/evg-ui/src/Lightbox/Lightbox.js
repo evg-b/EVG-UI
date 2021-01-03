@@ -1,5 +1,4 @@
-
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-jss';
 import classNames from 'classnames';
@@ -28,9 +27,12 @@ const styles = {
         // gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
         // gridTemplateRows: 'repeat(auto-fit, minmax(150px, 300px))',
         // gridAutoRows: 'minmax(150px, 300px)',
-        gridTemplateColumns: 'repeat(3, minmax(30%, 1fr))',
-        gridTemplateRows: 'repeat(3, minmax(30%, 1fr))',
-        gridAutoRows: 'minmax(30%, 1fr)',
+        // gridTemplateColumns: 'repeat(3, minmax(150px, 1fr))',
+        // gridTemplateRows: 'repeat(3, minmax(150px, 1fr))',
+        gridTemplateColumns: 'repeat(3, 150px)',
+        gridTemplateRows: 'repeat(3, 150px)',
+        gridAutoColumns: '150px',
+        gridAutoRows: '150px',
         gridGap: '2%',
         padding: '2%',
         boxSizing: 'border-box',
@@ -83,11 +85,11 @@ const styles = {
     },
     imgFlip: {
         ...Elevation(16),
-        willChange: 'transform',
         width: 'var(--evg-img-width-end)',
         height: 'var(--evg-img-height-end)',
         transform: 'translateY(var(--evg-img-coord-y-now,0))',
         objectFit: 'cover',
+        willChange: 'transform',
     },
     imgFlip_normal: {
         animation: `$move ${msAnim}ms cubic-bezier(0.4, 0, 0.2, 1) both`,
@@ -122,6 +124,7 @@ const styles = {
     },
     blackout: {
         backgroundColor: 'rgba(0,0,0,var(--evg-img-blackout,0))',
+        // opacity: 'var(--evg-img-blackout,0)',
     },
     blackout_normal: {
         animation: `$blackout ${msAnim}ms ease-out`,
@@ -167,11 +170,12 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
         classes,
         className,
         children,
-        imgs = [],
+        imgs,
         ...otherProps
     } = props
 
-    const LightboxEVG_ref = ref || useRef()
+    let LightboxEVG_ref = useRef()
+    LightboxEVG_ref = ref || LightboxEVG_ref
     const Modal_ref = useRef() // для --css-var
     const imgIndexOpen_ref = useRef()
     const cachcalcStartPosition = useRef()
@@ -186,17 +190,21 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
     const setEvgVar = (key, val) => {
         // установка css var
         document.documentElement.style.setProperty(key, val)
+
+        // const Modal_S = Modal_ref.current
+        // Modal_S.style.setProperty(key, val)
     }
     const clearEvgVar = () => {
         document.documentElement.style.cssText = ''
         cachcalcStartPosition.current = {} // очищаем кэш
     }
-    const calcStartPosition = (img) => {
+    const calcStartPosition = useCallback((img) => {
         if (cachcalcStartPosition.current === img) {
             // кэш помогает избежать повторных вычеселний для фото которые уже сделаны
             return
         }
         cachcalcStartPosition.current = img
+
         const { top, left, width, height } = img.getBoundingClientRect()
         const { clientWidth, clientHeight } = document.documentElement
         const [centerX, centerY] = [clientWidth / 2, clientHeight / 2]
@@ -209,10 +217,11 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
         setEvgVar('--evg-img-height-start', `${height}px`)
         setEvgVar('--evg-img-width-end', `${imgSizeEnd.newWidth}px`)
         setEvgVar('--evg-img-height-end', `${imgSizeEnd.newHeight}px`)
-    }
+    }, [])
+
     const calcBlackout = (shiftY) => {
         const HeightCenter = document.documentElement.clientHeight / 2
-        let blackoutPerc = 1 - (Math.abs(shiftY) / HeightCenter)
+        let blackoutPerc = Number((1 - (Math.abs(shiftY) / HeightCenter)).toFixed(2))
         return blackoutPerc
     }
 
@@ -239,6 +248,14 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
             flip && setFlip(false)
             setEvgVar('--evg-img-coord-y-now', `${shiftY}px`)
             setEvgVar('--evg-img-blackout', calcBlackout(shiftY))
+            // setTimeout(() => {
+            //     setEvgVar('--evg-img-coord-y-now', `${shiftY}px`)
+            //     // setEvgVar('--evg-img-blackout', calcBlackout(shiftY))
+            // }, 0)
+            // setTimeout(() => {
+            //     // setEvgVar('--evg-img-coord-y-now', `${shiftY}px`)
+            //     setEvgVar('--evg-img-blackout', calcBlackout(shiftY))
+            // }, 0)
         }
     }
     const onMoveEnd = ({ shiftY, inertia, itXorY, startItXorY }) => {
@@ -277,8 +294,9 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
         setIndexOpen(index)
     }
     useEffect(() => {
-        if (imgIndexOpen_ref.current) calcStartPosition(imgIndexOpen_ref.current)
-    }, [indexOpen])
+        imgIndexOpen_ref.current && calcStartPosition(imgIndexOpen_ref.current)
+    }, [indexOpen, calcStartPosition])
+
     const flipImg = (
         <img
             className={classNames(classes.imgFlip, {
@@ -318,8 +336,8 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
                     return (
                         <div
                             key={index}
-                            className={classes.img}
                             onClick={onHandlerClick}
+                            className={classes.img}
                             style={index === indexOpen && isModal ? { opacity: 0, transition: 'opacity 0ms 30ms' } : { opacity: 1 }}
                         >
                             <img
@@ -346,7 +364,7 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
                 moveStart={onMoveStart}
                 moveXY={onMoveXY}
                 moveEnd={onMoveEnd}
-                isEsc={true}
+                isEsc
             >
                 <div className={classNames(classes.testBlock)}>
                     {flipImg}
@@ -357,12 +375,28 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
     )
 })
 Lightbox.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * Массив изображений.
+    */
     imgs: PropTypes.arrayOf(PropTypes.string),
 }
 Lightbox.defaultProps = {
+    imgs: []
 }
 Lightbox.displayName = 'LightboxEVG'
 export default withStyles(styles)(Lightbox)

@@ -3,6 +3,8 @@ import { CodeExample } from '@evg-b/evg-ui';
 import Snippets from './snippets'
 import AvatarBase from './AvatarBase'
 import AvatarColor from './AvatarColor'
+import AvatarGroupAndSize from './AvatarGroupAndSize'
+import AvatarMultiple from './AvatarMultiple'
 import AvatarNotImage from './AvatarNotImage'
 import AvatarSize from './AvatarSize'
 import AvatarStatus from './AvatarStatus'
@@ -25,6 +27,26 @@ const AvatarColorExample = () => {
 			title='Color'
 			demo={<AvatarColor />}
 			snippet={Snippets.AvatarColor}
+		/>
+	)
+}
+
+const AvatarGroupAndSizeExample = () => {
+	return (
+		<CodeExample
+			title='GroupAndSize'
+			demo={<AvatarGroupAndSize />}
+			snippet={Snippets.AvatarGroupAndSize}
+		/>
+	)
+}
+
+const AvatarMultipleExample = () => {
+	return (
+		<CodeExample
+			title='Multiple'
+			demo={<AvatarMultiple />}
+			snippet={Snippets.AvatarMultiple}
 		/>
 	)
 }
@@ -72,6 +94,8 @@ const AvatarStatusColorExample = () => {
 export { 
 	AvatarBaseExample,
 AvatarColorExample,
+AvatarGroupAndSizeExample,
+AvatarMultipleExample,
 AvatarNotImageExample,
 AvatarSizeExample,
 AvatarStatusExample,

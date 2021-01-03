@@ -22,10 +22,9 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
         classes,
         className,
         children,
-        component = 'button',
-        color = 'default',
-        rippleCenter = true,
-        tabIndex = 0,
+        component,
+        color,
+        rippleCenter,
         size,
         ...otherProps
     } = props
@@ -40,7 +39,6 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
             )}
             ref={ref}
             component={Component}
-            tabIndex={tabIndex}
             rippleCenter
             color={Color(color).Color}
             contrast={color === 'default' ? true : false}
@@ -59,17 +57,45 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
     )
 })
 IconButton.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * Корнево узел. Это HTML элемент или компонент.
+    */
     component: PropTypes.elementType,
-    size: PropTypes.oneOf(['small', 'medium', 'large', 'extra']),
+
+    /**
+     * Название цвета в разных форматах.
+    */
     color: PropTypes.string,
+
+    /**
+     * Размер компонента.
+    */
+    size: PropTypes.oneOf(['small', 'medium', 'large', 'extra']),
+
+    /**
+     * Если true, Ripple эффект стартует в центре.
+    */
+    rippleCenter: PropTypes.bool,
 }
 IconButton.defaultProps = {
     color: 'default',
     component: 'button',
-    rippleCenter: false,
+    rippleCenter: true,
     size: 'medium',
 }
 IconButton.displayName = 'IconButtonEVG'

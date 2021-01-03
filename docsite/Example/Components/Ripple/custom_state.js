@@ -1,8 +1,8 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { withStyles } from 'react-jss';
 import classNames from 'classnames'
-import Color from '@evg-b/evg-ui/src/utils/Color'
-import hexToRGBA from '@evg-b/evg-ui/src/utils/hexToRGBA'
+import Color from '@evg-b/evg-ui/dist/utils/Color'
+import hexToRGBA from '@evg-b/evg-ui/dist/utils/hexToRGBA'
 
 const styles = {
     base: {

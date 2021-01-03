@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-jss';
 import classNames from 'classnames';
@@ -12,7 +12,8 @@ const styles = {
 }
 const config = {
     sizeCub: 40,
-    maxLevel: 100,
+    minLevel: 30,
+    maxLevel: 200,
     speedDefault: 1,
     colorFront: '#E0E0E0', // 300
     colorOrange: '#EF6C00',// orange
@@ -54,7 +55,8 @@ class Cub {
         this.size = config.sizeCub
         this.directionX = directionX
         this.directionY = directionY
-        this.levelMax = Math.random() * config.maxLevel
+        // this.levelMax = Math.random() * config.maxLevel
+        this.levelMax = Math.floor(Math.random() * (config.maxLevel - config.minLevel)) + config.minLevel
         this.level = 0
         this.levelTarget = 0
         this.levelFreez = -1
@@ -121,59 +123,66 @@ class Cub {
         const [nowX1, nowX2] = [this.x - centeringBySize, this.x + centeringBySize]
         const [nowY1, nowY2] = [this.y - centeringBySize, this.y + centeringBySize]
 
-        let levelPercent = (this.level / config.maxLevel) * 50
-        let colorSidetoFront = brightChange(this.colorBase, -20)
-        let colorSideX = brightChange(colorSidetoFront, levelPercent * this.shiftX * 1)
-        let colorSideY = brightChange(colorSidetoFront, levelPercent * this.shiftY * 1)
+        // let levelPercent = (this.level / config.maxLevel) * 50
+        // let colorSidetoFront = brightChange(this.colorBase, -20)
+        // let colorSideX = brightChange(colorSidetoFront, levelPercent * this.shiftX * 1)
+        // let colorSideY = brightChange(colorSidetoFront, levelPercent * this.shiftY * 1)
+
+        let colorSideX = '#E0E0E0'
+        let colorSideY = '#E0E0E0'
 
         if (this.directionY === 1) {
             // top
             this.ctx.beginPath();
             this.ctx.fillStyle = colorSideY
-            this.ctx.strokeStyle = colorSideY
+            // this.ctx.strokeStyle = colorSideY
             this.ctx.moveTo(startX1, startY1);
             this.ctx.lineTo(startX2, startY1)
             this.ctx.lineTo(nowX2, nowY1)
             this.ctx.lineTo(nowX1, nowY1)
             this.ctx.closePath()
             this.ctx.fill()
+
             // this.ctx.stroke()
         } else {
             // bottom
             this.ctx.beginPath();
             this.ctx.fillStyle = colorSideY
-            this.ctx.strokeStyle = colorSideY
+            // this.ctx.strokeStyle = colorSideY
             this.ctx.moveTo(startX1, startY2);
             this.ctx.lineTo(startX2, startY2);
             this.ctx.lineTo(nowX2, nowY2)
             this.ctx.lineTo(nowX1, nowY2)
             this.ctx.closePath()
             this.ctx.fill()
+
             // this.ctx.stroke()
         }
         if (this.directionX === 1) {
             // right
             this.ctx.beginPath();
             this.ctx.fillStyle = colorSideX
-            this.ctx.strokeStyle = colorSideX
+            // this.ctx.strokeStyle = colorSideX
             this.ctx.moveTo(startX1, startY1);
             this.ctx.lineTo(nowX1, nowY1);
             this.ctx.lineTo(nowX1, nowY2);
             this.ctx.lineTo(startX1, startY2);
             this.ctx.closePath()
             this.ctx.fill()
+
             // this.ctx.stroke()
         } else {
             // left
             this.ctx.beginPath();
             this.ctx.fillStyle = colorSideX
-            this.ctx.strokeStyle = colorSideX
+            // this.ctx.strokeStyle = colorSideX
             this.ctx.moveTo(startX2, startY1);
             this.ctx.lineTo(nowX2, nowY1);
             this.ctx.lineTo(nowX2, nowY2);
             this.ctx.lineTo(startX2, startY2);
             this.ctx.closePath()
             this.ctx.fill()
+
             // this.ctx.stroke()
         }
     }
@@ -181,8 +190,8 @@ class Cub {
         let levelPercent = (this.level / config.maxLevel) * 50
         let colorFrontToCenter = brightChange(this.colorBase, -(this.shiftX * this.shiftY) * 10)
         this.ctx.fillStyle = brightChange(colorFrontToCenter, levelPercent)
-        this.ctx.strokeStyle = brightChange(colorFrontToCenter, levelPercent)
-        this.ctx.closePath()
+        // this.ctx.strokeStyle = brightChange(colorFrontToCenter, levelPercent)
+        // this.ctx.closePath()
         this.ctx.fillRect(this.x - (this.size / 2), this.y - (this.size / 2), this.size, this.size);
     }
     render() {
@@ -200,6 +209,7 @@ class Cub {
 
         this.renderSides()
         this.renderFront()
+        // console.log(`x:${this.x} y:${this.y}`)
     }
 }
 class OverseerCubs {
@@ -220,9 +230,9 @@ class OverseerCubs {
     setRipple(ripple) {
         this.ripple = ripple
     }
-    filling() {
-        const cubsCounX = 2 + (this.w / config.sizeCub | 0) // тоже самое что и Math.floor(w/config.sizeCub)
-        const cubsCounY = 2 + (this.h / config.sizeCub | 0) // тоже самое что и Math.floor(h/config.sizeCubD)
+    filling(fillingX, fillingY) {
+        const cubsCounX = fillingX === 0 ? 2 + (this.w / config.sizeCub | 0) : fillingX
+        const cubsCounY = fillingY === 0 ? 2 + (this.h / config.sizeCub | 0) : fillingY
         // const [cubsCounX, cubsCounY] = [8, 8]
 
         const startX = (config.sizeCub + this.w - cubsCounX * config.sizeCub) / 2
@@ -302,7 +312,7 @@ class OverseerCubs {
         this.cubs.forEach(cub => cub.setAutopilot(switchBool))
     }
     render() {
-        // ctx.clearRect(0, 0, w, h) // clear
+        // this.ctx.clearRect(0, 0, this.w, this.h) // clear
         this.cubs.forEach(cub => cub.render()) // render
         this.ripple && this.rippleAnimation()
         this.OverseerId.id = requestAnimationFrame(this.render)
@@ -316,7 +326,7 @@ class OverseerCubs {
         }, 500)
     }
 }
-class Cubs extends React.Component {
+class Cubes extends React.Component {
     constructor(props) {
         super(props);
         this.CanvasWrapper_Ref = React.createRef();
@@ -331,8 +341,8 @@ class Cubs extends React.Component {
         console.log('ctx:', this.Canvas_Ref);
         ctx.width = ctx.offsetParent.clientWidth
         ctx.height = ctx.offsetParent.clientHeight
-        this.Overseer = new OverseerCubs(ctx.getContext('2d'), this.OverseerId, ctx.width, ctx.height)
-        this.Overseer.filling()
+        this.Overseer = new OverseerCubs(ctx.getContext('2d', { alpha: false }), this.OverseerId, ctx.width, ctx.height)
+        this.Overseer.filling(this.props.fillingX, this.props.fillingY)
         // 2) start requestAnimationFrame
         this.Overseer.render()
         setTimeout(() => {
@@ -341,6 +351,10 @@ class Cubs extends React.Component {
         setTimeout(() => {
             this.Overseer.setRipple(true)
         }, 1000 * 4)
+        setTimeout(() => {
+            this.Overseer.setRipple(false)
+        }, 1000 * 6)
+        // console.log('hi')
     }
     stop() {
         let cancelAnimationFrame = window.cancelAnimationFrame || window.mozCancelAnimationFrame;
@@ -354,6 +368,8 @@ class Cubs extends React.Component {
             children,
             classes,
             className,
+            fillingX,
+            fillingY,
             ...otherProps
         } = this.props
         return (
@@ -365,14 +381,28 @@ class Cubs extends React.Component {
     }
 
 }
-Cubs.propTypes = {
+Cubes.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
 
+    fillingX: PropTypes.number,
+    fillingY: PropTypes.number,
 }
-Cubs.defaultProps = {
-
+Cubes.defaultProps = {
+    fillingX: 0,
+    fillingY: 0,
 }
-Cubs.displayName = 'CubsEVG'
-export default withStyles(styles)(Cubs)
+Cubes.displayName = 'CubesEVG'
+export default withStyles(styles)(Cubes)

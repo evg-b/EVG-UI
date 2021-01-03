@@ -2,7 +2,7 @@ export default {
 'RippleBase' : `import React from 'react';
 import { withStyles } from 'react-jss';
 import { Ripple } from '@evg-b/evg-ui';
-import Elevation from '@evg-b/evg-ui/src/utils/Elevation';
+import Elevation from '@evg-b/evg-ui/dist/utils/Elevation';
 
 const styles = {
     base: {
@@ -30,8 +30,8 @@ export default withStyles(styles)(RippleBase)
 `,'RippleColor' : `import React from 'react';
 import { withStyles } from 'react-jss';
 import { Ripple } from '@evg-b/evg-ui';
-import Elevation from '@evg-b/evg-ui/src/utils/Elevation';
-import Color from '@evg-b/evg-ui/src/utils/Color';
+import Elevation from '@evg-b/evg-ui/dist/utils/Elevation';
+import Color from '@evg-b/evg-ui/dist/utils/Color';
 
 const styles = {
     base: {
@@ -72,8 +72,8 @@ const RippleColor = (props) => {
 export default withStyles(styles)(RippleColor)`,'RippleContrast' : `import React from 'react';
 import { withStyles } from 'react-jss';
 import { Ripple } from '@evg-b/evg-ui';
-import Elevation from '@evg-b/evg-ui/src/utils/Elevation';
-import Color from '@evg-b/evg-ui/src/utils/Color';
+import Elevation from '@evg-b/evg-ui/dist/utils/Elevation';
+import Color from '@evg-b/evg-ui/dist/utils/Color';
 
 const styles = {
     base: {

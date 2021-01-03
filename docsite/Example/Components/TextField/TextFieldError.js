@@ -15,7 +15,8 @@ const TextFieldError = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <TextField helperText='helperText' labelText='helperText' placeholder='placeholder' color='primary' />
+            <TextField error helperText='Error helper text' labelText='Error' placeholder='placeholder' color='primary' value='Error' />
+            <TextField error outlined labelText='Error' placeholder='placeholder' color='primary' value='Error' />
         </div>
     )
 }

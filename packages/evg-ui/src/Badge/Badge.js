@@ -1,4 +1,3 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-jss';
@@ -33,7 +32,6 @@ const styles = {
         backgroundColor: props => Color(props.color).Color,
         color: props => Color(props.color).Contrast,
         transform: 'scale(1) translate(50%, -50%)',
-        // transform: props => props.ripe ? 'scale(1)' : 'scale(1) translate(50%, -50%)',
         transformOrigin: '100% 0%',
         transition: 'transform 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
     },
@@ -61,12 +59,12 @@ const Badge = React.forwardRef(function Badge(props, ref) {
         classes,
         className,
         children,
-        color = 'default',
-        count = 0,
-        max = 99,
-        dot = false,
-        circle = false, // overlap="circle"
-        ripe = false,
+        color,
+        count,
+        max,
+        dot,
+        circle,
+        ripe,
         ...otherProps
     } = props
 
@@ -90,7 +88,7 @@ const Badge = React.forwardRef(function Badge(props, ref) {
     const Badge = (
         <div
             ref={ref}
-            className={classNames(classes.base)}
+            className={classNames(classes.base, className)}
             {...otherProps}
         >
             {children}
@@ -100,14 +98,49 @@ const Badge = React.forwardRef(function Badge(props, ref) {
     return ripe ? BadgeRipe : Badge
 })
 Badge.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * Название цвета в разных форматах.
+    */
     color: PropTypes.string,
+
+    /**
+     * Номер для отображения на значке.
+    */
     count: PropTypes.number,
+
+    /**
+     * Максимальный предел точного отображения.
+    */
     max: PropTypes.number,
+
+    /**
+     * Минималистичный вид.
+    */
     dot: PropTypes.bool,
+
+    /**
+     * Смещение, чтобы корректно смотрелось если родитель круглой формы.
+    */
     circle: PropTypes.bool,
+
+    /**
+     * true - badge становиться самостоятельным элементом.
+    */
     ripe: PropTypes.bool,
 }
 Badge.defaultProps = {

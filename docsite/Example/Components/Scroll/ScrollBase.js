@@ -17,8 +17,8 @@ const ScrollBase = () => {
     }
     return (
         <Scroll
-            width={200}
-            height={400}
+            autoHide={false}
+            style={{ width: 200, height: 400, backgroundColor: 'rgba(0,0,0,.1)' }}
         >
             {
                 [...Array(25)].map((n, i) =>

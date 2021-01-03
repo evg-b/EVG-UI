@@ -20,12 +20,6 @@ const styles = {
     },
     groupContained: {
         ...Elevation(2),
-        // '&:hover': {
-        //     ...Elevation(4),
-        // },
-        // '&:active': {
-        //     ...Elevation(8),
-        // },
     },
     groupContainedChild: {
         boxShadow: 'none',
@@ -82,13 +76,13 @@ const ButtonGroup = React.forwardRef(function ButtonGroup(props, ref) {
         classes,
         className,
         children,
-        color = 'default',
-        orientation = 'horizontal', // horizontal | vertical
-        size = 'medium',
-        variant = 'text', // text | outlined | contained
-        round = false,
-        uppercase = true,
-        disabled = false,
+        color,
+        orientation, // horizontal | vertical
+        size,
+        variant, // text | outlined | contained
+        round,
+        uppercase,
+        disabled,
         ...otherProps
     } = props
 
@@ -111,7 +105,7 @@ const ButtonGroup = React.forwardRef(function ButtonGroup(props, ref) {
                     React.cloneElement(child, {
                         className: classNames(
                             classes[`${orientation}Child`],
-                            className,
+                            child.props.className,
                             {
                                 [classes.groupContainedChild]: variant === 'contained',
                             }
@@ -131,19 +125,61 @@ const ButtonGroup = React.forwardRef(function ButtonGroup(props, ref) {
     )
 })
 ButtonGroup.propTypes = {
+    /**
+    * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
-    round: PropTypes.bool,
-    orientation: PropTypes.oneOf(['horizontal', 'vertical',]),
-    size: PropTypes.oneOf(['small', 'medium', 'large', 'extra']),
+
+    /**
+     * Название цвета в разных форматах.
+    */
     color: PropTypes.string,
+
+    /**
+     * Круглые края.
+    */
+    round: PropTypes.bool,
+
+    /**
+     * Если true, принимает состоянии disabled.
+    */
+    disabled: PropTypes.bool,
+
+    /**
+     * Регистр текста.
+    */
+    uppercase: PropTypes.bool,
+
+    /**
+     * Принимает вертикальное или горизонтальное положение.
+    */
+    orientation: PropTypes.oneOf(['horizontal', 'vertical',]),
+
+    /**
+     * Все потомки принимают указанный размер.
+    */
+    size: PropTypes.oneOf(['small', 'medium', 'large', 'extra']),
+
+    /**
+     * Все потомки принимают указанный вид.
+    */
     variant: PropTypes.oneOf(['text', 'outlined', 'contained']),
 }
 ButtonGroup.defaultProps = {
     color: 'default',
     size: 'medium',
     uppercase: true,
+    disabled: false,
     round: false, // true - круглые края
     variant: 'text',
     orientation: 'horizontal',

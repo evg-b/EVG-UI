@@ -1,23 +1,22 @@
-
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-jss';
 import classNames from 'classnames';
-import { Person } from '@evg-b/evg-icons'
+import { Person } from '../internal/icons/Avatar'
 import Color from '../utils/Color'
 
 const styles = {
     base: {
         position: 'relative',
         display: 'inline-block',
+        borderRadius: '50%',
     },
     avatar: {
         display: 'flex',
         justifyContent: 'center',
         alignItems: 'center',
-        width: props => `${props.size}px`,
-        height: props => `${props.size}px`,
-        fontSize: '1.5em',
+        width: props => props.size,
+        height: props => props.size,
         borderRadius: '50%',
         overflow: 'hidden',
         fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
@@ -32,6 +31,23 @@ const styles = {
             transition: 'opacity 100ms ease-out',
         }
     },
+    avatars: {
+        width: props => props.size,
+        height: props => props.size,
+        borderRadius: '50%',
+        overflow: 'hidden',
+        display: 'flex',
+        flexDirection: 'column',
+        flexWrap: 'wrap',
+        '&>*': {
+            borderRadius: 0,
+            flexGrow: 1,
+            width: props => props.size / 2,
+            height: props => {
+                return props.srcs.length === 2 ? props.size : props.size / 2
+            }
+        }
+    },
     loaded: {
         '& img': {
             opacity: 1,
@@ -40,6 +56,10 @@ const styles = {
     spare: {
         textTransform: 'uppercase',
         position: 'absolute',
+        fontSize: props => props.size / 2,
+        '&>svg': {
+            fontSize: props => props.size * 0.7,
+        }
     },
     status: {
         '&:after': {
@@ -62,71 +82,126 @@ const Avatar = React.forwardRef(function Avatar(props, ref) {
         classes,
         className,
         children,
-        src = '',
-        srcArr = [],
-        alt = '',
-        size = 40,
-        status = false,
-        color = 'default',
-        statusColor = 'success',
+        src,
+        srcs,
+        alt,
+        altMax,
+        size,
+        status,
+        color,
+        statusColor,
         ...otherProps
     } = props
 
-    const [loaded, setLoaded] = useState(false)
+    const [isLoaded, setIsLoaded] = useState(false)
 
     const handOnLoad = () => {
-        setLoaded(true)
+        setIsLoaded(true)
     }
-    const SpareImg = alt === "" ? <Person /> : alt[0]
-    // const SpareImg = alt === "" ? '<Person />' : alt[0]
+    const SpareImg = alt === "" ? <Person /> : alt.slice(0, altMax)
 
-    const AvatarImg = (
-        <div
-            className={classNames(classes.avatar,
+    const AvatarImg = (srcUrl, classe = classes) => {
+        // бесмысленное решение передавать classes, дабы линтер не ругался
+        return (
+            <div className={classNames(classe.avatar, {
+                [classe.loaded]: isLoaded,
+            })}>
+                <img src={srcUrl} alt={alt} onLoad={handOnLoad} />
                 {
-                    [classes.loaded]: loaded,
-                })}
-        >
-            <img src={src} alt={alt} onLoad={handOnLoad} />
-            {
-                !loaded ?
-                    <span className={classes.spare}>
-                        {SpareImg}
-                    </span> : null
-            }
-        </div>
+                    !isLoaded ?
+                        <span className={classe.spare}>
+                            {SpareImg}
+                        </span> : null
+                }
+            </div>
+        )
+    }
+    const AvatarImgs = (
+        srcs.length === 1 ? AvatarImg(srcs[0]) :
+            <div className={classes.avatars}>
+                {
+                    srcs.map((srcUrl) => {
+                        return AvatarImg(srcUrl)
+                    })
+                }
+            </div>
     )
 
     return (
         <div
             ref={ref}
-            className={classNames(classes.base,
-                {
-                    [classes.status]: status,
-                })}
+            className={classNames(classes.base, { [classes.status]: status }, className)}
             {...otherProps}
         >
-            {AvatarImg}
+            {srcs.length > 0 ? AvatarImgs : AvatarImg(src)}
         </div>
     )
 })
 Avatar.propTypes = {
+    /**
+     * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * Название цвета в разных форматах.
+    */
     color: PropTypes.string,
+
+    /**
+     * url изображения.
+    */
     src: PropTypes.string,
-    srcArr: PropTypes.arrayOf(PropTypes.string),
+
+    /**
+     * Массив url изображений.
+    */
+    srcs: PropTypes.arrayOf(PropTypes.string),
+
+    /**
+     * Альтернативный текст для изображений.
+    */
     alt: PropTypes.string,
+
+    /**
+     * Количество первых букв alt для отображения если src пуст.
+    */
+    altMax: PropTypes.number,
+
+    /**
+     * Размер компонента.
+    */
     size: PropTypes.number,
+
+    /**
+     * Отображать статус или нетю
+    */
     status: PropTypes.bool,
+
+    /**
+     * Цвет статусаю.
+    */
     statusColor: PropTypes.string,
 }
 Avatar.defaultProps = {
+    alt: '',
     color: 'default',
     size: 40,
     status: false,
     statusColor: 'success',
+    altMax: 1,
+    src: '',
+    srcs: [],
 }
 Avatar.displayName = 'AvatarEVG'
 export default withStyles(styles)(Avatar)

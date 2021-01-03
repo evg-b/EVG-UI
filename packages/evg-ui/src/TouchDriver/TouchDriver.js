@@ -17,6 +17,7 @@ const moveCoordTemp = {
     deltaY: 0,
     inertia: false,
 }
+const prevDeltaTemp = { x: 0, y: 0 }
 const EventSettings = {
     capture: true, // запускаемся на погружении
     passive: false,
@@ -26,11 +27,11 @@ const directionY = { '-1': 'top', '1': 'bottom' }
 class TouchDriver extends React.Component {
     constructor(props) {
         super(props);
-        this.prevDelta = {}
         this.slip = 0
         this.slipSensitivity = 2
         this.touchRef = this.props.touchRef || React.createRef();
         this.isTouch = React.createRef(false);
+        this.prevDelta = React.createRef();
         this.moveCoord = React.createRef();
         this.moveCoordInit = this.moveCoordInit.bind(this)
         this.getInCoord = this.getInCoord.bind(this)
@@ -62,6 +63,7 @@ class TouchDriver extends React.Component {
     }
     moveCoordInit() {
         this.moveCoord.current = { ...moveCoordTemp }
+        this.prevDelta.current = { ...prevDeltaTemp }
         this.slip = 0
     }
     getInCoord(e) {
@@ -83,10 +85,6 @@ class TouchDriver extends React.Component {
                 clientY = e.touches[0].clientY
                 break;
             // case 'wheel':
-            //     prevDeltaX += e.deltaX
-            //     prevDeltaY += e.deltaY
-            //     clientX = e.clientX + prevDeltaX
-            //     clientY = e.clientY + prevDeltaY
             //     break
         }
 
@@ -105,7 +103,7 @@ class TouchDriver extends React.Component {
         return { nowX, nowY }
     }
     moveStartMouseOrTouch(e) {
-        e.type === 'mousedown' && e.preventDefault()
+        this.moveCoordInit()
         const { moveStart } = this.props
         const moveCoord_ref = this.moveCoord.current
         this.isTouch.current = true
@@ -118,8 +116,10 @@ class TouchDriver extends React.Component {
         moveStart && moveStart(moveCoord_ref)
     }
     move(e) {
+        // e.preventDefault()
         const { moveXY, autoMove } = this.props
         const mc = this.moveCoord.current
+        let prevDelta = this.prevDelta.current
         let tch_ref = this.touchRef.current
         if (this.isTouch.current) {
             let { nowX, nowY } = this.getInCoord(e)
@@ -131,10 +131,10 @@ class TouchDriver extends React.Component {
             mc.nowY = nowY
 
             if (mc.deltaX === mc.deltaY && mc.nowX !== 0 && mc.nowY !== 0) {
-                mc.deltaY = this.prevDelta.Y
-                mc.deltaX = this.prevDelta.X
+                mc.deltaY = prevDelta.y
+                mc.deltaX = prevDelta.x
             }
-            this.prevDelta = { X: mc.deltaX, Y: mc.deltaY }
+            prevDelta = { x: mc.deltaX, y: mc.deltaY }
 
             mc.itXorY = Math.abs(mc.deltaX) > Math.abs(mc.deltaY) ? 'x' : 'y'
             mc.direction = mc.itXorY === 'x' ? directionX[Math.sign(mc.deltaX)] : directionY[Math.sign(mc.deltaY)]
@@ -158,7 +158,6 @@ class TouchDriver extends React.Component {
     }
     moveDetectEnd() {
         const { moveEnd } = this.props
-        // console.log('[end]this.moveCoord', this.moveCoord);
         let moveCoord_ref = this.moveCoord.current
         if (moveCoord_ref.startTime === 0) {
             // выходим если событие End пришлои не от нашего объекта
@@ -176,7 +175,6 @@ class TouchDriver extends React.Component {
         } else {
             moveEnd && moveEnd(moveCoord_ref)
         }
-        this.moveCoordInit()
     }
     moveHome() {
         let tch_ref = this.touchRef.current
@@ -206,13 +204,55 @@ class TouchDriver extends React.Component {
     }
 }
 TouchDriver.propTypes = {
+    /**
+     * Это контент между открывающим и закрывающим тегом компонента.
+    */
     children: PropTypes.node,
+
+    /**
+     * Объект содержит jss стили компонента.
+    */
     classes: PropTypes.object,
+
+    /**
+     * Чтобы указать CSS классы, используйте этот атрибут.
+    */
     className: PropTypes.string,
+
+    /**
+     * Корнево узел. Это HTML элемент или компонент.
+    */
+    component: PropTypes.elementType,
+
+    /**
+     * ref ссылка компонента.
+    */
+    touchRef: PropTypes.object,
+
+    /**
+     * Если true, компонент перемещается сам.
+    */
     autoMove: PropTypes.bool,
+
+    /**
+     * Если true, учитывается движение по touchpad.
+    */
     touchpad: PropTypes.bool,
+
+    /**
+     * Вызывается при касании к области внутри компонента.
+    */
     moveStart: PropTypes.func,
+
+    /**
+     * Вызывается при движении курсора или пальца по области и за ее пределами. 
+     * Если до этого сработал moveStart.
+    */
     moveXY: PropTypes.func,
+
+    /**
+     * Вызывается при окончании движения.
+    */
     moveEnd: PropTypes.func,
 }
 TouchDriver.defaultProps = {
