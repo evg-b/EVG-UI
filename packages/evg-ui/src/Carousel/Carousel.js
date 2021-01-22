@@ -1,11 +1,11 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useLayoutEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-jss';
 import classNames from 'classnames';
 import Color from '../utils/Color';
+import Image from '../Image'
 import TouchDriver from '../TouchDriver';
 import hexToRGBA from '../utils/hexToRGBA';
-import calcMaxSizeRatio from '../utils/calcMaxSizeRatio';
 import { ChevronLeft, ChevronRight, } from '../internal/icons/Carousel';
 
 const absolutePosition = {
@@ -19,45 +19,54 @@ const wrapperImg = {
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'center',
-    '& img': {
-        maxWidth: '100%',
-        maxHeight: '90%',
-        objectFit: 'cover',
-    }
+    width: '100%',
+    height: '100%',
 }
-
 const styles = {
     base: {
-        // ...absolutePosition,
+        position: 'relative',
+        overflow: 'hidden',
         width: '100%',
         height: '100%',
-        overflow: 'hidden',
         backgroundColor: props => props.backgroundColor,
-        position: 'relative',
-        '--evg-zone-coord-now': 0,
-        '--evg-zone-coord-end': 0,
-        '--evg-a-status': 'paused', // running
+        '-webkit-touch-callout': 'none', /* iOS Safari */
+        '-webkit-user-select': 'none',   /* Chrome/Safari/Opera */
+        '-moz-user-select': 'none',      /* Firefox */
+        '-ms-user-select': 'none',       /* Internet Explorer/Edge */
+        userSelect: 'none',
+
     },
     v_zone: {
         ...absolutePosition,
-        transform: 'translateX(var(--evg-zone-coord-now))',
         willChange: 'transform',
-    },
-    v_zone_move: {
-        animation: `$move 200ms cubic-bezier(0.4, 0, 0.2, 1)`,
-        animationIterationCount: '1',
-        animationFillMode: 'both',
-        animationPlayState: 'var(--evg-a-status)',
-    },
-    v_zone_back: {
-        animation: `$back 200ms cubic-bezier(0.4, 0, 0.2, 1)`,
-        animationIterationCount: '1',
-        animationFillMode: 'both',
-        animationPlayState: 'var(--evg-a-status)',
     },
     v_center: {
         ...absolutePosition,
         ...wrapperImg,
+    },
+    v_zone_right: {
+        animation: props => `$right ${props.duration}ms cubic-bezier(0.4, 0, 0.2, 1) both`,
+    },
+    v_zone_left: {
+        animation: props => `$left ${props.duration}ms cubic-bezier(0.4, 0, 0.2, 1) both`,
+    },
+    v_zone_comeback: {
+        animation: props => `$comeback ${props.duration}ms cubic-bezier(0.4, 0, 0.2, 1) both`,
+    },
+    '@keyframes right': {
+        to: {
+            transform: 'translateX(-105%)',
+        },
+    },
+    '@keyframes left': {
+        to: {
+            transform: 'translateX(105%)',
+        },
+    },
+    '@keyframes comeback': {
+        to: {
+            transform: 'translateX(0)',
+        },
     },
     v_left: {
         ...absolutePosition,
@@ -90,28 +99,18 @@ const styles = {
     v_btn_right: {
         right: 0,
     },
-    '@keyframes move': {
-        from: {
-            transform: 'translateX(var(--evg-zone-coord-now))',
-        },
-        to: {
-            transform: 'translateX(var(--evg-zone-coord-end))',
-        },
-    },
-    '@keyframes back': {
-        from: {
-            transform: 'translateX(var(--evg-zone-coord-now))',
-        },
-        to: {
-            transform: 'translateX(0)',
-        },
-    },
     '@media (max-width: 1024px)': {
         v_btn: {
             display: 'none',
         },
     },
-    сarouselImg: {},
+    сarouselImg: {
+        maxWidth: '100%',
+        maxHeight: '90%',
+    },
+    ImgLeft: {},
+    ImgCenter: {},
+    ImgRight: {},
 }
 
 const Carousel = React.forwardRef(function Carousel(props, ref) {
@@ -120,171 +119,145 @@ const Carousel = React.forwardRef(function Carousel(props, ref) {
         className,
         children,
         imgs = [],
-        imgStart = 0, // default 0
+        imgStart, // default 0
+        onChangeImg,
         backgroundColor,
-        onChangeImg = f => f,
-        mode,
+        sensitivity,
+        duration,
         ...otherProps
     } = props
 
     const [imgIndex, setImgIndex] = useState(imgStart < imgs.length ? imgStart : 0)
-    const [animationMove, setAnimationMove] = useState(false)
-    const [animationBack, setAnimationBack] = useState(false)
+    const [indexDirection, setIndexDirection] = useState(0) // -1 | 0 | 1
+    const [comeback, setComeback] = useState(false)
+    const [stateImg, setStateImg] = useState({ left: '', center: '', right: '' })
 
     let ViewerEVG_ref = useRef() // для --var-css
     ViewerEVG_ref = ref || ViewerEVG_ref
     const ViewerEVGZone_ref = useRef()
+    const imgIndex_ref = useRef(imgStart)
 
-    const nowCoord = useRef(0)
-    const nowAnimation = useRef(false)
-
-    const newImgIndex = useRef(imgIndex)
-    const cacheSizeImg = useRef(new Map())
-
-    const sensitivity = 200 // px
-
-    const setEvgVar = (key, val) => {
-        // установка css var
-        const V_EVG_S = ViewerEVG_ref.current
-        V_EVG_S.style.setProperty(key, val)
-    }
-    const clearNowCoord = () => {
-        nowCoord.current = 0
-        nowAnimation.current = false
-        setEvgVar('--evg-zone-coord-now', 0)
-    }
-    const comeBack = () => {
-        setAnimationBack(true)
-    }
-
-    const onMoveStart = () => {
-        setEvgVar('--evg-a-status', `paused`)
-    }
-    const onMoveXY = ({ deltaX, itXorY, startItXorY }) => {
+    const comeBack = useCallback(() => {
+        moveZone(0)
+    }, [moveZone])
+    const moveZone = useCallback((shift) => {
+        const ViewerEVGZone_s = ViewerEVGZone_ref.current
+        ViewerEVGZone_s.style.transform = `translateX(${shift}px)`
+    }, [])
+    // --- touchDriver
+    const onMoveXY = ({ shiftX, itXorY, startItXorY }) => {
         if (itXorY === 'x' && startItXorY === 'x') {
-            nowCoord.current = nowCoord.current + deltaX
-            setEvgVar('--evg-zone-coord-now', `${nowCoord.current}px`)
+            moveZone(shiftX)
         }
     }
-    const onMoveEnd = ({ shiftX, inertia, itXorY, startItXorY }) => {
-        setEvgVar('--evg-a-status', `running`)
-        // защита от холостого нажатия
-        if (shiftX !== 0 && startItXorY === 'x' && !nowAnimation.current) {
+    const onMoveEnd = ({ shiftX, inertia, startItXorY }) => {
+        if (shiftX !== 0 && startItXorY === 'x') {
             if (inertia || Math.abs(shiftX) > sensitivity) {
                 if (Math.sign(shiftX) === 1) {
-                    // left (prev)
-                    imgs[newImgIndex.current - 1] ? moveSlide('ArrowLeft') : comeBack()
+                    moveSlide('ArrowLeft')
                 } else {
-                    // right (next)
-                    imgs[newImgIndex.current + 1] ? moveSlide('ArrowRight') : comeBack()
+                    moveSlide('ArrowRight')
                 }
             } else {
-                comeBack()
+                setComeback(true)
             }
         }
     }
+    // --- touchDriver
+    // --- replace
+    const pseudoReplace = (direction) => {
+        let pseudo = { ...stateImg }
+        if (direction === 'right') {
+            pseudo.center = pseudo.right
+        } else {
+            pseudo.center = pseudo.left
+        }
+        setStateImg(pseudo)
+    }
+    const realReplace = useCallback((imgIndex) => {
+        // TODO: можно в center передавать уже созданные компоненты Image из left или right.
+        // это может защитить от потери кэша. 
+        setStateImg({
+            left: imgs[imgIndex - 1] ? <Image className={classNames(classes.сarouselImg, classes.ImgLeft)} src={imgs[imgIndex - 1]} /> : '',
+            center: <Image className={classNames(classes.сarouselImg, classes.ImgCenter)} src={imgs[imgIndex]} />,
+            right: imgs[imgIndex + 1] ? <Image className={classNames(classes.сarouselImg, classes.ImgRight)} src={imgs[imgIndex + 1]} /> : '',
+        })
+    }, [imgs, classes])
+    // --- replace
+    const moveSlide = (direction) => {
+        switch (direction) {
+            case 'ArrowRight':
+                imgs[imgIndex_ref.current + 1] ? setIndexDirection(prev => prev === 0 ? 1 : prev) : setComeback(true)
+                break;
+            case 'ArrowLeft':
+                imgs[imgIndex_ref.current - 1] ? setIndexDirection(prev => prev === 0 ? -1 : prev) : setComeback(true)
+                break;
+        }
+    }
 
-    const onKeypress = (e) => {
+    const onKeyUp = (e) => {
         e.preventDefault()
         if (e.key === 'ArrowRight' || e.key === 'ArrowLeft') {
             moveSlide(e.key)
         }
     }
-    const moveSlide = (mode) => {
-        let moveEnd = 0
-        switch (mode) {
-            case 'ArrowRight':
-                if (newImgIndex.current < imgs.length - 1) {
-                    moveEnd = -105
-                    newImgIndex.current = newImgIndex.current + 1
-                }
-                break;
-            case 'ArrowLeft':
-                if (newImgIndex.current > 0) {
-                    moveEnd = 105
-                    newImgIndex.current = newImgIndex.current - 1
-                }
-                break;
-        }
-        setEvgVar('--evg-zone-coord-end', `${moveEnd}%`)
-        setEvgVar('--evg-a-status', `running`)
-
-        nowAnimation.current = true
-        setAnimationMove(true)
-    }
 
     const onAnimationEnd = (e) => {
-        if (e.animationName.includes('move')) {
-            // через changeImg внешнии модули такие как mediaViewer может следить за изменениями
-            onChangeImg(newImgIndex.current)
-            setImgIndex(newImgIndex.current)
-            setAnimationMove(false)
+        if (e.animationName.includes('right')) {
+            imgIndex_ref.current = imgIndex_ref.current + 1
+            pseudoReplace('right')
         }
-        if (e.animationName.includes('back')) {
-            setAnimationBack(false)
+        if (e.animationName.includes('left')) {
+            imgIndex_ref.current = imgIndex_ref.current - 1
+            pseudoReplace('left')
         }
-        setEvgVar('--evg-a-status', `paused`)
-        clearNowCoord()
+        if (e.animationName.includes('comeback')) {
+            comeBack()
+            setComeback(false)
+        }
     }
+
     useEffect(() => {
-        console.log('Carusel[useEffect] event');
-        window.addEventListener('keyup', onKeypress)
+        setImgIndex(imgStart)
+    }, [imgStart])
+
+    useEffect(() => {
+        realReplace(imgIndex)
+        // через changeImg внешнии модули такие как mediaViewer может следить за изменениями
+        onChangeImg && onChangeImg(imgIndex)
+    }, [imgIndex, onChangeImg, realReplace])
+
+    useLayoutEffect(() => {
+        comeBack()
+        setImgIndex(imgIndex_ref.current)
+        setIndexDirection(0)
+    }, [stateImg, comeBack])
+
+    useEffect(() => {
+        window.addEventListener('keyup', onKeyUp)
         return () => {
-            window.removeEventListener('keyup', onKeypress)
+            window.removeEventListener('keyup', onKeyUp)
         }
         // eslint-disable-next-line react-hooks/exhaustive-deps
     }, [])
 
-    /*
-        @param (img:nodeElement)
-        @return {width,heigth}
-    */
-    const calcSizeMax = (imgSrc) => {
-        let resCalc
-        // console.log('calcSizeMax:', imgSrc)
-        if (cacheSizeImg.current.has(imgSrc)) {
-            resCalc = cacheSizeImg.current.get(imgSrc)
-            // console.log('cache', resCalc);
-        } else {
-            let img = document.createElement('img');
-            img.src = imgSrc;
-            const { clientWidth, clientHeight } = document.documentElement
-            let sizeFix = calcMaxSizeRatio(img.naturalWidth, img.naturalHeight, clientWidth, clientHeight)
-            resCalc = { width: sizeFix.newWidth, height: sizeFix.newHeight }
-            cacheSizeImg.current.set(imgSrc, resCalc)
-            // console.log('no cache', resCalc);
-        }
-        return resCalc
-    }
-    const nextArrow = imgs[imgIndex + 1] ?
-        <div className={classNames(classes.v_btn, classes.v_btn_right)} onClick={() => moveSlide('ArrowRight')}>
-            <ChevronRight />
-        </div> : null
-
-    const prevArrow = imgs[imgIndex - 1] ?
+    const leftArrow = stateImg.left ?
         <div className={classNames(classes.v_btn, classes.v_btn_left)} onClick={() => moveSlide('ArrowLeft')}>
             <ChevronLeft />
         </div> : null
 
-    const vLeft = imgs[imgIndex - 1] ?
-        <div className={classNames(classes.v_left, classes.сarouselImg)}>
-            <img
-                style={mode ? { ...calcSizeMax(imgs[imgIndex - 1]) } : null}
-                src={imgs[imgIndex - 1]} alt="" />
+    const rightArrow = stateImg.right ?
+        <div className={classNames(classes.v_btn, classes.v_btn_right)} onClick={() => moveSlide('ArrowRight')}>
+            <ChevronRight />
         </div> : null
 
-    const vRight = imgs[imgIndex + 1] ?
-        <div className={classNames(classes.v_right, classes.сarouselImg)}>
-            <img
-                style={mode ? { ...calcSizeMax(imgs[imgIndex + 1]) } : null}
-                src={imgs[imgIndex + 1]} alt="" />
-        </div> : null
+    const vLeft = stateImg.left ? <div className={classNames(classes.v_left)}>{stateImg.left}</div> : null
+    const vRight = stateImg.right ? <div className={classNames(classes.v_right)}>{stateImg.right}</div> : null
 
     return (
         <TouchDriver
             className={classNames(classes.base, className)}
             ref={ViewerEVG_ref}
-            moveStart={onMoveStart}
             moveXY={onMoveXY}
             moveEnd={onMoveEnd}
             {...otherProps}
@@ -292,23 +265,18 @@ const Carousel = React.forwardRef(function Carousel(props, ref) {
             <div
                 ref={ViewerEVGZone_ref}
                 className={classNames(classes.v_zone, {
-                    [classes.v_zone_move]: animationMove,
-                    [classes.v_zone_back]: animationBack,
+                    [classes.v_zone_right]: indexDirection === 1,
+                    [classes.v_zone_left]: indexDirection === -1,
+                    [classes.v_zone_comeback]: comeback,
                 })}
                 onAnimationEnd={onAnimationEnd}
             >
                 {vLeft}
-                <div className={classNames(classes.v_center, classes.сarouselImg)}>
-                    <img
-                        style={mode ? { ...calcSizeMax(imgs[imgIndex]) } : null}
-                        src={imgs[imgIndex]}
-                        alt=""
-                    />
-                </div>
+                <div className={classNames(classes.v_center)}>{stateImg.center}</div>
                 {vRight}
             </div>
-            {nextArrow}
-            {prevArrow}
+            {leftArrow}
+            {rightArrow}
         </TouchDriver>
     )
 })
@@ -339,23 +307,30 @@ Carousel.propTypes = {
     imgStart: PropTypes.number,
 
     /**
-     * Цвет заденго фона.
+     * Цвет фона.
     */
     backgroundColor: PropTypes.string,
 
     /**
-     * Вызывается при изменении img.
+     * Вызывается при изменении img. Возвращает index активного изображения.
     */
     onChangeImg: PropTypes.func,
 
     /**
-     * 
+     * Количество пикселей в сдвиге после которого запускается смена изображения. 
     */
-    mode: PropTypes.string,
+    sensitivity: PropTypes.number,
+
+    /**
+     * Время выполнения анимации смены изображения. 
+    */
+    duration: PropTypes.number,
 }
 Carousel.defaultProps = {
     imgStart: 0,
-    mode: '',
+    backgroundColor: '#000000d9',
+    sensitivity: 200,
+    duration: 200,
 }
 Carousel.displayName = 'CarouselEVG'
 export default withStyles(styles)(Carousel)

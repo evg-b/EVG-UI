@@ -1,11 +1,7 @@
 export default {
 'ListActions' : `import React from 'react';
 import { withStyles } from 'react-jss';
-import { Checkbox, List, ListItem, ListItemText, ListitemAction } from '@evg-b/evg-ui';
-// import {
-//     Checkbox,
-//     MoreVert,
-// } from '@evg-b/evg-icons';
+import { Checkbox, List, ListItem, ListItemText, ListItemAction } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -24,10 +20,9 @@ const ListAction = (props) => {
                 {
                     [...Array(5)].map((n, i) =>
                         <ListItem key={i}>
-                            <ListitemAction position='start'>
-                                {/* <IconButton><MoreVert /></IconButton> */}
+                            <ListItemAction position='start'>
                                 <Checkbox defaultChecked />
-                            </ListitemAction>
+                            </ListItemAction>
                             <ListItemText>ListItem - {i + 1}</ListItemText>
                         </ListItem>
                     )
@@ -37,10 +32,9 @@ const ListAction = (props) => {
                 {
                     [...Array(5)].map((n, i) =>
                         <ListItem key={i}>
-                            <ListitemAction>
-                                {/* <IconButton><MoreVert /></IconButton> */}
+                            <ListItemAction>
                                 <Checkbox defaultChecked />
-                            </ListitemAction>
+                            </ListItemAction>
                             <ListItemText>ListItem - {i + 1}</ListItemText>
                         </ListItem>
                     )

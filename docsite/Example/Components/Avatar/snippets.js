@@ -96,8 +96,7 @@ const AvatarGroupAndSize = (props) => {
     )
 }
 
-export default withStyles(styles)(AvatarGroupAndSize)`,'AvatarMultiple' : `// AvatarMultiple
-import React from 'react';
+export default withStyles(styles)(AvatarGroupAndSize)`,'AvatarMultiple' : `import React from 'react';
 import { withStyles } from 'react-jss';
 import { Avatar } from '@evg-b/evg-ui';
 
@@ -105,6 +104,9 @@ const styles = {
     base: {
         display: 'flex',
         flexWrap: 'wrap',
+        '&>*': {
+            margin: 10,
+        }
     }
 }
 
@@ -115,32 +117,26 @@ const AvatarMultiple = (props) => {
 
     return (
         <div className={classes.base}>
-            <Avatar srcs={[
-                '/source/Avatar/1.jpg',
-                '/source/Avatar/1.jpg',
-                '/source/Avatar/1.jpg',
-                '/source/Avatar/1.jpg',
+            <Avatar size={55} srcs={[
+                '/source/Avatar/3.jpg',
+                '/source/Avatar/12.jpg',
+                '/source/Avatar/11.jpg',
+                '/source/Avatar/10.jpg',
             ]}
             />
-            <Avatar srcs={[
-                '/source/Avatar/1.jpg',
-                '/source/Avatar/1.jpg',
-                '/source/Avatar/1.jpg',
-                '/source/Avatar/1.jpg',
+            <Avatar size={55} srcs={[
+                '/source/Avatar/3.jpg',
+                '/source/Avatar/12.jpg',
+                '/source/Avatar/11.jpg',
             ]}
             />
-            <Avatar srcs={[
-                '/source/Avatar/1.jpg',
-                '/source/Avatar/1.jpg',
-                '/source/Avatar/1.jpg',
-                '/source/Avatar/1.jpg',
+            <Avatar size={55} srcs={[
+                '/source/Avatar/3.jpg',
+                '/source/Avatar/12.jpg',
             ]}
             />
-            <Avatar srcs={[
-                '/source/Avatar/1.jpg',
-                '/source/Avatar/1.jpg',
-                '/source/Avatar/1.jpg',
-                '/source/Avatar/1.jpg',
+            <Avatar size={55} srcs={[
+                '/source/Avatar/3.jpg',
             ]}
             />
         </div>

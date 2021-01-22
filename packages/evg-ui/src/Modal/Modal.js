@@ -30,14 +30,16 @@ const Modal = React.forwardRef(function Modal(props, ref) {
         ...otherProps
     } = props
 
-    const CloseESC = (e) => {
-        e.preventDefault()
-        if (isEsc && 'Escape' === e.key) {
-            console.log('[modal] onClose-start Esc');
+    const Close = (e) => {
+        if (e.target === e.currentTarget && open) {
+            console.log('[modal] onClose-start target');
             onClose && onClose()
         }
-        if (e.target === e.currentTarget) {
-            console.log('[modal] onClose-start target');
+    }
+    const CloseESC = (e) => {
+        e.preventDefault()
+        if (isEsc && 'Escape' === e.key && open) {
+            console.log('[modal] onClose-start Esc');
             onClose && onClose()
         }
     }
@@ -49,8 +51,7 @@ const Modal = React.forwardRef(function Modal(props, ref) {
         <Component
             ref={ref}
             className={classNames(classes.base, className)}
-            onClick={CloseESC}
-            onKeyUp={CloseESC}
+            onClick={Close}
             {...otherProps}
         >
             {children}

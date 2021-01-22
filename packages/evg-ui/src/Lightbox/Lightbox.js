@@ -7,6 +7,7 @@ import Modal from '../Modal'
 import Carousel from '../Carousel'
 import Elevation from '../utils/Elevation'
 import calcMaxSizeRatio from '../utils/calcMaxSizeRatio'
+import Image from '../Image'
 
 const absolutePosition = {
     position: 'absolute',
@@ -15,20 +16,12 @@ const absolutePosition = {
     left: 0,
     bottom: 0,
 }
-
-// const msAnim = 50000
-const msAnim = 300
 const styles = {
     // Lightbox
     base: {
         width: '100%',
         height: '100%',
         display: 'grid',
-        // gridTemplateColumns: 'repeat(auto-fit, minmax(150px, 1fr))',
-        // gridTemplateRows: 'repeat(auto-fit, minmax(150px, 300px))',
-        // gridAutoRows: 'minmax(150px, 300px)',
-        // gridTemplateColumns: 'repeat(3, minmax(150px, 1fr))',
-        // gridTemplateRows: 'repeat(3, minmax(150px, 1fr))',
         gridTemplateColumns: 'repeat(3, 150px)',
         gridTemplateRows: 'repeat(3, 150px)',
         gridAutoColumns: '150px',
@@ -38,26 +31,15 @@ const styles = {
         boxSizing: 'border-box',
     },
     modal: {
-        // '--evg-img-coord-y-now': 0,
-        // '--evg-img-coord-x-start': 0,
-        // '--evg-img-coord-y-start': 0,
-        // '--evg-img-width-start': 0,
-        // '--evg-img-height-start': 0,
-        // '--evg-img-blackout': 0,
-        // backgroundColor: 'red',
-        // backgroundColor: 'rgba(0,0,0,.2)',
-        // backgroundColor: 'rgba(0,0,0,1)',
+        padding: 0,
+        margin: 0,
     },
     img: {
         tapHighlightColor: 'transparent',
         cursor: 'pointer',
         width: '100%',
         height: '100%',
-        '& img': {
-            width: '100%',
-            height: '100%',
-            objectFit: 'cover',
-        }
+        objectFit: 'cover',
     },
     // Lightbox
     testBlock: {
@@ -73,95 +55,84 @@ const styles = {
     blockTouchCarousel: {
         pointerEvents: 'none',
     },
-    сarouselImg: {
-        '& img': {
-            maxWidth: '1000px',
-            maxHeight: '90vh',
-            objectFit: 'cover',
-        }
-    },
+
     hidden: {
         display: 'none', // visible
     },
     imgFlip: {
-        ...Elevation(16),
-        width: 'var(--evg-img-width-end)',
-        height: 'var(--evg-img-height-end)',
+        // ...Elevation(16),
+        width: 'var(--evg-img-center-width-end,0)',
+        height: 'var(--evg-img-center-height-end,0)',
         transform: 'translateY(var(--evg-img-coord-y-now,0))',
         objectFit: 'cover',
         willChange: 'transform',
     },
     imgFlip_normal: {
-        animation: `$move ${msAnim}ms cubic-bezier(0.4, 0, 0.2, 1) both`,
-        animationDirection: 'normal',
+        animation: props => `$move ${props.duration}ms cubic-bezier(0.4, 0, 0.2, 1) both normal`,
     },
     imgFlip_reverse: {
-        animation: `$move ${msAnim}ms cubic-bezier(0.4, 0, 0.2, 1) both`,
-        animationDirection: 'reverse',
+        animation: props => `$move ${props.duration}ms cubic-bezier(0.4, 0, 0.2, 1) both reverse`,
     },
     '@keyframes move': {
         from: {
-            width: 'var(--evg-img-width-start)',
-            height: 'var(--evg-img-height-start)',
-            transform: 'translate(var(--evg-img-coord-start))',
+            width: 'var(--evg-img-width-start,0)',
+            height: 'var(--evg-img-height-start,0)',
+            transform: 'translate(var(--evg-img-coord-start,0))', // x,y
         },
         to: {
-            width: 'var(--evg-img-width-end)',
-            height: 'var(--evg-img-height-end)',
-            transform: 'translateY(var(--evg-img-coord-y-now,0))',
+            width: 'var(--evg-img-center-width-end,0)',
+            height: 'var(--evg-img-center-height-end,0)',
+            transform: 'translateY(var(--evg-img-coord-y-now,0))', // y
         },
     },
-    imgFlip_back: {
-        animation: `$back ${msAnim}ms ease-out`,
+    imgFlip_comeback: {
+        animation: props => `$comeback ${props.duration}ms cubic-bezier(0.4, 0, 0.2, 1)`,
     },
-    '@keyframes back': {
-        from: {
-            transform: 'translateY(var(--evg-img-coord-y-now,0))',
-        },
+    '@keyframes comeback': {
         to: {
             transform: 'translateY(0)',
         },
     },
     blackout: {
         backgroundColor: 'rgba(0,0,0,var(--evg-img-blackout,0))',
-        // opacity: 'var(--evg-img-blackout,0)',
+        willChange: 'background-color',
     },
     blackout_normal: {
-        animation: `$blackout ${msAnim}ms ease-out`,
-        animationDirection: 'normal',
+        animation: props => `$blackout ${props.duration}ms cubic-bezier(0.4, 0, 0.2, 1) normal`,
     },
     blackout_reverse: {
-        animation: `$blackout ${msAnim}ms ease-out`,
-        animationDirection: 'reverse',
+        animation: props => `$blackout ${props.duration}ms cubic-bezier(0.4, 0, 0.2, 1) reverse`,
+    },
+    blackout_back: {
+        animation: props => `$blackout_back ${props.duration}ms cubic-bezier(0.4, 0, 0.2, 1)`,
     },
     '@keyframes blackout': {
         from: {
             backgroundColor: 'rgba(0,0,0,0)',
         },
         to: {
-            backgroundColor: 'rgba(0,0,0,var(--evg-img-blackout,0))',
+            backgroundColor: 'rgba(0,0,0,var(--evg-img-blackout,1))',
         },
-    },
-    blackout_back: {
-        animation: `$blackout_back ${msAnim}ms ease-out`,
-        animationDirection: 'normal',
     },
     '@keyframes blackout_back': {
-        from: {
-            backgroundColor: 'rgba(0,0,0,var(--evg-img-blackout,0))',
-        },
         to: {
             backgroundColor: 'rgba(0,0,0,1)',
         },
     },
-    '@media (max-width: 1024px)': {
-        // страховка, если ручной расчет не сработает по ошибке браузера
-        сarouselImg: {
-            '& img': {
-                maxWidth: '100%',
-                maxHeight: '90%',
-            }
-        }
+    ImgLeft: {
+        width: 'var(--evg-img-left-width-end,0)',
+        height: 'var(--evg-img-left-height-end,0)',
+        objectFit: 'cover',
+    },
+    ImgCenter: {
+        width: 'var(--evg-img-center-width-end,0)',
+        height: 'var(--evg-img-center-height-end,0)',
+        objectFit: 'cover',
+    },
+    ImgRight: {
+        width: 'var(--evg-img-right-width-end,0)',
+        height: 'var(--evg-img-right-height-end,0)',
+        objectFit: 'cover',
     },
 }
 
@@ -171,52 +142,63 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
         className,
         children,
         imgs,
+        duration,
         ...otherProps
     } = props
 
     let LightboxEVG_ref = useRef()
     LightboxEVG_ref = ref || LightboxEVG_ref
     const Modal_ref = useRef() // для --css-var
-    const imgIndexOpen_ref = useRef()
-    const cachcalcStartPosition = useRef()
+    // const cachcalcStartPosition = useRef()
 
     const [indexOpen, setIndexOpen] = useState(-1)
     const [isModal, setIsModal] = useState(false)
-    const [animationBack, setAnimationBack] = useState(false)
+    const [comeback, setComeback] = useState(false)
     const [flip, setFlip] = useState(false)
     const [normalAnimation, setNormalAnimation] = useState(false)
     const [reverseAnimation, setReverseAnimation] = useState(false)
 
+    const ratioSizeImgByIndex = useCallback((imgIndex = 0) => {
+        let ims = [...LightboxEVG_ref.current.getElementsByTagName('img')]
+
+        let leftImg = imgs[imgIndex - 1] ? ims.find(e => Number(e.dataset.index) === imgIndex - 1) : ''
+        let centerImg = ims.find(e => Number(e.dataset.index) === imgIndex)
+        let rightImg = imgs[imgIndex + 1] ? ims.find(e => Number(e.dataset.index) === imgIndex + 1) : ''
+
+        leftImg && calcPosition(leftImg, 'left')
+        calcPosition(centerImg, 'center')
+        rightImg && calcPosition(rightImg, 'right')
+    }, [imgs, calcPosition])
+
     const setEvgVar = (key, val) => {
         // установка css var
-        document.documentElement.style.setProperty(key, val)
-
-        // const Modal_S = Modal_ref.current
-        // Modal_S.style.setProperty(key, val)
+        const Modal_S = Modal_ref.current
+        Modal_S.style.setProperty(key, val)
     }
-    const clearEvgVar = () => {
-        document.documentElement.style.cssText = ''
-        cachcalcStartPosition.current = {} // очищаем кэш
-    }
-    const calcStartPosition = useCallback((img) => {
-        if (cachcalcStartPosition.current === img) {
-            // кэш помогает избежать повторных вычеселний для фото которые уже сделаны
-            return
-        }
-        cachcalcStartPosition.current = img
 
-        const { top, left, width, height } = img.getBoundingClientRect()
+    const calcPosition = useCallback((img, prefix = 'center') => {
+        // console.log('calcStartPosition img:', img)
+        // if (cachcalcStartPosition.current === img) {
+        //     // кэш помогает избежать повторных вычеселний для фото которые уже сделаны
+        //     return
+        // }
+        // cachcalcStartPosition.current = img
+
         const { clientWidth, clientHeight } = document.documentElement
-        const [centerX, centerY] = [clientWidth / 2, clientHeight / 2]
-        let newX = -(centerX - (width / 2)) + left
-        let newY = -(centerY - (height / 2)) + top
+        if (prefix === 'center') {
+            const { top, left, width, height } = img.getBoundingClientRect()
+            const [centerX, centerY] = [clientWidth / 2, clientHeight / 2]
+            let newX = -(centerX - (width / 2)) + left
+            let newY = -(centerY - (height / 2)) + top
+
+            setEvgVar('--evg-img-coord-start', `${newX}px,${newY}px`)
+            setEvgVar('--evg-img-width-start', `${width}px`)
+            setEvgVar('--evg-img-height-start', `${height}px`)
+        }
 
         const imgSizeEnd = calcMaxSizeRatio(img.naturalWidth, img.naturalHeight, clientWidth, clientHeight)
-        setEvgVar('--evg-img-coord-start', `${newX}px,${newY}px`)
-        setEvgVar('--evg-img-width-start', `${width}px`)
-        setEvgVar('--evg-img-height-start', `${height}px`)
-        setEvgVar('--evg-img-width-end', `${imgSizeEnd.newWidth}px`)
-        setEvgVar('--evg-img-height-end', `${imgSizeEnd.newHeight}px`)
+        setEvgVar(`--evg-img-${prefix}-width-end`, `${imgSizeEnd.newWidth}px`)
+        setEvgVar(`--evg-img-${prefix}-height-end`, `${imgSizeEnd.newHeight}px`)
     }, [])
 
     const calcBlackout = (shiftY) => {
@@ -226,49 +208,39 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
     }
 
     const onHandlerClick = (e) => {
+        console.log('[Lightbox][onHandlerClick] setIsModal -> true')
         setIsModal(true)
-        calcStartPosition(e.target, 'onHandlerClick')
-        setIndexOpen(Number(e.target.dataset.index))
-
-        setEvgVar('--evg-img-blackout', 1)
-
-        setNormalAnimation(true)
+        setIndexOpen(Number(e.currentTarget.dataset.index))
     }
 
     const onClose = () => {
-        setFlip(false)
-        setReverseAnimation(true)
+        console.log(`onClose isModal:${isModal} normalAnimation:${normalAnimation}`)
+        if (isModal && !normalAnimation) {
+            setFlip(false)
+            setNormalAnimation(false)
+            setReverseAnimation(true)
+        }
     }
-    const onMoveStart = ({ startItXorY }) => {
-        // console.log(`Lightbox[onMoveStart] flip: ${flip}`);
-        // setBlockTouchCarousel(true)
-    }
+    // --- touchDriver
     const onMoveXY = ({ shiftY, itXorY, startItXorY }) => {
         if (itXorY === 'y' && startItXorY === 'y') {
             flip && setFlip(false)
             setEvgVar('--evg-img-coord-y-now', `${shiftY}px`)
             setEvgVar('--evg-img-blackout', calcBlackout(shiftY))
-            // setTimeout(() => {
-            //     setEvgVar('--evg-img-coord-y-now', `${shiftY}px`)
-            //     // setEvgVar('--evg-img-blackout', calcBlackout(shiftY))
-            // }, 0)
-            // setTimeout(() => {
-            //     // setEvgVar('--evg-img-coord-y-now', `${shiftY}px`)
-            //     setEvgVar('--evg-img-blackout', calcBlackout(shiftY))
-            // }, 0)
-        }
-    }
-    const onMoveEnd = ({ shiftY, inertia, itXorY, startItXorY }) => {
-        // todo: подключить инерцию
-        if (startItXorY === 'y' && shiftY !== 0) {
-            if (inertia || Math.abs(shiftY) > 200) {
-                setReverseAnimation(true)
-            } else {
-                setAnimationBack(true)
-            }
         }
     }
 
+    const onMoveEnd = ({ shiftY, inertia, startItXorY }) => {
+        // todo: подключить инерцию
+        if (startItXorY === 'y' && shiftY !== 0) {
+            if (inertia || Math.abs(shiftY) > 200) {
+                onClose()
+            } else {
+                setComeback(true)
+            }
+        }
+    }
+    // --- touchDriver
     const onAnimationEnd = (e) => {
         if (e.animationName.includes('move')) {
             if (normalAnimation) {
@@ -277,32 +249,41 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
             }
             if (reverseAnimation) {
                 setIsModal(false)
-                setReverseAnimation(false)
-                setIndexOpen(-1)
-                clearEvgVar()
             }
         }
         if (e.animationName.includes('back')) {
-            setEvgVar('--evg-img-blackout', 1)
-            setAnimationBack(false)
+            setEvgVar('--evg-img-coord-y-now', 0)
             setFlip(true)
+            setComeback(false)
         }
-        setEvgVar('--evg-img-coord-y-now', 0)
     }
+
     const handlerChangeImg = (index) => {
-        console.log('Lightbox[handlerChangeImg]', index);
+        // console.log('Lightbox[handlerChangeImg]', index);
         setIndexOpen(index)
     }
+
     useEffect(() => {
-        imgIndexOpen_ref.current && calcStartPosition(imgIndexOpen_ref.current)
-    }, [indexOpen, calcStartPosition])
+        console.log(`[useEffect] isModal:${isModal}`)
+        if (isModal) {
+            // modal смонтирован
+            setNormalAnimation(true)
+        } else {
+            setIndexOpen(-1)
+            setReverseAnimation(false)
+        }
+    }, [isModal])
+
+    useEffect(() => {
+        indexOpen !== -1 && ratioSizeImgByIndex(indexOpen)
+    }, [indexOpen, ratioSizeImgByIndex])
 
     const flipImg = (
         <img
             className={classNames(classes.imgFlip, {
                 [classes.imgFlip_normal]: normalAnimation,
                 [classes.imgFlip_reverse]: reverseAnimation,
-                [classes.imgFlip_back]: animationBack,
+                [classes.imgFlip_comeback]: comeback,
                 [classes.hidden]: flip,
             })}
             onAnimationEnd={onAnimationEnd}
@@ -317,12 +298,13 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
                 [classes.hidden]: !flip,
             })}
             classes={{
-                сarouselImg: classes.сarouselImg,
+                ImgLeft: classes.ImgLeft,
+                ImgCenter: classes.ImgCenter,
+                ImgRight: classes.ImgRight,
             }}
             imgs={imgs}
             imgStart={indexOpen}
             onChangeImg={handlerChangeImg}
-            mode='lightbox'
         />
     )
     return (
@@ -334,19 +316,15 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
             {
                 imgs.map((elem, index) => {
                     return (
-                        <div
+                        <Image
                             key={index}
-                            onClick={onHandlerClick}
                             className={classes.img}
                             style={index === indexOpen && isModal ? { opacity: 0, transition: 'opacity 0ms 30ms' } : { opacity: 1 }}
-                        >
-                            <img
-                                data-index={index}
-                                ref={index === indexOpen ? imgIndexOpen_ref : null}
-                                src={elem}
-                                alt=""
-                            />
-                        </div>
+                            data-index={index}
+                            src={elem}
+                            alt=""
+                            onClick={onHandlerClick}
+                        />
                     )
                 })
             }
@@ -355,13 +333,12 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
                 ref={Modal_ref}
                 className={classNames(classes.modal, classes.blackout, {
                     [classes.blackout_normal]: normalAnimation,
-                    [classes.blackout_back]: animationBack,
                     [classes.blackout_reverse]: reverseAnimation,
+                    [classes.blackout_back]: comeback,
                 })}
                 component={TouchDriver}
                 open={isModal}
                 onClose={onClose}
-                moveStart={onMoveStart}
                 moveXY={onMoveXY}
                 moveEnd={onMoveEnd}
                 isEsc
@@ -394,9 +371,15 @@ Lightbox.propTypes = {
      * Массив изображений.
     */
     imgs: PropTypes.arrayOf(PropTypes.string),
+
+    /**
+     * Время выполнения анимации полета изображения. 
+    */
+    duration: PropTypes.number,
 }
 Lightbox.defaultProps = {
-    imgs: []
+    imgs: [],
+    duration: 300,
 }
 Lightbox.displayName = 'LightboxEVG'
 export default withStyles(styles)(Lightbox)

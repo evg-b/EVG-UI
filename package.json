@@ -3,7 +3,7 @@
   "main": "index.js",
   "license": "MIT",
   "scripts": {
-    "build": "yarn build:release",
+    "build": "lerna run --parallel --scope \"@evg-b/evg-*\" build",
     "lint": "eslint .",
     "wds": "yarn wds:exboard & yarn wds:evgui",
     "wds:docstart": "lerna run --scope doc start",

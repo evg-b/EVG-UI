@@ -34,6 +34,7 @@ export { default as Popup } from './Popup';
 export { default as Skeleton } from './Skeleton';
 export { default as Tooltip } from './Tooltip';
 export { default as PropDoc } from './PropDoc';
+export { default as Image } from './Image';
 // Tabs
 // Slider
 // Notify

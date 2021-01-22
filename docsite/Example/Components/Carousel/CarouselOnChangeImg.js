@@ -28,7 +28,6 @@ const CarouselOnChangeImg = (props) => {
         <div className={classes.base}>
             <Carousel
                 imgs={imgs}
-                backgroundColor='rgba(0,0,0,.85)'
             />
         </div>
     )

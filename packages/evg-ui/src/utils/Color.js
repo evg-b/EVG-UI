@@ -44,7 +44,6 @@ const MapColor = {
     'blueGray': blueGray,
 }
 const MapTheme = {
-    // 'default': '#00000000',
     'default': '#FFFFFF00',
     'primary': blue[DefaultLevelColor],
     // secondary
@@ -70,7 +69,6 @@ function getCssVar(cssVarName) {
     return cssVar ? cssVar : notFoundColor
 }
 export default function Color(colorName = '') {
-    // if (colorName) {
     if (colorName.indexOf('--') === 0) {
         colorName = getCssVar(colorName)
     }
@@ -92,6 +90,4 @@ export default function Color(colorName = '') {
     }
     // если мы не распознали цвет то применяем для него дефолтное значение чтобы хоть что-то вернуть
     return ConstructorColor(colorName)
-    // return ConstructorColor(notFoundColor)
-    // }
 }

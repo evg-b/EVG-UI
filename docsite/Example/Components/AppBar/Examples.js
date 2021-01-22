@@ -47,10 +47,10 @@ const AppBarTitleCenterExample = () => {
 	)
 }
 
-export {
+export { 
 	AppBarBaseExample,
-	AppBarColorExample,
-	AppBarLeftAndRightExample,
-	AppBarTitleCenterExample,
+AppBarColorExample,
+AppBarLeftAndRightExample,
+AppBarTitleCenterExample,
 
 }

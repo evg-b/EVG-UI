@@ -103,9 +103,11 @@ class TouchDriver extends React.Component {
         return { nowX, nowY }
     }
     moveStartMouseOrTouch(e) {
-        this.moveCoordInit()
-        const { moveStart } = this.props
         const moveCoord_ref = this.moveCoord.current
+        if (moveCoord_ref.startTime !== 0) {
+            console.log('dubleClick!!!')
+        }
+        const { moveStart } = this.props
         this.isTouch.current = true
         let { nowX, nowY } = this.getInCoord(e)
         moveCoord_ref.startX = nowX
@@ -116,7 +118,7 @@ class TouchDriver extends React.Component {
         moveStart && moveStart(moveCoord_ref)
     }
     move(e) {
-        // e.preventDefault()
+        e.preventDefault()
         const { moveXY, autoMove } = this.props
         const mc = this.moveCoord.current
         let prevDelta = this.prevDelta.current
@@ -175,6 +177,8 @@ class TouchDriver extends React.Component {
         } else {
             moveEnd && moveEnd(moveCoord_ref)
         }
+        // setTimeout(() => { this.moveCoordInit() }, 300)
+        this.moveCoordInit()
     }
     moveHome() {
         let tch_ref = this.touchRef.current

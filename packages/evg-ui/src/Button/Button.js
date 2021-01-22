@@ -1,16 +1,16 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
+import withStyles from '../styles/withStyles'
 import classNames from 'classnames'
-import Color from '../utils/Color'
-import hexToRGBA from '../utils/hexToRGBA'
+// import Color from '../utils/Color'
+import Color2 from '../utils/Color/Color'
 import Elevation from '../utils/Elevation'
 import ButtonBase from '../ButtonBase'
 import Loader from '../Loader'
 
 const styles = {
     base: {
-        borderRadius: '4px',
+        borderRadius: 4,
         '&:disabled': {
             ...Elevation(0),
         }
@@ -19,21 +19,26 @@ const styles = {
         display: 'inline-flex',
         alignItems: 'center',
         fontFamily: 'Roboto, sans-serif',
-        letterSpacing: '.0892857143em',
+        letterSpacing: '.09em',
         lineHeight: '1.7',
         fontWeight: 500,
     },
     // variant
     text: {
-        color: props => props.color === 'default' ? Color(props.color).Contrast : Color(props.color).Color
+        color: props => props.color === 'default' ? props.Color.Contrast() : props.Color.Color()
+        // color: props => props.color === 'default' ? Color2(props.color).Contrast() : Color2(props.color).Color()
     },
     outlined: {
-        border: props => `1px solid ${props.color === 'default' ? hexToRGBA(Color(props.color).Contrast, 0.6) : hexToRGBA(Color(props.color).Color, 0.6)}`,
-        color: props => props.color === 'default' ? hexToRGBA(Color(props.color).Contrast, 0.6) : Color(props.color).Color
+        border: props => `1px solid ${props.color === 'default' ? props.Color.Contrast('hexa', 0.6) : props.Color.Color('hexa', 0.6)}`,
+        color: props => props.color === 'default' ? props.Color.Contrast('hexa', 0.6) : props.Color.Color()
+        // border: props => `1px solid ${props.color === 'default' ? Color2(props.color).Contrast('hexa', 0.6) : Color2(props.color).Color('hexa', 0.6)}`,
+        // color: props => props.color === 'default' ? Color2(props.color).Contrast('hexa', 0.6) : Color2(props.color).Color()
     },
     contained: {
-        backgroundColor: props => Color(props.color).Color,
-        color: props => Color(props.color).Contrast,
+        backgroundColor: props => props.Color.Color(),
+        color: props => props.Color.Contrast(),
+        // backgroundColor: props => Color2(props.color).Color(),
+        // color: props => Color2(props.color).Contrast(),
 
     },
     elevation: {
@@ -91,7 +96,6 @@ const styles = {
     loaderFull: {
         position: 'absolute',
     }
-
 }
 const MapSizeLoader = {
     'small': 18,
@@ -153,7 +157,8 @@ const Button = React.forwardRef(function Button(props, ref) {
                 },
                 className
             )}
-            color={Color(color).Color}
+            color={Color2(color).Color()}
+            // color={color}
             contrast={variant === 'contained' || color === 'default' ? true : false}
             ref={ref}
             type={Component}

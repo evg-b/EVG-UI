@@ -141,7 +141,7 @@ export default ScrollTrackSizeAndColor`,'ScrollVerticalAndHorizontal' : `import 
 import { Scroll } from '@evg-b/evg-ui';
 
 const styles = {
-    width: '150%',
+    width: '800px',
     height: '100px',
     margin: '10px',
     color: 'white',

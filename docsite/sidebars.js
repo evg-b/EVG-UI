@@ -14,12 +14,19 @@ module.exports = {
       'Components/Carousel',
       'Components/Checkbox',
       'Components/Icon',
+      'Components/Image',
       'Components/Lightbox',
       'Components/List',
       'Components/Loader',
+      {
+        type: 'category',
+        label: 'LiveBackground',
+        items: ['Components/Cubes'],
+      },
       // 'Components/Menu',
       'Components/Modal',
       // 'Components/Notify',
+      'Components/Popup',
       'Components/Radio',
       'Components/Ripple',
       'Components/Scroll',
@@ -31,6 +38,7 @@ module.exports = {
       'Components/TextField',
       'Components/Tooltip',
       'Components/TouchDriver',
+
     ],
     // API: [
     //   'API/AppBar',

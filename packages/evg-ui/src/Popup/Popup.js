@@ -77,9 +77,11 @@ const Popup = React.forwardRef(function Popup(props, ref) {
     let Popup_ref = useRef()
     Popup_ref = ref || Popup_ref
     const [show, setShow] = useState(false)
-    const parents_ref = useRef({ all: [], scroll: [] })
     const [mountNode, setMountNode] = useState(false)
+
+    const parents_ref = useRef({ all: [], scroll: [] })
     const visible_ref = useRef({ showRef: false, mountRef: false })
+    const observerTarget_ref = useRef({ observes: { Intersection: undefined, Resize: undefined } })
 
     visible_ref.current.showRef = show
     visible_ref.current.mountRef = mountNode
@@ -149,10 +151,8 @@ const Popup = React.forwardRef(function Popup(props, ref) {
         handleResize()
     }, [mountNode, handleResize])
 
-    const observerTarget_ref = useRef({ observes: { Intersection: undefined, Resize: undefined }, signature: 0 })
-
     useEffect(() => {
-        let { observes, signature } = observerTarget_ref.current
+        let { observes } = observerTarget_ref.current
         if (!observes.Resize) {
             // CREATE observes.Intersection
             observes.Resize = new ResizeObserver(handleResize)
@@ -265,7 +265,7 @@ Popup.propTypes = {
     className: PropTypes.string,
 
     /**
-     * Это ref ссылка к которой прицепляется Popup.
+     * Это ref ссылка по которой прицепляется Popup.
     */
     target: PropTypes.object,
 
@@ -323,7 +323,7 @@ Popup.propTypes = {
 Popup.defaultProps = {
     target: {},
     position: 'bottom',
-    autoHide: true,
+    // autoHide: true,
     animation: 'fade',
     shift: 0,
     mode: 'hover',
