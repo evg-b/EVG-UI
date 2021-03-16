@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { withStyles } from 'react-jss';
-import { Button } from '@evg-b/evg-ui';
+import { Button, withStyles } from '@evg-b/evg-ui';
 import { Check } from '@evg-b/evg-icons';
 
 const styles = {
@@ -31,7 +30,7 @@ const ButtonLoading = (props) => {
             <Button
                 loading={loading[1]}
                 variant='contained'
-                color='--ifm-color-primary'
+                color='primary'
                 startIcon={<Check />}
                 onClick={() => handleLoad(1)}
             >
@@ -40,7 +39,7 @@ const ButtonLoading = (props) => {
             <Button
                 loading={loading[2]}
                 variant='contained'
-                color='--ifm-color-primary'
+                color='primary'
                 onClick={() => handleLoad(2)}
             >
                 And Me Me!

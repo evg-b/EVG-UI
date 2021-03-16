@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import { CodeExample } from '@evg-b/evg-tools';
 import Snippets from './snippets'
 import IconBase from './IconBase'
 import IconColor from './IconColor'
@@ -16,6 +16,7 @@ const IconBaseExample = () => {
 	)
 }
 
+
 const IconColorExample = () => {
 	return (
 		<CodeExample
@@ -25,6 +26,7 @@ const IconColorExample = () => {
 		/>
 	)
 }
+
 
 const IconSizeExample = () => {
 	return (
@@ -36,9 +38,10 @@ const IconSizeExample = () => {
 	)
 }
 
-export { 
-	IconBaseExample,
+
+
+export {
+    IconBaseExample,
 IconColorExample,
 IconSizeExample,
-
 }

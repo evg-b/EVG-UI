@@ -11,10 +11,9 @@ const styles = {
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,.8)',
 }
+
 const ScrollBase = () => {
-    const blockScroll = (props) => {
-        return <div key={props} style={styles}>{props}</div>
-    }
+    const blockScroll = (props) => <div key={props} style={styles}>{props}</div>
     return (
         <Scroll
             autoHide={false}

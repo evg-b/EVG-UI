@@ -11,14 +11,16 @@ const styles = {
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,.8)',
 }
+
 const ScrollVerticalAndHorizontal = () => {
     const blockScroll = (props) => {
         return <div key={props} style={styles}>{props}</div>
     }
     return (
         <Scroll
-            color="#FFFFFF"
+            color='#FFFFFF'
             style={{ width: 400, height: 400 }}
+            autoHide={false}
         >
             {
                 [...Array(25)].map((n, i) =>

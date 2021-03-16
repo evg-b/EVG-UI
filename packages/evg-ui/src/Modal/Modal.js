@@ -1,7 +1,7 @@
 import React, { useEffect } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
+import { withStyles } from '../styles'
 import { createPortal } from 'react-dom'
 
 const styles = {
@@ -17,7 +17,13 @@ const styles = {
         alignItems: 'center',
         overscrollBehavior: 'contain',
     }
-};
+}
+
+/**
+ * Это окно, которое блокирует работу пользователя с родительским приложением до тех пор, пока пользователь это окно не закроет. 
+ * Подходит для создания диалогов и лайтбоксов.
+*/
+
 const Modal = React.forwardRef(function Modal(props, ref) {
     const {
         classes,
@@ -32,21 +38,22 @@ const Modal = React.forwardRef(function Modal(props, ref) {
 
     const Close = (e) => {
         if (e.target === e.currentTarget && open) {
-            console.log('[modal] onClose-start target');
             onClose && onClose()
         }
     }
+
     const CloseESC = (e) => {
         e.preventDefault()
         if (isEsc && 'Escape' === e.key && open) {
-            console.log('[modal] onClose-start Esc');
             onClose && onClose()
         }
     }
+
     useEffect(() => {
         window.addEventListener('keyup', CloseESC)
         return () => window.removeEventListener('keyup', CloseESC)
     })
+
     return open ? createPortal(
         <Component
             ref={ref}
@@ -60,6 +67,7 @@ const Modal = React.forwardRef(function Modal(props, ref) {
     ) : null
 })
 Modal.propTypes = {
+
     /**
     * Это контент между открывающим и закрывающим тегом компонента.
     */
@@ -76,7 +84,7 @@ Modal.propTypes = {
     className: PropTypes.string,
 
     /**
-     * Корнево узел. Это HTML элемент или компонент.
+     * Корневой узел. Это HTML элемент или компонент.
     */
     component: PropTypes.elementType,
 

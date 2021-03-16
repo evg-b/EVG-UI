@@ -1,45 +1,30 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
-import hexToRGBA from '../utils/hexToRGBA'
-import Color from '../utils/Color'
+import { withStyles } from '../styles'
 import TouchDriver from '../TouchDriver'
 
 const styles = {
     base: {
-        // overflow: 'hidden',
         '--evg-scroller-size-y': 0,
         '--evg-scroller-size-x': 0,
         '--evg-scroller-y': 0,
         '--evg-scroller-x': 0,
         position: 'relative',
-        // overflow: 'hidden',
-        // overflow: 'scroll',
     },
     wrapper: {
         overflow: 'scroll',
-        // overflow: 'hidden',
-
         maxHeight: 'inherit',
         height: 'inherit',
         minHeight: 'inherit',
         maxWidth: 'inherit',
         width: 'inherit',
         minWidth: 'inherit',
-
         '-ms-overflow-style': 'none',  /* IE and Edge */
         scrollbarWidth: 'none',  /* Firefox */
         '&::-webkit-scrollbar': { /* chrome */
             display: 'none',
         },
-    },
-    space: {
-        // '-ms-overflow-style': 'none',  /* IE and Edge */
-        // scrollbarWidth: 'none',  /* Firefox */
-        // '&::-webkit-scrollbar': { /* chrome */
-        //     display: 'none',
-        // },
     },
     scrollVisible: {
         opacity: '1!important',
@@ -52,13 +37,12 @@ const styles = {
         zIndex: 1,
         cursor: 'pointer',
         position: 'absolute',
-        backgroundColor: props => hexToRGBA(Color(props.color).Color, 0.1),
+        backgroundColor: props => props.Color.Base('rgba', 0.1),
         borderRadius: '5px 5px',
-        // margin: '1px',
         '&:after': {
             content: '""',
             position: 'absolute',
-            backgroundColor: props => hexToRGBA(Color(props.color).Color, 0.6),
+            backgroundColor: props => props.Color.Base('rgba', 0.6),
             borderRadius: '5px 5px',
         },
         '&:hover': {
@@ -92,6 +76,10 @@ const styles = {
         }
     },
 }
+
+/**
+ * Кроссбраузерный скроллбар.
+*/
 
 const Scroll = React.forwardRef(function Scroll(props, ref) {
     const {
@@ -133,6 +121,7 @@ const Scroll = React.forwardRef(function Scroll(props, ref) {
         const S_B_S = ScrollBase_ref.current
         S_B_S.style.setProperty(key, val)
     }
+
     const getSpace = () => {
         // const { offsetWidth, offsetHeight } = ScrollBase_ref.current
         const { offsetWidth, offsetHeight } = ScrollWrapper_ref.current
@@ -148,6 +137,7 @@ const Scroll = React.forwardRef(function Scroll(props, ref) {
             }
         }
     }
+
     const calcScrollerSize = () => {
         const { offset, scroll } = getSpace()
         return {
@@ -155,6 +145,7 @@ const Scroll = React.forwardRef(function Scroll(props, ref) {
             y: (offset.y / scroll.y) * offset.y | 0,
         }
     }
+
     function satisfactorySize(e) {
         const { offset, scroll } = getSpace()
 
@@ -171,8 +162,8 @@ const Scroll = React.forwardRef(function Scroll(props, ref) {
         setEvgVar('--evg-scroller-size-y', `${calcScrollerSize().y}px`)
         setEvgVar('--evg-scroller-size-x', `${calcScrollerSize().x}px`)
     }
+
     const calcPosition = (newPositionScroller = 0, mod = 'y') => {
-        // console.log(`scroll[calcPosition] mod:${mod} newPositionScroller:${newPositionScroller}`);
         const { offset, scroll } = getSpace()
         let barSize = mod === 'y' ? calcScrollerSize().y : calcScrollerSize().x
 
@@ -185,7 +176,6 @@ const Scroll = React.forwardRef(function Scroll(props, ref) {
 
         let scrollToY = ScrollWrapper_ref.current.scrollTop
         let scrollToX = ScrollWrapper_ref.current.scrollLeft
-        // console.log(`scroll[calcPosition]0 scrollToX:${scrollToX} scrollToY:${scrollToY}`);
         if (newPositionScroller >= 0 && newPositionScroller < endScroll) {
             mod === 'y' ? scrollToY = ratioShift * newPositionScroller : scrollToX = ratioShift * newPositionScroller
             setEvgVar(`--evg-scroller-${mod}`, `${newPositionScroller}px`)
@@ -198,9 +188,9 @@ const Scroll = React.forwardRef(function Scroll(props, ref) {
                 setEvgVar(`--evg-scroller-${mod}`, `${endScroll}px`)
             }
         }
-        // console.log(`scroll[calcPosition]1 scrollToX:${scrollToX} scrollToY:${scrollToY}`);
         ScrollWrapper_ref.current.scrollTo(scrollToX, scrollToY)
     }
+
     const createAutoHideTimer = () => {
         lastMove.current = setTimeout(() => {
             onScrollStop && onScrollStop(true)
@@ -239,6 +229,7 @@ const Scroll = React.forwardRef(function Scroll(props, ref) {
             createAutoHideTimer()
         }
     }
+
     const onMoveStart = (e, mod) => {
         const { nowY, nowX } = e
         touchTrack.current = true
@@ -247,20 +238,23 @@ const Scroll = React.forwardRef(function Scroll(props, ref) {
         if (Now < prevNow.current[mod] || Now > (prevNow.current[mod] + barSize)) {
             let correction = barSize / 2
             /*
-                correction - корректируем позицию трекера, чтобы курсор оказался хотябы в центре, а не с краю
+                correction - корректируем позицию трекера, чтобы курсор оказался хотя бы в центре, а не с краю
             */
             prevNow.current[mod] = Now - correction
             calcPosition(prevNow.current[mod], mod)
         }
     }
+
     const onMoveY = ({ deltaY }) => {
         prevNow.current.y += deltaY
         calcPosition(prevNow.current.y, 'y')
     }
+
     const onMoveX = ({ deltaX }) => {
         prevNow.current.x += deltaX
         calcPosition(prevNow.current.x, 'x')
     }
+
     const onMoveEnd = () => {
         touchTrack.current = false
         createAutoHideTimer()
@@ -274,6 +268,7 @@ const Scroll = React.forwardRef(function Scroll(props, ref) {
             observer_ref.current.observe(ScrollSpace_ref.current)
         }
     })
+
     useEffect(() => {
         return () => {
             observer_ref.current.disconnect()
@@ -303,7 +298,7 @@ const Scroll = React.forwardRef(function Scroll(props, ref) {
         <Component
             ref={ScrollBase_ref}
             className={classNames(classes.base, className)}
-            style={style} // TODO: fix
+            style={style}
         >
             {satisfactoryHeight && vertical ? trackY : null}
             {satisfactoryWidth && horizontal ? trackX : null}
@@ -314,16 +309,13 @@ const Scroll = React.forwardRef(function Scroll(props, ref) {
             >
                 <div
                     ref={ScrollSpace_ref}
-                    className={classes.space}
                     style={{
-                        // overflow: 'scroll',
                         display: 'inline-block',
                         width: '100%',
                         height: '100%',
                     }}
                 >
                     {children}
-
                 </div>
 
             </div>
@@ -331,6 +323,7 @@ const Scroll = React.forwardRef(function Scroll(props, ref) {
     )
 })
 Scroll.propTypes = {
+
     /**
     * Это контент между открывающим и закрывающим тегом компонента.
     */
@@ -347,7 +340,7 @@ Scroll.propTypes = {
     className: PropTypes.string,
 
     /**
-     * Корнево узел. Это HTML элемент или компонент.
+     * Корневой узел. Это HTML элемент или компонент.
     */
     component: PropTypes.elementType,
 

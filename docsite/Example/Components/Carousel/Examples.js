@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import { CodeExample } from '@evg-b/evg-tools';
 import Snippets from './snippets'
 import CarouselBase from './CarouselBase'
 import CarouselOnChangeImg from './CarouselOnChangeImg'
@@ -15,6 +15,7 @@ const CarouselBaseExample = () => {
 	)
 }
 
+
 const CarouselOnChangeImgExample = () => {
 	return (
 		<CodeExample
@@ -25,8 +26,9 @@ const CarouselOnChangeImgExample = () => {
 	)
 }
 
-export { 
-	CarouselBaseExample,
-CarouselOnChangeImgExample,
 
+
+export {
+    CarouselBaseExample,
+CarouselOnChangeImgExample,
 }

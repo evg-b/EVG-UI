@@ -1,8 +1,8 @@
 import React, { useEffect, useState, useRef, useCallback } from 'react';
-import { createPortal } from 'react-dom'
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
+import { createPortal } from 'react-dom'
+import { withStyles } from '../styles'
 import getParentsNode from '../utils/dom/getParentsNode'
 import getIsScrollParentNode from '../utils/dom/getIsScrollParentNode'
 
@@ -22,7 +22,6 @@ const styles = {
         left: 0,
         right: 0,
         bottom: 0,
-        // pointerEvents: 'none',
     },
     fade: {
         animation: `$fade 300ms cubic-bezier(0.4, 0, 0.2, 1)`,
@@ -59,6 +58,10 @@ const styles = {
     },
 };
 
+/**
+ * Popup - компонент для создания всплывающего окна.
+*/
+
 const Popup = React.forwardRef(function Popup(props, ref) {
     const {
         classes,
@@ -74,6 +77,7 @@ const Popup = React.forwardRef(function Popup(props, ref) {
         mode,
         ...otherProps
     } = props
+
     let Popup_ref = useRef()
     Popup_ref = ref || Popup_ref
     const [show, setShow] = useState(false)
@@ -120,6 +124,7 @@ const Popup = React.forwardRef(function Popup(props, ref) {
             setShow(true)
         }
     }
+
     const onClosePopup = () => {
         if (onClose) {
             onClose()
@@ -131,6 +136,7 @@ const Popup = React.forwardRef(function Popup(props, ref) {
     const newOpenHover = () => {
         mode === 'hover' && onOpenPopup()
     }
+
     const newCloseHover = () => {
         mode === 'hover' && onClosePopup()
     }
@@ -138,6 +144,7 @@ const Popup = React.forwardRef(function Popup(props, ref) {
     const newOpenClick = () => {
         mode === 'click' && onOpenPopup()
     }
+
     const newCloseClick = () => {
         mode === 'click' && onClosePopup()
     }
@@ -150,42 +157,6 @@ const Popup = React.forwardRef(function Popup(props, ref) {
     useEffect(() => {
         handleResize()
     }, [mountNode, handleResize])
-
-    useEffect(() => {
-        let { observes } = observerTarget_ref.current
-        if (!observes.Resize) {
-            // CREATE observes.Intersection
-            observes.Resize = new ResizeObserver(handleResize)
-        }
-        if (!observes.Intersection) {
-            // CREATE observes.Intersection
-            observes.Intersection = new IntersectionObserver(([entries]) => {
-                setMountNode(entries.isIntersecting)
-            }, {
-                root: parents_ref.current.all[0],
-                threshold: 1.0,
-            })
-        }
-        if (show) {
-            parents_ref.current.scroll.forEach((p) => {
-                p.addEventListener('scroll', handleResize)
-            })
-            // observes WATCH
-            observes.Intersection.observe(target.current)
-
-            parents_ref.current.all.forEach((p) => {
-                observes.Resize.observe(p)
-            })
-
-        } else {
-            parents_ref.current.scroll.forEach((p) => {
-                p.removeEventListener('scroll', handleResize)
-            })
-            observes.Intersection.disconnect()
-            observes.Resize.disconnect()
-
-        }
-    }, [show, target, calcPositionTooltip, handleResize])
 
     useEffect(() => {
         if (target.current) {
@@ -215,13 +186,42 @@ const Popup = React.forwardRef(function Popup(props, ref) {
     }, [])
 
     useEffect(() => {
-        if (typeof Open === 'boolean') {
-            if (Open) {
-                setShow(true)
-            } else {
-                setShow(false)
-            }
+        let { observes } = observerTarget_ref.current
+        if (!observes.Resize) {
+            // CREATE observes.Intersection
+            observes.Resize = new ResizeObserver(handleResize)
         }
+        if (!observes.Intersection) {
+            // CREATE observes.Intersection
+            observes.Intersection = new IntersectionObserver(([entries]) => {
+                setMountNode(entries.isIntersecting)
+            }, {
+                // root: parents_ref.current.all[0],
+                root: parents_ref.current.scroll[0],
+                threshold: 1.0,
+            })
+        }
+        if (show) {
+            parents_ref.current.scroll.forEach((p) => {
+                p.addEventListener('scroll', handleResize)
+            })
+            // observes WATCH
+            observes.Intersection.observe(target.current)
+
+            parents_ref.current.all.forEach((p) => {
+                observes.Resize.observe(p)
+            })
+        } else {
+            parents_ref.current.scroll.forEach((p) => {
+                p.removeEventListener('scroll', handleResize)
+            })
+            observes.Intersection.disconnect()
+            observes.Resize.disconnect()
+        }
+    }, [show, target, calcPositionTooltip, handleResize])
+
+    useEffect(() => {
+        typeof Open === 'boolean' && setShow(Open)
     }, [Open])
 
     useEffect(() => {
@@ -249,6 +249,7 @@ const Popup = React.forwardRef(function Popup(props, ref) {
     return Object.prototype.hasOwnProperty.call(target, 'current') && show && Portal
 })
 Popup.propTypes = {
+
     /**
     * Это контент между открывающим и закрывающим тегом компонента.
     */
@@ -316,7 +317,7 @@ Popup.propTypes = {
     animation: PropTypes.oneOf(['fade', 'docking', 'zoom']),
 
     /**
-     * Режим октрытия.
+     * Режим открытия.
     */
     mode: PropTypes.oneOf(['hover', 'click']),
 }

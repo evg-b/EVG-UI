@@ -1,26 +1,17 @@
-
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
-import Color from '../utils/Color'
+import { Elevation, withStyles } from '../styles'
 import IconButton from '../IconButton'
-import Elevation from '../utils/Elevation'
 
-// const MapSize = {
-//     'small': '18px',
-//     'medium': '24px',
-//     'large': '36px',
-//     'extra': '48px',
-// }
 const styles = {
     base: {
         position: 'relative',
         display: 'inline-flex',
         justifyContent: 'center',
         alignItems: 'center',
-        '--evg-switch-thumb-color': props => props.color === 'default' ? '#FFFFFF' : Color(props.color).Color,
-        '--evg-switch-track-color': props => props.color === 'default' ? '#000000' : Color(props.color).Color,
+        '--evg-switch-thumb-color': props => props.color === 'default' ? '#FFFFFF' : props.Color.Base(),
+        '--evg-switch-track-color': props => props.color === 'default' ? '#000000' : props.Color.Base(),
         '&[disabled] > $track, &[disabled] > $thumb > $thumbIcon': {
             cursor: 'default',
             pointerEvents: ' none',
@@ -38,7 +29,6 @@ const styles = {
         '&:checked ~ $thumbIcon': {
             backgroundColor: 'var(--evg-switch-thumb-color)',
         },
-
     },
     thumb: {
         transform: 'translateX(-10px)',
@@ -69,12 +59,15 @@ const styles = {
     },
 }
 
+/**
+ * Включает или выключает состояние отдельного параметра настроек.
+*/
+
 const Switch = React.forwardRef(function Switch(props, ref) {
     const {
         classes,
         className,
         children,
-        // size = 'medium',
         onChange,
         color,
         ...otherProps
@@ -121,10 +114,6 @@ const Switch = React.forwardRef(function Switch(props, ref) {
     )
 })
 Switch.propTypes = {
-    /**
-    * Это контент между открывающим и закрывающим тегом компонента.
-    */
-    children: PropTypes.node,
 
     /**
      * Объект содержит jss стили компонента.
@@ -137,6 +126,11 @@ Switch.propTypes = {
     className: PropTypes.string,
 
     /**
+     * Это свойство не реализуется.
+    */
+    children: PropTypes.any,
+
+    /**
      * Название цвета в разных форматах.
     */
     color: PropTypes.string,
@@ -145,11 +139,9 @@ Switch.propTypes = {
      * Вызывается при изменении состояния.
     */
     onChange: PropTypes.func,
-    // size: PropTypes.oneOf(['small', 'medium', 'large', 'extra']),
 }
 Switch.defaultProps = {
     color: 'default',
-    // size: 'medium',
 }
 Switch.displayName = 'SwitchEVG'
 export default withStyles(styles)(Switch)

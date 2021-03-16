@@ -1,7 +1,5 @@
-export default {
-'CarouselBase' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Carousel } from '@evg-b/evg-ui';
+export default {CarouselBase: `import React from 'react';
+import { Carousel, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -34,9 +32,9 @@ const CarouselBase = (props) => {
     )
 }
 
-export default withStyles(styles)(CarouselBase)`,'CarouselOnChangeImg' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Carousel } from '@evg-b/evg-ui';
+export default withStyles(styles)(CarouselBase)`,
+CarouselOnChangeImg: `import React from 'react';
+import { Carousel, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

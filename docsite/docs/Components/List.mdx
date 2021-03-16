@@ -23,6 +23,8 @@ import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
 ## Color
 
+Цвет компонента меняется через свойство `color`. Более подробно про цвет в этой [статье](/docs/styles/color#props-color).
+
 <ListColorExample />
 
 ## Height
@@ -41,9 +43,36 @@ import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
 ## Actions
 
+`ListItemAction` это контейнер для размещения `node` элементов, таких как `Button`, `Icons` и д.р. 
+
+```jsx
+<ListItem>
+
+	<ListItemAction position='start'>
+		<Icon />
+	</ListItemAction>
+
+	<ListItemAction position='end'>
+		<Icon />
+	</ListItemAction>
+
+</ListItem>
+```
+
 <ListActionsExample />
 
 ## Meta
+
+Мета информация полезна для показа времени или количества сообщений.
+
+```jsx
+<ListItemText
+	meta='12:35'
+	secondaryMeta={<Badge ripe count={2} />}
+>
+	Message
+</ListItemText>
+```
 
 <ListMetaExample />
 

@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Avatar } from '@evg-b/evg-ui';
+import { Avatar, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

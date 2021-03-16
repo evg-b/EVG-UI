@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import { CodeExample } from '@evg-b/evg-tools';
 import Snippets from './snippets'
 import LoaderBase from './LoaderBase'
 import LoaderColor from './LoaderColor'
@@ -17,6 +17,7 @@ const LoaderBaseExample = () => {
 	)
 }
 
+
 const LoaderColorExample = () => {
 	return (
 		<CodeExample
@@ -26,6 +27,7 @@ const LoaderColorExample = () => {
 		/>
 	)
 }
+
 
 const LoaderDepthExample = () => {
 	return (
@@ -37,6 +39,7 @@ const LoaderDepthExample = () => {
 	)
 }
 
+
 const LoaderSizeExample = () => {
 	return (
 		<CodeExample
@@ -47,10 +50,11 @@ const LoaderSizeExample = () => {
 	)
 }
 
-export { 
-	LoaderBaseExample,
+
+
+export {
+    LoaderBaseExample,
 LoaderColorExample,
 LoaderDepthExample,
 LoaderSizeExample,
-
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import { CodeExample } from '@evg-b/evg-tools';
 import Snippets from './snippets'
 import ButtonBase from './ButtonBase'
 import ButtonColor from './ButtonColor'
@@ -23,6 +23,7 @@ const ButtonBaseExample = () => {
 	)
 }
 
+
 const ButtonColorExample = () => {
 	return (
 		<CodeExample
@@ -32,6 +33,7 @@ const ButtonColorExample = () => {
 		/>
 	)
 }
+
 
 const ButtonElevationExample = () => {
 	return (
@@ -43,15 +45,17 @@ const ButtonElevationExample = () => {
 	)
 }
 
+
 const ButtonIconButtonExample = () => {
 	return (
 		<CodeExample
-			title='Icon'
+			title='IconButton'
 			demo={<ButtonIconButton />}
 			snippet={Snippets.ButtonIconButton}
 		/>
 	)
 }
+
 
 const ButtonLoadingExample = () => {
 	return (
@@ -63,6 +67,7 @@ const ButtonLoadingExample = () => {
 	)
 }
 
+
 const ButtonRoundExample = () => {
 	return (
 		<CodeExample
@@ -72,6 +77,7 @@ const ButtonRoundExample = () => {
 		/>
 	)
 }
+
 
 const ButtonSizeExample = () => {
 	return (
@@ -83,6 +89,7 @@ const ButtonSizeExample = () => {
 	)
 }
 
+
 const ButtonStartIconAndEndIconExample = () => {
 	return (
 		<CodeExample
@@ -92,6 +99,7 @@ const ButtonStartIconAndEndIconExample = () => {
 		/>
 	)
 }
+
 
 const ButtonUppercaseExample = () => {
 	return (
@@ -103,6 +111,7 @@ const ButtonUppercaseExample = () => {
 	)
 }
 
+
 const ButtonVariantExample = () => {
 	return (
 		<CodeExample
@@ -113,8 +122,10 @@ const ButtonVariantExample = () => {
 	)
 }
 
-export { 
-	ButtonBaseExample,
+
+
+export {
+    ButtonBaseExample,
 ButtonColorExample,
 ButtonElevationExample,
 ButtonIconButtonExample,
@@ -124,5 +135,4 @@ ButtonSizeExample,
 ButtonStartIconAndEndIconExample,
 ButtonUppercaseExample,
 ButtonVariantExample,
-
 }

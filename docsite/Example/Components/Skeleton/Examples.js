@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import { CodeExample } from '@evg-b/evg-tools';
 import Snippets from './snippets'
 import SkeletonAnimation from './SkeletonAnimation'
 import SkeletonAvatar from './SkeletonAvatar'
@@ -17,6 +17,7 @@ const SkeletonAnimationExample = () => {
 	)
 }
 
+
 const SkeletonAvatarExample = () => {
 	return (
 		<CodeExample
@@ -26,6 +27,7 @@ const SkeletonAvatarExample = () => {
 		/>
 	)
 }
+
 
 const SkeletonBaseExample = () => {
 	return (
@@ -37,6 +39,7 @@ const SkeletonBaseExample = () => {
 	)
 }
 
+
 const SkeletonTextExample = () => {
 	return (
 		<CodeExample
@@ -47,10 +50,11 @@ const SkeletonTextExample = () => {
 	)
 }
 
-export { 
-	SkeletonAnimationExample,
+
+
+export {
+    SkeletonAnimationExample,
 SkeletonAvatarExample,
 SkeletonBaseExample,
 SkeletonTextExample,
-
 }

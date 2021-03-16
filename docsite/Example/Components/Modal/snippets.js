@@ -1,7 +1,5 @@
-export default {
-'ModalBase' : `import React, { useState } from 'react';
-import { withStyles } from 'react-jss';
-import { Modal, Button, IconButton } from '@evg-b/evg-ui';
+export default {ModalBase: `import React, { useState } from 'react';
+import { Modal, Button, IconButton, withStyles } from '@evg-b/evg-ui';
 import { Close } from '@evg-b/evg-icons'
 
 const styles = {
@@ -58,9 +56,9 @@ const ModalBase = (props) => {
     )
 }
 
-export default withStyles(styles)(ModalBase)`,'ModalEsc' : `import React, { useState } from 'react';
-import { withStyles } from 'react-jss';
-import { Modal, Button, IconButton, Switch } from '@evg-b/evg-ui';
+export default withStyles(styles)(ModalBase)`,
+ModalEsc: `import React, { useState } from 'react';
+import { Modal, Button, IconButton, Switch, withStyles } from '@evg-b/evg-ui';
 import { Close } from '@evg-b/evg-icons'
 
 const styles = {

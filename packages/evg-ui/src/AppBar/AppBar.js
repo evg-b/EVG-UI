@@ -1,9 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
-import Color from '../utils/Color'
-import Elevation from '../utils/Elevation'
+import { Elevation, withStyles } from '../styles'
 
 const styles = {
     base: {
@@ -15,8 +13,8 @@ const styles = {
         justifyContent: 'space-between',
         height: '56px',
         width: '100%',
-        backgroundColor: props => Color(props.color).Color,
-        color: props => Color(props.color).Contrast,
+        backgroundColor: props => props.Color.Base(),
+        color: props => props.Color.Contrast(),
     },
     positionTop: {
         top: 0,
@@ -60,7 +58,6 @@ const styles = {
     titleCenter: {
         justifyContent: 'center',
     },
-    name: 'TestName',
 }
 // const metaThemeColor = (color) => {
 //     let metaColor = document.querySelector('meta[name="theme-color"]')
@@ -73,6 +70,11 @@ const styles = {
 //         document.getElementsByTagName('head')[0].appendChild(meta);
 //     }
 // }
+
+/**
+ * Это верхняя панель управления обычно используется для заголовков, навигации и действий связанных с текущим экраном.
+*/
+
 const AppBar = React.forwardRef(function AppBar(props, ref) {
     const {
         classes,
@@ -95,9 +97,10 @@ const AppBar = React.forwardRef(function AppBar(props, ref) {
     // })
 
     return (
-        <div className={classNames(classes.base, className)}
-            style={{ position: position }}
+        <div
             ref={ref}
+            className={classNames(classes.base, className)}
+            style={{ position: position }}
             {...otherProps}
         >
             <div className={classNames(classes.case, classes.left)}>
@@ -119,10 +122,6 @@ const AppBar = React.forwardRef(function AppBar(props, ref) {
     )
 })
 AppBar.propTypes = {
-    /**
-     * Это контент между открывающим и закрывающим тегом компонента.
-    */
-    children: PropTypes.node,
 
     /**
      * Объект содержит jss стили компонента.
@@ -133,6 +132,11 @@ AppBar.propTypes = {
      * Чтобы указать CSS классы, используйте этот атрибут.
     */
     className: PropTypes.string,
+
+    /**
+     * Это свойство не реализуется.
+    */
+    children: PropTypes.any,
 
     /**
      * Позиционирование компонента на странице

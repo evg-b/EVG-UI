@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
-import { withStyles } from 'react-jss';
-import { Button, Tooltip } from '@evg-b/evg-ui';
+import { Button, Tooltip, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

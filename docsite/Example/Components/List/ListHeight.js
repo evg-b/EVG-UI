@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { List, ListItem, ListItemText } from '@evg-b/evg-ui';
+import { List, ListItem, ListItemText, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -15,7 +14,7 @@ const ListHeight = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <List autoHide={false} color='--ifm-color-primary' style={{ width: 300, height: 400 }}>
+            <List autoHide={false} color='primary' style={{ width: 300, height: 400 }}>
                 {
                     [...Array(15)].map((n, i) =>
                         <ListItem key={i} button>

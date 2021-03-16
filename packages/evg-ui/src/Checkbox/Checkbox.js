@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
+import { Color, withStyles } from '../styles'
 import SwitchBase from '../SwitchBase'
-import Color from '../utils/Color'
 import {
     CheckBoxCheck,
     CheckBoxOutlineBlank,
@@ -11,10 +10,10 @@ import {
 } from '../internal/icons/Checkbox'
 
 const MapSize = {
-    'small': '12px',
-    'medium': '14px',
-    'large': '24px',
-    'extra': '34px',
+    'small': 12,
+    'medium': 14,
+    'large': 24,
+    'extra': 34,
 }
 
 const styles = {
@@ -27,12 +26,11 @@ const styles = {
         transition: 'opacity 100ms linear,stroke-dashoffset 250ms cubic-bezier(0.4, 0, 0.2, 1)',
         userSelect: 'none',
         fill: 'currentColor',
-        stroke: props => props.color === 'default' ? Color('#000000').Contrast : Color(props.color).Contrast,
+        stroke: props => props.color === 'default' ? Color('#000000').Contrast() : props.Color.Contrast(),
         strokeWidth: 2.5,
         strokeDasharray: 24,
         strokeDashoffset: 24,
-        fontSize: props => `${MapSize[props.size]}`,
-        backgroundColor: props => props.color === 'default' ? Color('#000000').Color : Color(props.color).Color,
+        backgroundColor: props => props.color === 'default' ? Color('#000000').Base() : props.Color.Base(),
         '&:disabled,&[disabled]': {
             cursor: 'default',
             pointerEvents: ' none',
@@ -54,6 +52,12 @@ const styles = {
         },
     },
 }
+
+/**
+ * Компонент позволяющий управлять параметром с двумя состояниями. 
+ * Полное соответствие функционала что и у нативной версии.
+*/
+
 const Checkbox = React.forwardRef(function Checkbox(props, ref) {
     const {
         classes,
@@ -70,7 +74,7 @@ const Checkbox = React.forwardRef(function Checkbox(props, ref) {
     const CheckBoxIcon = indeterminate ? IndeterminateCheckBox : CheckBoxCheck
     const CheckBoxCheckedIcon = (
         <CheckBoxIcon
-            size={size}
+            size={!indeterminate ? MapSize[size] : size}
             color={color}
             disabled={disabled}
             className={classNames({
@@ -98,10 +102,6 @@ const Checkbox = React.forwardRef(function Checkbox(props, ref) {
     )
 })
 Checkbox.propTypes = {
-    /**
-    * Это контент между открывающим и закрывающим тегом компонента.
-    */
-    children: PropTypes.node,
 
     /**
      * Объект содержит jss стили компонента.
@@ -113,6 +113,10 @@ Checkbox.propTypes = {
     */
     className: PropTypes.string,
 
+    /**
+     * Это свойство не реализуется.
+    */
+    children: PropTypes.any,
     /**
      * Название цвета в разных форматах.
     */

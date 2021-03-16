@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Button } from '@evg-b/evg-ui';
+import { Button, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -15,8 +14,8 @@ const ButtonElevation = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <Button variant='contained' color='--ifm-color-primary'>elevation</Button>
-            <Button variant='contained' color='--ifm-color-primary' elevation={false}>no elevation</Button>
+            <Button variant='contained' color='primary'>elevation</Button>
+            <Button variant='contained' color='primary' elevation={false}>no elevation</Button>
         </div>
     )
 }

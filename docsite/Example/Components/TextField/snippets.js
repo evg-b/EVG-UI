@@ -1,7 +1,5 @@
-export default {
-'TextFieldBase' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { TextField } from '@evg-b/evg-ui';
+export default {TextFieldBase: `import React from 'react';
+import { TextField, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -22,9 +20,9 @@ const TextFieldBase = (props) => {
     )
 }
 
-export default withStyles(styles)(TextFieldBase)`,'TextFieldColor' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { TextField } from '@evg-b/evg-ui';
+export default withStyles(styles)(TextFieldBase)`,
+TextFieldColor: `import React from 'react';
+import { TextField, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -39,16 +37,15 @@ const TextFieldColor = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <TextField color='--ifm-color-primary' labelText='css var' placeholder='placeholder' />
             <TextField color='primary' labelText='primary' placeholder='placeholder' />
             <TextField color='fail' labelText='fail' placeholder='placeholder' outlined />
         </div>
     )
 }
 
-export default withStyles(styles)(TextFieldColor)`,'TextFieldError' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { TextField } from '@evg-b/evg-ui';
+export default withStyles(styles)(TextFieldColor)`,
+TextFieldError: `import React from 'react';
+import { TextField, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -69,9 +66,9 @@ const TextFieldError = (props) => {
     )
 }
 
-export default withStyles(styles)(TextFieldError)`,'TextFieldFullWidth' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { TextField } from '@evg-b/evg-ui';
+export default withStyles(styles)(TextFieldError)`,
+TextFieldFullWidth: `import React from 'react';
+import { TextField, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -92,9 +89,9 @@ const TextFieldFullWidth = (props) => {
     )
 }
 
-export default withStyles(styles)(TextFieldFullWidth)`,'TextFieldHelperText' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { TextField } from '@evg-b/evg-ui';
+export default withStyles(styles)(TextFieldFullWidth)`,
+TextFieldHelperText: `import React from 'react';
+import { TextField, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -114,9 +111,9 @@ const TextFieldHelperText = (props) => {
     )
 }
 
-export default withStyles(styles)(TextFieldHelperText)`,'TextFieldIcon' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { TextField } from '@evg-b/evg-ui';
+export default withStyles(styles)(TextFieldHelperText)`,
+TextFieldIcon: `import React from 'react';
+import { TextField, withStyles } from '@evg-b/evg-ui';
 import { Close, Check } from '@evg-b/evg-icons';
 
 const styles = {
@@ -146,9 +143,9 @@ const TextFieldIcon = (props) => {
     )
 }
 
-export default withStyles(styles)(TextFieldIcon)`,'TextFieldMaxCount' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { TextField } from '@evg-b/evg-ui';
+export default withStyles(styles)(TextFieldIcon)`,
+TextFieldMaxCount: `import React from 'react';
+import { TextField, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -168,9 +165,9 @@ const TextFieldMaxCount = (props) => {
     )
 }
 
-export default withStyles(styles)(TextFieldMaxCount)`,'TextFieldMultiline' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { TextField } from '@evg-b/evg-ui';
+export default withStyles(styles)(TextFieldMaxCount)`,
+TextFieldMultiline: `import React from 'react';
+import { TextField, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -197,9 +194,9 @@ const TextFieldMultiline = (props) => {
     )
 }
 
-export default withStyles(styles)(TextFieldMultiline)`,'TextFieldOutlined' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { TextField } from '@evg-b/evg-ui';
+export default withStyles(styles)(TextFieldMultiline)`,
+TextFieldOutlined: `import React from 'react';
+import { TextField, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -220,9 +217,9 @@ const TextFieldOutlined = (props) => {
     )
 }
 
-export default withStyles(styles)(TextFieldOutlined)`,'TextFieldPlaceholderAndLabelText' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { TextField } from '@evg-b/evg-ui';
+export default withStyles(styles)(TextFieldOutlined)`,
+TextFieldPlaceholderAndLabelText: `import React from 'react';
+import { TextField, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -244,9 +241,9 @@ const TextFieldPlaceholderAndLabelText = (props) => {
     )
 }
 
-export default withStyles(styles)(TextFieldPlaceholderAndLabelText)`,'TextFieldRound' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { TextField } from '@evg-b/evg-ui';
+export default withStyles(styles)(TextFieldPlaceholderAndLabelText)`,
+TextFieldRound: `import React from 'react';
+import { TextField, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

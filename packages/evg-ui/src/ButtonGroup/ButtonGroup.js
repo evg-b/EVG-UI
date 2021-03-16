@@ -1,13 +1,21 @@
-
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
-import Color from '../utils/Color';
-import Elevation from '../utils/Elevation';
 import classNames from 'classnames';
+import { Elevation, withStyles } from '../styles'
 
 const whatBorderColor = (props) => {
-    let BorderColor = props.variant === 'outlined' ? Color(props.color).Color : Color(props.color).Contrast
+    let BorderColor
+    switch (props.variant) {
+        case 'text':
+            BorderColor = props.color === 'default' ? props.Color.Contrast() : props.Color.Base()
+            break;
+        case 'outlined':
+            BorderColor = props.color === 'default' ? props.Color.Contrast() : props.Color.Base()
+            break;
+        case 'contained':
+            BorderColor = props.Color.Contrast()
+            break;
+    }
     return `1px solid ${BorderColor}`
 }
 const styles = {
@@ -37,39 +45,31 @@ const styles = {
         '&:not(:first-child)': {
             borderTopLeftRadius: 0,
             borderBottomLeftRadius: 0,
-            borderLeft: 0,
+            borderLeft: props => whatBorderColor(props),
         },
         '&:not(:last-child)': {
             borderTopRightRadius: 0,
             borderBottomRightRadius: 0,
             borderRight: 0,
         },
-        '&:first-child': {
-            borderRight: props => whatBorderColor(props)
-        },
-        '&:last-child': {
-            borderLeft: props => whatBorderColor(props)
-        },
     },
     verticalChild: {
         '&:not(:first-child)': {
             borderTopRightRadius: 0,
             borderTopLeftRadius: 0,
-            borderTop: 0,
+            borderTop: props => whatBorderColor(props),
         },
         '&:not(:last-child)': {
             borderBottomRightRadius: 0,
             borderBottomLeftRadius: 0,
             borderBottom: 0,
         },
-        '&:first-child': {
-            borderBottom: props => whatBorderColor(props)
-        },
-        '&:last-child': {
-            borderTop: props => whatBorderColor(props)
-        },
     },
 }
+
+/**
+ * Этот компонент группирует button, так же его можно использовать как переключатель.
+*/
 
 const ButtonGroup = React.forwardRef(function ButtonGroup(props, ref) {
     const {
@@ -77,9 +77,9 @@ const ButtonGroup = React.forwardRef(function ButtonGroup(props, ref) {
         className,
         children,
         color,
-        orientation, // horizontal | vertical
+        orientation,
         size,
-        variant, // text | outlined | contained
+        variant,
         round,
         uppercase,
         disabled,
@@ -125,6 +125,7 @@ const ButtonGroup = React.forwardRef(function ButtonGroup(props, ref) {
     )
 })
 ButtonGroup.propTypes = {
+
     /**
     * Это контент между открывающим и закрывающим тегом компонента.
     */

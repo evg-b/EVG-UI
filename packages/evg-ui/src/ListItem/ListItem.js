@@ -1,9 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
+import { Color, withStyles } from '../styles'
 import ButtonBase from '../ButtonBase'
-import Color from '../utils/Color'
 
 const styles = {
     base: {
@@ -11,7 +10,9 @@ const styles = {
         display: 'flex',
         alignItems: 'center',
         padding: '0 16px', // 0 16
-        color: props => props.active && Color(props.color).Color,
+        margin: '0!important',
+        backgroundColor: props => Color('surface').Base(),
+        color: props => props.active && props.Color.Base(),
     },
     avatarLine: {
         height: '56px',
@@ -27,6 +28,10 @@ const styles = {
     },
 }
 
+/**
+ * Компонент для отображения содержимого в List.
+*/
+
 const ListItem = React.forwardRef(function ListItem(props, ref) {
     const {
         classes,
@@ -40,6 +45,7 @@ const ListItem = React.forwardRef(function ListItem(props, ref) {
         // secondaryText: SecondaryTextProp,
         ...otherProps
     } = props
+
     const Component = button ? ButtonBase : component
     const componentProp = button ? component : null
     const isButtonSettings = button ? { active, color: color, contrast: color === 'default' } : null
@@ -65,6 +71,7 @@ const ListItem = React.forwardRef(function ListItem(props, ref) {
     )
 })
 ListItem.propTypes = {
+
     /**
     * Это контент между открывающим и закрывающим тегом компонента.
     */
@@ -81,7 +88,7 @@ ListItem.propTypes = {
     className: PropTypes.string,
 
     /**
-     * Корнево узел. Это HTML элемент или компонент.
+     * Корневой узел. Это HTML элемент или компонент.
     */
     component: PropTypes.elementType,
 
@@ -111,4 +118,3 @@ ListItem.defaultProps = {
 }
 ListItem.displayName = 'ListItemEVG'
 export default withStyles(styles)(ListItem)
-

@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import { CodeExample } from '@evg-b/evg-tools';
 import Snippets from './snippets'
 import MenuBase from './MenuBase'
 
@@ -14,7 +14,8 @@ const MenuBaseExample = () => {
 	)
 }
 
-export { 
-	MenuBaseExample,
 
+
+export {
+    MenuBaseExample,
 }

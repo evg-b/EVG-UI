@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Checkbox } from '@evg-b/evg-ui';
+import { Checkbox, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

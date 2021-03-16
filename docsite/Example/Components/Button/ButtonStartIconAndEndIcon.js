@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Button } from '@evg-b/evg-ui';
+import { Button, withStyles } from '@evg-b/evg-ui';
 import { Check, Cancel } from '@evg-b/evg-icons';
 
 const styles = {
@@ -23,7 +22,7 @@ const ButtonStartIconAndEndIcon = (props) => {
             </Button>
             <Button
                 variant='contained'
-                color='--ifm-color-primary'
+                color='primary'
                 endIcon={<Cancel />}
             >
                 Button

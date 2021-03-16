@@ -1,7 +1,5 @@
-export default {
-'AvatarBase' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Avatar } from '@evg-b/evg-ui';
+export default {AvatarBase: `import React from 'react';
+import { Avatar, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -23,9 +21,9 @@ const AvatarBase = (props) => {
     )
 }
 
-export default withStyles(styles)(AvatarBase)`,'AvatarColor' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Avatar } from '@evg-b/evg-ui';
+export default withStyles(styles)(AvatarBase)`,
+AvatarColor: `import React from 'react';
+import { Avatar, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -42,17 +40,15 @@ const AvatarColor = (props) => {
     return (
         <div className={classes.base}>
             <Avatar alt='evg b' />
-            <Avatar alt='Alira' color='--ifm-color-primary' />
+            <Avatar alt='Alira' color='primary' />
             <Avatar alt='Rick' color='success' />
         </div>
     )
 }
 
-export default withStyles(styles)(AvatarColor)
-
-`,'AvatarGroupAndSize' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Avatar, AvatarGroup } from '@evg-b/evg-ui';
+export default withStyles(styles)(AvatarColor)`,
+AvatarGroupAndSize: `import React from 'react';
+import { Avatar, AvatarGroup, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -96,9 +92,9 @@ const AvatarGroupAndSize = (props) => {
     )
 }
 
-export default withStyles(styles)(AvatarGroupAndSize)`,'AvatarMultiple' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Avatar } from '@evg-b/evg-ui';
+export default withStyles(styles)(AvatarGroupAndSize)`,
+AvatarMultiple: `import React from 'react';
+import { Avatar, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -143,9 +139,9 @@ const AvatarMultiple = (props) => {
     )
 }
 
-export default withStyles(styles)(AvatarMultiple)`,'AvatarNotImage' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Avatar } from '@evg-b/evg-ui';
+export default withStyles(styles)(AvatarMultiple)`,
+AvatarNotImage: `import React from 'react';
+import { Avatar, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -170,9 +166,9 @@ const AvatarNotImage = (props) => {
 
 export default withStyles(styles)(AvatarNotImage)
 
-`,'AvatarSize' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Avatar } from '@evg-b/evg-ui';
+`,
+AvatarSize: `import React from 'react';
+import { Avatar, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -197,9 +193,9 @@ const AvatarSize = (props) => {
     )
 }
 
-export default withStyles(styles)(AvatarSize)`,'AvatarStatus' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Avatar } from '@evg-b/evg-ui';
+export default withStyles(styles)(AvatarSize)`,
+AvatarStatus: `import React from 'react';
+import { Avatar, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -221,9 +217,9 @@ const AvatarStatus = (props) => {
     )
 }
 
-export default withStyles(styles)(AvatarStatus)`,'AvatarStatusColor' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Avatar } from '@evg-b/evg-ui';
+export default withStyles(styles)(AvatarStatus)`,
+AvatarStatusColor: `import React from 'react';
+import { Avatar, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

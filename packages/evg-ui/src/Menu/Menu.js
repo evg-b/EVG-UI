@@ -1,21 +1,11 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
-import classNames from 'classnames';
+import { Elevation, withStyles } from '../styles'
 import Popup from '../Popup'
 import List from '../List'
-import Elevation from '../utils/Elevation'
 
 const styles = {
     base: {
-        // display: 'flex',
-        // alignItems: 'center',
-        // borderRadius: '4px',
-        // fontSize: '12px',
-        // boxSizing: 'border-box',
-        // backgroundColor: hexToRGBA(Color(gray[700]).Color, 0.9),
-        // color: Color(gray[700]).Contrast,
-        // transition: 'opacity 100ms ease-in 50ms',
     },
 
 };
@@ -27,13 +17,16 @@ const Menu = React.forwardRef(function Menu(props, ref) {
         ...otherProps
     } = props
 
-    return <Popup ref={ref} mode='click' {...otherProps}>
-        <List style={{ ...Elevation(8) }}>
-            {children}
-        </List>
-    </Popup>
+    return (
+        <Popup ref={ref} mode='click' {...otherProps}>
+            <List style={{ ...Elevation(8) }}>
+                {children}
+            </List>
+        </Popup>
+    )
 })
 Menu.propTypes = {
+
     /**
     * Это контент между открывающим и закрывающим тегом компонента.
     */

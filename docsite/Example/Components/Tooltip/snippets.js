@@ -1,8 +1,5 @@
-export default {
-'TooltipAnimation' : `// TooltipAnimation
-import React, { useRef } from 'react';
-import { withStyles } from 'react-jss';
-import { Button, Tooltip } from '@evg-b/evg-ui';
+export default {TooltipAnimation: `import React, { useRef } from 'react';
+import { Button, Tooltip, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -36,9 +33,9 @@ const TooltipAnimation = (props) => {
     )
 }
 
-export default withStyles(styles)(TooltipAnimation)`,'TooltipAutoHide' : `import React, { useRef } from 'react';
-import { withStyles } from 'react-jss';
-import { Button, Tooltip } from '@evg-b/evg-ui';
+export default withStyles(styles)(TooltipAnimation)`,
+TooltipAutoHide: `import React, { useRef } from 'react';
+import { Button, Tooltip, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -62,9 +59,9 @@ const TooltipAutoHide = (props) => {
     )
 }
 
-export default withStyles(styles)(TooltipAutoHide)`,'TooltipBase' : `import React, { useRef } from 'react';
-import { withStyles } from 'react-jss';
-import { Button, Tooltip } from '@evg-b/evg-ui';
+export default withStyles(styles)(TooltipAutoHide)`,
+TooltipBase: `import React, { useRef } from 'react';
+import { Button, Tooltip, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -88,9 +85,9 @@ const TooltipBase = (props) => {
     )
 }
 
-export default withStyles(styles)(TooltipBase)`,'TooltipPosition' : `import React, { useRef } from 'react';
-import { withStyles } from 'react-jss';
-import { Button, Tooltip } from '@evg-b/evg-ui';
+export default withStyles(styles)(TooltipBase)`,
+TooltipPosition: `import React, { useRef } from 'react';
+import { Button, Tooltip, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

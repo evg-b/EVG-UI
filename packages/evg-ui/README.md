@@ -1,20 +1,20 @@
 <p align="center">
   <a href="">
-    <img width="100%" height="100%" src="https://raw.githubusercontent.com/evg-b/EVG-UI/main/packages/evg-ui/static/evg-ui.gif">
+    <img height="200" src="https://raw.githubusercontent.com/evg-b/EVG-UI/main/docsite/static/img/logo.svg">
   </a>
 </p>
 
-<h1 align="center">EVG-UI</h1>
+<h1>EVG-UI</h1>
 
-<p align="center">React компоненты основанные на идеях Material Design.</p>
+<p>React компоненты основанные на идеях Material Design.</p>
 
-<p align="center">
-Библиотека вдохновленна интерсными техническими решениями Material Design, Material-UI, VK-UI, yandex-ui, Angular Material, Vue Material, Vuetify, Ant и др.
+<p>
+Библиотека вдохновлена интересными техническими решениями Material Design, Material-UI, VK-UI, yandex-ui, Angular Material, Vue Material, Vuetify, Ant и др.
 </p>
 
 ### Установка
 ```sh
-npm install @evg-b/evg-ui --save или yarn install @evg-b/evg-ui
+npm install @evg-b/evg-ui --save или yarn add @evg-b/evg-ui
 ```
 
 ### Usage
@@ -41,7 +41,7 @@ import { Avatar, Badge, Button } from '@evg-b/evg-ui';
 ### Шрифт
 
 Material Design разрабатывался основываясь на шрифте `Roboto`.
-Подключите шрифт к вашему проекту чтобы все компоненты выглядили так как задумывалось. 
+Подключите шрифт к вашему проекту чтобы все компоненты выглядели так как задумывалось. 
 
 ```html
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />

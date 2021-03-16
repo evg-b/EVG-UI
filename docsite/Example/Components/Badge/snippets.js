@@ -1,7 +1,5 @@
-export default {
-'BadgeBase' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Badge } from '@evg-b/evg-ui';
+export default {BadgeBase: `import React from 'react';
+import { Badge, withStyles } from '@evg-b/evg-ui';
 import { Notifications } from '@evg-b/evg-icons'
 
 const styles = {
@@ -18,16 +16,16 @@ const BadgeBase = (props) => {
     return (
         <div className={classes.base}>
             <Notifications />
-            <Badge count={3} color='--ifm-color-primary' >
+            <Badge count={3} color='primary' >
                 <Notifications />
             </Badge>
         </div>
     )
 }
 
-export default withStyles(styles)(BadgeBase)`,'BadgeCircle' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Avatar, Badge } from '@evg-b/evg-ui';
+export default withStyles(styles)(BadgeBase)`,
+BadgeCircle: `import React from 'react';
+import { Avatar, Badge, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -58,9 +56,9 @@ const BadgeDot = (props) => {
     )
 }
 
-export default withStyles(styles)(BadgeDot)`,'BadgeColor' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Badge } from '@evg-b/evg-ui';
+export default withStyles(styles)(BadgeDot)`,
+BadgeColor: `import React from 'react';
+import { Badge, withStyles } from '@evg-b/evg-ui';
 import { Notifications } from '@evg-b/evg-icons'
 
 const styles = {
@@ -79,9 +77,6 @@ const BadgeColor = (props) => {
             <Badge count={3} >
                 <Notifications />
             </Badge>
-            <Badge count={3} color='--ifm-color-primary'>
-                <Notifications />
-            </Badge>
             <Badge count={3} color='primary'>
                 <Notifications />
             </Badge>
@@ -95,9 +90,9 @@ const BadgeColor = (props) => {
     )
 }
 
-export default withStyles(styles)(BadgeColor)`,'BadgeDot' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Badge } from '@evg-b/evg-ui';
+export default withStyles(styles)(BadgeColor)`,
+BadgeDot: `import React from 'react';
+import { Badge, withStyles } from '@evg-b/evg-ui';
 import { Notifications } from '@evg-b/evg-icons'
 
 const styles = {
@@ -123,9 +118,9 @@ const BadgeDot = (props) => {
     )
 }
 
-export default withStyles(styles)(BadgeDot)`,'BadgeMax' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Badge } from '@evg-b/evg-ui';
+export default withStyles(styles)(BadgeDot)`,
+BadgeMax: `import React from 'react';
+import { Badge, withStyles } from '@evg-b/evg-ui';
 import { Notifications } from '@evg-b/evg-icons'
 
 const styles = {
@@ -154,9 +149,9 @@ const BadgeMax = (props) => {
     )
 }
 
-export default withStyles(styles)(BadgeMax)`,'BadgeRipe' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Badge } from '@evg-b/evg-ui';
+export default withStyles(styles)(BadgeMax)`,
+BadgeRipe: `import React from 'react';
+import { Badge, withStyles } from '@evg-b/evg-ui';
 import { Notifications } from '@evg-b/evg-icons'
 const styles = {
     base: {

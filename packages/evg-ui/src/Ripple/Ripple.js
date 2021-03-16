@@ -1,9 +1,8 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
+import { Color, withStyles } from '../styles'
 import TouchDriver from '../TouchDriver';
-import Color from '../utils/Color'
 
 const ArrayStates = {
     'white': {
@@ -31,9 +30,9 @@ const ArrayStates = {
         'dragged': 0.16,
     },
 }
-const OverlayColor = (color, contrast = true) => {
-    return contrast ? Color(color).Contrast : Color(color).Color
-}
+
+const OverlayColor = (color, contrast = true) => contrast ? Color(color).Contrast() : Color(color).Base()
+
 const OpacityFromColor = (color, effect) => {
     let opacity
     switch (color) {
@@ -57,6 +56,7 @@ const absolutePosition = {
     right: 0,
     bottom: 0,
 }
+
 const styles = {
     base: {
         ...absolutePosition,
@@ -115,7 +115,7 @@ const styles = {
         '0%': {
             animationTimingFunction: 'cubic-bezier(0.4, 0, 0.2, 1)',
             opacity: 0,
-            transform: 'translate(var(--evg-ripple-coord-start)) scale(.6,.6)',
+            transform: 'translate(var(--evg-ripple-coord-start)) scale(.2,.2)',
         },
         '50%': {
             opacity: 'var(--evg-ripple-opacity)',
@@ -133,13 +133,18 @@ const styles = {
             opacity: 0,
         },
     },
-
 }
+
+/**
+ * Ripple сигнализирует пользователю что его взаимодействие с компонентом было получено, используя эффект ряби в точке касания. 
+ * Так же помогает понять с каким именно компонентом произошло взаимодействие если они расположены слишком близко друг к другу.
+*/
 
 const Ripple = React.forwardRef(function Ripple(props, ref) {
     const {
         classes,
         className,
+        children,
         component: Component = 'span',
         rippleCenter = false,
         isFocus = false,
@@ -149,6 +154,7 @@ const Ripple = React.forwardRef(function Ripple(props, ref) {
         contrast = true,
         ...otherProps
     } = props
+
     let RippleRef = useRef()
     RippleRef = ref || RippleRef
     const [startRipple, setStartRipple] = useState(false)
@@ -159,6 +165,7 @@ const Ripple = React.forwardRef(function Ripple(props, ref) {
     const startTouch = ({ startX, startY }) => {
         RippleStartAnimation(startX, startY, rippleCenter)
     }
+
     const RippleStartAnimation = (startX, startY, center) => {
         isEndTouch.current = false
         const RippleRef_S = RippleRef.current
@@ -185,15 +192,18 @@ const Ripple = React.forwardRef(function Ripple(props, ref) {
 
         setStartRipple(true)
     }
+
     const endTouch = () => {
         isEndTouch.current = true
         animationStartRippleDone()
     }
+
     const animationStartRippleDone = () => {
         if (isEndTouch.current && startRippleDone.current) {
             setEndRipple(true)
         }
     }
+
     const onAnimationEnd = (e) => {
         if (e.animationName.includes('startRipple')) {
             startRippleDone.current = true
@@ -203,12 +213,14 @@ const Ripple = React.forwardRef(function Ripple(props, ref) {
             DefaultSetState()
         }
     }
+
     const DefaultSetState = () => {
         setStartRipple(false)
         setEndRipple(false)
         isEndTouch.current = false
         startRippleDone.current = false
     }
+
     useEffect(() => {
         if (isPressed) {
             RippleStartAnimation(0, 0, true)
@@ -231,7 +243,7 @@ const Ripple = React.forwardRef(function Ripple(props, ref) {
                 }
             )}
             onAnimationEnd={onAnimationEnd}
-            ref={RippleRef}
+            innerRef={RippleRef}
             component={Component}
             moveStart={startTouch}
             moveEnd={endTouch}
@@ -240,10 +252,6 @@ const Ripple = React.forwardRef(function Ripple(props, ref) {
     )
 })
 Ripple.propTypes = {
-    /**
-    * Это контент между открывающим и закрывающим тегом компонента.
-    */
-    children: PropTypes.node,
 
     /**
      * Объект содержит jss стили компонента.
@@ -256,7 +264,12 @@ Ripple.propTypes = {
     className: PropTypes.string,
 
     /**
-     * Корнево узел. Это HTML элемент или компонент.
+     * Это свойство не реализуется.
+    */
+    children: PropTypes.any,
+
+    /**
+     * Корневой узел. Это HTML элемент или компонент.
     */
     component: PropTypes.elementType,
 
@@ -287,7 +300,7 @@ Ripple.propTypes = {
 
     /**
      * Если true, цвет волны будет белым или серым автоматически. 
-     * Для лучшео восприятия в зависимости от основного цвета.  
+     * Для лучшего восприятия в зависимости от основного цвета.  
     */
     contrast: PropTypes.bool,
 }

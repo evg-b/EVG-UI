@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import { CodeExample } from '@evg-b/evg-tools';
 import Snippets from './snippets'
 import CubesBase from './CubesBase'
 import CubesSettings from './CubesSettings'
@@ -15,6 +15,7 @@ const CubesBaseExample = () => {
 	)
 }
 
+
 const CubesSettingsExample = () => {
 	return (
 		<CodeExample
@@ -25,8 +26,9 @@ const CubesSettingsExample = () => {
 	)
 }
 
-export { 
-	CubesBaseExample,
-CubesSettingsExample,
 
+
+export {
+    CubesBaseExample,
+CubesSettingsExample,
 }

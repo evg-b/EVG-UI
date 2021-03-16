@@ -1,7 +1,7 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
+import { withStyles } from '../styles'
 import Loader from '../Loader'
 import { ImageError } from '../internal/icons/ImageError'
 
@@ -16,6 +16,10 @@ const styles = {
     }
 }
 
+/**
+ * Image - обертка над тегом `<img>`. Показывает статус загрузки или ошибки у изображения.
+*/
+
 const Image = React.forwardRef(function (props, ref) {
     const {
         classes,
@@ -27,8 +31,12 @@ const Image = React.forwardRef(function (props, ref) {
 
     const [isLoad, setIsLoad] = useState(false)
     const [isError, setIsError] = useState(false)
-    console.log('[Image] className:', className)
-    const loadImg = (urlSrc) => {
+
+    const loadImg = useCallback((urlSrc) => {
+
+        setIsLoad(false)
+        setIsError(false)
+
         const image = document.createElement('img')
         image.src = urlSrc
         setIsLoad(image.complete)
@@ -39,12 +47,14 @@ const Image = React.forwardRef(function (props, ref) {
         image.onerror = (e) => {
             setIsError(true)
         }
-    }
+    }, [])
+
     useEffect(() => {
-        setIsLoad(false)
-        setIsError(false)
+        // setIsLoad(false)
+        // setIsError(false)
         loadImg(src)
-    }, [src])
+    }, [src, loadImg])
+
     const capImg = <div className={classNames(classes.base, className)} {...otherProps}>{isError ? <ImageError viewBox={200} style={{ fontSize: 80, stroke: '#c7c7c7' }} /> : <Loader />}</div>
     return (
         <>
@@ -55,6 +65,7 @@ const Image = React.forwardRef(function (props, ref) {
     )
 })
 Image.propTypes = {
+
     /**
      * Объект содержит jss стили компонента.
     */
@@ -66,7 +77,7 @@ Image.propTypes = {
     className: PropTypes.string,
 
     /**
-     * Корнево узел. Это HTML элемент или компонент.
+     * Корневой узел. Это HTML элемент или компонент.
     */
     component: PropTypes.elementType,
 
@@ -84,4 +95,3 @@ Image.defaultProps = {
 }
 Image.displayName = 'ImageEVG'
 export default withStyles(styles)(Image)
-

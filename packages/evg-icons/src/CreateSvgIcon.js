@@ -1,5 +1,5 @@
 import React from 'react';
-import SvgIcon from './SvgIcon'
+import { SvgIcon } from '@evg-b/evg-ui'
 
 export default function CreateSvgIcon({ path, name }) {
     const Component = React.forwardRef((props, ref) => (

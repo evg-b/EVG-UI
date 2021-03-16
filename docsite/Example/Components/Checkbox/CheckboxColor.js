@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Checkbox } from '@evg-b/evg-ui';
+import { Checkbox, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -16,7 +15,6 @@ const CheckboxColor = (props) => {
     return (
         <div className={classes.base}>
             <Checkbox color="default" defaultChecked />
-            <Checkbox color="--ifm-color-primary" defaultChecked />
             <Checkbox color="primary" defaultChecked />
             <Checkbox color="warn" defaultChecked />
             <Checkbox color="success" defaultChecked />

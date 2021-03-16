@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
-import { gray } from '../colors'
-import Color from '../utils/Color'
-import hexToRGBA from '../utils/hexToRGBA'
+import { Color, withStyles } from '../styles'
 import Popup from '../Popup'
 
 const styles = {
@@ -14,8 +11,8 @@ const styles = {
         borderRadius: '4px',
         fontSize: '12px',
         boxSizing: 'border-box',
-        backgroundColor: hexToRGBA(Color(gray[700]).Color, 0.9),
-        color: Color(gray[700]).Contrast,
+        backgroundColor: Color('gray700').Base('rgba', 0.9),
+        color: Color('gray700').Contrast(),
         transition: 'opacity 100ms ease-in 50ms',
     },
     desktop: {
@@ -27,6 +24,11 @@ const styles = {
         padding: '0 16px',
     },
 };
+
+/**
+ * Всплывающая подсказка когда пользователь наводит курсор на элемент.
+*/
+
 const Tooltip = React.forwardRef(function Tooltip(props, ref) {
     const {
         classes,
@@ -43,6 +45,7 @@ const Tooltip = React.forwardRef(function Tooltip(props, ref) {
     </Popup>
 })
 Tooltip.propTypes = {
+
     /**
     * Это контент между открывающим и закрывающим тегом компонента.
     */

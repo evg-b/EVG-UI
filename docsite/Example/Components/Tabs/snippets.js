@@ -1,3 +1,2 @@
-export default {
-'TabsBase' : ``,
+export default {TabsBase: ``,
 }

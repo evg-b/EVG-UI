@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
+import { Color, withStyles } from '../styles'
 import Scroll from '../Scroll'
 
 const styles = {
@@ -12,20 +12,24 @@ const styles = {
         margin: 0,
         boxSizing: 'border-box',
         overflow: 'hidden',
-        backgroundColor: '#ffffff',
+        backgroundColor: props => Color('surface').Base(),
         fontSize: '1rem',
-        '& > li + li': {
+        '& > li': {
             margin: 0,
         }
     },
 }
+
+/**
+ * Списки представляют собой множество компонентов с однородными типами данных в вертикальной плоскости. 
+ * Элементы списка поддерживают события взаимодействия мыши и жестов.
+*/
 
 const List = React.forwardRef(function List(props, ref) {
     const {
         classes,
         className,
         children,
-        // component: Component = 'ul',
         color,
         ...otherProps
     } = props
@@ -34,7 +38,7 @@ const List = React.forwardRef(function List(props, ref) {
         <Scroll
             ref={ref}
             className={classNames(classes.base, className)}
-            color={color}
+            color={color === 'default' ? '#000000' : color}
             {...otherProps}
         >
             {
@@ -48,31 +52,29 @@ const List = React.forwardRef(function List(props, ref) {
     )
 })
 List.propTypes = {
+
     /**
     * Это контент между открывающим и закрывающим тегом компонента.
     */
     children: PropTypes.node,
+
     /**
      * Объект содержит jss стили компонента.
     */
     classes: PropTypes.object,
+
     /**
      * Чтобы указать CSS классы, используйте этот атрибут.
     */
     className: PropTypes.string,
-    // /**
-    //  * Корнево узел. Это HTML элемент или компонент.
-    // */
-    // component: PropTypes.elementType,
+
     /**
      * Название цвета в разных форматах.
     */
     color: PropTypes.string,
 }
 List.defaultProps = {
-    // component: 'ul',
     color: 'default',
 }
 List.displayName = 'ListEVG'
 export default withStyles(styles)(List)
-

@@ -1,6 +1,6 @@
 <p align="center">
   <a href="">
-    <img width="100%" height="100%" src="https://raw.githubusercontent.com/evg-b/EVG-UI/main/packages/evg-ui/static/evg-ui.gif">
+    <img height="200" src="https://raw.githubusercontent.com/evg-b/EVG-UI/main/docsite/static/img/logo.svg">
   </a>
 </p>
 
@@ -9,12 +9,12 @@
 <p align="center">React компоненты основанные на идеях Material Design.</p>
 
 <p align="center">
-Библиотека вдохновленна интерсными техническими решениями Material Design, Material-UI, VK-UI, yandex-ui, Angular Material, Vue Material, Vuetify, Ant и др.
+Библиотека вдохновлена интересными техническими и дизайнерскими решениями Material Design.
 </p>
 
 ### Установка
 ```sh
-npm install @evg-b/evg-ui --save или yarn install @evg-b/evg-ui
+npm install @evg-b/evg-ui --save или yarn add @evg-b/evg-ui
 ```
 
 ### Usage
@@ -34,6 +34,7 @@ export default HelloWorld
 ```
 
 Чтобы сделать сборку компактнее вы можете импортировать в проект только нужные компоненты.
+
 ```jsx
 import { Avatar, Badge, Button } from '@evg-b/evg-ui';
 ```
@@ -41,7 +42,7 @@ import { Avatar, Badge, Button } from '@evg-b/evg-ui';
 ### Шрифт
 
 Material Design разрабатывался основываясь на шрифте `Roboto`.
-Подключите шрифт к вашему проекту чтобы все компоненты выглядили так как задумывалось. 
+Подключите шрифт к вашему проекту чтобы все компоненты выглядели так как задумывалось. 
 
 ```html
 <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
@@ -52,7 +53,7 @@ Material Design разрабатывался основываясь на шри�
 Так же вы можете использовать все 1.440+ svg иконок от Material Design в своих проектах. [@evg-b/evg-icons](https://github.com/evg-b/EVG-UI/tree/main/packages/evg-icons)
 
 ```sh
-npm install @evg-b/evg-icons --save или yarn install @evg-b/evg-icons
+npm install @evg-b/evg-icons --save или yarn add @evg-b/evg-icons
 ```
 
 Пример:
@@ -61,8 +62,8 @@ import { Check, Close, Favorite } from '@evg-b/evg-icons';
 ```
 
 ### Документация
-url
+Загляните на [сайт](https://evg-b.github.io/evg-ui/).
 
 
 ### Сообщить о проблеме
-Советы и критика важны при развитии любого продукта. Если вы заметили баг, или у вас есть идея по улучшению расскажите в issue.
+Советы и критика важны при развитии любого продукта. Если вы заметили баг, или у вас есть идея по улучшению то расскажите в issue.

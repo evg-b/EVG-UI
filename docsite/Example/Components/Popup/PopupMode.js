@@ -1,6 +1,5 @@
 import React, { useRef } from 'react';
-import { withStyles } from 'react-jss';
-import { Button, Popup } from '@evg-b/evg-ui';
+import { Button, Popup, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

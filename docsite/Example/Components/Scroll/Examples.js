@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import { CodeExample } from '@evg-b/evg-tools';
 import Snippets from './snippets'
 import ScrollAutoHide from './ScrollAutoHide'
 import ScrollBase from './ScrollBase'
@@ -18,6 +18,7 @@ const ScrollAutoHideExample = () => {
 	)
 }
 
+
 const ScrollBaseExample = () => {
 	return (
 		<CodeExample
@@ -27,6 +28,7 @@ const ScrollBaseExample = () => {
 		/>
 	)
 }
+
 
 const ScrollMaxHeightExample = () => {
 	return (
@@ -38,6 +40,7 @@ const ScrollMaxHeightExample = () => {
 	)
 }
 
+
 const ScrollTrackSizeAndColorExample = () => {
 	return (
 		<CodeExample
@@ -47,6 +50,7 @@ const ScrollTrackSizeAndColorExample = () => {
 		/>
 	)
 }
+
 
 const ScrollVerticalAndHorizontalExample = () => {
 	return (
@@ -58,11 +62,12 @@ const ScrollVerticalAndHorizontalExample = () => {
 	)
 }
 
-export { 
-	ScrollAutoHideExample,
+
+
+export {
+    ScrollAutoHideExample,
 ScrollBaseExample,
 ScrollMaxHeightExample,
 ScrollTrackSizeAndColorExample,
 ScrollVerticalAndHorizontalExample,
-
 }

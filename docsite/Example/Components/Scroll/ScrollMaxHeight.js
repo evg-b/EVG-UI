@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Scroll, Button, ButtonGroup, TextField } from '@evg-b/evg-ui';
+import { Scroll, Button } from '@evg-b/evg-ui';
 
 const styles = {
     width: '100px',
@@ -11,7 +11,7 @@ const styles = {
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,.8)',
 }
-
+ 
 const ScrollBase = () => {
     const [count, setCount] = useState(2)
     const blockScroll = (props) => {
@@ -24,8 +24,8 @@ const ScrollBase = () => {
     return (
         <div>
             <div style={{ display: 'flex', marginBottom: '10px' }}>
-                <Button color="--ifm-color-primary" onClick={() => handleClick(true)}>+</Button>
-                <Button color="--ifm-color-primary" onClick={() => handleClick(false)}>-</Button>
+                <Button color="primary" onClick={() => handleClick(true)}>+</Button>
+                <Button color="primary" onClick={() => handleClick(false)}>-</Button>
             </div>
             <Scroll
                 autoHide={false}

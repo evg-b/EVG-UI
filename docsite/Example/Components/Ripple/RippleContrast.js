@@ -1,8 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Ripple } from '@evg-b/evg-ui';
-import Elevation from '@evg-b/evg-ui/dist/utils/Elevation';
-import Color from '@evg-b/evg-ui/dist/utils/Color';
+import { Ripple, Elevation, Color, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -22,7 +19,7 @@ const RippleContrast = (props) => {
         classes,
     } = props
 
-    const purple600 = Color('purple600').Color
+    const purple600 = Color('purple600').Base()
 
     return (
         <div className={classes.base}>

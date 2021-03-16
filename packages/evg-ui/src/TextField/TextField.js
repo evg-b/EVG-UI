@@ -1,8 +1,7 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
-import Color from '../utils/Color'
+import { Color, withStyles } from '../styles'
 
 const styles = {
     base: {
@@ -10,14 +9,14 @@ const styles = {
         display: 'flex',
         flexDirection: 'column',
         paddingBottom: 20,
-        '--evg-text-field-color': props => props.color === 'default' ? Color(props.color).Contrast : Color(props.color).Color,
+        '--evg-text-field-color': props => props.color === 'default' ? props.Color.Contrast() : props.Color.Base(),
         '&[disabled] > $textField, &[disabled] > $textField > $input': {
             cursor: 'default',
             pointerEvents: ' none',
             color: 'rgba(0, 0, 0, 0.26)',
         },
         '&[data-error]': {
-            '--evg-text-field-color': Color('red700').Color,
+            '--evg-text-field-color': Color('red700').Base(),
             '& > $outlined, & > $filled': {
                 borderColor: 'var(--evg-text-field-color)',
             },
@@ -85,6 +84,7 @@ const styles = {
         display: 'inline-block',
         position: 'relative',
         maxWidth: '133%',
+        lineHeight: '1.15rem',
         pointerEvents: 'none',
         transformOrigin: 'left top',
         top: '1.05rem',
@@ -281,6 +281,10 @@ const styles = {
     },
 }
 
+/**
+ * Текстовые поля позволяют пользователям вводить и редактировать текст.
+*/
+
 const TextField = React.forwardRef(function TextField(props, ref) {
     const {
         classes,
@@ -295,7 +299,7 @@ const TextField = React.forwardRef(function TextField(props, ref) {
         helperText: HelperText = '',
         outlined,
         fullWidth,
-        round, // true - круглые края
+        round,
         multiline,
         error,
         rows,
@@ -430,10 +434,6 @@ const TextField = React.forwardRef(function TextField(props, ref) {
     )
 })
 TextField.propTypes = {
-    /**
-    * Это контент между открывающим и закрывающим тегом компонента.
-    */
-    children: PropTypes.node,
 
     /**
      * Объект содержит jss стили компонента.
@@ -446,7 +446,12 @@ TextField.propTypes = {
     className: PropTypes.string,
 
     /**
-     * Корнево узел. Это HTML элемент или компонент.
+     * Это свойство не реализуется.
+    */
+    children: PropTypes.any,
+
+    /**
+     * Корневой узел. Это HTML элемент или компонент.
     */
     component: PropTypes.elementType,
 

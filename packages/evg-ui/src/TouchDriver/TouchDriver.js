@@ -24,12 +24,18 @@ const EventSettings = {
 }
 const directionX = { '-1': 'left', '1': 'right' }
 const directionY = { '-1': 'top', '1': 'bottom' }
+
+/**
+ * Вычисляет взаимодействие с компонентом в двумерной координатной плоскости. 
+ * С его помощью можно вычислять начало, конец, реальное положение, инерцию жестов. Используется во многих компонентах.
+*/
+
 class TouchDriver extends React.Component {
     constructor(props) {
         super(props);
         this.slip = 0
         this.slipSensitivity = 2
-        this.touchRef = this.props.touchRef || React.createRef();
+        this.touchRef = this.props.innerRef || React.createRef();
         this.isTouch = React.createRef(false);
         this.prevDelta = React.createRef();
         this.moveCoord = React.createRef();
@@ -70,7 +76,7 @@ class TouchDriver extends React.Component {
         let tch_ref = this.touchRef.current
         let clientX = 0, clientY = 0
 
-        // 1 - находим координаты нажаия относительно экрана
+        // 1 - находим координаты нажатия относительно экрана
         switch (e.type) {
             case 'mousedown':
             case 'mousemove':
@@ -104,9 +110,9 @@ class TouchDriver extends React.Component {
     }
     moveStartMouseOrTouch(e) {
         const moveCoord_ref = this.moveCoord.current
-        if (moveCoord_ref.startTime !== 0) {
-            console.log('dubleClick!!!')
-        }
+        // if (moveCoord_ref.startTime !== 0) {
+        //     console.log('dubleClick!!!')
+        // }
         const { moveStart } = this.props
         this.isTouch.current = true
         let { nowX, nowY } = this.getInCoord(e)
@@ -118,8 +124,8 @@ class TouchDriver extends React.Component {
         moveStart && moveStart(moveCoord_ref)
     }
     move(e) {
-        e.preventDefault()
-        const { moveXY, autoMove } = this.props
+        const { moveXY, autoMove, scrollable } = this.props
+        !scrollable && e.preventDefault()
         const mc = this.moveCoord.current
         let prevDelta = this.prevDelta.current
         let tch_ref = this.touchRef.current
@@ -162,7 +168,7 @@ class TouchDriver extends React.Component {
         const { moveEnd } = this.props
         let moveCoord_ref = this.moveCoord.current
         if (moveCoord_ref.startTime === 0) {
-            // выходим если событие End пришлои не от нашего объекта
+            // выходим если событие End пришло не от нашего объекта
             return
         }
         const sensitivityTime = 300
@@ -177,7 +183,6 @@ class TouchDriver extends React.Component {
         } else {
             moveEnd && moveEnd(moveCoord_ref)
         }
-        // setTimeout(() => { this.moveCoordInit() }, 300)
         this.moveCoordInit()
     }
     moveHome() {
@@ -189,9 +194,10 @@ class TouchDriver extends React.Component {
         const {
             children,
             component: Component = 'div',
-            touchRef,
-            autoMove = false,
-            touchpad = false,
+            innerRef,
+            autoMove,
+            touchpad,
+            scrollable,
             moveStart,
             moveXY,
             moveEnd,
@@ -208,6 +214,7 @@ class TouchDriver extends React.Component {
     }
 }
 TouchDriver.propTypes = {
+
     /**
      * Это контент между открывающим и закрывающим тегом компонента.
     */
@@ -224,19 +231,24 @@ TouchDriver.propTypes = {
     className: PropTypes.string,
 
     /**
-     * Корнево узел. Это HTML элемент или компонент.
+     * Корневой узел. Это HTML элемент или компонент.
     */
     component: PropTypes.elementType,
 
     /**
      * ref ссылка компонента.
     */
-    touchRef: PropTypes.object,
+    innerRef: PropTypes.object,
 
     /**
      * Если true, компонент перемещается сам.
     */
     autoMove: PropTypes.bool,
+
+    /**
+     * Если true, не останавливает нативный скролл при движении на поверхности TouchDriver.
+    */
+    scrollable: PropTypes.bool,
 
     /**
      * Если true, учитывается движение по touchpad.
@@ -263,8 +275,7 @@ TouchDriver.defaultProps = {
     component: 'div',
     autoMove: false,
     touchpad: false,
+    scrollable: false,
 }
 
-export default React.forwardRef((props, ref) => <TouchDriver
-    touchRef={ref} {...props}
-/>);
+export default TouchDriver

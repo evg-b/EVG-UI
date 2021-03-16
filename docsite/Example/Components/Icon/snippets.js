@@ -1,6 +1,5 @@
-export default {
-'IconBase' : `import React from 'react';
-import { withStyles } from 'react-jss';
+export default {IconBase: `import React from 'react';
+import { withStyles } from '@evg-b/evg-ui';
 import {
     ChevronLeft,
     Check,
@@ -39,8 +38,9 @@ const IconBase = (props) => {
     )
 }
 
-export default withStyles(styles)(IconBase)`,'IconColor' : `import React from 'react';
-import { withStyles } from 'react-jss';
+export default withStyles(styles)(IconBase)`,
+IconColor: `import React from 'react';
+import { withStyles } from '@evg-b/evg-ui';
 import {
     ChevronLeft,
     Check,
@@ -62,17 +62,17 @@ const IconColor = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
+            <Cancel color='primary' />
             <ChevronLeft color='warn' />
             <Close color='fail' />
             <Check color='success' />
-            <Cancel color='primary' />
-            <Visibility color='--ifm-color-primary' />
         </div>
     )
 }
 
-export default withStyles(styles)(IconColor)`,'IconSize' : `import React from 'react';
-import { withStyles } from 'react-jss';
+export default withStyles(styles)(IconColor)`,
+IconSize: `import React from 'react';
+import { withStyles } from '@evg-b/evg-ui';
 import { Cancel } from '@evg-b/evg-icons';
 
 const styles = {

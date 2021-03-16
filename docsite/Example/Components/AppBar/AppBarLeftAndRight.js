@@ -7,7 +7,7 @@ const AppBarLeftAndRight = () => {
         <AppBar
             title='EVG-UI left/right'
             position='static'
-            color='--ifm-color-primary'
+            color='primary'
             left={<Menu />}
             right={
                 <>

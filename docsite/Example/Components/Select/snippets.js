@@ -1,7 +1,5 @@
-export default {
-'SelectBase' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Select, SelectOption } from '@evg-b/evg-ui';
+export default {SelectBase: `import React from 'react';
+import { Select, SelectOption, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -35,9 +33,9 @@ const SelectBase = (props) => {
     )
 }
 
-export default withStyles(styles)(SelectBase)`,'SelectColor' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Select, SelectOption } from '@evg-b/evg-ui';
+export default withStyles(styles)(SelectBase)`,
+SelectColor: `import React from 'react';
+import { Select, SelectOption, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -71,9 +69,9 @@ const SelectColor = (props) => {
     )
 }
 
-export default withStyles(styles)(SelectColor)`,'SelectEmptyOption' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Select, SelectOption } from '@evg-b/evg-ui';
+export default withStyles(styles)(SelectColor)`,
+SelectEmptyOption: `import React from 'react';
+import { Select, SelectOption, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

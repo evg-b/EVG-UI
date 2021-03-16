@@ -1,7 +1,5 @@
-export default {
-'RadioBase' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Radio } from '@evg-b/evg-ui';
+export default {RadioBase: `import React from 'react';
+import { Radio, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -23,9 +21,9 @@ const RadioBase = (props) => {
     )
 }
 
-export default withStyles(styles)(RadioBase)`,'RadioColor' : `import React, { useState } from 'react';
-import { withStyles } from 'react-jss';
-import { Radio } from '@evg-b/evg-ui';
+export default withStyles(styles)(RadioBase)`,
+RadioColor: `import React, { useState } from 'react';
+import { Radio, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -46,18 +44,17 @@ const RadioColor = (props) => {
     return (
         <div className={classes.base}>
             <Radio onChange={handleChange} checked={checkName === 'radio1'} name="radio1" color="default" />
-            <Radio onChange={handleChange} checked={checkName === 'radio2'} name="radio2" color="--ifm-color-primary" />
-            <Radio onChange={handleChange} checked={checkName === 'radio3'} name="radio3" color="primary" />
-            <Radio onChange={handleChange} checked={checkName === 'radio4'} name="radio4" color="warn" />
-            <Radio onChange={handleChange} checked={checkName === 'radio5'} name="radio5" color="success" />
-            <Radio onChange={handleChange} checked={checkName === 'radio6'} name="radio6" color="fail" />
+            <Radio onChange={handleChange} checked={checkName === 'radio2'} name="radio2" color="primary" />
+            <Radio onChange={handleChange} checked={checkName === 'radio3'} name="radio3" color="warn" />
+            <Radio onChange={handleChange} checked={checkName === 'radio4'} name="radio4" color="success" />
+            <Radio onChange={handleChange} checked={checkName === 'radio5'} name="radio5" color="fail" />
         </div>
     )
 }
 
-export default withStyles(styles)(RadioColor)`,'RadioSize' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Radio } from '@evg-b/evg-ui';
+export default withStyles(styles)(RadioColor)`,
+RadioSize: `import React from 'react';
+import { Radio, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -70,10 +67,10 @@ const RadioSize = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <Radio size='small' color="--ifm-color-primary" />
-            <Radio size='medium' color="--ifm-color-primary" />
-            <Radio size='large' color="--ifm-color-primary" />
-            <Radio size='extra' color="--ifm-color-primary" />
+            <Radio size='small' color="primary" />
+            <Radio size='medium' color="primary" />
+            <Radio size='large' color="primary" />
+            <Radio size='extra' color="primary" />
         </div>
     )
 }

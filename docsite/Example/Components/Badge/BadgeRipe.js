@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Badge } from '@evg-b/evg-ui';
+import { Badge, withStyles } from '@evg-b/evg-ui';
 import { Notifications } from '@evg-b/evg-icons'
 const styles = {
     base: {

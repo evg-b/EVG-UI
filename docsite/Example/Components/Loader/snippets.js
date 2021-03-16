@@ -1,14 +1,13 @@
-export default {
-'LoaderBase' : `import React from 'react';
+export default {LoaderBase: `import React from 'react';
 import { Loader } from '@evg-b/evg-ui';
 
 const LoaderBase = () => {
-    return <Loader color="--ifm-color-primary" />
+    return <Loader color="primary" />
 }
 
-export default LoaderBase`,'LoaderColor' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Loader } from '@evg-b/evg-ui';
+export default LoaderBase`,
+LoaderColor: `import React from 'react';
+import { Loader, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -23,16 +22,16 @@ const LoaderColor = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <Loader color="--ifm-color-primary" />
             <Loader />
             <Loader color='primary' />
+            <Loader color='warn' />
         </div>
     )
 }
 
-export default withStyles(styles)(LoaderColor)`,'LoaderDepth' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Loader } from '@evg-b/evg-ui';
+export default withStyles(styles)(LoaderColor)`,
+LoaderDepth: `import React from 'react';
+import { Loader, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -54,9 +53,9 @@ const LoaderSize = (props) => {
     )
 }
 
-export default withStyles(styles)(LoaderSize)`,'LoaderSize' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Loader } from '@evg-b/evg-ui';
+export default withStyles(styles)(LoaderSize)`,
+LoaderSize: `import React from 'react';
+import { Loader, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

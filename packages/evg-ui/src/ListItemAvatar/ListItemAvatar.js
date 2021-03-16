@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
+import { withStyles } from '../styles'
 
 const styles = {
     base: {
@@ -14,6 +14,10 @@ const styles = {
     },
 }
 
+/**
+ * Компонент для правильного позиционирования и отображения Avatar в list.
+*/
+
 const ListItemAvatar = React.forwardRef(function ListItemAvatar(props, ref) {
     const {
         classes,
@@ -24,6 +28,7 @@ const ListItemAvatar = React.forwardRef(function ListItemAvatar(props, ref) {
     } = props
 
     let Component = component
+
     return (
         <Component
             className={classNames(classes.base, className)}
@@ -35,6 +40,7 @@ const ListItemAvatar = React.forwardRef(function ListItemAvatar(props, ref) {
     )
 })
 ListItemAvatar.propTypes = {
+
     /**
     * Это контент между открывающим и закрывающим тегом компонента.
     */
@@ -48,7 +54,7 @@ ListItemAvatar.propTypes = {
     */
     className: PropTypes.string,
     /**
-     * Корнево узел. Это HTML элемент или компонент.
+     * Корневой узел. Это HTML элемент или компонент.
     */
     component: PropTypes.elementType,
 }

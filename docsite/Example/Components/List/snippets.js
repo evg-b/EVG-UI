@@ -1,7 +1,5 @@
-export default {
-'ListActions' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Checkbox, List, ListItem, ListItemText, ListItemAction } from '@evg-b/evg-ui';
+export default {ListActions: `import React from 'react';
+import { Checkbox, List, ListItem, ListItemText, ListItemAction, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -44,9 +42,9 @@ const ListAction = (props) => {
     )
 }
 
-export default withStyles(styles)(ListAction)`,'ListAvatar' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Avatar, List, ListItem, ListItemText, ListItemAvatar } from '@evg-b/evg-ui';
+export default withStyles(styles)(ListAction)`,
+ListAvatar: `import React from 'react';
+import { Avatar, List, ListItem, ListItemText, ListItemAvatar, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -75,9 +73,9 @@ const ListAvatar = (props) => {
     )
 }
 
-export default withStyles(styles)(ListAvatar)`,'ListBase' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { List, ListItem, ListItemText } from '@evg-b/evg-ui';
+export default withStyles(styles)(ListAvatar)`,
+ListBase: `import React from 'react';
+import { List, ListItem, ListItemText, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -105,9 +103,9 @@ const ListBase = (props) => {
     )
 }
 
-export default withStyles(styles)(ListBase)`,'ListColor' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { List, ListItem, ListItemText } from '@evg-b/evg-ui';
+export default withStyles(styles)(ListBase)`,
+ListColor: `import React from 'react';
+import { List, ListItem, ListItemText, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -122,7 +120,7 @@ const ListColor = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <List color='--ifm-color-primary' style={{ width: '300px' }}>
+            <List color='primary' style={{ width: '300px' }}>
                 {
                     [...Array(5)].map((n, i) =>
                         <ListItem key={i} button>
@@ -135,9 +133,9 @@ const ListColor = (props) => {
     )
 }
 
-export default withStyles(styles)(ListColor)`,'ListHeight' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { List, ListItem, ListItemText } from '@evg-b/evg-ui';
+export default withStyles(styles)(ListColor)`,
+ListHeight: `import React from 'react';
+import { List, ListItem, ListItemText, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -152,7 +150,7 @@ const ListHeight = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <List autoHide={false} color='--ifm-color-primary' style={{ width: 300, height: 400 }}>
+            <List autoHide={false} color='primary' style={{ width: 300, height: 400 }}>
                 {
                     [...Array(15)].map((n, i) =>
                         <ListItem key={i} button>
@@ -165,9 +163,9 @@ const ListHeight = (props) => {
     )
 }
 
-export default withStyles(styles)(ListHeight)`,'ListMeta' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Avatar, Badge, List, ListItem, ListItemText, ListItemAvatar } from '@evg-b/evg-ui';
+export default withStyles(styles)(ListHeight)`,
+ListMeta: `import React from 'react';
+import { Avatar, Badge, List, ListItem, ListItemText, ListItemAvatar, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -232,9 +230,9 @@ const ListMeta = (props) => {
     )
 }
 
-export default withStyles(styles)(ListMeta)`,'ListSecondaryText' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { List, ListItem, ListItemText } from '@evg-b/evg-ui';
+export default withStyles(styles)(ListMeta)`,
+ListSecondaryText: `import React from 'react';
+import { List, ListItem, ListItemText, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

@@ -24,18 +24,27 @@ import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
 ## Avatar not image
 
+Если нету картинки, отображается первая буква `alt`. Если `alt` не определен то отображается иконка по умолчанию. 
+
+Свойство `altMax={number}` определяет количество букв для показа.
+
 <AvatarNotImageExample />
 
 ## Color
 
+Цвет компонента меняется через свойство `color`. Более подробно про цвет в этой [статье](/docs/styles/color#props-color).
+
 <AvatarColorExample />
 
-
 ## Size
+
+Размер компонента изменяется через свойство `size`.
 
 <AvatarSizeExample />
 
 ## Status
+
+Можно отображать онлайн статус если `status={true}`
 
 <AvatarStatusExample />
 
@@ -44,6 +53,8 @@ import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 <AvatarStatusColorExample />
 
 ## Multiple avatar
+
+Свойство `srcs={[string]}` принимает массив ссылок на изображения.
 
 <AvatarMultipleExample />
 

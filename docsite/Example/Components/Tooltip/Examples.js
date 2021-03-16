@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import { CodeExample } from '@evg-b/evg-tools';
 import Snippets from './snippets'
 import TooltipAnimation from './TooltipAnimation'
 import TooltipAutoHide from './TooltipAutoHide'
@@ -17,6 +17,7 @@ const TooltipAnimationExample = () => {
 	)
 }
 
+
 const TooltipAutoHideExample = () => {
 	return (
 		<CodeExample
@@ -26,6 +27,7 @@ const TooltipAutoHideExample = () => {
 		/>
 	)
 }
+
 
 const TooltipBaseExample = () => {
 	return (
@@ -37,6 +39,7 @@ const TooltipBaseExample = () => {
 	)
 }
 
+
 const TooltipPositionExample = () => {
 	return (
 		<CodeExample
@@ -47,10 +50,11 @@ const TooltipPositionExample = () => {
 	)
 }
 
-export { 
-	TooltipAnimationExample,
+
+
+export {
+    TooltipAnimationExample,
 TooltipAutoHideExample,
 TooltipBaseExample,
 TooltipPositionExample,
-
 }

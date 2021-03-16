@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { withStyles } from 'react-jss';
-import { Modal, Button, IconButton, Switch } from '@evg-b/evg-ui';
+import { Modal, Button, IconButton, Switch, withStyles } from '@evg-b/evg-ui';
 import { Close } from '@evg-b/evg-icons'
 
 const styles = {

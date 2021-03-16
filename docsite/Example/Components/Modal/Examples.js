@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import { CodeExample } from '@evg-b/evg-tools';
 import Snippets from './snippets'
 import ModalBase from './ModalBase'
 import ModalEsc from './ModalEsc'
@@ -15,6 +15,7 @@ const ModalBaseExample = () => {
 	)
 }
 
+
 const ModalEscExample = () => {
 	return (
 		<CodeExample
@@ -25,8 +26,9 @@ const ModalEscExample = () => {
 	)
 }
 
-export { 
-	ModalBaseExample,
-ModalEscExample,
 
+
+export {
+    ModalBaseExample,
+ModalEscExample,
 }

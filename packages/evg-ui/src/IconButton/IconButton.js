@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames'
-import Color from '../utils/Color'
+import { withStyles } from '../styles'
 import ButtonBase from '../ButtonBase/ButtonBase'
 
 const styles = {
@@ -17,6 +16,10 @@ const styles = {
     },
 }
 
+/**
+ * Button компонент который модифицирован под icons.
+*/
+
 const IconButton = React.forwardRef(function IconButton(props, ref) {
     const {
         classes,
@@ -30,6 +33,7 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
     } = props
 
     let Component = otherProps.href ? 'a' : component
+
     return (
         <ButtonBase
             className={classNames(
@@ -40,13 +44,13 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
             ref={ref}
             component={Component}
             rippleCenter
-            color={Color(color).Color}
+            color={color}
             contrast={color === 'default' ? true : false}
             disabled={otherProps.disabled}
             {...otherProps}
         >
             {
-                React.Children.map(children, (child, index) =>
+                React.Children.map(children, (child) =>
                     React.cloneElement(child, {
                         color: child.props.color || color,
                         size: child.props.size || size,
@@ -57,6 +61,7 @@ const IconButton = React.forwardRef(function IconButton(props, ref) {
     )
 })
 IconButton.propTypes = {
+
     /**
     * Это контент между открывающим и закрывающим тегом компонента.
     */
@@ -73,7 +78,7 @@ IconButton.propTypes = {
     className: PropTypes.string,
 
     /**
-     * Корнево узел. Это HTML элемент или компонент.
+     * Корневой узел. Это HTML элемент или компонент.
     */
     component: PropTypes.elementType,
 

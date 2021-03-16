@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Checkbox, List, ListItem, ListItemText, ListItemAction } from '@evg-b/evg-ui';
+import { Checkbox, List, ListItem, ListItemText, ListItemAction, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

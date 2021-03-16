@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { TextField } from '@evg-b/evg-ui';
+import { TextField, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

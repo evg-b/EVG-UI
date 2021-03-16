@@ -1,9 +1,6 @@
-import React, { useState, useEffect, useRef } from 'react';
-import { withStyles } from 'react-jss';
+import React, { useState, useRef } from 'react';
 import classNames from 'classnames';
-import { TouchDriver, Switch } from '@evg-b/evg-ui';
-import Elevation from '@evg-b/evg-ui/dist/utils/Elevation'
-import Color from '@evg-b/evg-ui/dist/utils/Color'
+import { Elevation, Color, TouchDriver, Switch, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     touch: {
@@ -22,8 +19,8 @@ const styles = {
         width: '100px',
         height: '100px',
         borderRadius: '50%',
-        backgroundColor: Color('--ifm-color-primary').Color,
-        color: Color('--ifm-color-primary').Contrast,
+        backgroundColor: Color('primary').Base(),
+        color: Color('primary').Contrast(),
         cursor: 'pointer',
         userSelect: 'none',
         left: 0,
@@ -38,7 +35,7 @@ const styles = {
         width: '100px',
         height: '100px',
         borderRadius: '50%',
-        border: `4px dashed ${Color('--ifm-color-primary').Color}`,
+        border: `4px dashed ${Color('primary').Base()}`,
     },
     holeLeft: {
         left: 0,
@@ -53,11 +50,11 @@ const styles = {
         transform: 'translate(-50%,-50%)',
         width: '5px',
         height: '170px',
-        backgroundColor: Color('gray300').Color,
+        backgroundColor: Color('gray300').Base(),
         transition: 'background-color 300ms ease',
     },
     active: {
-        backgroundColor: Color('--ifm-color-primary').Color,
+        backgroundColor: Color('primary').Base(),
 
     },
     controlPanel: {
@@ -67,16 +64,15 @@ const styles = {
         left: '50%',
         transform: 'translateX(-50%)',
         bottom: 20,
-        color: Color('gray300').Color,
+        color: Color('gray300').Base(),
         '&>label': {
             marginLeft: '10px',
             fontWeight: 500,
         }
     },
     controlPanelActive: {
-        color: Color('--ifm-color-primary').Color,
+        color: Color('primary').Base(),
     }
-
 }
 
 const TouchDriverInertia = (props) => {
@@ -116,7 +112,7 @@ const TouchDriverInertia = (props) => {
     }
     return (
         <TouchDriver
-            ref={touch_ref}
+            innerRef={touch_ref}
             className={classes.touch}
             moveXY={onMove}
             moveEnd={onMoveEnd}
@@ -126,7 +122,7 @@ const TouchDriverInertia = (props) => {
             <div className={classNames(classes.hole, classes.holeRight)}></div>
             <div className={classNames(classes.rubicon, { [classes.active]: active })}></div>
             <div className={classNames(classes.controlPanel, { [classes.controlPanelActive]: useInertia })}>
-                <Switch onChange={onChangeInertia} id='switch' color='--ifm-color-primary' />
+                <Switch onChange={onChangeInertia} id='switch' color='primary' />
                 <label htmlFor="switch">INERTIA</label>
             </div>
         </TouchDriver>

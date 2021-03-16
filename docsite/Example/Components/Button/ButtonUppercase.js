@@ -5,7 +5,7 @@ const ButtonUppercase = () => {
     return (
         <Button
             variant='contained'
-            color='--ifm-color-primary'
+            color='primary'
             uppercase={false}
         >
             Uppercase

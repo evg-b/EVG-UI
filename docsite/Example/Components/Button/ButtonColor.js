@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Button } from '@evg-b/evg-ui';
+import { Button, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -16,7 +15,6 @@ const ButtonColor = (props) => {
     return (
         <div className={classes.base}>
             <Button >text</Button>
-            <Button color='--ifm-color-primary'>css Var</Button>
             <Button color='primary'>primary</Button>
             <Button color='warn'>warn</Button>
             <Button color='success'>success</Button>

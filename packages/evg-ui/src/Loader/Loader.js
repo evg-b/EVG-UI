@@ -1,8 +1,7 @@
 import React, { useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
-import Color from '../utils/Color'
+import { withStyles } from '../styles'
 
 const styles = {
     base: {
@@ -17,29 +16,40 @@ const styles = {
     },
     circle: {
         fill: 'none',
-        stroke: props => props.color === 'default' ? 'currentColor' : Color(props.color).Color,
+        stroke: props => props.color === 'default' ? 'currentColor' : props.Color.Base(),
         animation: `$circle 1500ms ease-out infinite`,
+        transformOrigin: 'center',
     },
     '@keyframes circle': {
         '0%': {
-            strokeDasharray: `1,calc(var(--evg-stroke-dasharray))`,
-            strokeDashoffset: 0
+            strokeDasharray: `calc(var(--evg-stroke-dasharray)*0.05),calc(var(--evg-stroke-dasharray))`,
+            strokeDashoffset: 0,
+            transform: 'rotate(0deg)'
         },
-        '40%': {
-            strokeDashoffset: `calc(var(--evg-stroke-dasharray)*-0.2)`,
+        '10%': {
+            strokeDasharray: `calc(var(--evg-stroke-dasharray)*0.05),calc(var(--evg-stroke-dasharray))`,
+            strokeDashoffset: 0,
         },
         '50%': {
             strokeDasharray: `calc(var(--evg-stroke-dasharray)*0.7),calc(var(--evg-stroke-dasharray))`,
-        },
-        '60%': {
             strokeDashoffset: `calc(var(--evg-stroke-dasharray)*-0.3)`,
+        },
+        '90%': {
+            strokeDasharray: `calc(var(--evg-stroke-dasharray)*0.7),calc(var(--evg-stroke-dasharray))`,
+            strokeDashoffset: `calc(var(--evg-stroke-dasharray)*-0.95)`,
         },
         '100%': {
             strokeDasharray: `calc(var(--evg-stroke-dasharray)*0.7),calc(var(--evg-stroke-dasharray))`,
             strokeDashoffset: `calc(var(--evg-stroke-dasharray)*-0.95)`,
+            transform: 'rotate(18deg)',
         }
     },
 }
+
+/**
+ * Индикатор прогресса указывающий неопределенное время ожидания.
+*/
+
 const Loader = React.forwardRef(function Loader(props, ref) {
     const {
         classes,
@@ -50,6 +60,7 @@ const Loader = React.forwardRef(function Loader(props, ref) {
         depth,
         ...otherProps
     } = props
+
     let Loader_ref = useRef()
     Loader_ref = ref || Loader_ref
 
@@ -58,6 +69,7 @@ const Loader = React.forwardRef(function Loader(props, ref) {
         let perimeter = 2 * Math.PI * (size / 2 - depth)
         Loader_S.style.setProperty('--evg-stroke-dasharray', `${perimeter}px`)
     }, [size, depth])
+
     return (
         <svg
             ref={Loader_ref}
@@ -78,10 +90,6 @@ const Loader = React.forwardRef(function Loader(props, ref) {
     )
 })
 Loader.propTypes = {
-    /**
-    * Это контент между открывающим и закрывающим тегом компонента.
-    */
-    children: PropTypes.node,
 
     /**
      * Объект содержит jss стили компонента.
@@ -94,7 +102,12 @@ Loader.propTypes = {
     className: PropTypes.string,
 
     /**
-     * Название цвета в разных форматах. Подробнее <a>link</a>
+     * Это свойство не реализуется.
+    */
+    children: PropTypes.any,
+
+    /**
+     * Название цвета в разных форматах.
     */
     color: PropTypes.string,
 
@@ -104,7 +117,7 @@ Loader.propTypes = {
     size: PropTypes.number,
 
     /**
-     * Толщина  линни.
+     * Толщина линии.
     */
     depth: PropTypes.number,
 }

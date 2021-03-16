@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Carousel } from '@evg-b/evg-ui';
+import { Carousel, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

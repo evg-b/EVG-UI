@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
+import { Elevation, withStyles } from '../styles'
 import TextField from '../TextField'
 import List from '../List'
 import SelectOption from '../SelectOption'
-import Elevation from '../utils/Elevation'
 import Popup from '../Popup'
 import { ExpandMore } from '../internal/icons/Select';
 
@@ -34,8 +33,12 @@ const styles = {
     selectList: {
         ...Elevation(8),
     },
+}
 
-};
+/**
+ * Select позволяет пользователям выбирать из меню с одним параметром.
+*/
+
 const Select = React.forwardRef(function Select(props, ref) {
     const {
         classes,
@@ -53,7 +56,7 @@ const Select = React.forwardRef(function Select(props, ref) {
     Select_ref = ref || Select_ref
 
     const [open, setOpen] = useState(false)
-    const [minWidth, setMminWidth] = useState(0)
+    const [minWidth, setMinWidth] = useState(0)
 
     const optionMap = new Map()
     React.Children.forEach(children, child => {
@@ -64,9 +67,9 @@ const Select = React.forwardRef(function Select(props, ref) {
         }
     })
     const [valueSelect, setValueSelect] = useState(optionMap.get(value))
-    const handelClick = (newValue) => {
-        setValueSelect(optionMap.get(newValue))
-        onChange && onChange(newValue)
+    const handelClick = ({ currentTarget }) => {
+        setValueSelect(optionMap.get(currentTarget.value))
+        onChange && onChange(currentTarget.value)
         handleCloseSelectList()
     }
     const emptySelectOption = () => <SelectOption onClick={handelClick} />
@@ -83,8 +86,9 @@ const Select = React.forwardRef(function Select(props, ref) {
         // TODO: оптимизировать и закешировать, чтобы срабатывала только два раза
         // в первый render ширина может учитываться margin и clientWidth почему то не помогает(а должен)
         // он помогает при первом показе, вот тогда нужно зафиксировать новое значение(правильное) и больше не менять
-        setMminWidth(Select_ref.current.clientWidth)
+        setMinWidth(Select_ref.current.clientWidth)
     }, [])
+
     return (
         <div className={classNames(classes.base, className)}>
             <TextField
@@ -97,7 +101,7 @@ const Select = React.forwardRef(function Select(props, ref) {
                 disabled={disabled}
                 {...otherProps}
             />
-            <ExpandMore color={open ? color : ''} disabled={disabled} className={classNames(classes.selectIcon, {
+            <ExpandMore color={open ? color : 'default'} disabled={disabled} className={classNames(classes.selectIcon, {
                 [classes.selectIconOpen]: open,
             })} />
             <Popup
@@ -133,6 +137,7 @@ const Select = React.forwardRef(function Select(props, ref) {
     )
 })
 Select.propTypes = {
+
     /**
     * Это контент между открывающим и закрывающим тегом компонента.
     */
@@ -176,6 +181,7 @@ Select.propTypes = {
 Select.defaultProps = {
     emptyOption: false,
     disabled: false,
+    color: 'default',
 }
 Select.displayName = 'SelectEVG'
 export default withStyles(styles)(Select)

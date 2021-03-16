@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Lightbox } from '@evg-b/evg-ui';
+import { Lightbox, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -23,7 +22,6 @@ const LightboxBase = (props) => {
         '/source/Carousel/7.jpg',
         '/source/Carousel/8.jpg',
         '/source/Carousel/9.jpg',
-        '/source/Carousel/10.jpg',
     ]
     return (
         <div className={classes.base}>

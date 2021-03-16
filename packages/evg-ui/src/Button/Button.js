@@ -1,10 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import withStyles from '../styles/withStyles'
 import classNames from 'classnames'
-// import Color from '../utils/Color'
-import Color2 from '../utils/Color/Color'
-import Elevation from '../utils/Elevation'
+import { Elevation, withStyles } from '../styles'
 import ButtonBase from '../ButtonBase'
 import Loader from '../Loader'
 
@@ -25,22 +22,17 @@ const styles = {
     },
     // variant
     text: {
-        color: props => props.color === 'default' ? props.Color.Contrast() : props.Color.Color()
-        // color: props => props.color === 'default' ? Color2(props.color).Contrast() : Color2(props.color).Color()
+        color: props => props.color === 'default' ? props.Color.Contrast() : props.Color.Base(),
     },
     outlined: {
-        border: props => `1px solid ${props.color === 'default' ? props.Color.Contrast('hexa', 0.6) : props.Color.Color('hexa', 0.6)}`,
-        color: props => props.color === 'default' ? props.Color.Contrast('hexa', 0.6) : props.Color.Color()
-        // border: props => `1px solid ${props.color === 'default' ? Color2(props.color).Contrast('hexa', 0.6) : Color2(props.color).Color('hexa', 0.6)}`,
-        // color: props => props.color === 'default' ? Color2(props.color).Contrast('hexa', 0.6) : Color2(props.color).Color()
+        border: props => `1px solid ${props.color === 'default' ? props.Color.Contrast('hexa', 0.6) : props.Color.Base('hexa', 0.6)}`,
+        color: props => props.color === 'default' ? props.Color.Contrast('hexa', 0.6) : props.Color.Base(),
     },
-    contained: {
-        backgroundColor: props => props.Color.Color(),
-        color: props => props.Color.Contrast(),
-        // backgroundColor: props => Color2(props.color).Color(),
-        // color: props => Color2(props.color).Contrast(),
+    contained: props => ({
+        backgroundColor: props.Color.Base(),
+        color: props.Color.Contrast(),
+    }),
 
-    },
     elevation: {
         ...Elevation(2),
         '&:hover': {
@@ -103,6 +95,12 @@ const MapSizeLoader = {
     'large': 36,
     'extra': 48,
 }
+
+/**
+ * Кнопки позволяют пользователям выполнять действия и делать выбор одним нажатием. 
+ * Является `<button>` или `<a>` элементом с ripple эффектом от Material Design.
+*/
+
 const Button = React.forwardRef(function Button(props, ref) {
     const {
         classes,
@@ -130,6 +128,7 @@ const Button = React.forwardRef(function Button(props, ref) {
             })}
         </span>
     )
+
     const endIcon = EndIcon && (
         <span className={classes.endIcon}>
             {React.cloneElement(EndIcon, {
@@ -137,6 +136,7 @@ const Button = React.forwardRef(function Button(props, ref) {
             })}
         </span>
     )
+
     const buttonLabel = (
         <span className={classes.buttonLabel} style={loading && !StartIcon && !EndIcon ? { visibility: 'hidden' } : null}>
             {loading && StartIcon ? <Loader className={classes.startIcon} size={MapSizeLoader[size]} depth={size === 'small' ? 2 : 3} /> : startIcon}
@@ -144,9 +144,11 @@ const Button = React.forwardRef(function Button(props, ref) {
             {endIcon}
         </span>
     )
+
     return (
         <ButtonBase
             className={classNames(
+                className,
                 classes.base,
                 classes[variant],
                 classes[size],
@@ -155,10 +157,8 @@ const Button = React.forwardRef(function Button(props, ref) {
                     [classes.round]: round,
                     [classes.elevation]: elevation && variant === 'contained',
                 },
-                className
             )}
-            color={Color2(color).Color()}
-            // color={color}
+            color={color}
             contrast={variant === 'contained' || color === 'default' ? true : false}
             ref={ref}
             type={Component}
@@ -166,11 +166,12 @@ const Button = React.forwardRef(function Button(props, ref) {
         >
             {loading && !StartIcon && !EndIcon ? <Loader className={classes.loaderFull} size={MapSizeLoader[size]} /> : null}
             {buttonLabel}
-        </ButtonBase >
+        </ButtonBase>
     )
 })
 
 Button.propTypes = {
+
     /**
     * Это контент между открывающим и закрывающим тегом компонента.
     */
@@ -184,7 +185,7 @@ Button.propTypes = {
     */
     className: PropTypes.string,
     /**
-     * Корнево узел. Это HTML элемент или компонент.
+     * Корневой узел. Это HTML элемент или компонент.
     */
     component: PropTypes.elementType,
     /**

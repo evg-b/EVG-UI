@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Loader } from '@evg-b/evg-ui';
+import { Loader, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -15,9 +14,9 @@ const LoaderColor = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <Loader color="--ifm-color-primary" />
             <Loader />
             <Loader color='primary' />
+            <Loader color='warn' />
         </div>
     )
 }

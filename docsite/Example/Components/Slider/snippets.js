@@ -1,3 +1,2 @@
-export default {
-'SliderBase' : ``,
+export default {SliderBase: ``,
 }

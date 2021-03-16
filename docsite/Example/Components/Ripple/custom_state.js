@@ -1,8 +1,6 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
+import { Elevation, Color, withStyles } from '@evg-b/evg-ui';
 import classNames from 'classnames'
-import Color from '@evg-b/evg-ui/dist/utils/Color'
-import hexToRGBA from '@evg-b/evg-ui/dist/utils/hexToRGBA'
 
 const styles = {
     base: {
@@ -15,6 +13,7 @@ const styles = {
         flexDirection: 'column',
         alignItems: 'center',
         padding: '15px',
+        ...Elevation(1)
     },
     state: {
         margin: '15px',
@@ -62,42 +61,35 @@ const ArrayStates = {
     },
 }
 const StatesRipple = (props) => {
-    const {
-        classes,
-    } = props
+    const { classes } = props
 
     return (
-        <div
-            className={classNames(
-                classes.base,
-            )}
-        >
+        <div className={classNames(classes.base)}>
             {
                 Object.keys(ArrayStates).map((state, index) => {
-                    let colorState = index !== 2 ? Color(StatesColor[state]).Color : Color(StatesColor[state]).Contrast
+                    let colorState = index !== 2 ? Color(StatesColor[state]).Base() : Color(StatesColor[state]).Contrast()
                     return (
                         <div
                             key={index}
                             className={classes.stateStand}
                             style={{
                                 backgroundColor: colorState,
+                                color: Color(colorState).Contrast()
                             }}
                         >
                             <div style={{
                                 padding: '10px',
-                                color: Color(colorState).Contrast
                             }}>{state}</div>
                             {
                                 Object.entries(ArrayStates[state]).map((config, i) => {
-                                    let colorRipple = index === 2 ? Color(StatesColor[state]).Color : Color(StatesColor[state]).Contrast
-                                    let colorRippleState = hexToRGBA(colorRipple, config[1])
+                                    let colorRipple = index === 2 ? Color(StatesColor[state]).Base() : Color(StatesColor[state]).Contrast()
+                                    let colorRippleState = Color(colorRipple).Base('rgba', config[1])
                                     return (
                                         <div
                                             key={i}
                                             className={classes.state}
                                             style={{
                                                 backgroundColor: colorRippleState,
-                                                color: Color(colorRippleState).Contrast,
                                             }}
                                         >
                                             <span>{config[0]}</span>

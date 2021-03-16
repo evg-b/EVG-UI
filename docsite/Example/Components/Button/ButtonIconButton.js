@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { IconButton } from '@evg-b/evg-ui';
+import { IconButton, withStyles } from '@evg-b/evg-ui';
 import {
     Close,
     Cancel,
@@ -23,7 +22,7 @@ const ButtonIconButton = (props) => {
     return (
         <div className={classes.base}>
             <IconButton><Close /></IconButton>
-            <IconButton color='--ifm-color-primary'><Cancel /></IconButton>
+            <IconButton color='primary'><Cancel /></IconButton>
             <IconButton color='warn'><Menu /></IconButton>
             <IconButton color='success'><Fullscreen /></IconButton>
             <IconButton disabled><Visibility /></IconButton>

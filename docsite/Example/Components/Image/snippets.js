@@ -1,7 +1,5 @@
-export default {
-'ImageBase' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Image } from '@evg-b/evg-ui';
+export default {ImageBase: `import React from 'react';
+import { Image, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -28,9 +26,9 @@ const ImageBase = (props) => {
     )
 }
 
-export default withStyles(styles)(ImageBase)`,'ImageBroken' : `import React, { useState } from 'react';
-import { withStyles } from 'react-jss';
-import { Image, Button } from '@evg-b/evg-ui';
+export default withStyles(styles)(ImageBase)`,
+ImageBroken: `import React, { useState } from 'react';
+import { Image, Button, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -60,9 +58,9 @@ const ImageBroken = (props) => {
     )
 }
 
-export default withStyles(styles)(ImageBroken)`,'Imageloader' : `import React, { useState } from 'react';
-import { withStyles } from 'react-jss';
-import { Image, Button } from '@evg-b/evg-ui';
+export default withStyles(styles)(ImageBroken)`,
+Imageloader: `import React, { useState } from 'react';
+import { Image, Button, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

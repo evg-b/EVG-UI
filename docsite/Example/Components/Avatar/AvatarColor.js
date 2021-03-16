@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Avatar } from '@evg-b/evg-ui';
+import { Avatar, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -17,11 +16,10 @@ const AvatarColor = (props) => {
     return (
         <div className={classes.base}>
             <Avatar alt='evg b' />
-            <Avatar alt='Alira' color='--ifm-color-primary' />
+            <Avatar alt='Alira' color='primary' />
             <Avatar alt='Rick' color='success' />
         </div>
     )
 }
 
 export default withStyles(styles)(AvatarColor)
-

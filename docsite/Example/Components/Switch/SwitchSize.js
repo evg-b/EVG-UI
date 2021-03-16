@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Switch } from '@evg-b/evg-ui';
+import { Switch, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

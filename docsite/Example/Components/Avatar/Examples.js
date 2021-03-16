@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import { CodeExample } from '@evg-b/evg-tools';
 import Snippets from './snippets'
 import AvatarBase from './AvatarBase'
 import AvatarColor from './AvatarColor'
@@ -21,6 +21,7 @@ const AvatarBaseExample = () => {
 	)
 }
 
+
 const AvatarColorExample = () => {
 	return (
 		<CodeExample
@@ -30,6 +31,7 @@ const AvatarColorExample = () => {
 		/>
 	)
 }
+
 
 const AvatarGroupAndSizeExample = () => {
 	return (
@@ -41,6 +43,7 @@ const AvatarGroupAndSizeExample = () => {
 	)
 }
 
+
 const AvatarMultipleExample = () => {
 	return (
 		<CodeExample
@@ -50,6 +53,7 @@ const AvatarMultipleExample = () => {
 		/>
 	)
 }
+
 
 const AvatarNotImageExample = () => {
 	return (
@@ -61,6 +65,7 @@ const AvatarNotImageExample = () => {
 	)
 }
 
+
 const AvatarSizeExample = () => {
 	return (
 		<CodeExample
@@ -70,6 +75,7 @@ const AvatarSizeExample = () => {
 		/>
 	)
 }
+
 
 const AvatarStatusExample = () => {
 	return (
@@ -81,6 +87,7 @@ const AvatarStatusExample = () => {
 	)
 }
 
+
 const AvatarStatusColorExample = () => {
 	return (
 		<CodeExample
@@ -91,8 +98,10 @@ const AvatarStatusColorExample = () => {
 	)
 }
 
-export { 
-	AvatarBaseExample,
+
+
+export {
+    AvatarBaseExample,
 AvatarColorExample,
 AvatarGroupAndSizeExample,
 AvatarMultipleExample,
@@ -100,5 +109,4 @@ AvatarNotImageExample,
 AvatarSizeExample,
 AvatarStatusExample,
 AvatarStatusColorExample,
-
 }

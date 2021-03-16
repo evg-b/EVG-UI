@@ -1,7 +1,5 @@
-export default {
-'SkeletonAnimation' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Skeleton } from '@evg-b/evg-ui';
+export default {SkeletonAnimation: `import React from 'react';
+import { Skeleton, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -22,9 +20,9 @@ const SkeletonAnimation = (props) => {
     )
 }
 
-export default withStyles(styles)(SkeletonAnimation)`,'SkeletonAvatar' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Skeleton } from '@evg-b/evg-ui';
+export default withStyles(styles)(SkeletonAnimation)`,
+SkeletonAvatar: `import React from 'react';
+import { Skeleton, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -46,9 +44,9 @@ const SkeletonAvatar = (props) => {
     )
 }
 
-export default withStyles(styles)(SkeletonAvatar)`,'SkeletonBase' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Skeleton } from '@evg-b/evg-ui';
+export default withStyles(styles)(SkeletonAvatar)`,
+SkeletonBase: `import React from 'react';
+import { Skeleton, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -70,9 +68,9 @@ const SkeletonBase = (props) => {
     )
 }
 
-export default withStyles(styles)(SkeletonBase)`,'SkeletonText' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Skeleton } from '@evg-b/evg-ui';
+export default withStyles(styles)(SkeletonBase)`,
+SkeletonText: `import React from 'react';
+import { Skeleton, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

@@ -1,8 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
-import classNames from 'classnames';
-import brightChange from '../utils/brightChange'
+import { Color, withStyles } from '../styles'
 
 const styles = {
     base: {
@@ -18,6 +16,9 @@ const config = {
     colorBase: '#E0E0E0', // 300
     factorRejection: 0.3,
 }
+const mapFrontColorCache = new Map()
+const mapSideColorCache = new Map()
+
 function getShift(x, y, w, h) {
     const [centerX, centerY] = [w / 2, h / 2]
     const [difX, difY] = [Math.abs(centerX - x), Math.abs(centerY - y)]
@@ -39,7 +40,7 @@ function getDirection(x, y, w, h) {
     return [directionX, directionY] = [x > centerX ? 1 : -1, y > centerY ? 1 : -1]
 }
 class Cub {
-    constructor(ctx, x, y, directionX = 1, directionY = 1, shiftX = 1, shiftY = 1, colorBase, levelMin, levelMax) {
+    constructor(ctx, x, y, directionX = 1, directionY = 1, shiftX = 1, shiftY = 1, colorBase, levelMin, levelMax, size) {
         this.ctx = ctx
         this.startX = x
         this.startY = y
@@ -48,7 +49,7 @@ class Cub {
         this.shiftX = shiftX
         this.shiftY = shiftY
         this.colorBase = colorBase
-        this.size = config.sizeCub
+        this.size = size
         this.directionX = directionX
         this.directionY = directionY
         // this.levelMax = Math.random() * config.maxLevel
@@ -98,7 +99,6 @@ class Cub {
     move() {
         let shiftNowX = +(this.level * this.directionX * this.shiftX * (this.level === 0 ? 0 : config.factorRejection)).toFixed(1)
         let shiftNowY = +(this.level * this.directionY * this.shiftY * (this.level === 0 ? 0 : config.factorRejection)).toFixed(1)
-        // console.log('shiftNowX:', shiftNowX)
         this.x = this.startX + shiftNowX
         this.y = this.startY + shiftNowY
     }
@@ -129,74 +129,87 @@ class Cub {
         const [nowY1, nowY2] = [this.y - centeringBySize, this.y + centeringBySize]
 
         let levelPercent = (this.level / this.levelMaxGlobal) * 50
-        let colorSidetoFront = brightChange(this.colorBase, -20)
-        let colorSideX = brightChange(colorSidetoFront, levelPercent * this.shiftX * 1)
-        let colorSideY = brightChange(colorSidetoFront, levelPercent * this.shiftY * 1)
 
-        // let colorSideX = '#d3d3d3'
-        // let colorSideY = '#d3d3d3'
+        const [keySideX, keySideY] = [`X${levelPercent * this.shiftX}`, `Y${levelPercent * this.shiftY}`]
+        let colorSideX, colorSideY
+
+        if (mapSideColorCache.has(keySideX)) {
+            colorSideX = mapSideColorCache.get(keySideX)
+        } else {
+            let colorSidetoFront = Color(this.colorBase).Bright('rgb', -20)
+            colorSideX = Color(colorSidetoFront).Bright('rgb', levelPercent * this.shiftX)
+
+            // кэшируем значение цвета для каждого уровня
+            mapSideColorCache.set(keySideX, colorSideX)
+        }
+
+        if (mapSideColorCache.has(keySideY)) {
+            colorSideY = mapSideColorCache.get(keySideY)
+        } else {
+            let colorSidetoFront = Color(this.colorBase).Bright('rgb', -20)
+            colorSideY = Color(colorSidetoFront).Bright('rgb', levelPercent * this.shiftY)
+
+            // кэшируем значение цвета для каждого уровня
+            mapSideColorCache.set(keySideY, colorSideY)
+        }
 
         if (this.directionY === 1) {
             // top
             this.ctx.beginPath();
             this.ctx.fillStyle = colorSideY
-            // this.ctx.strokeStyle = colorSideY
             this.ctx.moveTo(startX1, startY1);
             this.ctx.lineTo(startX2, startY1)
             this.ctx.lineTo(nowX2, nowY1)
             this.ctx.lineTo(nowX1, nowY1)
             this.ctx.closePath()
             this.ctx.fill()
-
-            // this.ctx.stroke()
         } else {
             // bottom
             this.ctx.beginPath();
             this.ctx.fillStyle = colorSideY
-            // this.ctx.strokeStyle = colorSideY
             this.ctx.moveTo(startX1, startY2);
             this.ctx.lineTo(startX2, startY2);
             this.ctx.lineTo(nowX2, nowY2)
             this.ctx.lineTo(nowX1, nowY2)
             this.ctx.closePath()
             this.ctx.fill()
-
-            // this.ctx.stroke()
         }
         if (this.directionX === 1) {
             // right
             this.ctx.beginPath();
             this.ctx.fillStyle = colorSideX
-            // this.ctx.strokeStyle = colorSideX
             this.ctx.moveTo(startX1, startY1);
             this.ctx.lineTo(nowX1, nowY1);
             this.ctx.lineTo(nowX1, nowY2);
             this.ctx.lineTo(startX1, startY2);
             this.ctx.closePath()
             this.ctx.fill()
-
-            // this.ctx.stroke()
         } else {
             // left
             this.ctx.beginPath();
             this.ctx.fillStyle = colorSideX
-            // this.ctx.strokeStyle = colorSideX
             this.ctx.moveTo(startX2, startY1);
             this.ctx.lineTo(nowX2, nowY1);
             this.ctx.lineTo(nowX2, nowY2);
             this.ctx.lineTo(startX2, startY2);
             this.ctx.closePath()
             this.ctx.fill()
-
-            // this.ctx.stroke()
         }
     }
     renderFront() {
+        // mapFrontColorCache
         let levelPercent = (this.level / this.levelMaxGlobal) * 50
-        let colorFrontToCenter = brightChange(this.colorBase, -(this.shiftX * this.shiftY) * 10)
-        this.ctx.fillStyle = brightChange(colorFrontToCenter, levelPercent)
-        // let colorFront = '#f7f7f7'
-        // this.ctx.fillStyle = colorFront
+        let keyFront = `${levelPercent},${this.shiftX * this.shiftY}`
+        if (mapFrontColorCache.has(keyFront)) {
+            this.ctx.fillStyle = mapFrontColorCache.get(keyFront)
+        } else {
+            let colorFrontToCenter = Color(this.colorBase).Bright('rgb', -(this.shiftX * this.shiftY) * 10)
+            const colorFront = Color(colorFrontToCenter).Bright('rgb', levelPercent)
+            this.ctx.fillStyle = colorFront
+
+            // кэшируем значение цвета для каждого уровня
+            mapFrontColorCache.set(keyFront, colorFront)
+        }
         this.ctx.fillRect(this.x - (this.size / 2), this.y - (this.size / 2), this.size, this.size);
     }
     render() {
@@ -211,7 +224,6 @@ class Cub {
         // } else {
         //     this.freezAnimation()
         // }
-        // console.log('cub x prev:', this.x)
         if (this.levelTarget === 0 && this.autopilot) {
             // this.speed !== 1 ? this.speed = 1 : null
             this.autopilotAnimation()
@@ -221,8 +233,6 @@ class Cub {
         }
         this.renderSides()
         this.renderFront()
-        // console.log('cub x:', this.x)
-        // console.log(`x:${this.x} y:${this.y}`)
     }
 }
 class OverseerCubs {
@@ -251,21 +261,21 @@ class OverseerCubs {
         this.rippleLevel = rippleLevel
         this.rippleSpeed = rippleSpeed
     }
-    filling(fillingX, fillingY, levelMin, levelMax) {
-        const cubsCounX = fillingX === 0 ? 2 + (this.w / config.sizeCub | 0) : fillingX
-        const cubsCounY = fillingY === 0 ? 2 + (this.h / config.sizeCub | 0) : fillingY
+    filling(fillingX, fillingY, levelMin, levelMax, sizeCub) {
+        const cubsCounX = fillingX === 0 ? 2 + (this.w / sizeCub | 0) : fillingX
+        const cubsCounY = fillingY === 0 ? 2 + (this.h / sizeCub | 0) : fillingY
 
-        const startX = (config.sizeCub + this.w - cubsCounX * config.sizeCub) / 2
-        const startY = (config.sizeCub + this.h - cubsCounY * config.sizeCub) / 2
+        const startX = (sizeCub + this.w - cubsCounX * sizeCub) / 2
+        const startY = (sizeCub + this.h - cubsCounY * sizeCub) / 2
 
         for (let j = 0; j < cubsCounY; j++) {
-            let y = startY + j * config.sizeCub // found y
+            let y = startY + j * sizeCub // found y
             for (let i = 0; i < cubsCounX; i++) {
-                let x = startX + i * config.sizeCub // found x
+                let x = startX + i * sizeCub // found x
 
                 let dif = getShift(x, y, this.w, this.h)
                 // let dif = { x: 0.37, y: 0.5 } // заглушка
-                this.cubs.push(new Cub(this.ctx, x, y, ...getDirection(x, y, this.w, this.h), dif.x, dif.y, this.color, levelMin, levelMax))
+                this.cubs.push(new Cub(this.ctx, x, y, ...getDirection(x, y, this.w, this.h), dif.x, dif.y, this.color, levelMin, levelMax, sizeCub))
             }
         }
         this.cubs = this.cubs.sort((a, b) => a.shiftX + a.shiftY < b.shiftX + b.shiftY ? 1 : -1)
@@ -335,22 +345,20 @@ class OverseerCubs {
         } else {
             this.step += stepSize
         }
-        // console.log('[cubes][rippleAnimation] this.mapInWork:', this.cubs.length, this.mapInRipple.size)
     }
     autopilot(switchBool = false) {
         this.cubs.forEach(cub => cub.setAutopilot(switchBool))
     }
     setColor(color = this.color) {
-        // this.color = color
-        let newColor = color ? color : config.colorBase
+        let newColor = color ? Color(color).Base() : config.colorBase
+        mapFrontColorCache.clear()
+        mapSideColorCache.clear()
         this.cubs.forEach(cub => cub.setColor(newColor))
     }
     setSpeed(newSpeed = this.speed) {
         this.cubs.forEach(cub => cub.setSpeed(newSpeed))
     }
     render() {
-        // this.ctx.clearRect(0, 0, this.w, this.h) // clear
-        // this.ctx.clearRect(0, 0, 200, 200) // clear
         this.cubs.forEach(cub => cub.render()) // render
         this.ripple && this.rippleAnimation()
         this.OverseerId.id = requestAnimationFrame(this.render)
@@ -364,11 +372,17 @@ class OverseerCubs {
         }, 500)
     }
 }
+
+/**
+ * Cubes - интерактивный живой фон из кубов. Работает все с помощью `canvas` 2d без сторонних зависимостей. 
+ * Удивляйте своих пользователей красивой фоновой анимацией.
+*/
+
 class Cubes extends React.Component {
     constructor(props) {
         super(props);
         this.CanvasWrapper_Ref = React.createRef();
-        this.Canvas_Ref = React.createRef();
+        this.Canvas_Ref = this.props.innerRef || React.createRef();
         this.OverseerId = { id: 0 }
         this.renderIsStart = false
         this.stop = this.stop.bind(this);
@@ -384,7 +398,7 @@ class Cubes extends React.Component {
             ctx.height = height
 
             this.Overseer = new OverseerCubs(ctx.getContext('2d', { alpha: false }), this.OverseerId, ctx.width, ctx.height)
-            this.Overseer.filling(this.props.fillingX, this.props.fillingY, this.props.levelMin, this.props.levelMax)
+            this.Overseer.filling(this.props.fillingX, this.props.fillingY, this.props.levelMin, this.props.levelMax, this.props.size)
             // // 2) start requestAnimationFrame
             this.Overseer.autopilot(this.props.autopilot)
             this.Overseer.setColor(this.props.color)
@@ -394,22 +408,25 @@ class Cubes extends React.Component {
         }, 0)
     }
     componentDidUpdate(prevProps) {
-        const { autopilot, color, speed } = prevProps
-        const { autopilot: newAutopilot, color: newColor, speed: newSpeed } = this.props
-        console.log('componentDidUpdate autopilot:', autopilot, newAutopilot)
+        const { autopilot, color, speed, size } = prevProps
+        const { autopilot: newAutopilot, color: newColor, speed: newSpeed, size: newSize } = this.props
+        // autopilot
         if (autopilot !== newAutopilot) {
             this.Overseer.autopilot(newAutopilot)
         }
-        // speed
         // color
-        console.log('componentDidUpdate color:', color, newColor)
         if (color !== newColor) {
             this.Overseer.setColor(newColor)
         }
-
-        console.log('componentDidUpdate speed:', speed, newSpeed)
+        // speed
         if (speed !== newSpeed) {
             this.Overseer.setSpeed(newSpeed)
+        }
+        // size
+        if (size !== newSize) {
+            this.Overseer.cubs = []
+            this.Overseer.filling(this.props.fillingX, this.props.fillingY, this.props.levelMin, this.props.levelMax, newSize)
+            this.Overseer.autopilot(this.props.autopilot)
         }
     }
     stop() {
@@ -432,12 +449,14 @@ class Cubes extends React.Component {
             classes,
             className,
             autopilot,
+            innerRef,
             color,
             fillingX,
             fillingY,
             levelMin,
             levelMax,
             speed,
+            size,
             ...otherProps
         } = this.props
         return (
@@ -450,10 +469,6 @@ class Cubes extends React.Component {
 
 }
 Cubes.propTypes = {
-    /**
-    * Это контент между открывающим и закрывающим тегом компонента.
-    */
-    children: PropTypes.node,
 
     /**
      * Объект содержит jss стили компонента.
@@ -465,12 +480,54 @@ Cubes.propTypes = {
     */
     className: PropTypes.string,
 
+    /**
+     * Это свойство не реализуется.
+    */
+    children: PropTypes.any,
+
+    /**
+     * ref ссылка компонента.
+    */
+    innerRef: PropTypes.object,
+
+    /**
+     * Название цвета в разных форматах.
+    */
     color: PropTypes.string,
+
+    /**
+     * Если true, кубы начинают двигаться сами по себе.
+    */
     autopilot: PropTypes.bool,
+
+    /**
+     * Заполнение области по X. Если 0 то полное заполнение до краев.
+    */
     fillingX: PropTypes.number,
+
+    /**
+     * Заполнение области по Y. Если 0 то полное заполнение до краев.
+    */
     fillingY: PropTypes.number,
+
+    /**
+     * Минимальный уровень высоты до которого может опускаться один куб.
+    */
     levelMin: PropTypes.number,
+
+    /**
+     * Максимальный уровень высоты до которого может опускаться один куб.
+    */
     levelMax: PropTypes.number,
+
+    /**
+     * Размер куба.
+    */
+    size: PropTypes.number,
+
+    /**
+     * Скорость изменения высоты куба.
+    */
     speed: PropTypes.number,
 }
 Cubes.defaultProps = {
@@ -480,7 +537,7 @@ Cubes.defaultProps = {
     fillingY: 0,
     levelMin: 30,
     levelMax: 100,
-    // size Cubes
+    size: 40,
     speed: 1,
 }
 Cubes.displayName = 'CubesEVG'

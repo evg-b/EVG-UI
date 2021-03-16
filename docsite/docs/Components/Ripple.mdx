@@ -5,34 +5,36 @@ sidebar_label: Ripple
 ---
 
 import {
-    RippleExampleBase,
-    RippleExampleColor,
-    RippleExampleContrast,
-} from '../../Example/Components/Ripple/RippleExample'
+    RippleBaseExample,
+    RippleColorExample,
+    RippleContrastExample,
+} from '../../Example/Components/Ripple/Examples'
 import StatesRipple from '../../Example/Components/Ripple/custom_state'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Ripple сигнализирует пользователю что его взаимодействие с компонентом было получено, используя эффект ряби в точке касания. Так же помогает понять с каким именно компонентом произошло взаимодействие если они расположены слишком близко друг к другу.
+Ripple сигнализирует пользователю что его взаимодействие с компонентом было получено, используя эффект ряби в точке касания. 
+Так же помогает понять с каким именно компонентом произошло взаимодействие если они расположены слишком близко друг к другу.
 
 ## Base
-<RippleExampleBase />
+<RippleBaseExample />
 
 ## Color 
 
 Для лучшего визуального восприятия вы можете передать цвет фона в компонент Ripple чтобы
 он окрасился в контрастный цвет переданному цвету.
-<RippleExampleColor />
+
+<RippleColorExample />
 
 ## Contrast
 
 Цвет Ripple также может принимать свой изначальный цвет который ему был передан. 
 Нужно выключить автоопределение контрастного цвета.
 
-<RippleExampleContrast />
+<RippleContrastExample />
 
 ## States
 
-Состояние Ripple эффекта подбирается автомотически в замисимости от цвета фона для лучшей видимости.
+Состояние Ripple эффекта подбирается автоматически в зависимости от цвета фона для лучшей видимости.
 
 <StatesRipple />
 

@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Select, SelectOption } from '@evg-b/evg-ui';
+import { Select, SelectOption, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

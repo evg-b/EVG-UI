@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-// import { Menu } from '@evg-b/evg-ui';
+import { withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

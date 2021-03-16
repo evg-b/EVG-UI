@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Skeleton } from '@evg-b/evg-ui';
+import { Skeleton, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
+import { withStyles } from '../styles'
 import IconButton from '../IconButton'
 
 const styles = {
@@ -20,6 +20,10 @@ const styles = {
     checked: {},
 }
 
+/**
+ * Базовый компонент который реализует общую логику checked в Checkbox, Radio, Switch.
+*/
+
 const SwitchBase = React.forwardRef(function SwitchBase(props, ref) {
     const {
         classes,
@@ -33,7 +37,6 @@ const SwitchBase = React.forwardRef(function SwitchBase(props, ref) {
         rippleOff,
         ...otherProps
     } = props
-
     const iconChecked = IconChecked && (
         React.cloneElement(IconChecked, {
             className: classNames(
@@ -55,8 +58,8 @@ const SwitchBase = React.forwardRef(function SwitchBase(props, ref) {
         >
             <input
                 className={classNames(
-                    classes.checked,
                     classes.input,
+                    classes.checked,
                 )}
                 tabIndex={0}
                 ref={ref}
@@ -70,10 +73,6 @@ const SwitchBase = React.forwardRef(function SwitchBase(props, ref) {
     )
 })
 SwitchBase.propTypes = {
-    /**
-    * Это контент между открывающим и закрывающим тегом компонента.
-    */
-    children: PropTypes.node,
 
     /**
      * Объект содержит jss стили компонента.
@@ -84,6 +83,11 @@ SwitchBase.propTypes = {
      * Чтобы указать CSS классы, используйте этот атрибут.
     */
     className: PropTypes.string,
+
+    /**
+     * Это свойство не реализуется.
+    */
+    children: PropTypes.any,
 
     /**
      * Название цвета в разных форматах. Подробнее <a>link</a>

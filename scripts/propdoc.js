@@ -9,16 +9,16 @@ const FILES = glob.sync('./packages/evg-ui/src/**/*.js',
             './packages/evg-ui/src/**/index.js',
             './packages/evg-ui/src/colors/**',
             './packages/evg-ui/src/utils/**',
-            './packages/evg-ui/src/internal/**'
+            './packages/evg-ui/src/internal/**',
+            './packages/evg-ui/src/styles/**',
         ]
     });
-console.log('FILES: ', FILES)
+
 const metadata = FILES.reduce((memo, filepath) => {
-    // console.log('metadata: ', filepath)
     const code = readFileSync(filepath, 'utf8');
+
     try {
         let componentInfo = docgen.parse(code);
-        // console.log("componentInfo: ", componentInfo)
         memo[basename(filepath, '.js')] = componentInfo;
     } catch (err) {
         if (err.message !== 'No suitable component definition found.') {

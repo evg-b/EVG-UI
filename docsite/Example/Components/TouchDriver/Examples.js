@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import { CodeExample } from '@evg-b/evg-tools';
 import Snippets from './snippets'
 import TouchDriverBase from './TouchDriverBase'
 import TouchDriverDirection from './TouchDriverDirection'
@@ -17,6 +17,7 @@ const TouchDriverBaseExample = () => {
 	)
 }
 
+
 const TouchDriverDirectionExample = () => {
 	return (
 		<CodeExample
@@ -26,6 +27,7 @@ const TouchDriverDirectionExample = () => {
 		/>
 	)
 }
+
 
 const TouchDriverInertiaExample = () => {
 	return (
@@ -37,6 +39,7 @@ const TouchDriverInertiaExample = () => {
 	)
 }
 
+
 const TouchDriverParamsExample = () => {
 	return (
 		<CodeExample
@@ -47,10 +50,11 @@ const TouchDriverParamsExample = () => {
 	)
 }
 
-export { 
-	TouchDriverBaseExample,
+
+
+export {
+    TouchDriverBaseExample,
 TouchDriverDirectionExample,
 TouchDriverInertiaExample,
 TouchDriverParamsExample,
-
 }

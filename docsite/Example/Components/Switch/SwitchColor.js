@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Switch } from '@evg-b/evg-ui';
+import { Switch, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -16,7 +15,6 @@ const SwitchColor = (props) => {
     return (
         <div className={classes.base}>
             <Switch color="default" defaultChecked />
-            <Switch color="--ifm-color-primary" defaultChecked />
             <Switch color="primary" defaultChecked />
             <Switch color="warn" defaultChecked />
             <Switch color="success" defaultChecked />

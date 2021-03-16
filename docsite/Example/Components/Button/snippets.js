@@ -1,7 +1,5 @@
-export default {
-'ButtonBase' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Button } from '@evg-b/evg-ui';
+export default {ButtonBase: `import React from 'react';
+import { Button, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -17,16 +15,16 @@ const ButtonBase = (props) => {
     return (
         <div className={classes.base}>
             <Button>text</Button>
-            <Button variant='contained' color='--ifm-color-primary' >contained</Button>
-            <Button variant='contained' color='--ifm-color-primary' disabled>disabled</Button>
+            <Button variant='contained' color='primary' >contained</Button>
+            <Button variant='contained' color='primary' disabled>disabled</Button>
             <Button variant='contained' href="#base-button">Link</Button>
         </div>
     )
 }
 
-export default withStyles(styles)(ButtonBase)`,'ButtonColor' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Button } from '@evg-b/evg-ui';
+export default withStyles(styles)(ButtonBase)`,
+ButtonColor: `import React from 'react';
+import { Button, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -42,7 +40,6 @@ const ButtonColor = (props) => {
     return (
         <div className={classes.base}>
             <Button >text</Button>
-            <Button color='--ifm-color-primary'>css Var</Button>
             <Button color='primary'>primary</Button>
             <Button color='warn'>warn</Button>
             <Button color='success'>success</Button>
@@ -51,9 +48,9 @@ const ButtonColor = (props) => {
     )
 }
 
-export default withStyles(styles)(ButtonColor)`,'ButtonElevation' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Button } from '@evg-b/evg-ui';
+export default withStyles(styles)(ButtonColor)`,
+ButtonElevation: `import React from 'react';
+import { Button, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -68,15 +65,15 @@ const ButtonElevation = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <Button variant='contained' color='--ifm-color-primary'>elevation</Button>
-            <Button variant='contained' color='--ifm-color-primary' elevation={false}>no elevation</Button>
+            <Button variant='contained' color='primary'>elevation</Button>
+            <Button variant='contained' color='primary' elevation={false}>no elevation</Button>
         </div>
     )
 }
 
-export default withStyles(styles)(ButtonElevation)`,'ButtonIconButton' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { IconButton } from '@evg-b/evg-ui';
+export default withStyles(styles)(ButtonElevation)`,
+ButtonIconButton: `import React from 'react';
+import { IconButton, withStyles } from '@evg-b/evg-ui';
 import {
     Close,
     Cancel,
@@ -99,7 +96,7 @@ const ButtonIconButton = (props) => {
     return (
         <div className={classes.base}>
             <IconButton><Close /></IconButton>
-            <IconButton color='--ifm-color-primary'><Cancel /></IconButton>
+            <IconButton color='primary'><Cancel /></IconButton>
             <IconButton color='warn'><Menu /></IconButton>
             <IconButton color='success'><Fullscreen /></IconButton>
             <IconButton disabled><Visibility /></IconButton>
@@ -107,9 +104,9 @@ const ButtonIconButton = (props) => {
     )
 }
 
-export default withStyles(styles)(ButtonIconButton)`,'ButtonLoading' : `import React, { useState } from 'react';
-import { withStyles } from 'react-jss';
-import { Button } from '@evg-b/evg-ui';
+export default withStyles(styles)(ButtonIconButton)`,
+ButtonLoading: `import React, { useState } from 'react';
+import { Button, withStyles } from '@evg-b/evg-ui';
 import { Check } from '@evg-b/evg-icons';
 
 const styles = {
@@ -140,7 +137,7 @@ const ButtonLoading = (props) => {
             <Button
                 loading={loading[1]}
                 variant='contained'
-                color='--ifm-color-primary'
+                color='primary'
                 startIcon={<Check />}
                 onClick={() => handleLoad(1)}
             >
@@ -149,7 +146,7 @@ const ButtonLoading = (props) => {
             <Button
                 loading={loading[2]}
                 variant='contained'
-                color='--ifm-color-primary'
+                color='primary'
                 onClick={() => handleLoad(2)}
             >
                 And Me Me!
@@ -158,9 +155,9 @@ const ButtonLoading = (props) => {
     )
 }
 
-export default withStyles(styles)(ButtonLoading)`,'ButtonRound' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Button } from '@evg-b/evg-ui';
+export default withStyles(styles)(ButtonLoading)`,
+ButtonRound: `import React from 'react';
+import { Button, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -175,16 +172,16 @@ const ButtonRound = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <Button variant='text' color='--ifm-color-primary' round >default</Button>
-            <Button variant='contained' color='--ifm-color-primary' round >contained</Button>
-            <Button variant='outlined' color='--ifm-color-primary' round >outlined</Button>
+            <Button variant='text' color='primary' round >default</Button>
+            <Button variant='contained' color='primary' round >contained</Button>
+            <Button variant='outlined' color='primary' round >outlined</Button>
         </div>
     )
 }
 
-export default withStyles(styles)(ButtonRound)`,'ButtonSize' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Button } from '@evg-b/evg-ui';
+export default withStyles(styles)(ButtonRound)`,
+ButtonSize: `import React from 'react';
+import { Button, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -199,17 +196,17 @@ const ButtonSize = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <Button variant='contained' color='--ifm-color-primary' size='small' >small</Button>
-            <Button variant='contained' color='--ifm-color-primary' size='medium' >medium</Button>
-            <Button variant='contained' color='--ifm-color-primary' size='large' >large</Button>
-            <Button variant='contained' color='--ifm-color-primary' size='extra' >extra</Button>
+            <Button variant='contained' color='primary' size='small' >small</Button>
+            <Button variant='contained' color='primary' size='medium' >medium</Button>
+            <Button variant='contained' color='primary' size='large' >large</Button>
+            <Button variant='contained' color='primary' size='extra' >extra</Button>
         </div>
     )
 }
 
-export default withStyles(styles)(ButtonSize)`,'ButtonStartIconAndEndIcon' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Button } from '@evg-b/evg-ui';
+export default withStyles(styles)(ButtonSize)`,
+ButtonStartIconAndEndIcon: `import React from 'react';
+import { Button, withStyles } from '@evg-b/evg-ui';
 import { Check, Cancel } from '@evg-b/evg-icons';
 
 const styles = {
@@ -232,7 +229,7 @@ const ButtonStartIconAndEndIcon = (props) => {
             </Button>
             <Button
                 variant='contained'
-                color='--ifm-color-primary'
+                color='primary'
                 endIcon={<Cancel />}
             >
                 Button
@@ -250,14 +247,15 @@ const ButtonStartIconAndEndIcon = (props) => {
     )
 }
 
-export default withStyles(styles)(ButtonStartIconAndEndIcon)`,'ButtonUppercase' : `import React from 'react';
+export default withStyles(styles)(ButtonStartIconAndEndIcon)`,
+ButtonUppercase: `import React from 'react';
 import { Button } from '@evg-b/evg-ui';
 
 const ButtonUppercase = () => {
     return (
         <Button
             variant='contained'
-            color='--ifm-color-primary'
+            color='primary'
             uppercase={false}
         >
             Uppercase
@@ -265,9 +263,9 @@ const ButtonUppercase = () => {
     )
 }
 
-export default ButtonUppercase`,'ButtonVariant' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Button } from '@evg-b/evg-ui';
+export default ButtonUppercase`,
+ButtonVariant: `import React from 'react';
+import { Button, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -282,9 +280,9 @@ const ButtonVariant = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <Button variant='text' color='--ifm-color-primary'>default</Button>
-            <Button variant='contained' color='--ifm-color-primary'>Button</Button>
-            <Button variant='outlined' color='--ifm-color-primary'>outlined</Button>
+            <Button variant='text' color='primary'>default</Button>
+            <Button variant='contained' color='primary'>Button</Button>
+            <Button variant='outlined' color='primary'>outlined</Button>
         </div>
     )
 }

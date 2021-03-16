@@ -1,7 +1,6 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
+import { Color, withStyles } from '@evg-b/evg-ui';
 import classNames from 'classnames'
-import Color from '@evg-b/evg-ui/dist/utils/Color';
 
 const styles = {
     base: {
@@ -15,14 +14,15 @@ const styles = {
         display: 'inline-flex',
         justifyContent: 'center',
         alignItems: 'center',
+        borderRadius: 6
     }
 }
 
 const MapContrast = [
-    'purple100',
+    '#7B1FA2',
     '#CE93D8',
-    '#BA68C8',
-    'purple400',
+    '#757575',
+    '#EEEEEE',
 ]
 
 const Contrast = React.forwardRef(function Contrast(props, ref) {
@@ -50,8 +50,8 @@ const Contrast = React.forwardRef(function Contrast(props, ref) {
                             key={id}
                             className={classes.tone}
                             style={{
-                                backgroundColor: Color(color).Color,
-                                color: Color(color).Contrast,
+                                backgroundColor: Color(color).Base(),
+                                color: Color(color).Contrast(),
                             }}
                         >
                             {color}

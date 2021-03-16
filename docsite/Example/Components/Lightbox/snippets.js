@@ -1,7 +1,5 @@
-export default {
-'LightboxBase' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Lightbox } from '@evg-b/evg-ui';
+export default {LightboxBase: `import React from 'react';
+import { Lightbox, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

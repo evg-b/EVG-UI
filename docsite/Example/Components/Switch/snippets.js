@@ -1,7 +1,5 @@
-export default {
-'SwitchBase' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Switch } from '@evg-b/evg-ui';
+export default {SwitchBase: `import React from 'react';
+import { Switch, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -24,9 +22,9 @@ const SwitchBase = (props) => {
     )
 }
 
-export default withStyles(styles)(SwitchBase)`,'SwitchColor' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Switch } from '@evg-b/evg-ui';
+export default withStyles(styles)(SwitchBase)`,
+SwitchColor: `import React from 'react';
+import { Switch, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -42,7 +40,6 @@ const SwitchColor = (props) => {
     return (
         <div className={classes.base}>
             <Switch color="default" defaultChecked />
-            <Switch color="--ifm-color-primary" defaultChecked />
             <Switch color="primary" defaultChecked />
             <Switch color="warn" defaultChecked />
             <Switch color="success" defaultChecked />
@@ -51,9 +48,9 @@ const SwitchColor = (props) => {
     )
 }
 
-export default withStyles(styles)(SwitchColor)`,'SwitchSize' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Switch } from '@evg-b/evg-ui';
+export default withStyles(styles)(SwitchColor)`,
+SwitchSize: `import React from 'react';
+import { Switch, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -76,9 +73,9 @@ const SwitchSize = (props) => {
     )
 }
 
-export default withStyles(styles)(SwitchSize)`,'SwitchVariant' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Switch } from '@evg-b/evg-ui';
+export default withStyles(styles)(SwitchSize)`,
+SwitchVariant: `import React from 'react';
+import { Switch, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

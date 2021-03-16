@@ -1,16 +1,15 @@
-export default {
-'AppBarBase' : `import React from 'react';
+export default {AppBarBase: `import React from 'react';
 import { AppBar } from '@evg-b/evg-ui';
 
 const AppBarBase = () => {
     return (
-        <AppBar title='EVG-UI' color='--ifm-color-primary' position='static' />
+        <AppBar title='EVG-UI' color='primary' position='static' />
     )
 }
 
-export default AppBarBase`,'AppBarColor' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { AppBar } from '@evg-b/evg-ui';
+export default AppBarBase`,
+AppBarColor: `import React from 'react';
+import { AppBar, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -35,7 +34,8 @@ const AppBarColor = (props) => {
     )
 }
 
-export default withStyles(styles)(AppBarColor)`,'AppBarLeftAndRight' : `import React from 'react';
+export default withStyles(styles)(AppBarColor)`,
+AppBarLeftAndRight: `import React from 'react';
 import { AppBar } from '@evg-b/evg-ui';
 import { Menu, MoreVert, Fullscreen } from '@evg-b/evg-icons';
 
@@ -44,7 +44,7 @@ const AppBarLeftAndRight = () => {
         <AppBar
             title='EVG-UI left/right'
             position='static'
-            color='--ifm-color-primary'
+            color='primary'
             left={<Menu />}
             right={
                 <>
@@ -58,7 +58,8 @@ const AppBarLeftAndRight = () => {
 
 export default AppBarLeftAndRight
 
-`,'AppBarTitleCenter' : `import React from 'react';
+`,
+AppBarTitleCenter: `import React from 'react';
 import { AppBar } from '@evg-b/evg-ui';
 import { Menu } from '@evg-b/evg-icons';
 
@@ -67,7 +68,7 @@ const AppBarTitleCenter = () => {
         <AppBar
             title='EVG-UI'
             position='static'
-            color='--ifm-color-primary'
+            color='primary'
             titleCenter
             left={<Menu />}
         />

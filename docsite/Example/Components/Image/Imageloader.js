@@ -1,6 +1,5 @@
 import React, { useState } from 'react';
-import { withStyles } from 'react-jss';
-import { Image, Button } from '@evg-b/evg-ui';
+import { Image, Button, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

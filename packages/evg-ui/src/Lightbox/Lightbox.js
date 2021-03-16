@@ -1,11 +1,10 @@
 import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
+import { withStyles } from '../styles'
 import TouchDriver from '../TouchDriver'
 import Modal from '../Modal'
 import Carousel from '../Carousel'
-import Elevation from '../utils/Elevation'
 import calcMaxSizeRatio from '../utils/calcMaxSizeRatio'
 import Image from '../Image'
 
@@ -16,6 +15,7 @@ const absolutePosition = {
     left: 0,
     bottom: 0,
 }
+
 const styles = {
     // Lightbox
     base: {
@@ -60,7 +60,6 @@ const styles = {
         display: 'none', // visible
     },
     imgFlip: {
-        // ...Elevation(16),
         width: 'var(--evg-img-center-width-end,0)',
         height: 'var(--evg-img-center-height-end,0)',
         transform: 'translateY(var(--evg-img-coord-y-now,0))',
@@ -136,6 +135,10 @@ const styles = {
     },
 }
 
+/**
+ * Lightbox - компонент для подробного ознакомления пользователя изображением из галереи. Поддержка жестов и интуитивное управление.
+*/
+
 const Lightbox = React.forwardRef(function Lightbox(props, ref) {
     const {
         classes,
@@ -149,7 +152,6 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
     let LightboxEVG_ref = useRef()
     LightboxEVG_ref = ref || LightboxEVG_ref
     const Modal_ref = useRef() // для --css-var
-    // const cachcalcStartPosition = useRef()
 
     const [indexOpen, setIndexOpen] = useState(-1)
     const [isModal, setIsModal] = useState(false)
@@ -177,13 +179,6 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
     }
 
     const calcPosition = useCallback((img, prefix = 'center') => {
-        // console.log('calcStartPosition img:', img)
-        // if (cachcalcStartPosition.current === img) {
-        //     // кэш помогает избежать повторных вычеселний для фото которые уже сделаны
-        //     return
-        // }
-        // cachcalcStartPosition.current = img
-
         const { clientWidth, clientHeight } = document.documentElement
         if (prefix === 'center') {
             const { top, left, width, height } = img.getBoundingClientRect()
@@ -208,13 +203,11 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
     }
 
     const onHandlerClick = (e) => {
-        console.log('[Lightbox][onHandlerClick] setIsModal -> true')
         setIsModal(true)
         setIndexOpen(Number(e.currentTarget.dataset.index))
     }
 
     const onClose = () => {
-        console.log(`onClose isModal:${isModal} normalAnimation:${normalAnimation}`)
         if (isModal && !normalAnimation) {
             setFlip(false)
             setNormalAnimation(false)
@@ -259,12 +252,10 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
     }
 
     const handlerChangeImg = (index) => {
-        // console.log('Lightbox[handlerChangeImg]', index);
         setIndexOpen(index)
     }
 
     useEffect(() => {
-        console.log(`[useEffect] isModal:${isModal}`)
         if (isModal) {
             // modal смонтирован
             setNormalAnimation(true)
@@ -307,6 +298,7 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
             onChangeImg={handlerChangeImg}
         />
     )
+
     return (
         <div
             ref={LightboxEVG_ref}
@@ -330,7 +322,7 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
             }
 
             <Modal
-                ref={Modal_ref}
+                innerRef={Modal_ref}
                 className={classNames(classes.modal, classes.blackout, {
                     [classes.blackout_normal]: normalAnimation,
                     [classes.blackout_reverse]: reverseAnimation,
@@ -352,10 +344,6 @@ const Lightbox = React.forwardRef(function Lightbox(props, ref) {
     )
 })
 Lightbox.propTypes = {
-    /**
-    * Это контент между открывающим и закрывающим тегом компонента.
-    */
-    children: PropTypes.node,
 
     /**
      * Объект содержит jss стили компонента.
@@ -366,6 +354,11 @@ Lightbox.propTypes = {
      * Чтобы указать CSS классы, используйте этот атрибут.
     */
     className: PropTypes.string,
+
+    /**
+     * Это свойство не реализуется.
+    */
+    children: PropTypes.any,
 
     /**
      * Массив изображений.

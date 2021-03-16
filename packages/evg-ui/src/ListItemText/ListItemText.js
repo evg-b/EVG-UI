@@ -1,14 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
+import { withStyles } from '../styles'
 
 const secondaryStyle = {
     fontSize: '.875rem',
     lineHeight: '1.25rem',
     fontWeight: 400,
-    color: 'rgba(0, 0, 0, .54)',
+    color: props => props.Color.Contrast('rgba', 0.54),
 }
+
 const styles = {
     base: {
         display: 'flex',
@@ -21,7 +22,6 @@ const styles = {
         whiteSpace: 'nowrap',
         margin: '0',
         padding: '0',
-
     },
     textStyle: {
         '& *': {
@@ -40,6 +40,7 @@ const styles = {
         alignItems: 'center',
         justifyContent: 'space-between',
         fontSize: '1rem',
+        color: props => props.Color.Contrast(),
     },
     secondaryText: {
         display: 'flex',
@@ -59,6 +60,10 @@ const styles = {
         height: '72px',
     },
 }
+
+/**
+ * Компонент для правильного отображения текста в List.
+*/
 
 const ListItemText = React.forwardRef(function ListItemText(props, ref) {
     const {
@@ -107,6 +112,7 @@ const ListItemText = React.forwardRef(function ListItemText(props, ref) {
     )
 })
 ListItemText.propTypes = {
+
     /**
     * Это контент между открывающим и закрывающим тегом компонента.
     */
@@ -128,6 +134,11 @@ ListItemText.propTypes = {
     component: PropTypes.elementType,
 
     /**
+     * Название цвета в разных форматах. Подробнее <a>link</a>
+    */
+    color: PropTypes.string,
+
+    /**
      * Вспомогательный текст.
     */
     secondaryText: PropTypes.string,
@@ -144,7 +155,7 @@ ListItemText.propTypes = {
 }
 ListItemText.defaultProps = {
     secondaryText: '',
+    color: 'surface',
 }
 ListItemText.displayName = 'ListItemTextEVG'
 export default withStyles(styles)(ListItemText)
-

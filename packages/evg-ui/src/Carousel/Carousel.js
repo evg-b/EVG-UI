@@ -1,11 +1,9 @@
 import React, { useState, useEffect, useRef, useLayoutEffect, useCallback } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
-import Color from '../utils/Color';
+import { Color, withStyles } from '../styles'
 import Image from '../Image'
 import TouchDriver from '../TouchDriver';
-import hexToRGBA from '../utils/hexToRGBA';
 import { ChevronLeft, ChevronRight, } from '../internal/icons/Carousel';
 
 const absolutePosition = {
@@ -28,13 +26,12 @@ const styles = {
         overflow: 'hidden',
         width: '100%',
         height: '100%',
-        backgroundColor: props => props.backgroundColor,
+        backgroundColor: props => Color(props.backgroundColor).Base(),
         '-webkit-touch-callout': 'none', /* iOS Safari */
         '-webkit-user-select': 'none',   /* Chrome/Safari/Opera */
         '-moz-user-select': 'none',      /* Firefox */
         '-ms-user-select': 'none',       /* Internet Explorer/Edge */
         userSelect: 'none',
-
     },
     v_zone: {
         ...absolutePosition,
@@ -81,7 +78,7 @@ const styles = {
     v_btn: {
         zIndex: 1,
         position: 'absolute',
-        color: props => Color(props.backgroundColor).Contrast,
+        color: props => Color(props.backgroundColor).Contrast(),
         cursor: 'pointer',
         height: '100%',
         width: '5%',
@@ -90,7 +87,7 @@ const styles = {
         alignItems: 'center',
         transition: 'background-color 500ms cubic-bezier(0.4, 0, 0.2, 1)',
         '&:hover': {
-            backgroundColor: props => hexToRGBA(Color(props.backgroundColor).Contrast, 0.2),
+            backgroundColor: props => Color(props.backgroundColor).Contrast('RGBA', 0.2),
         }
     },
     v_btn_left: {
@@ -112,6 +109,11 @@ const styles = {
     ImgCenter: {},
     ImgRight: {},
 }
+
+/**
+ * Это карусель инструмент для отображения изображений. 
+ * Поддерживает жесты и оптимизирован для N-количества элементов. 
+*/
 
 const Carousel = React.forwardRef(function Carousel(props, ref) {
     const {
@@ -140,6 +142,7 @@ const Carousel = React.forwardRef(function Carousel(props, ref) {
     const comeBack = useCallback(() => {
         moveZone(0)
     }, [moveZone])
+
     const moveZone = useCallback((shift) => {
         const ViewerEVGZone_s = ViewerEVGZone_ref.current
         ViewerEVGZone_s.style.transform = `translateX(${shift}px)`
@@ -150,6 +153,7 @@ const Carousel = React.forwardRef(function Carousel(props, ref) {
             moveZone(shiftX)
         }
     }
+
     const onMoveEnd = ({ shiftX, inertia, startItXorY }) => {
         if (shiftX !== 0 && startItXorY === 'x') {
             if (inertia || Math.abs(shiftX) > sensitivity) {
@@ -174,6 +178,7 @@ const Carousel = React.forwardRef(function Carousel(props, ref) {
         }
         setStateImg(pseudo)
     }
+
     const realReplace = useCallback((imgIndex) => {
         // TODO: можно в center передавать уже созданные компоненты Image из left или right.
         // это может защитить от потери кэша. 
@@ -256,8 +261,8 @@ const Carousel = React.forwardRef(function Carousel(props, ref) {
 
     return (
         <TouchDriver
+            innerRef={ViewerEVG_ref}
             className={classNames(classes.base, className)}
-            ref={ViewerEVG_ref}
             moveXY={onMoveXY}
             moveEnd={onMoveEnd}
             {...otherProps}
@@ -281,10 +286,6 @@ const Carousel = React.forwardRef(function Carousel(props, ref) {
     )
 })
 Carousel.propTypes = {
-    /**
-    * Это контент между открывающим и закрывающим тегом компонента.
-    */
-    children: PropTypes.node,
 
     /**
      * Объект содержит jss стили компонента.
@@ -297,12 +298,17 @@ Carousel.propTypes = {
     className: PropTypes.string,
 
     /**
+     * Это свойство не реализуется.
+    */
+    children: PropTypes.any,
+
+    /**
      * Массив изображений.
     */
     imgs: PropTypes.arrayOf(PropTypes.string),
 
     /**
-     * Index стартавого изображения в массиве.
+     * Index стартового изображения в массиве.
     */
     imgStart: PropTypes.number,
 
@@ -328,7 +334,7 @@ Carousel.propTypes = {
 }
 Carousel.defaultProps = {
     imgStart: 0,
-    backgroundColor: '#000000d9',
+    backgroundColor: 'gray900',
     sensitivity: 200,
     duration: 200,
 }

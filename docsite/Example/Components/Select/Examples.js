@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import { CodeExample } from '@evg-b/evg-tools';
 import Snippets from './snippets'
 import SelectBase from './SelectBase'
 import SelectColor from './SelectColor'
@@ -16,6 +16,7 @@ const SelectBaseExample = () => {
 	)
 }
 
+
 const SelectColorExample = () => {
 	return (
 		<CodeExample
@@ -25,6 +26,7 @@ const SelectColorExample = () => {
 		/>
 	)
 }
+
 
 const SelectEmptyOptionExample = () => {
 	return (
@@ -36,9 +38,10 @@ const SelectEmptyOptionExample = () => {
 	)
 }
 
-export { 
-	SelectBaseExample,
+
+
+export {
+    SelectBaseExample,
 SelectColorExample,
 SelectEmptyOptionExample,
-
 }

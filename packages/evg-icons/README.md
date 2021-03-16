@@ -4,15 +4,12 @@
   </a>
 </p>
 
-<h1 align="center">evg-icons</h1>
-
-<p align="center">
-Используйте все 1.440+ svg иконок от Material Design в своих проектах.
-</p>
+<h1>evg-icons</h1>
+<p>Используйте все 1.440+ svg иконок от Material Design в своих проектах.</p>
 
 ### Установка
 ```sh
-npm install @evg-b/evg-icons --save или yarn install @evg-b/evg-icons
+npm install @evg-b/evg-icons --save или yarn add @evg-b/evg-icons
 ```
 
 ### Usage
@@ -26,6 +23,7 @@ const HelloWorldIcons = () => {
             <Check />
             <Close color='primary' />
             <Favorite size='large' />
+            <Favorite size={48} />
         </div>
     );
 }
@@ -76,7 +74,10 @@ export default HelloWorldIcons
       size
       </td>
       <td>
-      | 'small' | 'medium' | 'large' | 'extra' |
+      'small',
+      'medium',
+      'large',
+      'extra' или number
       </td>
       <td>
       'medium'

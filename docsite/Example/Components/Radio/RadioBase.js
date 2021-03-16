@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Radio } from '@evg-b/evg-ui';
+import { Radio, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {

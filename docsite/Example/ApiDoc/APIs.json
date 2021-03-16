@@ -1,16 +1,9 @@
 {
   "AppBar": {
-    "description": "",
+    "description": "Это верхняя панель управления обычно используется для заголовков, навигации и действий связанных с текущим экраном.",
     "displayName": "AppBarEVG",
     "methods": [],
     "props": {
-      "children": {
-        "type": {
-          "name": "node"
-        },
-        "required": false,
-        "description": "Это контент между открывающим и закрывающим тегом компонента."
-      },
       "classes": {
         "type": {
           "name": "object"
@@ -24,6 +17,13 @@
         },
         "required": false,
         "description": "Чтобы указать CSS классы, используйте этот атрибут."
+      },
+      "children": {
+        "type": {
+          "name": "any"
+        },
+        "required": false,
+        "description": "Это свойство не реализуется."
       },
       "position": {
         "type": {
@@ -104,7 +104,7 @@
     }
   },
   "Avatar": {
-    "description": "",
+    "description": "Этот компонент обычно используют для отображения изображения профиля пользователей. \r\nТак же отображает первую букву в имени контакта если изображение еще не загрузилось.",
     "displayName": "AvatarEVG",
     "methods": [],
     "props": {
@@ -203,7 +203,7 @@
           "name": "bool"
         },
         "required": false,
-        "description": "Отображать статус или нетю",
+        "description": "Отображать статус или нет.",
         "defaultValue": {
           "value": "false",
           "computed": false
@@ -214,7 +214,7 @@
           "name": "string"
         },
         "required": false,
-        "description": "Цвет статусаю.",
+        "description": "Цвет статуса.",
         "defaultValue": {
           "value": "'success'",
           "computed": false
@@ -223,7 +223,7 @@
     }
   },
   "AvatarGroup": {
-    "description": "",
+    "description": "Этот компонент группирует множества Avatar.",
     "displayName": "AvatarGroupEVG",
     "methods": [],
     "props": {
@@ -273,7 +273,7 @@
     }
   },
   "Badge": {
-    "description": "",
+    "description": "Это маленький значок обычно используется в паре с другими компонентами. \r\nИспользуется для привлечения внимание к этим компонентам.",
     "displayName": "BadgeEVG",
     "methods": [],
     "props": {
@@ -367,7 +367,7 @@
     }
   },
   "Button": {
-    "description": "",
+    "description": "Кнопки позволяют пользователям выполнять действия и делать выбор одним нажатием. \r\nЯвляется `<button>` или `<a>` элементом с ripple эффектом от Material Design.",
     "displayName": "ButtonEVG",
     "methods": [],
     "props": {
@@ -397,7 +397,7 @@
           "name": "elementType"
         },
         "required": false,
-        "description": "Корнево узел. Это HTML элемент или компонент.",
+        "description": "Корневой узел. Это HTML элемент или компонент.",
         "defaultValue": {
           "value": "'button'",
           "computed": false
@@ -529,7 +529,7 @@
     }
   },
   "ButtonBase": {
-    "description": "",
+    "description": "Базовая кнопка в котором реализуется Ripple.",
     "displayName": "ButtonBaseEVG",
     "methods": [],
     "props": {
@@ -559,7 +559,7 @@
           "name": "elementType"
         },
         "required": false,
-        "description": "Корнево узел. Это HTML элемент или компонент.",
+        "description": "Корневой узел. Это HTML элемент или компонент.",
         "defaultValue": {
           "value": "'button'",
           "computed": false
@@ -643,7 +643,7 @@
           "name": "bool"
         },
         "required": false,
-        "description": "Если true, цвет текста будет белым или черным автоматически. \r\nДля лучшео восприятия в зависимости от основного цвета.",
+        "description": "Если true, цвет текста будет белым или черным автоматически. \r\nДля лучшего восприятия в зависимости от основного цвета.",
         "defaultValue": {
           "value": "true",
           "computed": false
@@ -663,7 +663,7 @@
     }
   },
   "ButtonGroup": {
-    "description": "",
+    "description": "Этот компонент группирует button, так же его можно использовать как переключатель.",
     "displayName": "ButtonGroupEVG",
     "methods": [],
     "props": {
@@ -810,17 +810,10 @@
     }
   },
   "Carousel": {
-    "description": "",
+    "description": "Это карусель инструмент для отображения изображений. \r\nПоддерживает жесты и оптимизирован для N-количества элементов.",
     "displayName": "CarouselEVG",
     "methods": [],
     "props": {
-      "children": {
-        "type": {
-          "name": "node"
-        },
-        "required": false,
-        "description": "Это контент между открывающим и закрывающим тегом компонента."
-      },
       "classes": {
         "type": {
           "name": "object"
@@ -834,6 +827,13 @@
         },
         "required": false,
         "description": "Чтобы указать CSS классы, используйте этот атрибут."
+      },
+      "children": {
+        "type": {
+          "name": "any"
+        },
+        "required": false,
+        "description": "Это свойство не реализуется."
       },
       "imgs": {
         "type": {
@@ -850,7 +850,7 @@
           "name": "number"
         },
         "required": false,
-        "description": "Index стартавого изображения в массиве.",
+        "description": "Index стартового изображения в массиве.",
         "defaultValue": {
           "value": "0",
           "computed": false
@@ -861,40 +861,48 @@
           "name": "string"
         },
         "required": false,
-        "description": "Цвет заденго фона."
+        "description": "Цвет фона.",
+        "defaultValue": {
+          "value": "'gray900'",
+          "computed": false
+        }
       },
       "onChangeImg": {
         "type": {
           "name": "func"
         },
         "required": false,
-        "description": "Вызывается при изменении img."
+        "description": "Вызывается при изменении img. Возвращает index активного изображения."
       },
-      "mode": {
+      "sensitivity": {
         "type": {
-          "name": "string"
+          "name": "number"
         },
         "required": false,
-        "description": "",
+        "description": "Количество пикселей в сдвиге после которого запускается смена изображения.",
         "defaultValue": {
-          "value": "''",
+          "value": "200",
+          "computed": false
+        }
+      },
+      "duration": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Время выполнения анимации смены изображения.",
+        "defaultValue": {
+          "value": "200",
           "computed": false
         }
       }
     }
   },
   "Checkbox": {
-    "description": "",
+    "description": "Компонент позволяющий управлять параметром с двумя состояниями. \r\nПолное соответствие функционала что и у нативной версии.",
     "displayName": "CheckboxEVG",
     "methods": [],
     "props": {
-      "children": {
-        "type": {
-          "name": "node"
-        },
-        "required": false,
-        "description": "Это контент между открывающим и закрывающим тегом компонента."
-      },
       "classes": {
         "type": {
           "name": "object"
@@ -908,6 +916,13 @@
         },
         "required": false,
         "description": "Чтобы указать CSS классы, используйте этот атрибут."
+      },
+      "children": {
+        "type": {
+          "name": "any"
+        },
+        "required": false,
+        "description": "Это свойство не реализуется."
       },
       "color": {
         "type": {
@@ -984,76 +999,8 @@
       }
     }
   },
-  "CodeExample": {
-    "description": "",
-    "displayName": "CodeExampleEVG",
-    "methods": [],
-    "props": {
-      "children": {
-        "type": {
-          "name": "node"
-        },
-        "required": false,
-        "description": "Это контент между открывающим и закрывающим тегом компонента."
-      },
-      "classes": {
-        "type": {
-          "name": "object"
-        },
-        "required": false,
-        "description": "Объект содержит jss стили компонента."
-      },
-      "className": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": "Чтобы указать CSS классы, используйте этот атрибут."
-      },
-      "title": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": "title демки.",
-        "defaultValue": {
-          "value": "'Title'",
-          "computed": false
-        }
-      },
-      "demo": {
-        "type": {
-          "name": "node"
-        },
-        "required": false,
-        "description": "Демка с компонентом."
-      },
-      "snippet": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": "Исходный код компонента в ввиде текста.",
-        "defaultValue": {
-          "value": "''",
-          "computed": false
-        }
-      },
-      "language": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": "Язык разметки для react-syntax-highlighter.",
-        "defaultValue": {
-          "value": "'jsx'",
-          "computed": false
-        }
-      }
-    }
-  },
   "IconButton": {
-    "description": "",
+    "description": "Button компонент который модифицирован под icons.",
     "displayName": "IconButtonEVG",
     "methods": [],
     "props": {
@@ -1083,7 +1030,7 @@
           "name": "elementType"
         },
         "required": false,
-        "description": "Корнево узел. Это HTML элемент или компонент.",
+        "description": "Корневой узел. Это HTML элемент или компонент.",
         "defaultValue": {
           "value": "'button'",
           "computed": false
@@ -1142,18 +1089,11 @@
       }
     }
   },
-  "Lightbox": {
-    "description": "",
-    "displayName": "LightboxEVG",
+  "Image": {
+    "description": "Image - обертка над тегом `<img>`. Показывает статус загрузки или ошибки у изображения.",
+    "displayName": "ImageEVG",
     "methods": [],
     "props": {
-      "children": {
-        "type": {
-          "name": "node"
-        },
-        "required": false,
-        "description": "Это контент между открывающим и закрывающим тегом компонента."
-      },
       "classes": {
         "type": {
           "name": "object"
@@ -1168,6 +1108,55 @@
         "required": false,
         "description": "Чтобы указать CSS классы, используйте этот атрибут."
       },
+      "component": {
+        "type": {
+          "name": "elementType"
+        },
+        "required": false,
+        "description": "Корневой узел. Это HTML элемент или компонент."
+      },
+      "src": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Атрибут `src` обязателен и содержит путь к изображению."
+      },
+      "alt": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Атрибут `alt` содержит текстовое описание изображения. Опционально."
+      }
+    }
+  },
+  "Lightbox": {
+    "description": "Lightbox - компонент для подробного ознакомления пользователя изображением из галереи. Поддержка жестов и интуитивное управление.",
+    "displayName": "LightboxEVG",
+    "methods": [],
+    "props": {
+      "classes": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Объект содержит jss стили компонента."
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Чтобы указать CSS классы, используйте этот атрибут."
+      },
+      "children": {
+        "type": {
+          "name": "any"
+        },
+        "required": false,
+        "description": "Это свойство не реализуется."
+      },
       "imgs": {
         "type": {
           "name": "arrayOf",
@@ -1181,11 +1170,22 @@
           "value": "[]",
           "computed": false
         }
+      },
+      "duration": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Время выполнения анимации полета изображения.",
+        "defaultValue": {
+          "value": "300",
+          "computed": false
+        }
       }
     }
   },
   "List": {
-    "description": "",
+    "description": "Списки представляют собой множество компонентов с однородными типами данных в вертикальной плоскости. \r\nЭлементы списка поддерживают события взаимодействия мыши и жестов.",
     "displayName": "ListEVG",
     "methods": [],
     "props": {
@@ -1224,7 +1224,7 @@
     }
   },
   "ListItem": {
-    "description": "",
+    "description": "Компонент для отображения содержимого в List.",
     "displayName": "ListItemEVG",
     "methods": [],
     "props": {
@@ -1254,7 +1254,7 @@
           "name": "elementType"
         },
         "required": false,
-        "description": "Корнево узел. Это HTML элемент или компонент.",
+        "description": "Корневой узел. Это HTML элемент или компонент.",
         "defaultValue": {
           "value": "'li'",
           "computed": false
@@ -1296,7 +1296,7 @@
     }
   },
   "ListItemAction": {
-    "description": "",
+    "description": "Компонент для правильного позиционирования и отображения action в list.\r\nТаких как Button, Checkbox, Radio, Switch и др.",
     "displayName": "ListItemActionEVG",
     "methods": [],
     "props": {
@@ -1326,7 +1326,7 @@
           "name": "elementType"
         },
         "required": false,
-        "description": "Корнево узел. Это HTML элемент или компонент.",
+        "description": "Корневой узел. Это HTML элемент или компонент.",
         "defaultValue": {
           "value": "'span'",
           "computed": false
@@ -1347,7 +1347,7 @@
           ]
         },
         "required": false,
-        "description": "Позиционирование в нутри родительского  компонента.",
+        "description": "Позиционирование внутри родительского  компонента.",
         "defaultValue": {
           "value": "'end'",
           "computed": false
@@ -1356,7 +1356,7 @@
     }
   },
   "ListItemAvatar": {
-    "description": "",
+    "description": "Компонент для правильного позиционирования и отображения Avatar в list.",
     "displayName": "ListItemAvatarEVG",
     "methods": [],
     "props": {
@@ -1386,7 +1386,7 @@
           "name": "elementType"
         },
         "required": false,
-        "description": "Корнево узел. Это HTML элемент или компонент.",
+        "description": "Корневой узел. Это HTML элемент или компонент.",
         "defaultValue": {
           "value": "'span'",
           "computed": false
@@ -1395,7 +1395,7 @@
     }
   },
   "ListItemText": {
-    "description": "",
+    "description": "Компонент для правильного отображения текста в List.",
     "displayName": "ListItemTextEVG",
     "methods": [],
     "props": {
@@ -1427,6 +1427,17 @@
         "required": false,
         "description": "Корнево узел. Это HTML элемент или компонент."
       },
+      "color": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Название цвета в разных форматах. Подробнее <a>link</a>",
+        "defaultValue": {
+          "value": "'surface'",
+          "computed": false
+        }
+      },
       "secondaryText": {
         "type": {
           "name": "string"
@@ -1455,14 +1466,30 @@
     }
   },
   "Cubes": {
-    "description": "",
-    "displayName": "CubsEVG",
+    "description": "Cubes - интерактивный живой фон из кубов. Работает все с помощью `canvas` 2d без сторонних зависимостей. \r\nУдивляйте своих пользователей красивой фоновой анимацией.",
+    "displayName": "CubesEVG",
     "methods": [
       {
         "name": "stop",
         "docblock": null,
         "modifiers": [],
         "params": [],
+        "returns": null
+      },
+      {
+        "name": "ripple",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "level",
+            "type": null
+          },
+          {
+            "name": "speed",
+            "type": null
+          }
+        ],
         "returns": null
       },
       {
@@ -1474,13 +1501,6 @@
       }
     ],
     "props": {
-      "children": {
-        "type": {
-          "name": "node"
-        },
-        "required": false,
-        "description": "Это контент между открывающим и закрывающим тегом компонента."
-      },
       "classes": {
         "type": {
           "name": "object"
@@ -1494,41 +1514,143 @@
         },
         "required": false,
         "description": "Чтобы указать CSS классы, используйте этот атрибут."
-      }
-    }
-  },
-  "Loader": {
-    "description": "",
-    "displayName": "LoaderEVG",
-    "methods": [],
-    "props": {
+      },
       "children": {
         "type": {
-          "name": "node"
+          "name": "any"
         },
         "required": false,
-        "description": "Это контент между открывающим и закрывающим тегом компонента."
+        "description": "Это свойство не реализуется."
       },
-      "classes": {
+      "innerRef": {
         "type": {
           "name": "object"
         },
         "required": false,
-        "description": "Объект содержит jss стили компонента."
-      },
-      "className": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": "Чтобы указать CSS классы, используйте этот атрибут."
+        "description": "ref ссылка компонента."
       },
       "color": {
         "type": {
           "name": "string"
         },
         "required": false,
-        "description": "Название цвета в разных форматах. Подробнее <a>link</a>",
+        "description": "Название цвета в разных форматах.",
+        "defaultValue": {
+          "value": "'#E0E0E0'",
+          "computed": false
+        }
+      },
+      "autopilot": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Если true, кубы начинают двигаться сами по себе.",
+        "defaultValue": {
+          "value": "true",
+          "computed": false
+        }
+      },
+      "fillingX": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Заполнение области по X. Если 0 то полное заполнение до краев.",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "fillingY": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Заполнение области по Y. Если 0 то полное заполнение до краев.",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "levelMin": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Минимальный уровень высоты до которого может опускаться один куб.",
+        "defaultValue": {
+          "value": "30",
+          "computed": false
+        }
+      },
+      "levelMax": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Максимальный уровень высоты до которого может опускаться один куб.",
+        "defaultValue": {
+          "value": "100",
+          "computed": false
+        }
+      },
+      "size": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Размер куба.",
+        "defaultValue": {
+          "value": "40",
+          "computed": false
+        }
+      },
+      "speed": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Скорость изменения высоты куба.",
+        "defaultValue": {
+          "value": "1",
+          "computed": false
+        }
+      }
+    }
+  },
+  "Loader": {
+    "description": "Индикатор прогресса указывающий неопределенное время ожидания.",
+    "displayName": "LoaderEVG",
+    "methods": [],
+    "props": {
+      "classes": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Объект содержит jss стили компонента."
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Чтобы указать CSS классы, используйте этот атрибут."
+      },
+      "children": {
+        "type": {
+          "name": "any"
+        },
+        "required": false,
+        "description": "Это свойство не реализуется."
+      },
+      "color": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Название цвета в разных форматах.",
         "defaultValue": {
           "value": "'default'",
           "computed": false
@@ -1550,7 +1672,7 @@
           "name": "number"
         },
         "required": false,
-        "description": "Толщина  линни.",
+        "description": "Толщина линии.",
         "defaultValue": {
           "value": "3",
           "computed": false
@@ -1615,7 +1737,7 @@
     }
   },
   "Modal": {
-    "description": "",
+    "description": "Это окно, которое блокирует работу пользователя с родительским приложением до тех пор, пока пользователь это окно не закроет. \r\nПодходит для создания диалогов и лайтбоксов.",
     "displayName": "ModalEVG",
     "methods": [],
     "props": {
@@ -1645,7 +1767,7 @@
           "name": "elementType"
         },
         "required": false,
-        "description": "Корнево узел. Это HTML элемент или компонент.",
+        "description": "Корневой узел. Это HTML элемент или компонент.",
         "defaultValue": {
           "value": "'div'",
           "computed": false
@@ -1711,7 +1833,7 @@
     }
   },
   "Popup": {
-    "description": "",
+    "description": "Popup - компонент для создания всплывающего окна.",
     "displayName": "PopupEVG",
     "methods": [],
     "props": {
@@ -1741,7 +1863,7 @@
           "name": "object"
         },
         "required": false,
-        "description": "Это ref ссылка к которой прицепляется Popup.",
+        "description": "Это ref ссылка по которой прицепляется Popup.",
         "defaultValue": {
           "value": "{}",
           "computed": false
@@ -1827,11 +1949,7 @@
           "name": "bool"
         },
         "required": false,
-        "description": "Если true, Popup закроется сам если убрать курсор.",
-        "defaultValue": {
-          "value": "true",
-          "computed": false
-        }
+        "description": "Если true, Popup закроется сам если убрать курсор."
       },
       "shift": {
         "type": {
@@ -1884,7 +2002,7 @@
           ]
         },
         "required": false,
-        "description": "Режим октрытия.",
+        "description": "Режим открытия.",
         "defaultValue": {
           "value": "'hover'",
           "computed": false
@@ -1892,57 +2010,11 @@
       }
     }
   },
-  "PropDoc": {
-    "description": "",
-    "displayName": "PropDocEVG",
-    "methods": [],
-    "props": {
-      "children": {
-        "type": {
-          "name": "node"
-        },
-        "required": false,
-        "description": "Это контент между открывающим и закрывающим тегом компонента."
-      },
-      "classes": {
-        "type": {
-          "name": "object"
-        },
-        "required": false,
-        "description": "Объект содержит jss стили компонента."
-      },
-      "className": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": "Чтобы указать CSS классы, используйте этот атрибут."
-      },
-      "patient": {
-        "type": {
-          "name": "object"
-        },
-        "required": false,
-        "description": "JSON объект с информацией о props компонента.",
-        "defaultValue": {
-          "value": "{}",
-          "computed": false
-        }
-      }
-    }
-  },
   "Radio": {
-    "description": "",
+    "description": "Радиокнопки позволяют пользователю выбрать один вариант из набора. \r\nИспользуйте для исключительного выбора, если вы считаете, что пользователю нужно видеть все доступные варианты.",
     "displayName": "RadioEVG",
     "methods": [],
     "props": {
-      "children": {
-        "type": {
-          "name": "node"
-        },
-        "required": false,
-        "description": "Это контент между открывающим и закрывающим тегом компонента."
-      },
       "classes": {
         "type": {
           "name": "object"
@@ -1956,6 +2028,13 @@
         },
         "required": false,
         "description": "Чтобы указать CSS классы, используйте этот атрибут."
+      },
+      "children": {
+        "type": {
+          "name": "any"
+        },
+        "required": false,
+        "description": "Это свойство не реализуется."
       },
       "name": {
         "type": {
@@ -2011,17 +2090,10 @@
     }
   },
   "Ripple": {
-    "description": "",
+    "description": "Ripple сигнализирует пользователю что его взаимодействие с компонентом было получено, используя эффект ряби в точке касания. \r\nТак же помогает понять с каким именно компонентом произошло взаимодействие если они расположены слишком близко друг к другу.",
     "displayName": "RippleEVG",
     "methods": [],
     "props": {
-      "children": {
-        "type": {
-          "name": "node"
-        },
-        "required": false,
-        "description": "Это контент между открывающим и закрывающим тегом компонента."
-      },
       "classes": {
         "type": {
           "name": "object"
@@ -2036,12 +2108,19 @@
         "required": false,
         "description": "Чтобы указать CSS классы, используйте этот атрибут."
       },
+      "children": {
+        "type": {
+          "name": "any"
+        },
+        "required": false,
+        "description": "Это свойство не реализуется."
+      },
       "component": {
         "type": {
           "name": "elementType"
         },
         "required": false,
-        "description": "Корнево узел. Это HTML элемент или компонент."
+        "description": "Корневой узел. Это HTML элемент или компонент."
       },
       "rippleCenter": {
         "type": {
@@ -2103,7 +2182,7 @@
           "name": "bool"
         },
         "required": false,
-        "description": "Если true, цвет волны будет белым или серым автоматически. \r\nДля лучшео восприятия в зависимости от основного цвета.",
+        "description": "Если true, цвет волны будет белым или серым автоматически. \r\nДля лучшего восприятия в зависимости от основного цвета.",
         "defaultValue": {
           "value": "true",
           "computed": false
@@ -2112,7 +2191,7 @@
     }
   },
   "Scroll": {
-    "description": "",
+    "description": "Кроссбраузерный скроллбар.",
     "displayName": "ScrollEVG",
     "methods": [],
     "props": {
@@ -2142,7 +2221,7 @@
           "name": "elementType"
         },
         "required": false,
-        "description": "Корнево узел. Это HTML элемент или компонент.",
+        "description": "Корневой узел. Это HTML элемент или компонент.",
         "defaultValue": {
           "value": "'div'",
           "computed": false
@@ -2260,7 +2339,7 @@
     }
   },
   "Select": {
-    "description": "",
+    "description": "Select позволяет пользователям выбирать из меню с одним параметром.",
     "displayName": "SelectEVG",
     "methods": [],
     "props": {
@@ -2290,7 +2369,11 @@
           "name": "string"
         },
         "required": false,
-        "description": "Название цвета в разных форматах."
+        "description": "Название цвета в разных форматах.",
+        "defaultValue": {
+          "value": "'default'",
+          "computed": false
+        }
       },
       "emptyOption": {
         "type": {
@@ -2339,7 +2422,7 @@
     }
   },
   "SelectOption": {
-    "description": "",
+    "description": "Компонент для отображения value в select.",
     "displayName": "SelectOptionEVG",
     "methods": [],
     "props": {
@@ -2364,13 +2447,6 @@
         "required": false,
         "description": "Чтобы указать CSS классы, используйте этот атрибут."
       },
-      "onClick": {
-        "type": {
-          "name": "func"
-        },
-        "required": false,
-        "description": "?"
-      },
       "value": {
         "type": {
           "name": "union",
@@ -2389,17 +2465,10 @@
     }
   },
   "Skeleton": {
-    "description": "",
+    "description": "Скелет интерфейса дает понять пользователю что контент еще загружается. \r\nПри этом знакомя пользователя к предварительному расположению элементов на странице.",
     "displayName": "SkeletonEVG",
     "methods": [],
     "props": {
-      "children": {
-        "type": {
-          "name": "node"
-        },
-        "required": false,
-        "description": "Это контент между открывающим и закрывающим тегом компонента."
-      },
       "classes": {
         "type": {
           "name": "object"
@@ -2414,12 +2483,19 @@
         "required": false,
         "description": "Чтобы указать CSS классы, используйте этот атрибут."
       },
+      "children": {
+        "type": {
+          "name": "any"
+        },
+        "required": false,
+        "description": "Это свойство не реализуется."
+      },
       "component": {
         "type": {
           "name": "elementType"
         },
         "required": false,
-        "description": "Корнево узел. Это HTML элемент или компонент.",
+        "description": "Корневой узел. Это HTML элемент или компонент.",
         "defaultValue": {
           "value": "'span'",
           "computed": false
@@ -2538,7 +2614,7 @@
     }
   },
   "SvgIcon": {
-    "description": "",
+    "description": "Компонент обертка над path svg который реализует функционал color и size.",
     "displayName": "SvgIconEVG",
     "methods": [],
     "props": {
@@ -2565,28 +2641,36 @@
       },
       "size": {
         "type": {
-          "name": "enum",
+          "name": "union",
           "value": [
             {
-              "value": "'small'",
-              "computed": false
+              "name": "enum",
+              "value": [
+                {
+                  "value": "'small'",
+                  "computed": false
+                },
+                {
+                  "value": "'medium'",
+                  "computed": false
+                },
+                {
+                  "value": "'large'",
+                  "computed": false
+                },
+                {
+                  "value": "'extra'",
+                  "computed": false
+                }
+              ]
             },
             {
-              "value": "'medium'",
-              "computed": false
-            },
-            {
-              "value": "'large'",
-              "computed": false
-            },
-            {
-              "value": "'extra'",
-              "computed": false
+              "name": "number"
             }
           ]
         },
         "required": false,
-        "description": "Размер компонента.",
+        "description": "Размер компонента. Так же принимает положительное число.",
         "defaultValue": {
           "value": "'medium'",
           "computed": false
@@ -2617,17 +2701,10 @@
     }
   },
   "Switch": {
-    "description": "",
+    "description": "Включает или выключает состояние отдельного параметра настроек.",
     "displayName": "SwitchEVG",
     "methods": [],
     "props": {
-      "children": {
-        "type": {
-          "name": "node"
-        },
-        "required": false,
-        "description": "Это контент между открывающим и закрывающим тегом компонента."
-      },
       "classes": {
         "type": {
           "name": "object"
@@ -2641,6 +2718,13 @@
         },
         "required": false,
         "description": "Чтобы указать CSS классы, используйте этот атрибут."
+      },
+      "children": {
+        "type": {
+          "name": "any"
+        },
+        "required": false,
+        "description": "Это свойство не реализуется."
       },
       "color": {
         "type": {
@@ -2663,17 +2747,10 @@
     }
   },
   "SwitchBase": {
-    "description": "",
+    "description": "Базовый компонент который реализует общую логику checked в Checkbox, Radio, Switch.",
     "displayName": "SwitchBaseEVG",
     "methods": [],
     "props": {
-      "children": {
-        "type": {
-          "name": "node"
-        },
-        "required": false,
-        "description": "Это контент между открывающим и закрывающим тегом компонента."
-      },
       "classes": {
         "type": {
           "name": "object"
@@ -2687,6 +2764,13 @@
         },
         "required": false,
         "description": "Чтобы указать CSS классы, используйте этот атрибут."
+      },
+      "children": {
+        "type": {
+          "name": "any"
+        },
+        "required": false,
+        "description": "Это свойство не реализуется."
       },
       "color": {
         "type": {
@@ -2774,7 +2858,7 @@
   },
   "Tabs": {
     "description": "",
-    "displayName": "SliderEVG",
+    "displayName": "TabsEVG",
     "methods": [],
     "props": {
       "children": {
@@ -2801,17 +2885,10 @@
     }
   },
   "TextField": {
-    "description": "",
+    "description": "Текстовые поля позволяют пользователям вводить и редактировать текст.",
     "displayName": "TextFieldEVG",
     "methods": [],
     "props": {
-      "children": {
-        "type": {
-          "name": "node"
-        },
-        "required": false,
-        "description": "Это контент между открывающим и закрывающим тегом компонента."
-      },
       "classes": {
         "type": {
           "name": "object"
@@ -2826,12 +2903,19 @@
         "required": false,
         "description": "Чтобы указать CSS классы, используйте этот атрибут."
       },
+      "children": {
+        "type": {
+          "name": "any"
+        },
+        "required": false,
+        "description": "Это свойство не реализуется."
+      },
       "component": {
         "type": {
           "name": "elementType"
         },
         "required": false,
-        "description": "Корнево узел. Это HTML элемент или компонент.",
+        "description": "Корневой узел. Это HTML элемент или компонент.",
         "defaultValue": {
           "value": "'input'",
           "computed": false
@@ -3004,7 +3088,7 @@
     }
   },
   "Tooltip": {
-    "description": "",
+    "description": "Всплывающая подсказка когда пользователь наводит курсор на элемент.",
     "displayName": "TooltipEVG",
     "methods": [],
     "props": {
@@ -3053,7 +3137,161 @@
     }
   },
   "TouchDriver": {
-    "description": "",
-    "methods": []
+    "description": "Вычисляет взаимодействие с компонентом в двумерной координатной плоскости. \r\nС его помощью можно вычислять начало, конец, реальное положение, инерцию жестов. Используется во многих компонентах.",
+    "displayName": "TouchDriver",
+    "methods": [
+      {
+        "name": "moveCoordInit",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
+        "name": "getInCoord",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "moveStartMouseOrTouch",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "move",
+        "docblock": null,
+        "modifiers": [],
+        "params": [
+          {
+            "name": "e",
+            "type": null
+          }
+        ],
+        "returns": null
+      },
+      {
+        "name": "moveDetectEnd",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      },
+      {
+        "name": "moveHome",
+        "docblock": null,
+        "modifiers": [],
+        "params": [],
+        "returns": null
+      }
+    ],
+    "props": {
+      "children": {
+        "type": {
+          "name": "node"
+        },
+        "required": false,
+        "description": "Это контент между открывающим и закрывающим тегом компонента."
+      },
+      "classes": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Объект содержит jss стили компонента."
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Чтобы указать CSS классы, используйте этот атрибут."
+      },
+      "component": {
+        "type": {
+          "name": "elementType"
+        },
+        "required": false,
+        "description": "Корневой узел. Это HTML элемент или компонент.",
+        "defaultValue": {
+          "value": "'div'",
+          "computed": false
+        }
+      },
+      "innerRef": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "ref ссылка компонента."
+      },
+      "autoMove": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Если true, компонент перемещается сам.",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "scrollable": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Если true, не останавливает нативный скролл при движении на поверхности TouchDriver.",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "touchpad": {
+        "type": {
+          "name": "bool"
+        },
+        "required": false,
+        "description": "Если true, учитывается движение по touchpad.",
+        "defaultValue": {
+          "value": "false",
+          "computed": false
+        }
+      },
+      "moveStart": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Вызывается при касании к области внутри компонента."
+      },
+      "moveXY": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Вызывается при движении курсора или пальца по области и за ее пределами. \r\nЕсли до этого сработал moveStart."
+      },
+      "moveEnd": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Вызывается при окончании движения."
+      }
+    }
   }
 }

@@ -3,31 +3,103 @@ id: Color
 title: Color
 sidebar_label: Color
 ---
-import Palettes from '../../Example/Styles/Color/Palettes'
 import Contrast from '../../Example/Styles/Color/Contrast'
+import ColorInfo from '../../Example/Styles/Color/ColorInfo'
+import Bright from '../../Example/Styles/Color/Bright'
+import PropsColor from '../../Example/Styles/Color/PropsColor'
 
-## Palettes
+## Color vs Palettes
 
-Эти цветовые палитры, изначально созданные Material Design в 2014 году, состоят из цветов, гармонично сочетающихся друг с другом.
-Автоконтрастность в нескольких отенках цветов измененна незначительно, для лучшей читаемости.
+Цвет, один из самых недооцененных элементов в плане функциональности во многих UI библиотеках.
+Объект `Color` является мощным инструментом по манипуляции с цветом.
 
-<Palettes />
+Например мы можете использовать цвет из Palettes набора напрямую или с помощью `Color`.
+
+<ColorInfo colors={['pink700','purple700','blue700']} />
+
+Объект `Color` умеет работать с цветами из темы.
+
+<ColorInfo colors={['primary','success','fail']} />
+
+Так же можно использовать `--css-var`. 
+
+```css
+:root {
+    --css-var-color-hex: #7B1FA2;
+    --css-var-color-purple: purple300;
+}
+```
+
+<ColorInfo colors={['--css-var-color-hex','--css-var-color-purple']} />
+
+Метод `Base()` по умолчанию возвращает цвет в том формате в котором он был передан.
+
+```js
+Color('#7B1FA2').Base() -> '#7B1FA2'
+Color('rgb(123,31,162)').Base() -> 'rgb(123,31,162)'
+Color('hsl(282,68%,38%)').Base() -> 'hsl(282,68%,38%)'
+```
+
+Но так же, метод `Base()` умеет конвертировать цвет в другой формат.
+
+```js
+Color('#7B1FA2').Base('rgb') -> 'rgb(123,31,162)'
+Color('rgb(123,31,162)').Base('hsl') -> 'hsl(282,68%,38%)'
+Color('hsl(282,68%,38%)').Base('hex') -> '#7B1FA2'
+```
+
+Доступные форматы:
+- hex
+- hexa
+- rgb
+- rgba
+- hsl
+- hsla
+
+## Alpha
+
+Что на счет прозрачности(альфа-канал)? Вы так же можете использовать форматы поддерживающие альфа-канал.
+
+```js
+Color('#7b1fa221').Base('rgba') -> 'rgba(123,31,162,0.13)'
+Color('rgba(123,31,162,0.13)').Base('hsla') -> 'hsl(282,68%,38%,0.13)'
+Color('hsla(282,68%,38%,0.13)').Base('hexa') -> '#7b1fa221'
+```
+
+В форматах `hexa/rgba/hsla` всегда будет alpha равен 1, если не указано другое значение вторым параметром, в функции `Base(format,alpha)`.
+```js
+Color('#7B1FA2').Base('rgba') -> 'rgba(123,31,162,1)' // alpha = 1
+Color('#7B1FA2').Base('rgba',0.78) -> 'rgba(123,31,162,0.78)' // alpha = 0.78
+```
 
 ## Contrast
 
-Функция Color() принимает на вход цвет и определяет 
-контрастный белый или черный цвет для лучшей читаемости текста. 
-Функция возвращает объект с полями Color и Contrast в hex формате.
-
-```js
-Color('blue700')
-return {
-    Color: '#1976D2',
-    Contrast: '#FFFFFF'
-}
-```
-Форматы цвета которые может принимать функция Color() [NamePalettes/hex/rba(a)/hsl]
+Метод `Contrast(format,alpha)` возвращает цвет(черный или белый) который лучше воспринимается человеком на фоне основного цвета.
 
 <Contrast />
 
-## BrightChange
+## Bright
+
+Метод `Bright(format,bright,alpha)` позволяет регулировать яркость. 
+
+Параметр `bright` принимает положительное или отрицательное число.
+
+```js
+Color('orange').Bright('hex',20)  // увеличить яркость
+Color('orange').Bright('hex',-20) // уменьшить яркость
+```
+
+<Bright />
+
+## Props color
+
+Более того, в каждый компонент EVG-UI встроен объект `Color`. 
+Так что вы уже используете все его преимущества.
+
+Например в компоненте `<Button>` текст, icon и loader принимает контрастный цвет относительно основного, переданного в свойстве `color`.
+
+```jsx
+<Button color='primary'>Text</Button>
+```
+
+<PropsColor />

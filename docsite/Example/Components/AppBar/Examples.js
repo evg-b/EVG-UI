@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import { CodeExample } from '@evg-b/evg-tools';
 import Snippets from './snippets'
 import AppBarBase from './AppBarBase'
 import AppBarColor from './AppBarColor'
@@ -17,6 +17,7 @@ const AppBarBaseExample = () => {
 	)
 }
 
+
 const AppBarColorExample = () => {
 	return (
 		<CodeExample
@@ -26,6 +27,7 @@ const AppBarColorExample = () => {
 		/>
 	)
 }
+
 
 const AppBarLeftAndRightExample = () => {
 	return (
@@ -37,6 +39,7 @@ const AppBarLeftAndRightExample = () => {
 	)
 }
 
+
 const AppBarTitleCenterExample = () => {
 	return (
 		<CodeExample
@@ -47,10 +50,11 @@ const AppBarTitleCenterExample = () => {
 	)
 }
 
-export { 
-	AppBarBaseExample,
+
+
+export {
+    AppBarBaseExample,
 AppBarColorExample,
 AppBarLeftAndRightExample,
 AppBarTitleCenterExample,
-
 }

@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
+import { withStyles } from '@evg-b/evg-ui';
 import {
     ChevronLeft,
     Check,
@@ -21,11 +21,10 @@ const IconColor = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
+            <Cancel color='primary' />
             <ChevronLeft color='warn' />
             <Close color='fail' />
             <Check color='success' />
-            <Cancel color='primary' />
-            <Visibility color='--ifm-color-primary' />
         </div>
     )
 }

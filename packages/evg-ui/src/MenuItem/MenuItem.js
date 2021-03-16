@@ -1,6 +1,6 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
+import { withStyles } from '../styles'
 import ListItem from '../ListItem'
 import ListItemText from '../ListItemText'
 
@@ -9,6 +9,7 @@ const styles = {
 
     },
 };
+
 const MenuItem = React.forwardRef(function MenuItem(props, ref) {
     const {
         classes,
@@ -16,6 +17,7 @@ const MenuItem = React.forwardRef(function MenuItem(props, ref) {
         children,
         ...otherProps
     } = props
+
     return (
         <ListItem
             ref={ref}
@@ -28,6 +30,7 @@ const MenuItem = React.forwardRef(function MenuItem(props, ref) {
     )
 })
 MenuItem.propTypes = {
+
     /**
     * Это контент между открывающим и закрывающим тегом компонента.
     */

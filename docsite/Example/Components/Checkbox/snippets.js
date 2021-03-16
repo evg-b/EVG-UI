@@ -1,7 +1,5 @@
-export default {
-'CheckboxBase' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Checkbox } from '@evg-b/evg-ui';
+export default {CheckboxBase: `import React from 'react';
+import { Checkbox, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -25,9 +23,9 @@ const CheckboxBase = (props) => {
     )
 }
 
-export default withStyles(styles)(CheckboxBase)`,'CheckboxColor' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Checkbox } from '@evg-b/evg-ui';
+export default withStyles(styles)(CheckboxBase)`,
+CheckboxColor: `import React from 'react';
+import { Checkbox, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -43,7 +41,6 @@ const CheckboxColor = (props) => {
     return (
         <div className={classes.base}>
             <Checkbox color="default" defaultChecked />
-            <Checkbox color="--ifm-color-primary" defaultChecked />
             <Checkbox color="primary" defaultChecked />
             <Checkbox color="warn" defaultChecked />
             <Checkbox color="success" defaultChecked />
@@ -52,9 +49,9 @@ const CheckboxColor = (props) => {
     )
 }
 
-export default withStyles(styles)(CheckboxColor)`,'CheckboxSize' : `import React from 'react';
-import { withStyles } from 'react-jss';
-import { Checkbox } from '@evg-b/evg-ui';
+export default withStyles(styles)(CheckboxColor)`,
+CheckboxSize: `import React from 'react';
+import { Checkbox, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -67,10 +64,10 @@ const CheckboxSize = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <Checkbox size='small' color="--ifm-color-primary" defaultChecked />
-            <Checkbox size='medium' color="--ifm-color-primary" defaultChecked />
-            <Checkbox size='large' color="--ifm-color-primary" defaultChecked />
-            <Checkbox size='extra' color="--ifm-color-primary" defaultChecked />
+            <Checkbox size='small' color="primary" defaultChecked />
+            <Checkbox size='medium' color="primary" defaultChecked />
+            <Checkbox size='large' color="primary" defaultChecked />
+            <Checkbox size='extra' color="primary" defaultChecked />
         </div>
     )
 }

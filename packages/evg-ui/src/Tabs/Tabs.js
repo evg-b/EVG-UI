@@ -1,13 +1,13 @@
 import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
+import { withStyles } from '../styles'
 
 const styles = {
     base: {
 
     }
 };
-const Slider = React.forwardRef(function Slider(props, ref) {
+const Tabs = React.forwardRef(function Tabs(props, ref) {
     const {
         classes,
         className,
@@ -22,7 +22,7 @@ const Slider = React.forwardRef(function Slider(props, ref) {
         </div>
     )
 })
-Slider.propTypes = {
+Tabs.propTypes = {
     /**
     * Это контент между открывающим и закрывающим тегом компонента.
     */
@@ -38,7 +38,7 @@ Slider.propTypes = {
     */
     className: PropTypes.string,
 }
-Slider.defaultProps = {
+Tabs.defaultProps = {
 }
-Slider.displayName = 'SliderEVG'
-export default withStyles(styles)(Slider)
+Tabs.displayName = 'TabsEVG'
+export default withStyles(styles)(Tabs)

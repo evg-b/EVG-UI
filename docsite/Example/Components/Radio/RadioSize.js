@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Radio } from '@evg-b/evg-ui';
+import { Radio, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -13,10 +12,10 @@ const RadioSize = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <Radio size='small' color="--ifm-color-primary" />
-            <Radio size='medium' color="--ifm-color-primary" />
-            <Radio size='large' color="--ifm-color-primary" />
-            <Radio size='extra' color="--ifm-color-primary" />
+            <Radio size='small' color="primary" />
+            <Radio size='medium' color="primary" />
+            <Radio size='large' color="primary" />
+            <Radio size='extra' color="primary" />
         </div>
     )
 }

@@ -10,19 +10,21 @@ import {
 	ButtonGroupOrientationExample,
 	ButtonGroupRoundExample,
 	ButtonGroupSizeExample,
-	ButtonGroupToggleExample,
+	ButtonGroupIconExample,
 	ButtonGroupUppercaseExample,
 	ButtonGroupVariantExample,
 } from '../../Example/Components/ButtonGroup/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Этот компонент группирует button, так же его можно использовать как переключатель.
+Этот компонент группирует Button.
 
 ## Base ButtonGroup
 
 <ButtonGroupBaseExample />
 
 ## Size
+
+Размер компонента в группе изменяется через свойство `size`.
 
 <ButtonGroupSizeExample />
 
@@ -32,6 +34,8 @@ import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
 ## Color
 
+Цвет компонентов в группе меняется через свойство `color`. Более подробно про цвет в этой [статье](/docs/styles/color#props-color).
+
 <ButtonGroupColorExample />
 
 ## Round
@@ -40,15 +44,19 @@ import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
 ## Orientation
 
+Горизонтальная и вертикальная ориентация группы кнопок.
+
 <ButtonGroupOrientationExample />
 
 ## Uppercase
 
+Если `uppercase={false}`, выключить верхний регистр текста.
+
 <ButtonGroupUppercaseExample />
 
-## Toggle
+## Group Icon
 
-<ButtonGroupToggleExample />
+<ButtonGroupIconExample />
 
 ## API
 

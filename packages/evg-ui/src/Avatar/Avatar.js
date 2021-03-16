@@ -1,9 +1,8 @@
 import React, { useState } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
+import { Color, withStyles } from '../styles'
 import { Person } from '../internal/icons/Avatar'
-import Color from '../utils/Color'
 
 const styles = {
     base: {
@@ -21,8 +20,8 @@ const styles = {
         overflow: 'hidden',
         fontFamily: '"Roboto", "Helvetica", "Arial", sans-serif',
         lineHeight: 'normal',
-        backgroundColor: props => Color(props.color === 'default' ? '#8a8a8a' : props.color).Color,
-        color: props => Color(props.color === 'default' ? '#8a8a8a' : props.color).Contrast,
+        backgroundColor: props => Color(props.color === 'default' ? '#8a8a8a' : props.color).Base(),
+        color: props => Color(props.color === 'default' ? '#8a8a8a' : props.color).Contrast(),
         '& img': {
             width: '100%',
             height: '100%',
@@ -43,9 +42,7 @@ const styles = {
             borderRadius: 0,
             flexGrow: 1,
             width: props => props.size / 2,
-            height: props => {
-                return props.srcs.length === 2 ? props.size : props.size / 2
-            }
+            height: props => props.srcs.length === 2 ? props.size : props.size / 2
         }
     },
     loaded: {
@@ -72,10 +69,15 @@ const styles = {
             borderRadius: '50%',
             right: '2%',
             bottom: '2%',
-            backgroundColor: props => Color(props.statusColor).Color,
+            backgroundColor: props => Color(props.statusColor).Base(),
         },
     }
 }
+
+/**
+ * Этот компонент обычно используют для отображения изображения профиля пользователей. 
+ * Так же отображает первую букву в имени контакта если изображение еще не загрузилось.
+*/
 
 const Avatar = React.forwardRef(function Avatar(props, ref) {
     const {
@@ -95,35 +97,26 @@ const Avatar = React.forwardRef(function Avatar(props, ref) {
 
     const [isLoaded, setIsLoaded] = useState(false)
 
-    const handOnLoad = () => {
-        setIsLoaded(true)
-    }
-    const SpareImg = alt === "" ? <Person /> : alt.slice(0, altMax)
+    const handOnLoad = () => setIsLoaded(true)
 
-    const AvatarImg = (srcUrl, classe = classes) => {
+    const SpareImg = () => <span className={classes.spare}>{alt === "" ? <Person /> : alt.slice(0, altMax)}</span>
+
+    const AvatarImg = (srcUrl, key = 0, classe = classes) => {
         // бесмысленное решение передавать classes, дабы линтер не ругался
         return (
-            <div className={classNames(classe.avatar, {
+            <div key={key} className={classNames(classe.avatar, {
                 [classe.loaded]: isLoaded,
             })}>
                 <img src={srcUrl} alt={alt} onLoad={handOnLoad} />
-                {
-                    !isLoaded ?
-                        <span className={classe.spare}>
-                            {SpareImg}
-                        </span> : null
-                }
+                {!isLoaded && SpareImg()}
             </div>
         )
     }
+
     const AvatarImgs = (
         srcs.length === 1 ? AvatarImg(srcs[0]) :
             <div className={classes.avatars}>
-                {
-                    srcs.map((srcUrl) => {
-                        return AvatarImg(srcUrl)
-                    })
-                }
+                {srcs.map((srcUrl, index) => AvatarImg(srcUrl, index))}
             </div>
     )
 
@@ -138,6 +131,7 @@ const Avatar = React.forwardRef(function Avatar(props, ref) {
     )
 })
 Avatar.propTypes = {
+
     /**
      * Это контент между открывающим и закрывающим тегом компонента.
     */
@@ -184,12 +178,12 @@ Avatar.propTypes = {
     size: PropTypes.number,
 
     /**
-     * Отображать статус или нетю
+     * Отображать статус или нет.
     */
     status: PropTypes.bool,
 
     /**
-     * Цвет статусаю.
+     * Цвет статуса.
     */
     statusColor: PropTypes.string,
 }

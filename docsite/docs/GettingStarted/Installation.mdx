@@ -1,0 +1,34 @@
+---
+id: Installation
+title: Installation
+sidebar_label: Installation
+---
+
+Для установки библиотеки в ваш проект запустите в консоли.
+
+```sh
+npm install @evg-b/evg-ui --save или yarn add @evg-b/evg-ui
+```
+
+Чтобы сделать сборку компактнее вы можете импортировать в проект только нужные компоненты.
+```jsx
+import { Avatar, Badge, Button } from '@evg-b/evg-ui';
+```
+
+### Шрифт
+
+Material Design разрабатывался основываясь на шрифте `Roboto`.
+Подключите шрифт к вашему проекту чтобы все компоненты выглядели так как задумывалось. 
+
+```html
+<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
+```
+
+### Icon
+
+Так же вы можете использовать все 1.440+ svg иконок от Material Design в своих проектах.
+Подробнее про [icon](/docs/Components/Icon)
+
+```sh
+npm install @evg-b/evg-icons --save или yarn add @evg-b/evg-icons
+```

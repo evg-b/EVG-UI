@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
+import { withStyles } from '../styles'
 
 const styles = {
     base: {
@@ -50,13 +50,18 @@ const styles = {
             transform: 'translateX(100%)',
         },
     },
-
 }
+
+/**
+ * Скелет интерфейса дает понять пользователю что контент еще загружается. 
+ * При этом знакомя пользователя к предварительному расположению элементов на странице.
+*/
 
 const Skeleton = React.forwardRef(function Skeleton(props, ref) {
     const {
         classes,
         className,
+        children,
         component: Component = 'span',
         type,
         width,
@@ -66,6 +71,7 @@ const Skeleton = React.forwardRef(function Skeleton(props, ref) {
         borderRadius,
         ...otherProps
     } = props
+
     let sizeStyle = {
         width: width,
         height: height,
@@ -83,6 +89,7 @@ const Skeleton = React.forwardRef(function Skeleton(props, ref) {
         delete sizeStyle.borderRadius
     }
     let classesList = type.split(',').map((val) => classes[val])
+
     return (
         <Component
             red={ref}
@@ -102,10 +109,6 @@ const Skeleton = React.forwardRef(function Skeleton(props, ref) {
     )
 })
 Skeleton.propTypes = {
-    /**
-    * Это контент между открывающим и закрывающим тегом компонента.
-    */
-    children: PropTypes.node,
 
     /**
      * Объект содержит jss стили компонента.
@@ -118,7 +121,12 @@ Skeleton.propTypes = {
     className: PropTypes.string,
 
     /**
-     * Корнево узел. Это HTML элемент или компонент.
+     * Это свойство не реализуется.
+    */
+    children: PropTypes.any,
+
+    /**
+     * Корневой узел. Это HTML элемент или компонент.
     */
     component: PropTypes.elementType,
 

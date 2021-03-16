@@ -6,7 +6,6 @@ export { default as Button } from './Button';
 export { default as ButtonBase } from './ButtonBase';
 export { default as ButtonGroup } from './ButtonGroup';
 export { default as Checkbox } from './Checkbox';
-export { default as CodeExample } from './CodeExample';
 export { default as IconButton } from './IconButton';
 export { default as TextField } from './TextField';
 export { default as SwitchBase } from './SwitchBase';
@@ -33,14 +32,14 @@ export { default as Cubes } from './LiveBackground/Cubes';
 export { default as Popup } from './Popup';
 export { default as Skeleton } from './Skeleton';
 export { default as Tooltip } from './Tooltip';
-export { default as PropDoc } from './PropDoc';
 export { default as Image } from './Image';
 // Tabs
 // Slider
 // Notify
 
-import * as colors from './colors';
+export * from './colors';
 
+import * as colors from './colors';
 export { colors };
 
-export * from './utils'; 
+export * from './styles';

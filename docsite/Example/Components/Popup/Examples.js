@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import { CodeExample } from '@evg-b/evg-tools';
 import Snippets from './snippets'
 import PopupAnimation from './PopupAnimation'
 import PopupAutoHide from './PopupAutoHide'
@@ -20,6 +20,7 @@ const PopupAnimationExample = () => {
 	)
 }
 
+
 const PopupAutoHideExample = () => {
 	return (
 		<CodeExample
@@ -29,6 +30,7 @@ const PopupAutoHideExample = () => {
 		/>
 	)
 }
+
 
 const PopupBaseExample = () => {
 	return (
@@ -40,6 +42,7 @@ const PopupBaseExample = () => {
 	)
 }
 
+
 const PopupModeExample = () => {
 	return (
 		<CodeExample
@@ -49,6 +52,7 @@ const PopupModeExample = () => {
 		/>
 	)
 }
+
 
 const PopupPositionExample = () => {
 	return (
@@ -60,6 +64,7 @@ const PopupPositionExample = () => {
 	)
 }
 
+
 const PopupScrollableExample = () => {
 	return (
 		<CodeExample
@@ -69,6 +74,7 @@ const PopupScrollableExample = () => {
 		/>
 	)
 }
+
 
 const PopupShiftExample = () => {
 	return (
@@ -80,13 +86,14 @@ const PopupShiftExample = () => {
 	)
 }
 
-export { 
-	PopupAnimationExample,
+
+
+export {
+    PopupAnimationExample,
 PopupAutoHideExample,
 PopupBaseExample,
 PopupModeExample,
 PopupPositionExample,
 PopupScrollableExample,
 PopupShiftExample,
-
 }

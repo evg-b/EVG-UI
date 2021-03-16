@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Button } from '@evg-b/evg-ui';
+import { Button, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -16,8 +15,8 @@ const ButtonBase = (props) => {
     return (
         <div className={classes.base}>
             <Button>text</Button>
-            <Button variant='contained' color='--ifm-color-primary' >contained</Button>
-            <Button variant='contained' color='--ifm-color-primary' disabled>disabled</Button>
+            <Button variant='contained' color='primary' >contained</Button>
+            <Button variant='contained' color='primary' disabled>disabled</Button>
             <Button variant='contained' href="#base-button">Link</Button>
         </div>
     )

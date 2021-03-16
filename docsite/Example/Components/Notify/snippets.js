@@ -1,3 +1,2 @@
-export default {
-'NotifyBase' : ``,
+export default {NotifyBase: ``,
 }

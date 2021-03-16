@@ -1,7 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
+import { withStyles } from '../styles'
 import Avatar from '../Avatar'
 
 const styles = {
@@ -11,6 +11,10 @@ const styles = {
         alignItems: 'center',
     }
 }
+
+/**
+ * Этот компонент группирует множества Avatar. 
+*/
 
 const AvatarGroup = React.forwardRef(function AvatarGroup(props, ref) {
     const {
@@ -49,6 +53,7 @@ const AvatarGroup = React.forwardRef(function AvatarGroup(props, ref) {
     )
 })
 AvatarGroup.propTypes = {
+
     /**
     * Это контент между открывающим и закрывающим тегом компонента.
     */

@@ -20,8 +20,8 @@ export default {
     output: [
         {
             dir: 'dist/',
-            format: 'cjs',
-            name: 'evg-ui-icons',
+            format: 'es',
+            name: 'evg-icons',
             globals,
             preserveModules: true,
             exports: 'named',

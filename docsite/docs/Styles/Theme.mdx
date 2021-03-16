@@ -1,0 +1,100 @@
+---
+id: Theme
+title: Theme
+sidebar_label: Theme
+---
+import ColorInfo from '../../Example/Styles/Color/ColorInfo'
+import ThemeChange from '../../Example/Styles/Theme/ThemeChange'
+import { Radio,Checkbox,Button  } from '@evg-b/evg-ui'
+
+Темы важны, так же важен способ взаимодействия с ними. Давайте с вами рассмотрим несколько популярных подходов использования тем.
+
+## EVG-Theme
+
+Есть тема по умолчанию, с помощью которой вы можете использовать заготовленные цвета.
+
+<ColorInfo colors={['default','primary','secondary','warn','success','fail','background','surface']} />
+
+```jsx
+import { Button } from '@evg-b/evg-ui'
+
+<Button color='default' variant='contained'>default</Button>
+<Button color='primary' variant='contained'>primary</Button>
+<Button color='secondary' variant='contained'>secondary</Button>
+<Button color='warn' variant='contained'>warn</Button>
+<Button color='success' variant='contained'>success</Button>
+<Button color='fail' variant='contained'>fail</Button>
+```
+
+<div style={{display: 'flex', justifyContent: 'space-around', margin: '40px 0'}}>
+    <Button color='default' variant='contained'>default</Button>
+    <Button color='blue600' variant='contained'>primary</Button>
+    <Button color='secondary' variant='contained'>secondary</Button>
+    <Button color='warn' variant='contained'>warn</Button>
+    <Button color='success' variant='contained'>success</Button>
+    <Button color='fail' variant='contained'>fail</Button>
+</div>
+
+
+
+## Custom Theme
+
+В каждый компонент встроен объект `Color` который так же работает с темами в вашем приложении буквально за вас.
+
+Всего лишь нужно создать --css-var определенного вида: `--evg-${themeColor}`
+
+```jsx
+// css
+:root {
+    --evg-primary: #7B1FA2;
+    --evg-success: rgb(85, 139, 47);
+    --evg-warn: 'orange900';
+}
+// css
+
+// jsx
+<Button color='primary' variant='contained'>primary</Button>
+<Button color='success' variant='contained'>success</Button>
+<Button color='warn' variant='contained'>warn</Button>
+// jsx
+```
+
+<div style={{display: 'flex', justifyContent: 'space-around', margin: '40px 0'}}>
+    <Button color='primary' variant='contained'>primary</Button>
+    <Button color='rgb(85, 139, 47)' variant='contained'>success</Button>
+    <Button color='orange900' variant='contained'>warn</Button>
+</div>
+
+Это все? Да, именно. 
+
+## Несколько Theme
+
+Давайте с вами создадим несколько тем. Для этого нам нужно так же создать --css-var с названием темы: `--evg-${themeName}-${themeColor}`
+
+```css
+:root {
+    // default - мы переопределяем тему по умолчанию
+    --evg-primary: #7B1FA2;
+
+    // dark
+    --evg-dark-primary: #7B1FA2;
+    --evg-dark-surface: #292d3e;
+}
+```
+
+Активируйте тему прямо на ходу из любого метса с помощью пользовательского хука `setTheme(themeName)`.
+Если хук `setTheme` запустить без аргумента, то активной станет тема по умолчанию.
+
+```jsx
+<Button onClick={() => setTheme()}>light</Button>
+<Button onClick={() => setTheme('dark')}>dark</Button>
+```
+
+
+<iframe 
+    src="https://codesandbox.io/embed/evg-ui-theme-yohew?autoresize=1&fontsize=12&theme=dark"
+    style={{width:'100%', height:'600px', border:0, borderRadius: '4px', overflow:'hidden'}}
+    title="evg-ui-theme"
+    allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
+    sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
+></iframe>

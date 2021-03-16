@@ -1,8 +1,5 @@
 import React, { useEffect, useRef } from 'react';
-import { withStyles } from 'react-jss';
-import { TouchDriver } from '@evg-b/evg-ui';
-import Elevation from '@evg-b/evg-ui/dist/utils/Elevation'
-import Color from '@evg-b/evg-ui/dist/utils/Color'
+import { Elevation, Color, TouchDriver, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     touch: {
@@ -18,8 +15,8 @@ const styles = {
         width: '150px',
         height: '150px',
         borderRadius: '50%',
-        backgroundColor: Color('--ifm-color-primary').Color,
-        color: Color('--ifm-color-primary').Contrast,
+        backgroundColor: Color('primary').Base(),
+        color: Color('primary').Contrast(),
         cursor: 'pointer',
         userSelect: 'none',
     },

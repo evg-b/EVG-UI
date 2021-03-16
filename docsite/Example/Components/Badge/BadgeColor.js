@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Badge } from '@evg-b/evg-ui';
+import { Badge, withStyles } from '@evg-b/evg-ui';
 import { Notifications } from '@evg-b/evg-icons'
 
 const styles = {
@@ -17,9 +16,6 @@ const BadgeColor = (props) => {
     return (
         <div className={classes.base}>
             <Badge count={3} >
-                <Notifications />
-            </Badge>
-            <Badge count={3} color='--ifm-color-primary'>
                 <Notifications />
             </Badge>
             <Badge count={3} color='primary'>

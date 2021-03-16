@@ -1,8 +1,7 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
-import Color from '../utils/Color'
+import { withStyles } from '../styles'
 
 const styles = {
     base: {
@@ -29,8 +28,8 @@ const styles = {
         fontWeight: 500,
         lineHeight: 1,
         pointerEvents: 'none',
-        backgroundColor: props => Color(props.color).Color,
-        color: props => Color(props.color).Contrast,
+        backgroundColor: props => props.Color.Base(),
+        color: props => props.Color.Contrast(),
         transform: 'scale(1) translate(50%, -50%)',
         transformOrigin: '100% 0%',
         transition: 'transform 225ms cubic-bezier(0.4, 0, 0.2, 1) 0ms',
@@ -53,6 +52,11 @@ const styles = {
         right: '14%',
     }
 }
+
+/**
+ * Это маленький значок обычно используется в паре с другими компонентами. 
+ * Используется для привлечения внимание к этим компонентам.
+*/
 
 const Badge = React.forwardRef(function Badge(props, ref) {
     const {
@@ -98,6 +102,7 @@ const Badge = React.forwardRef(function Badge(props, ref) {
     return ripe ? BadgeRipe : Badge
 })
 Badge.propTypes = {
+
     /**
     * Это контент между открывающим и закрывающим тегом компонента.
     */

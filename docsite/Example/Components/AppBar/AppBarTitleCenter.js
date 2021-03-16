@@ -7,7 +7,7 @@ const AppBarTitleCenter = () => {
         <AppBar
             title='EVG-UI'
             position='static'
-            color='--ifm-color-primary'
+            color='primary'
             titleCenter
             left={<Menu />}
         />

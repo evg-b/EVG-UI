@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import { CodeExample } from '@evg-b/evg-tools';
 import Snippets from './snippets'
 import CheckboxBase from './CheckboxBase'
 import CheckboxColor from './CheckboxColor'
@@ -16,6 +16,7 @@ const CheckboxBaseExample = () => {
 	)
 }
 
+
 const CheckboxColorExample = () => {
 	return (
 		<CodeExample
@@ -25,6 +26,7 @@ const CheckboxColorExample = () => {
 		/>
 	)
 }
+
 
 const CheckboxSizeExample = () => {
 	return (
@@ -36,9 +38,10 @@ const CheckboxSizeExample = () => {
 	)
 }
 
-export { 
-	CheckboxBaseExample,
+
+
+export {
+    CheckboxBaseExample,
 CheckboxColorExample,
 CheckboxSizeExample,
-
 }

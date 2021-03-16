@@ -1,7 +1,6 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames'
-import Elevation from '@evg-b/evg-ui/dist/utils/Elevation'
+import { Elevation, withStyles } from '@evg-b/evg-ui'
 
 const styles = {
     base: {

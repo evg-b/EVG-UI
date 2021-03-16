@@ -1,5 +1,4 @@
-export default {
-'ScrollAutoHide' : `import React from 'react';
+export default {ScrollAutoHide: `import React from 'react';
 import { Scroll } from '@evg-b/evg-ui';
 
 const styles = {
@@ -12,6 +11,7 @@ const styles = {
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,.8)',
 }
+
 const ScrollAutoHide = () => {
     const blockScroll = (props) => {
         return <div key={props} style={styles}>{props}</div>
@@ -30,7 +30,8 @@ const ScrollAutoHide = () => {
     )
 }
 
-export default ScrollAutoHide`,'ScrollBase' : `import React from 'react';
+export default ScrollAutoHide`,
+ScrollBase: `import React from 'react';
 import { Scroll } from '@evg-b/evg-ui';
 
 const styles = {
@@ -43,10 +44,9 @@ const styles = {
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,.8)',
 }
+
 const ScrollBase = () => {
-    const blockScroll = (props) => {
-        return <div key={props} style={styles}>{props}</div>
-    }
+    const blockScroll = (props) => <div key={props} style={styles}>{props}</div>
     return (
         <Scroll
             autoHide={false}
@@ -61,8 +61,9 @@ const ScrollBase = () => {
     )
 }
 
-export default ScrollBase`,'ScrollMaxHeight' : `import React, { useState } from 'react';
-import { Scroll, Button, ButtonGroup, TextField } from '@evg-b/evg-ui';
+export default ScrollBase`,
+ScrollMaxHeight: `import React, { useState } from 'react';
+import { Scroll, Button } from '@evg-b/evg-ui';
 
 const styles = {
     width: '100px',
@@ -74,7 +75,7 @@ const styles = {
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,.8)',
 }
-
+ 
 const ScrollBase = () => {
     const [count, setCount] = useState(2)
     const blockScroll = (props) => {
@@ -87,8 +88,8 @@ const ScrollBase = () => {
     return (
         <div>
             <div style={{ display: 'flex', marginBottom: '10px' }}>
-                <Button color="--ifm-color-primary" onClick={() => handleClick(true)}>+</Button>
-                <Button color="--ifm-color-primary" onClick={() => handleClick(false)}>-</Button>
+                <Button color="primary" onClick={() => handleClick(true)}>+</Button>
+                <Button color="primary" onClick={() => handleClick(false)}>-</Button>
             </div>
             <Scroll
                 autoHide={false}
@@ -104,7 +105,8 @@ const ScrollBase = () => {
     )
 }
 
-export default ScrollBase`,'ScrollTrackSizeAndColor' : `import React from 'react';
+export default ScrollBase`,
+ScrollTrackSizeAndColor: `import React from 'react';
 import { Scroll } from '@evg-b/evg-ui';
 
 const styles = {
@@ -115,7 +117,7 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,.8)',
+    backgroundColor: 'rgba(0,0,0,.8)', 
 }
 const ScrollTrackSizeAndColor = () => {
     const blockScroll = (props) => {
@@ -137,7 +139,8 @@ const ScrollTrackSizeAndColor = () => {
     )
 }
 
-export default ScrollTrackSizeAndColor`,'ScrollVerticalAndHorizontal' : `import React from 'react';
+export default ScrollTrackSizeAndColor`,
+ScrollVerticalAndHorizontal: `import React from 'react';
 import { Scroll } from '@evg-b/evg-ui';
 
 const styles = {
@@ -150,6 +153,7 @@ const styles = {
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,.8)',
 }
+
 const ScrollVerticalAndHorizontal = () => {
     const blockScroll = (props) => {
         return <div key={props} style={styles}>{props}</div>

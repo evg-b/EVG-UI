@@ -1,9 +1,15 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
 import classNames from 'classnames';
-import Color from '../utils/Color'
+import { withStyles } from '../styles'
 
+const svgSizeNumberAndTemplate = (size) => {
+    if (typeof size === 'number') {
+        return `${size}px`
+    } else {
+        return MapSize[size] ? MapSize[size] : MapSize['medium']
+    }
+}
 const MapSize = {
     'small': '18px',
     'medium': '24px',
@@ -19,10 +25,14 @@ const styles = {
         width: '1em',
         height: '1em',
         fill: 'currentColor',
-        color: props => Color(props.color).Color,
-        fontSize: props => `${MapSize[props.size]}`,
+        color: props => props.color === 'default' ? 'currentColor' : props.Color.Base(),
+        fontSize: props => svgSizeNumberAndTemplate(props.size),
     },
 }
+
+/**
+ * Компонент обертка над path svg который реализует функционал color и size.
+*/
 
 const SvgIcon = React.forwardRef(function SvgIcon(props, ref) {
     const {
@@ -34,7 +44,6 @@ const SvgIcon = React.forwardRef(function SvgIcon(props, ref) {
         viewBox,
         ...otherProps
     } = props
-
     return (
         <svg
             ref={ref}
@@ -50,6 +59,7 @@ const SvgIcon = React.forwardRef(function SvgIcon(props, ref) {
     )
 })
 SvgIcon.propTypes = {
+
     /**
     * Это контент между открывающим и закрывающим тегом компонента.
     */
@@ -66,9 +76,12 @@ SvgIcon.propTypes = {
     className: PropTypes.string,
 
     /**
-     * Размер компонента.
+     * Размер компонента. Так же принимает положительное число.
     */
-    size: PropTypes.oneOf(['small', 'medium', 'large', 'extra']),
+    size: PropTypes.oneOfType([
+        PropTypes.oneOf(['small', 'medium', 'large', 'extra']),
+        PropTypes.number,
+    ]),
 
     /**
      * Название цвета в разных форматах.

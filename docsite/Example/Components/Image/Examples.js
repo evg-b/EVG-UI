@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import { CodeExample } from '@evg-b/evg-tools';
 import Snippets from './snippets'
 import ImageBase from './ImageBase'
 import ImageBroken from './ImageBroken'
@@ -16,6 +16,7 @@ const ImageBaseExample = () => {
 	)
 }
 
+
 const ImageBrokenExample = () => {
 	return (
 		<CodeExample
@@ -25,6 +26,7 @@ const ImageBrokenExample = () => {
 		/>
 	)
 }
+
 
 const ImageloaderExample = () => {
 	return (
@@ -36,9 +38,10 @@ const ImageloaderExample = () => {
 	)
 }
 
-export { 
-	ImageBaseExample,
+
+
+export {
+    ImageBaseExample,
 ImageBrokenExample,
 ImageloaderExample,
-
 }

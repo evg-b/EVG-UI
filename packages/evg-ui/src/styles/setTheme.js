@@ -1,6 +1,7 @@
-const setTheme = (nameTheme) => {
+const setTheme = (nameTheme = '') => {
     // 1. check
     if (typeof nameTheme !== 'string') {
+        nameTheme = ''
         // return status-wrong
         // console.error - пояснения
     }

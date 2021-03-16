@@ -1,6 +1,6 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
+import { withStyles } from '../styles'
 import classNames from 'classnames';
 import SwitchBase from '../SwitchBase'
 import { RadioButtonCircle, RadioButtonUnchecked } from '../internal/icons/Radio'
@@ -20,6 +20,11 @@ const styles = {
         },
     },
 }
+
+/**
+ * Радиокнопки позволяют пользователю выбрать один вариант из набора. 
+ * Используйте для исключительного выбора, если вы считаете, что пользователю нужно видеть все доступные варианты.
+*/
 
 const Radio = React.forwardRef(function Radio(props, ref) {
     const {
@@ -64,10 +69,6 @@ const Radio = React.forwardRef(function Radio(props, ref) {
     )
 })
 Radio.propTypes = {
-    /**
-    * Это контент между открывающим и закрывающим тегом компонента.
-    */
-    children: PropTypes.node,
 
     /**
      * Объект содержит jss стили компонента.
@@ -78,6 +79,11 @@ Radio.propTypes = {
      * Чтобы указать CSS классы, используйте этот атрибут.
     */
     className: PropTypes.string,
+
+    /**
+     * Это свойство не реализуется.
+    */
+    children: PropTypes.any,
 
     /**
      * Название компонента.

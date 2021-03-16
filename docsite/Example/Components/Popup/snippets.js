@@ -1,7 +1,5 @@
-export default {
-'PopupAnimation' : `import React, { useRef } from 'react';
-import { withStyles } from 'react-jss';
-import { Button, Popup } from '@evg-b/evg-ui';
+export default {PopupAnimation: `import React, { useRef } from 'react';
+import { Button, Popup, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -35,9 +33,9 @@ const PopupAnimation = (props) => {
     )
 }
 
-export default withStyles(styles)(PopupAnimation)`,'PopupAutoHide' : `import React, { useRef } from 'react';
-import { withStyles } from 'react-jss';
-import { Button, Popup } from '@evg-b/evg-ui';
+export default withStyles(styles)(PopupAnimation)`,
+PopupAutoHide: `import React, { useRef } from 'react';
+import { Button, Popup, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -67,7 +65,8 @@ const TooltipBase = (props) => {
     )
 }
 
-export default withStyles(styles)(TooltipBase)`,'PopupBase' : `import React, { useRef } from 'react';
+export default withStyles(styles)(TooltipBase)`,
+PopupBase: `import React, { useRef } from 'react';
 import { Button, Popup } from '@evg-b/evg-ui';
 
 const PopupBase = () => {
@@ -82,9 +81,9 @@ const PopupBase = () => {
     )
 }
 
-export default PopupBase`,'PopupMode' : `import React, { useRef } from 'react';
-import { withStyles } from 'react-jss';
-import { Button, Popup } from '@evg-b/evg-ui';
+export default PopupBase`,
+PopupMode: `import React, { useRef } from 'react';
+import { Button, Popup, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -113,7 +112,8 @@ const PopupMode = (props) => {
     )
 }
 
-export default withStyles(styles)(PopupMode)`,'PopupPosition' : `import React, { useRef } from 'react';
+export default withStyles(styles)(PopupMode)`,
+PopupPosition: `import React, { useRef } from 'react';
 import { Button, Popup } from '@evg-b/evg-ui';
 
 const PopupPosition = () => {
@@ -134,9 +134,9 @@ const PopupPosition = () => {
     )
 }
 
-export default PopupPosition`,'PopupScrollable' : `import React, { useRef } from 'react';
-import { withStyles } from 'react-jss';
-import { Button, Popup, Scroll } from '@evg-b/evg-ui';
+export default PopupPosition`,
+PopupScrollable: `import React, { useRef } from 'react';
+import { Button, Popup, Scroll, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -151,22 +151,11 @@ const TooltipBase = (props) => {
     const { classes } = props
     const btn_ref = useRef()
     return (
-        // <>
-        //     <Button ref={btn_ref} variant='outlined' >Popup</Button>
-        //     <Popup target={btn_ref}>
-        //         Popup
-        //     </Popup>
-        // </>
         <Scroll
             autoHide={false}
             style={{ width: 200, maxHeight: 200, backgroundColor: 'rgba(0,0,0,.1)' }}
         >
-            {
-                // [...Array(25)].map((n, i) =>
-                //     blockScroll(i + 1)
-                // )
 
-            }
             <div style={{ height: 600, width: 600 }}>
                 <Button ref={btn_ref} variant='outlined' style={{ margin: '75px 0 0 60px' }}>Popup</Button>
                 <Popup open target={btn_ref}>
@@ -178,7 +167,8 @@ const TooltipBase = (props) => {
     )
 }
 
-export default withStyles(styles)(TooltipBase)`,'PopupShift' : `import React, { useRef } from 'react';
+export default withStyles(styles)(TooltipBase)`,
+PopupShift: `import React, { useRef } from 'react';
 import { Button, Popup } from '@evg-b/evg-ui';
 
 const sPop = {

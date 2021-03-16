@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import { CodeExample } from '@evg-b/evg-tools';
 import Snippets from './snippets'
 import BadgeBase from './BadgeBase'
 import BadgeCircle from './BadgeCircle'
@@ -19,6 +19,7 @@ const BadgeBaseExample = () => {
 	)
 }
 
+
 const BadgeCircleExample = () => {
 	return (
 		<CodeExample
@@ -28,6 +29,7 @@ const BadgeCircleExample = () => {
 		/>
 	)
 }
+
 
 const BadgeColorExample = () => {
 	return (
@@ -39,6 +41,7 @@ const BadgeColorExample = () => {
 	)
 }
 
+
 const BadgeDotExample = () => {
 	return (
 		<CodeExample
@@ -48,6 +51,7 @@ const BadgeDotExample = () => {
 		/>
 	)
 }
+
 
 const BadgeMaxExample = () => {
 	return (
@@ -59,6 +63,7 @@ const BadgeMaxExample = () => {
 	)
 }
 
+
 const BadgeRipeExample = () => {
 	return (
 		<CodeExample
@@ -69,12 +74,13 @@ const BadgeRipeExample = () => {
 	)
 }
 
-export { 
-	BadgeBaseExample,
+
+
+export {
+    BadgeBaseExample,
 BadgeCircleExample,
 BadgeColorExample,
 BadgeDotExample,
 BadgeMaxExample,
 BadgeRipeExample,
-
 }

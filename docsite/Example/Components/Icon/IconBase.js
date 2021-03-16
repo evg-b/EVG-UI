@@ -1,5 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
+import { withStyles } from '@evg-b/evg-ui';
 import {
     ChevronLeft,
     Check,

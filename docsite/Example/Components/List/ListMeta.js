@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Avatar, Badge, List, ListItem, ListItemText, ListItemAvatar } from '@evg-b/evg-ui';
+import { Avatar, Badge, List, ListItem, ListItemText, ListItemAvatar, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -33,7 +32,7 @@ const ListMeta = (props) => {
             name: 'Rick',
             text: 'oops it seems we have a problem',
             time: '20:01',
-            count: 1,
+            count: 123,
         },
         {
             avatar: '/source/Avatar/12.jpg',

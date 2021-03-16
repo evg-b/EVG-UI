@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import { CodeExample } from '@evg-b/evg-tools';
 import Snippets from './snippets'
 import SwitchBase from './SwitchBase'
 import SwitchColor from './SwitchColor'
@@ -17,6 +17,7 @@ const SwitchBaseExample = () => {
 	)
 }
 
+
 const SwitchColorExample = () => {
 	return (
 		<CodeExample
@@ -26,6 +27,7 @@ const SwitchColorExample = () => {
 		/>
 	)
 }
+
 
 const SwitchSizeExample = () => {
 	return (
@@ -37,6 +39,7 @@ const SwitchSizeExample = () => {
 	)
 }
 
+
 const SwitchVariantExample = () => {
 	return (
 		<CodeExample
@@ -47,10 +50,11 @@ const SwitchVariantExample = () => {
 	)
 }
 
-export { 
-	SwitchBaseExample,
+
+
+export {
+    SwitchBaseExample,
 SwitchColorExample,
 SwitchSizeExample,
 SwitchVariantExample,
-
 }

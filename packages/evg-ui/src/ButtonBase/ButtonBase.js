@@ -1,6 +1,6 @@
 import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
-import { withStyles } from 'react-jss';
+import { withStyles } from '../styles'
 import classNames from 'classnames'
 import Ripple from '../Ripple';
 
@@ -18,13 +18,11 @@ const styles = {
         overflow: 'hidden',
         textDecoration: 'none',
         userSelect: 'none',
-        '-moz-appearance': 'none',
-        '-webkit-appearance': 'none',
+        appearance: 'none',
         tapHighlightColor: 'transparent',
-        '-webkit-tap-highlight-color': 'transparent',
         boxSizing: 'border-box',
         transition: 'background-color 200ms linear',
-        '&:disabled,&[disabled]': {
+        '&:disabled, &[disabled]': {
             cursor: 'default',
             pointerEvents: ' none',
             backgroundColor: 'rgba(0, 0, 0, 0.12)',
@@ -32,6 +30,10 @@ const styles = {
         }
     },
 }
+
+/**
+ * Базовая кнопка в котором реализуется Ripple. 
+*/
 
 const ButtonBase = React.forwardRef(function ButtonBase(props, ref) {
     const {
@@ -41,7 +43,6 @@ const ButtonBase = React.forwardRef(function ButtonBase(props, ref) {
         component,
         uppercase,
         disabled,
-        // onClick,
         tabIndex,
         rippleCenter,
         rippleOff,
@@ -60,14 +61,17 @@ const ButtonBase = React.forwardRef(function ButtonBase(props, ref) {
     const handlerFocus = () => {
         setIsFocus(true)
     }
+
     const handlerBlur = () => {
         setIsFocus(false)
     }
+
     const handleKeyPress = () => {
         if (!isPressed) {
             setIsPressed(true)
         }
     }
+
     const handleKeyUp = () => {
         if (isPressed) {
             setIsPressed(false)
@@ -77,11 +81,10 @@ const ButtonBase = React.forwardRef(function ButtonBase(props, ref) {
         <Component
             tabIndex={tabIndex}
             className={classNames(
-                classes.base,
                 className,
+                classes.base,
             )}
             ref={ref}
-            // onClick={onClick}
             type={Component}
             disabled={disabled}
             onFocus={handlerFocus}
@@ -102,13 +105,15 @@ const ButtonBase = React.forwardRef(function ButtonBase(props, ref) {
                         isFocus={isFocus}
                         isPressed={isPressed}
                         isActive={active}
+                        scrollable
                     />
             }
-        </Component >
+        </Component>
     )
 })
 
 ButtonBase.propTypes = {
+
     /**
     * Это контент между открывающим и закрывающим тегом компонента.
     */
@@ -122,7 +127,7 @@ ButtonBase.propTypes = {
     */
     className: PropTypes.string,
     /**
-     * Корнево узел. Это HTML элемент или компонент.
+     * Корневой узел. Это HTML элемент или компонент.
     */
     component: PropTypes.elementType,
     /**
@@ -145,11 +150,6 @@ ButtonBase.propTypes = {
     */
     href: PropTypes.string,
 
-    // /**
-    //  * 
-    // */
-    // onClick: PropTypes.func,
-
     /**
      * Атрибут tabindex определяет последовательность перехода между ссылками при нажатии на кнопку Tab.
     */
@@ -167,7 +167,7 @@ ButtonBase.propTypes = {
 
     /**
      * Если true, цвет текста будет белым или черным автоматически. 
-     * Для лучшео восприятия в зависимости от основного цвета. 
+     * Для лучшего восприятия в зависимости от основного цвета. 
     */
     contrast: PropTypes.bool,
 

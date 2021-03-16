@@ -1,6 +1,5 @@
 import React from 'react';
-import { withStyles } from 'react-jss';
-import { Avatar } from '@evg-b/evg-ui';
+import { Avatar, withStyles } from '@evg-b/evg-ui';
 
 const styles = {
     base: {
@@ -18,7 +17,7 @@ const AvatarNotImage = (props) => {
         <div className={classes.base}>
             <Avatar alt='evg b' />
             <Avatar />
-            <Avatar alt='Alira' />
+            <Avatar alt='Alira' altMax={2} />
         </div>
     )
 }

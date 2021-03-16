@@ -4,15 +4,21 @@
   "license": "MIT",
   "scripts": {
     "build": "lerna run --parallel --scope \"@evg-b/evg-*\" build",
+    "watch": "lerna run --parallel --scope \"@evg-b/evg-*\" watch",
     "lint": "eslint .",
-    "wds": "yarn wds:exboard & yarn wds:evgui",
+    "wds": "yarn wds:exboard && yarn wds:evgui && yarn wds:evgtools",
     "wds:docstart": "lerna run --scope doc start",
     "wds:exboard": "lerna run --scope exboard wds",
     "wds:evgui": "lerna run --scope @evg-b/evg-ui watch",
-    "propdoc": "yarn node ./scripts/propdoc.js"
+    "wds:evgtools": "lerna run --scope @evg-b/evg-tools watch",
+    "propdoc": "yarn propdoc:jsonAPI && yarn propdoc:APImdx && yarn propdoc:snippet",
+    "propdoc:jsonAPI": "yarn node ./scripts/propdoc.js",
+    "propdoc:APImdx": "yarn node ./scripts/propGenApi.js",
+    "propdoc:snippet": "yarn node ./scripts/GenerationSnippets.js"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
+    "@babel/plugin-external-helpers": "^7.12.13",
     "@babel/plugin-proposal-class-properties": "^7.12.1",
     "@babel/plugin-proposal-object-rest-spread": "^7.12.1",
     "@babel/plugin-transform-runtime": "^7.12.10",
@@ -22,6 +28,7 @@
     "@rollup/plugin-commonjs": "^17.0.0",
     "@rollup/plugin-json": "^4.1.0",
     "@rollup/plugin-node-resolve": "^11.0.1",
+    "@web/rollup-plugin-copy": "^0.2.0",
     "babel-eslint": "^10.1.0",
     "eslint": "^7.16.0",
     "eslint-plugin-react": "^7.21.5",
@@ -29,17 +36,18 @@
     "lerna": "^3.22.1",
     "react-docgen": "^5.3.1",
     "rollup": "^2.35.1",
+    "rollup-plugin-delete": "^2.0.0",
     "rollup-plugin-terser": "^7.0.2"
   },
   "private": true,
-  "resolutions": {
-    "**/terser-webpack-plugin": "^1.4.3"
-  },
   "workspaces": {
     "packages": [
       "packages/*",
       "docsite",
       "exboard"
+    ],
+    "nohoist": [
+      "**/html-minifier-terser"
     ]
   }
 }

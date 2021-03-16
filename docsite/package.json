@@ -14,12 +14,14 @@
   "dependencies": {
     "@docusaurus/core": "2.0.0-alpha.70",
     "@docusaurus/preset-classic": "2.0.0-alpha.70",
-    "@evg-b/evg-icons": "^1.0.1",
-    "@evg-b/evg-ui": "^1.0.4",
+    "@evg-b/evg-icons": "*",
+    "@evg-b/evg-ui": "*",
+    "@evg-b/evg-tools": "*",
     "@mdx-js/react": "^1.6.21",
-    "clsx": "^1.1.1",
+    "classnames": "^2.2.6",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react-dom": "^16.8.4",
+    "react-syntax-highlighter": "^15.4.3"
   },
   "browserslist": {
     "production": [
