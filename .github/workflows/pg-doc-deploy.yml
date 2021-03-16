@@ -36,23 +36,15 @@ jobs:
       - uses: webfactory/ssh-agent@v0.5.0
         with:
           ssh-private-key: ${{ secrets.GH_PAGES_DEPLOY }}
-          
       - name: Set Git config
         run: |
           git config --global user.name $GIT_USER
-          git config --global user.email $user_email
-
+          git config --global user.email $USER_EMAIL
       - name: Build Rollup packages
         run: yarn build
-
       - name: Release to GitHub Pages
         run: yarn workspace docsite deploy
-
         env:
-          user_name: 'evg-b'
           GIT_USER: 'evg-b'
           USE_SSH: true
-          user_email: 'seber.bobilev@gmail.com'
-          
-          
-          
+          USER_EMAIL: 'seber.bobilev@gmail.com'
