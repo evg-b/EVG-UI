@@ -10,6 +10,7 @@ const styles = {
         }
     }
 }
+
 const ListAvatar = (props) => {
     const { classes } = props
     return (

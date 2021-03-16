@@ -11,12 +11,10 @@ const styles = {
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,.8)',
 }
- 
+
 const ScrollBase = () => {
     const [count, setCount] = useState(2)
-    const blockScroll = (props) => {
-        return <div key={props} style={styles}>{props}</div>
-    }
+    const blockScroll = (key) => <div key={key} style={styles}>{key}</div>
     const handleClick = (mod) => {
         mod ? setCount(count + 1) : setCount(count - 1 < 0 ? 0 : count - 1)
     }

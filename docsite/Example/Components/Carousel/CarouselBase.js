@@ -1,5 +1,6 @@
 import React from 'react';
 import { Carousel, withStyles } from '@evg-b/evg-ui';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 const styles = {
     base: {
@@ -12,16 +13,16 @@ const styles = {
 const CarouselBase = (props) => {
     const { classes } = props
     const imgs = [
-        '/source/Carousel/1.jpg',
-        '/source/Carousel/2.jpg',
-        '/source/Carousel/3.jpg',
-        '/source/Carousel/4.jpg',
-        '/source/Carousel/5.jpg',
-        '/source/Carousel/6.jpg',
-        '/source/Carousel/7.jpg',
-        '/source/Carousel/8.jpg',
-        '/source/Carousel/9.jpg',
-        '/source/Carousel/10.jpg',
+        useBaseUrl('/source/Carousel/1.jpg'),
+        useBaseUrl('/source/Carousel/2.jpg'),
+        useBaseUrl('/source/Carousel/3.jpg'),
+        useBaseUrl('/source/Carousel/4.jpg'),
+        useBaseUrl('/source/Carousel/5.jpg'),
+        useBaseUrl('/source/Carousel/6.jpg'),
+        useBaseUrl('/source/Carousel/7.jpg'),
+        useBaseUrl('/source/Carousel/8.jpg'),
+        useBaseUrl('/source/Carousel/9.jpg'),
+        useBaseUrl('/source/Carousel/10.jpg'),
     ]
     return (
         <div className={classes.base}>

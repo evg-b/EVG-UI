@@ -13,7 +13,7 @@ const styles = {
 }
 
 const ScrollBase = () => {
-    const blockScroll = (props) => <div key={props} style={styles}>{props}</div>
+    const blockScroll = (key) => <div key={key} style={styles}>{key}</div>
     return (
         <Scroll
             autoHide={false}

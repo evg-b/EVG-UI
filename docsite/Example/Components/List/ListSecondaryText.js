@@ -10,6 +10,7 @@ const styles = {
         }
     }
 }
+
 const ListSecondaryText = (props) => {
     const { classes } = props
     return (

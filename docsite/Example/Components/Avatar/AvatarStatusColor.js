@@ -1,5 +1,6 @@
 import React from 'react';
 import { Avatar, withStyles } from '@evg-b/evg-ui';
+import useBaseUrl from '@docusaurus/useBaseUrl';
 
 const styles = {
     base: {
@@ -9,17 +10,15 @@ const styles = {
 }
 
 const AvatarStatusColor = (props) => {
-    const {
-        classes,
-    } = props
+    const { classes } = props
 
     return (
         <div className={classes.base}>
-            <Avatar src='/source/Avatar/1.jpg' status statusColor='default' />
-            <Avatar src='/source/Avatar/1.jpg' status statusColor='primary' />
-            <Avatar src='/source/Avatar/1.jpg' status statusColor='warn' />
-            <Avatar src='/source/Avatar/1.jpg' status statusColor='success' />
-            <Avatar src='/source/Avatar/1.jpg' status statusColor='fail' />
+            <Avatar src={useBaseUrl('/source/Avatar/1.jpg')} status statusColor='default' />
+            <Avatar src={useBaseUrl('/source/Avatar/1.jpg')} status statusColor='primary' />
+            <Avatar src={useBaseUrl('/source/Avatar/1.jpg')} status statusColor='warn' />
+            <Avatar src={useBaseUrl('/source/Avatar/1.jpg')} status statusColor='success' />
+            <Avatar src={useBaseUrl('/source/Avatar/1.jpg')} status statusColor='fail' />
         </div>
     )
 }

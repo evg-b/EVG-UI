@@ -9,12 +9,11 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,.8)', 
+    backgroundColor: 'rgba(0,0,0,.8)',
 }
+
 const ScrollTrackSizeAndColor = () => {
-    const blockScroll = (props) => {
-        return <div key={props} style={styles}>{props}</div>
-    }
+    const blockScroll = (key) => <div key={key} style={styles}>{key}</div>
     return (
         <Scroll
             autoHide={false}

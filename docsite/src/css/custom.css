@@ -6,7 +6,7 @@
  */
 
 /* You can override the default Infima variables here. */
-@import url(http://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700);
+@import url(https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700);
 :root {
   --ifm-font-family-base: "Roboto", "Helvetica", "Arial", sans-serif;
   --ifm-color-primary: #7B1FA2;

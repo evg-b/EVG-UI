@@ -13,9 +13,7 @@ const styles = {
 }
 
 const ScrollVerticalAndHorizontal = () => {
-    const blockScroll = (props) => {
-        return <div key={props} style={styles}>{props}</div>
-    }
+    const blockScroll = (key) => <div key={key} style={styles}>{key}</div>
     return (
         <Scroll
             color='#FFFFFF'

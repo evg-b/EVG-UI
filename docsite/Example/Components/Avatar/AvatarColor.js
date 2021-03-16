@@ -9,9 +9,7 @@ const styles = {
 }
 
 const AvatarColor = (props) => {
-    const {
-        classes,
-    } = props
+    const { classes } = props
 
     return (
         <div className={classes.base}>

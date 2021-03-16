@@ -9,9 +9,7 @@ const styles = {
 }
 
 const AvatarNotImage = (props) => {
-    const {
-        classes,
-    } = props
+    const { classes } = props
 
     return (
         <div className={classes.base}>
