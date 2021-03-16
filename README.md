@@ -62,7 +62,7 @@ import { Check, Close, Favorite } from '@evg-b/evg-icons';
 ```
 
 ### Документация
-Загляните на [сайт](https://evg-b.github.io/evg-ui/).
+Загляните на [сайт](https://evg-b.github.io/EVG-UI/).
 
 
 ### Сообщить о проблеме
