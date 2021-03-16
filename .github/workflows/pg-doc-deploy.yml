@@ -43,7 +43,17 @@ jobs:
         env:
           GIT_USER: 'evg-b'
           USER_EMAIL: 'seber.bobilev@gmail.com'
-          
+
+      - name: install dependencies
+        run: |
+          if [ -e yarn.lock ]; then
+          yarn install --frozen-lockfile
+          elif [ -e package-lock.json ]; then
+          npm ci
+          else
+          npm i
+          fi
+
       - name: Build Rollup packages
         run: yarn build
 
