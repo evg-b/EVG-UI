@@ -40,7 +40,7 @@ const Elevations = React.forwardRef(function Palettes(props, ref) {
             {...otherProps}
         >
             {
-                [...Array(25)].map((n, i) =>
+                Array.from(new Array(25)).map((n, i) =>
                     <div key={i} className={classes.ElevationBox} style={Elevation(i)}>{i}</div>
                 )
             }
