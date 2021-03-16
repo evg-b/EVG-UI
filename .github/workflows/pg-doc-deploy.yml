@@ -40,11 +40,15 @@ jobs:
         run: |
           git config --global user.name $GIT_USER
           git config --global user.email $USER_EMAIL
+        env:
+          GIT_USER: 'evg-b'
+          USER_EMAIL: 'seber.bobilev@gmail.com'
+          
       - name: Build Rollup packages
         run: yarn build
+
       - name: Release to GitHub Pages
         run: yarn workspace docsite deploy
         env:
           GIT_USER: 'evg-b'
           USE_SSH: true
-          USER_EMAIL: 'seber.bobilev@gmail.com'
