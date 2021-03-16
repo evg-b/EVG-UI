@@ -7,7 +7,6 @@ import ButtonGroupIcon from './ButtonGroupIcon'
 import ButtonGroupOrientation from './ButtonGroupOrientation'
 import ButtonGroupRound from './ButtonGroupRound'
 import ButtonGroupSize from './ButtonGroupSize'
-import ButtonGroupToggle from './ButtonGroupToggle'
 import ButtonGroupUppercase from './ButtonGroupUppercase'
 import ButtonGroupVariant from './ButtonGroupVariant'
 
@@ -78,17 +77,6 @@ const ButtonGroupSizeExample = () => {
 }
 
 
-const ButtonGroupToggleExample = () => {
-	return (
-		<CodeExample
-			title='Toggle'
-			demo={<ButtonGroupToggle />}
-			snippet={Snippets.ButtonGroupToggle}
-		/>
-	)
-}
-
-
 const ButtonGroupUppercaseExample = () => {
 	return (
 		<CodeExample
@@ -119,7 +107,6 @@ ButtonGroupIconExample,
 ButtonGroupOrientationExample,
 ButtonGroupRoundExample,
 ButtonGroupSizeExample,
-ButtonGroupToggleExample,
 ButtonGroupUppercaseExample,
 ButtonGroupVariantExample,
 }
