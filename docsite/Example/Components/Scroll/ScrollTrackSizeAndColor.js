@@ -22,7 +22,7 @@ const ScrollTrackSizeAndColor = () => {
             style={{ width: 300, height: 400, backgroundColor: 'rgba(0,0,0,.1)' }}
         >
             {
-                [...Array(25)].map((n, i) =>
+                Array.from(new Array(25)).map((n, i) =>
                     blockScroll(i + 1)
                 )
             }

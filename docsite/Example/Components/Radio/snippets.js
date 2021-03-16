@@ -36,11 +36,12 @@ const styles = {
 }
 const RadioColor = (props) => {
     const { classes } = props
-    const [checkName, setCheckName] = useState('radio1');
+    const [checkName, setCheckName] = useState('radio1')
 
     const handleChange = (e) => {
-        setCheckName(e.target.name);
-    };
+        setCheckName(e.target.name)
+    }
+
     return (
         <div className={classes.base}>
             <Radio onChange={handleChange} checked={checkName === 'radio1'} name="radio1" color="default" />

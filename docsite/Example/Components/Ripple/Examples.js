@@ -5,6 +5,7 @@ import custom_state from './custom_state'
 import RippleBase from './RippleBase'
 import RippleColor from './RippleColor'
 import RippleContrast from './RippleContrast'
+import RippleExample from './RippleExample'
 
 
 const custom_stateExample = () => {
@@ -51,10 +52,22 @@ const RippleContrastExample = () => {
 }
 
 
+const RippleExampleExample = () => {
+	return (
+		<CodeExample
+			title='Example'
+			demo={<RippleExample />}
+			snippet={Snippets.RippleExample}
+		/>
+	)
+}
+
+
 
 export {
     custom_stateExample,
 RippleBaseExample,
 RippleColorExample,
 RippleContrastExample,
+RippleExampleExample,
 }

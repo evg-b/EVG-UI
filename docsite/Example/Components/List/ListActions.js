@@ -11,30 +11,34 @@ const styles = {
     }
 }
 
+const Items = [
+    'Notifications', 'Security', 'Storage', 'Settings', 'Folders'
+]
+
 const ListAction = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
             <List style={{ width: '300px' }}>
                 {
-                    [...Array(5)].map((n, i) =>
+                    Items.map((item, i) =>
                         <ListItem key={i}>
                             <ListItemAction position='start'>
                                 <Checkbox defaultChecked />
                             </ListItemAction>
-                            <ListItemText>ListItem - {i + 1}</ListItemText>
+                            <ListItemText>{item}</ListItemText>
                         </ListItem>
                     )
                 }
             </List>
             <List style={{ width: '300px' }}>
                 {
-                    [...Array(5)].map((n, i) =>
+                    Items.map((item, i) =>
                         <ListItem key={i}>
                             <ListItemAction>
                                 <Checkbox defaultChecked />
                             </ListItemAction>
-                            <ListItemText>ListItem - {i + 1}</ListItemText>
+                            <ListItemText>{item}</ListItemText>
                         </ListItem>
                     )
                 }

@@ -18,7 +18,6 @@ const ScrollBase = () => {
     const handleClick = (mod) => {
         mod ? setCount(count + 1) : setCount(count - 1 < 0 ? 0 : count - 1)
     }
-
     return (
         <div>
             <div style={{ display: 'flex', marginBottom: '10px' }}>
@@ -30,7 +29,7 @@ const ScrollBase = () => {
                 style={{ width: 200, maxHeight: 400, backgroundColor: 'rgba(0,0,0,.1)' }}
             >
                 {
-                    [...Array(count)].map((n, i) =>
+                    Array.from(new Array(count)).map((n, i) =>
                         blockScroll(i + 1)
                     )
                 }

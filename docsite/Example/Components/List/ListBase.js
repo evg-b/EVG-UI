@@ -11,15 +11,19 @@ const styles = {
     }
 }
 
+const Items = [
+    'Notifications', 'Security', 'Storage', 'Settings', 'Folders'
+]
+
 const ListBase = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
             <List style={{ width: '300px' }}>
                 {
-                    [...Array(5)].map((n, i) =>
+                    Items.map((item, i) =>
                         <ListItem key={i} button>
-                            <ListItemText>ListItem - {i + 1}</ListItemText>
+                            <ListItemText>{item}</ListItemText>
                         </ListItem>
                     )
                 }

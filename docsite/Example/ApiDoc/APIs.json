@@ -809,6 +809,80 @@
       }
     }
   },
+  "Carousel — копия": {
+    "description": "",
+    "displayName": "CarouselEVG",
+    "methods": [],
+    "props": {
+      "children": {
+        "type": {
+          "name": "node"
+        },
+        "required": false,
+        "description": "Это контент между открывающим и закрывающим тегом компонента."
+      },
+      "classes": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Объект содержит jss стили компонента."
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Чтобы указать CSS классы, используйте этот атрибут."
+      },
+      "imgs": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "string"
+          }
+        },
+        "required": false,
+        "description": "Массив изображений."
+      },
+      "imgStart": {
+        "type": {
+          "name": "number"
+        },
+        "required": false,
+        "description": "Index стартавого изображения в массиве.",
+        "defaultValue": {
+          "value": "0",
+          "computed": false
+        }
+      },
+      "backgroundColor": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Цвет заденго фона."
+      },
+      "onChangeImg": {
+        "type": {
+          "name": "func"
+        },
+        "required": false,
+        "description": "Вызывается при изменении img."
+      },
+      "mode": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "",
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      }
+    }
+  },
   "Carousel": {
     "description": "Это карусель инструмент для отображения изображений. \r\nПоддерживает жесты и оптимизирован для N-количества элементов.",
     "displayName": "CarouselEVG",
@@ -999,6 +1073,74 @@
       }
     }
   },
+  "CodeExample": {
+    "description": "",
+    "displayName": "CodeExampleEVG",
+    "methods": [],
+    "props": {
+      "children": {
+        "type": {
+          "name": "node"
+        },
+        "required": false,
+        "description": "Это контент между открывающим и закрывающим тегом компонента."
+      },
+      "classes": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Объект содержит jss стили компонента."
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Чтобы указать CSS классы, используйте этот атрибут."
+      },
+      "title": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "title демки.",
+        "defaultValue": {
+          "value": "'Title'",
+          "computed": false
+        }
+      },
+      "demo": {
+        "type": {
+          "name": "node"
+        },
+        "required": false,
+        "description": "Демка с компонентом."
+      },
+      "snippet": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Исходный код компонента в ввиде текста.",
+        "defaultValue": {
+          "value": "''",
+          "computed": false
+        }
+      },
+      "language": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Язык разметки для react-syntax-highlighter.",
+        "defaultValue": {
+          "value": "'jsx'",
+          "computed": false
+        }
+      }
+    }
+  },
   "IconButton": {
     "description": "Button компонент который модифицирован под icons.",
     "displayName": "IconButtonEVG",
@@ -1128,6 +1270,48 @@
         },
         "required": false,
         "description": "Атрибут `alt` содержит текстовое описание изображения. Опционально."
+      }
+    }
+  },
+  "Lightbox — копия": {
+    "description": "",
+    "displayName": "LightboxEVG",
+    "methods": [],
+    "props": {
+      "children": {
+        "type": {
+          "name": "node"
+        },
+        "required": false,
+        "description": "Это контент между открывающим и закрывающим тегом компонента."
+      },
+      "classes": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Объект содержит jss стили компонента."
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Чтобы указать CSS классы, используйте этот атрибут."
+      },
+      "imgs": {
+        "type": {
+          "name": "arrayOf",
+          "value": {
+            "name": "string"
+          }
+        },
+        "required": false,
+        "description": "Массив изображений.",
+        "defaultValue": {
+          "value": "[]",
+          "computed": false
+        }
       }
     }
   },
@@ -2005,6 +2189,45 @@
         "description": "Режим открытия.",
         "defaultValue": {
           "value": "'hover'",
+          "computed": false
+        }
+      }
+    }
+  },
+  "PropDoc": {
+    "description": "",
+    "displayName": "PropDocEVG",
+    "methods": [],
+    "props": {
+      "children": {
+        "type": {
+          "name": "node"
+        },
+        "required": false,
+        "description": "Это контент между открывающим и закрывающим тегом компонента."
+      },
+      "classes": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "Объект содержит jss стили компонента."
+      },
+      "className": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Чтобы указать CSS классы, используйте этот атрибут."
+      },
+      "patient": {
+        "type": {
+          "name": "object"
+        },
+        "required": false,
+        "description": "JSON объект с информацией о props компонента.",
+        "defaultValue": {
+          "value": "{}",
           "computed": false
         }
       }

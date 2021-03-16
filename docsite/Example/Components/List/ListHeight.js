@@ -11,15 +11,37 @@ const styles = {
     }
 }
 
+const Items = [
+    'Captain Shepard',
+    'Garrus Vakarian',
+    'Tali’Zorah nar Rayya',
+    'Liara T’Soni',
+    'Ashley Williams',
+    'Urdnot Wrex',
+    'Jacob Taylor',
+    'Jack',
+    'Legion',
+    'Miranda Lawson',
+    'Mordin Solus',
+    'Morinth',
+    'Samara',
+    'Thane Krios',
+    'EDI',
+    'Javik',
+    'Joker',
+    'The Illusive Man',
+    'David Edvard Anderson'
+]
+
 const ListHeight = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
             <List autoHide={false} color='primary' style={{ width: 300, height: 400 }}>
                 {
-                    [...Array(15)].map((n, i) =>
+                    Items.map((item, i) =>
                         <ListItem key={i} button>
-                            <ListItemText>ListItem - {i + 1}</ListItemText>
+                            <ListItemText>{item}</ListItemText>
                         </ListItem>
                     )
                 }

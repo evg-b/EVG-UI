@@ -13,16 +13,14 @@ const styles = {
 }
 
 const ScrollAutoHide = () => {
-    const blockScroll = (props) => {
-        return <div key={props} style={styles}>{props}</div>
-    }
+    const blockScroll = (key) => <div key={key} style={styles}>{key}</div>
     return (
         <Scroll
             autoHide={true}
             style={{ width: 200, height: 400, backgroundColor: 'rgba(0,0,0,.1)' }}
         >
             {
-                [...Array(25)].map((n, i) =>
+                Array.from(new Array(25)).map((n, i) =>
                     blockScroll(i + 1)
                 )
             }
@@ -46,14 +44,14 @@ const styles = {
 }
 
 const ScrollBase = () => {
-    const blockScroll = (props) => <div key={props} style={styles}>{props}</div>
+    const blockScroll = (key) => <div key={key} style={styles}>{key}</div>
     return (
         <Scroll
             autoHide={false}
             style={{ width: 200, height: 400, backgroundColor: 'rgba(0,0,0,.1)' }}
         >
             {
-                [...Array(25)].map((n, i) =>
+                Array.from(new Array(5)).map((n, i) =>
                     blockScroll(i + 1)
                 )
             }
@@ -75,16 +73,13 @@ const styles = {
     alignItems: 'center',
     backgroundColor: 'rgba(0,0,0,.8)',
 }
- 
+
 const ScrollBase = () => {
     const [count, setCount] = useState(2)
-    const blockScroll = (props) => {
-        return <div key={props} style={styles}>{props}</div>
-    }
+    const blockScroll = (key) => <div key={key} style={styles}>{key}</div>
     const handleClick = (mod) => {
         mod ? setCount(count + 1) : setCount(count - 1 < 0 ? 0 : count - 1)
     }
-
     return (
         <div>
             <div style={{ display: 'flex', marginBottom: '10px' }}>
@@ -96,7 +91,7 @@ const ScrollBase = () => {
                 style={{ width: 200, maxHeight: 400, backgroundColor: 'rgba(0,0,0,.1)' }}
             >
                 {
-                    [...Array(count)].map((n, i) =>
+                    Array.from(new Array(count)).map((n, i) =>
                         blockScroll(i + 1)
                     )
                 }
@@ -117,12 +112,11 @@ const styles = {
     display: 'flex',
     justifyContent: 'center',
     alignItems: 'center',
-    backgroundColor: 'rgba(0,0,0,.8)', 
+    backgroundColor: 'rgba(0,0,0,.8)',
 }
+
 const ScrollTrackSizeAndColor = () => {
-    const blockScroll = (props) => {
-        return <div key={props} style={styles}>{props}</div>
-    }
+    const blockScroll = (key) => <div key={key} style={styles}>{key}</div>
     return (
         <Scroll
             autoHide={false}
@@ -131,7 +125,7 @@ const ScrollTrackSizeAndColor = () => {
             style={{ width: 300, height: 400, backgroundColor: 'rgba(0,0,0,.1)' }}
         >
             {
-                [...Array(25)].map((n, i) =>
+                Array.from(new Array(25)).map((n, i) =>
                     blockScroll(i + 1)
                 )
             }
@@ -155,16 +149,15 @@ const styles = {
 }
 
 const ScrollVerticalAndHorizontal = () => {
-    const blockScroll = (props) => {
-        return <div key={props} style={styles}>{props}</div>
-    }
+    const blockScroll = (key) => <div key={key} style={styles}>{key}</div>
     return (
         <Scroll
-            color="#FFFFFF"
+            color='#FFFFFF'
             style={{ width: 400, height: 400 }}
+            autoHide={false}
         >
             {
-                [...Array(25)].map((n, i) =>
+                Array.from(new Array(25)).map((n, i) =>
                     blockScroll(i + 1)
                 )
             }

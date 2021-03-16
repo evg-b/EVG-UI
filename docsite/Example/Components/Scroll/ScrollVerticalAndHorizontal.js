@@ -21,7 +21,7 @@ const ScrollVerticalAndHorizontal = () => {
             autoHide={false}
         >
             {
-                [...Array(25)].map((n, i) =>
+                Array.from(new Array(25)).map((n, i) =>
                     blockScroll(i + 1)
                 )
             }

@@ -11,16 +11,20 @@ const styles = {
     }
 }
 
+const Items = [
+    'Captain Shepard', 'Garrus Vakarian', 'Tali’Zorah nar Rayya', 'Liara T’Soni', 'Ashley Williams', 'Urdnot Wrex'
+]
+
 const ListAvatar = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
             <List style={{ width: '300px' }}>
                 {
-                    [...Array(5)].map((n, i) =>
+                    Items.map((item, i) =>
                         <ListItem key={i} button>
                             <ListItemAvatar><Avatar /></ListItemAvatar>
-                            <ListItemText>ListItem - {i + 1}</ListItemText>
+                            <ListItemText>{item}</ListItemText>
                         </ListItem>
                     )
                 }
