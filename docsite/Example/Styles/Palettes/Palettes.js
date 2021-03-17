@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames'
 import { Color, colors, withStyles } from '@evg-b/evg-ui';
 
 const {
@@ -49,7 +48,7 @@ const MapColor = {
 const styles = {
     base: {
         display: 'grid',
-        gridTemplateColumns: '1fr 1fr 1fr',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
         gridGap: '20px',
     },
     palette: {
@@ -58,7 +57,6 @@ const styles = {
     },
     tone: {
         height: '50px',
-        width: '250px',
         display: 'flex',
         justifyContent: 'space-between',
         alignItems: 'center',
@@ -68,12 +66,9 @@ const styles = {
 
 const Palettes = (props) => {
     const { classes } = props
+
     return (
-        <div
-            className={classNames(
-                classes.base,
-            )}
-        >
+        <div className={classes.base}>
             {
                 Object.keys(MapColor).map((key, index) => {
                     return (

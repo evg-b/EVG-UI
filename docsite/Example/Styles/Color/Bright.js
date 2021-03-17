@@ -1,21 +1,14 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React from 'react';
 import { Color, withStyles } from '@evg-b/evg-ui';
-import classNames from 'classnames'
-
 
 const styles = {
     base: {
         display: 'flex',
-        // display: 'grid',
-        // gridTemplateColumns: 'repeat(10, 1fr)',
-        // flexWrap: 'wrap',
-        // justifyContent: 'space-between',
         margin: '10px 0',
     },
     tone: {
         height: '60px',
         width: '60px',
-        // borderRadius: 6,
         display: 'inline-flex',
         justifyContent: 'center',
         alignItems: 'center',
@@ -23,27 +16,18 @@ const styles = {
     }
 }
 
-const brightChange = React.forwardRef(function brightChange(props, ref) {
-    const {
-        classes,
-        className,
-        children,
-        component: Component = 'div',
-        ...otherProps
-    } = props
+const brightChange = (props) => {
+    const { classes } = props
 
     return (
-        <Component
-            // className={classes.base}
-            ref={ref}
-            {...otherProps}
-        >
+        <div>
             <div className={classes.base}>
                 {
-                    [...Array(13)].map((color, index) => {
+                    Array.from(new Array(13)).map((n, index) => {
                         let ColorEVG = Color('orange').Bright('hex', index * 5)
                         return (
                             <div
+                                key={index}
                                 className={classes.tone}
                                 style={{
                                     backgroundColor: ColorEVG,
@@ -58,10 +42,11 @@ const brightChange = React.forwardRef(function brightChange(props, ref) {
             </div>
             <div className={classes.base}>
                 {
-                    [...Array(13)].map((color, index) => {
+                    Array.from(new Array(13)).map((n, index) => {
                         let ColorEVG = Color('orange').Bright('hex', -index * 5)
                         return (
                             <div
+                                key={index}
                                 className={classes.tone}
                                 style={{
                                     backgroundColor: ColorEVG,
@@ -74,9 +59,8 @@ const brightChange = React.forwardRef(function brightChange(props, ref) {
                     })
                 }
             </div>
-
-        </Component >
+        </div>
     )
-})
+}
 
 export default withStyles(styles)(brightChange)

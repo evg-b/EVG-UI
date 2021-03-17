@@ -1,6 +1,5 @@
 import React from 'react';
 import { Color, withStyles } from '@evg-b/evg-ui';
-import classNames from 'classnames'
 
 const styles = {
     base: {
@@ -24,24 +23,11 @@ const MapContrast = [
     '#EEEEEE',
 ]
 
-const Contrast = React.forwardRef(function Contrast(props, ref) {
-    const {
-        classes,
-        className,
-        children,
-        component: Component = 'div',
-        ...otherProps
-    } = props
+const Contrast = (props) => {
+    const { classes } = props
 
     return (
-        <Component
-            className={classNames(
-                classes.base,
-                className,
-            )}
-            ref={ref}
-            {...otherProps}
-        >
+        <div className={classes.base}>
             {
                 MapContrast.map((color, id) => {
                     return (
@@ -58,8 +44,8 @@ const Contrast = React.forwardRef(function Contrast(props, ref) {
                     )
                 })
             }
-        </Component >
+        </div>
     )
-})
+}
 
 export default withStyles(styles)(Contrast)

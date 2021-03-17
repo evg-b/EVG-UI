@@ -1,5 +1,4 @@
 import React from 'react';
-import classNames from 'classnames'
 import { Elevation, withStyles } from '@evg-b/evg-ui'
 
 const styles = {
@@ -21,31 +20,18 @@ const styles = {
     }
 }
 
-const Elevations = React.forwardRef(function Palettes(props, ref) {
-    const {
-        classes,
-        className,
-        children,
-        component: Component = 'div',
-        ...otherProps
-    } = props
+const Elevations = (props) => {
+    const { classes } = props
 
     return (
-        <Component
-            className={classNames(
-                classes.base,
-                className,
-            )}
-            ref={ref}
-            {...otherProps}
-        >
+        <div className={classes.base}>
             {
                 Array.from(new Array(25)).map((n, i) =>
                     <div key={i} className={classes.ElevationBox} style={Elevation(i)}>{i}</div>
                 )
             }
-        </Component>
+        </div>
     )
-})
+}
 
 export default withStyles(styles)(Elevations)

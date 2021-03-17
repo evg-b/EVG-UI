@@ -1,15 +1,10 @@
 import React from 'react';
 import { Elevation, Color, ListItem, ListItemText, ListItemAvatar, withStyles } from '@evg-b/evg-ui';
-import classNames from 'classnames'
 
 const styles = {
     base: {
         display: 'grid',
-        // gridTemplateColumns: '1fr 1fr 1fr',
-        // gridTemplateColumns: 'repeat(3, 1fr)',
-        // gridTemplateColumns: 'repeat(auto-fill, minmax(1fr, 1fr))',
         gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-        // gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
         marginTop: 35,
         marginBottom: 60,
     },
@@ -25,27 +20,17 @@ const styles = {
 }
 
 
-const ColorInfo = React.forwardRef(function ColorInfo(props, ref) {
+const ColorInfo = (props) => {
     const {
         classes,
-        className,
-        children,
-        component: Component = 'div',
         colors = ['red700', 'red300'], // [color,color,...]
         full = false,
-        ...otherProps
     } = props
 
     const ColorBase = (color) => <span>Color(<span className={classes.textColor}>{color}</span>).Base()</span>
 
     return (
-        <Component
-            className={classNames(
-                classes.base,
-            )}
-            ref={ref}
-            {...otherProps}
-        >
+        <div className={classes.base}>
             {
                 colors.map((color, index) => {
                     let colorFix = color === 'primary' ? 'blue600' : color
@@ -62,9 +47,8 @@ const ColorInfo = React.forwardRef(function ColorInfo(props, ref) {
                     )
                 })
             }
-
-        </Component >
+        </div>
     )
-})
+}
 
 export default withStyles(styles)(ColorInfo)
