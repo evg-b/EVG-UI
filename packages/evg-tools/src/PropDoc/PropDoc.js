@@ -12,14 +12,12 @@ const styles = {
         color: '#1d1d1f',
     },
     table: {
-        display: 'table',
-        // minWidth: '100%',
+        overflow: 'hidden',
+        overflowX: 'auto',
+        display: 'block',
         width: '100%',
-        // border: 0,
-        // whiteSpace: 'nowrap',
         borderCollapse: 'collapse',
         wordBreak: 'normal',
-        // tableLayout: 'fixed',
         textAlign: 'left',
         '& td,& th': {
             border: 0,
@@ -49,9 +47,8 @@ const styles = {
                 width: '15%',
             },
             '&:nth-child(2)': {
-                // minWidth: '10%',
+                whiteSpace: 'pre-line',
                 maxWidth: '28%',
-                // width: '25%',
                 color: '#7B1FA2',
                 fontWeight: 500,
             },
@@ -59,7 +56,6 @@ const styles = {
                 width: '10%',
             },
             '&:nth-child(4)': {
-                // width: '28%',
             },
         }
     }
@@ -68,9 +64,9 @@ const ValueDetectArr = (value) => {
     if (Array.isArray(value)) {
         return value.reduce((mem, val, index, arr) => {
             if (Array.isArray(val.value)) {
-                return mem + `${val.name}[${ValueDetectArr(val.value)}] or `
+                return mem + `${val.name}[\n${ValueDetectArr(val.value)}\n] or `
             } else {
-                return mem + `${val.value || val.name}${index === arr.length - 1 ? '' : ', '}`
+                return mem + `${val.value || val.name}${index === arr.length - 1 ? '' : ',\n '}`
             }
         }, ``)
     } else {
@@ -114,7 +110,7 @@ const PropDoc = React.forwardRef(function PropDoc(props, ref) {
         <>
             {full && Description()}
 
-            <div className={classes.base} {...otherProps}>
+            <div ref={ref} className={classes.base} {...otherProps}>
                 <table className={classes.table}>
                     <thead>
                         <tr className={classNames(classes.Tr, classes.TrHeaderTh)}>
@@ -134,6 +130,7 @@ const PropDoc = React.forwardRef(function PropDoc(props, ref) {
         </>
     )
 })
+
 PropDoc.propTypes = {
     /**
     * Это контент между открывающим и закрывающим тегом компонента.

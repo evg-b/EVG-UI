@@ -1,6 +1,6 @@
 {
   "name": "@evg-b/evg-tools",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "EVG-TOOLS, tools for doc EVG-UI.",
   "main": "dist/index.js",
   "keywords": [
