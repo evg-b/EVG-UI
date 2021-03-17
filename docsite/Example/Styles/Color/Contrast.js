@@ -4,13 +4,12 @@ import classNames from 'classnames'
 
 const styles = {
     base: {
-        display: 'flex',
-        flexWrap: 'wrap',
-        justifyContent: 'space-between',
+        display: 'grid',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(150px, 1fr))',
+        gridGap: '20px',
     },
     tone: {
         height: '50px',
-        width: '200px',
         display: 'inline-flex',
         justifyContent: 'center',
         alignItems: 'center',

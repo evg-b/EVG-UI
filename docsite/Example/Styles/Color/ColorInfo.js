@@ -5,7 +5,11 @@ import classNames from 'classnames'
 const styles = {
     base: {
         display: 'grid',
-        gridTemplateColumns: '1fr 1fr 1fr',
+        // gridTemplateColumns: '1fr 1fr 1fr',
+        // gridTemplateColumns: 'repeat(3, 1fr)',
+        // gridTemplateColumns: 'repeat(auto-fill, minmax(1fr, 1fr))',
+        gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
+        // gridTemplateColumns: 'repeat(auto-fit, minmax(250px, 1fr))',
         marginTop: 35,
         marginBottom: 60,
     },
@@ -27,9 +31,12 @@ const ColorInfo = React.forwardRef(function ColorInfo(props, ref) {
         className,
         children,
         component: Component = 'div',
-        colors = ['red700', 'red300'], // [color,color]
+        colors = ['red700', 'red300'], // [color,color,...]
+        full = false,
         ...otherProps
     } = props
+
+    const ColorBase = (color) => <span>Color(<span className={classes.textColor}>{color}</span>).Base()</span>
 
     return (
         <Component
@@ -48,7 +55,9 @@ const ColorInfo = React.forwardRef(function ColorInfo(props, ref) {
                             <ListItemAvatar>
                                 <span className={classes.tone} style={{ backgroundColor: colorObject }}></span>
                             </ListItemAvatar>
-                            <ListItemText secondaryText={colorObject} style={{ fontWeight: 500 }}>Color(<span className={classes.textColor}>'{color}'</span>).Base()</ListItemText>
+                            <ListItemText secondaryText={colorObject} style={{ fontWeight: 500 }}>
+                                {full ? ColorBase(color) : color}
+                            </ListItemText>
                         </ListItem>
                     )
                 })
