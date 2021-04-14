@@ -1,6 +1,6 @@
 {
   "name": "@evg-b/evg-ui",
-  "version": "0.0.1",
+  "version": "0.0.2",
   "description": "EVG-UI library inspired by Material Design.",
   "main": "dist/index.js",
   "keywords": [

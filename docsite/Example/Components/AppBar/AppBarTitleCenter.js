@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar } from '@evg-b/evg-ui';
+import { AppBar, IconButton } from '@evg-b/evg-ui';
 import { Menu } from '@evg-b/evg-icons';
 
 const AppBarTitleCenter = () => {
@@ -9,7 +9,7 @@ const AppBarTitleCenter = () => {
             position='static'
             color='primary'
             titleCenter
-            left={<Menu />}
+            left={<IconButton><Menu /></IconButton>}
         />
     )
 }

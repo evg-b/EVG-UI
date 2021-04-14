@@ -1,5 +1,5 @@
 import React from 'react';
-import { AppBar } from '@evg-b/evg-ui';
+import { AppBar, IconButton } from '@evg-b/evg-ui';
 import { Menu, MoreVert, Fullscreen } from '@evg-b/evg-icons';
 
 const AppBarLeftAndRight = () => {
@@ -8,11 +8,11 @@ const AppBarLeftAndRight = () => {
             title='EVG-UI left/right'
             position='static'
             color='primary'
-            left={<Menu />}
+            left={<IconButton><Menu /></IconButton>}
             right={
                 <>
-                    <Fullscreen />
-                    <MoreVert />
+                    <IconButton><Fullscreen /></IconButton>
+                    <IconButton><MoreVert /></IconButton>
                 </>
             }
         />

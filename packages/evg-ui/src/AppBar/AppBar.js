@@ -16,44 +16,24 @@ const styles = {
         backgroundColor: props => props.Color.Base(),
         color: props => props.Color.Contrast(),
     },
-    positionTop: {
+    top: {
         top: 0,
     },
-    positionBottom: {
+    bottom: {
         bottom: 0,
     },
     case: {
         display: 'flex',
     },
     left: {
-        justifyContent: 'flex-start',
         paddingLeft: '16px',
-        '& *:first-child': {
-            paddingLeft: '0',
-        },
-        '& *:last-child': {
-            paddingRight: '0',
-        },
-        '& *': {
-            padding: '0 12px',
-        },
     },
     title: {
         flex: 1,
         paddingLeft: '32px',
-        '& *:not(:first-child)': {
-            paddingLeft: '24px',
-        },
     },
     right: {
-        justifyContent: 'flex-end',
         paddingRight: '16px',
-        '& *:last-child': {
-            paddingRight: '0',
-        },
-        '& *': {
-            padding: '0 12px',
-        },
     },
     titleCenter: {
         justifyContent: 'center',
@@ -139,14 +119,14 @@ AppBar.propTypes = {
     children: PropTypes.any,
 
     /**
-     * Позиционирование компонента на странице
-    */
-    position: PropTypes.oneOf(['absolute', 'fixed', 'relative', 'static', 'sticky']),
-
-    /**
      * Название цвета в разных форматах.
     */
     color: PropTypes.string,
+
+    /**
+     * Позиционирование компонента на странице
+    */
+    position: PropTypes.oneOf(['absolute', 'fixed', 'relative', 'static', 'sticky']),
 
     /**
      * Контейнер элементов в левой части. 

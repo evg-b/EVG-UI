@@ -25,6 +25,17 @@
         "required": false,
         "description": "Это свойство не реализуется."
       },
+      "color": {
+        "type": {
+          "name": "string"
+        },
+        "required": false,
+        "description": "Название цвета в разных форматах.",
+        "defaultValue": {
+          "value": "'default'",
+          "computed": false
+        }
+      },
       "position": {
         "type": {
           "name": "enum",
@@ -55,17 +66,6 @@
         "description": "Позиционирование компонента на странице",
         "defaultValue": {
           "value": "'fixed'",
-          "computed": false
-        }
-      },
-      "color": {
-        "type": {
-          "name": "string"
-        },
-        "required": false,
-        "description": "Название цвета в разных форматах.",
-        "defaultValue": {
-          "value": "'default'",
           "computed": false
         }
       },
