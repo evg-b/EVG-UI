@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '../styles'
-import ListItem from '../ListItem'
-import ListItemText from '../ListItemText'
+import ListItem from '../ListItem/ListItem'
+import ListItemText from '../ListItemText/ListItemText'
 
 const styles = {
     base: {

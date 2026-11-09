@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '../styles'
-import IconButton from '../IconButton'
+import IconButton from '../IconButton/IconButton'
 
 const styles = {
     base: {

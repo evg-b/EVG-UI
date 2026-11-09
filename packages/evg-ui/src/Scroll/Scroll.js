@@ -2,7 +2,7 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '../styles'
-import TouchDriver from '../TouchDriver'
+import TouchDriver from '../TouchDriver/TouchDriver'
 
 const styles = {
     base: {

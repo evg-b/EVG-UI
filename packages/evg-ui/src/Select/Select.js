@@ -2,10 +2,10 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Elevation, withStyles } from '../styles'
-import TextField from '../TextField'
-import List from '../List'
-import SelectOption from '../SelectOption'
-import Popup from '../Popup'
+import TextField from '../TextField/TextField'
+import List from '../List/List'
+import SelectOption from '../SelectOption/SelectOption'
+import Popup from '../Popup/Popup'
 import { ExpandMore } from '../internal/icons/Select';
 
 const styles = {

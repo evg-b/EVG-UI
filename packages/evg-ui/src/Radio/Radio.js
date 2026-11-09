@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '../styles'
 import classNames from 'classnames';
-import SwitchBase from '../SwitchBase'
+import SwitchBase from '../SwitchBase/SwitchBase'
 import { RadioButtonCircle, RadioButtonUnchecked } from '../internal/icons/Radio'
 
 const styles = {

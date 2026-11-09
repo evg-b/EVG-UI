@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Color, withStyles } from '../styles'
-import SwitchBase from '../SwitchBase'
+import SwitchBase from '../SwitchBase/SwitchBase'
 import {
     CheckBoxCheck,
     CheckBoxOutlineBlank,

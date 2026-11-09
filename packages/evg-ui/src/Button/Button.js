@@ -2,8 +2,8 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames'
 import { Elevation, withStyles } from '../styles'
-import ButtonBase from '../ButtonBase'
-import Loader from '../Loader'
+import ButtonBase from '../ButtonBase/ButtonBase'
+import Loader from '../Loader/Loader'
 
 const styles = {
     base: {

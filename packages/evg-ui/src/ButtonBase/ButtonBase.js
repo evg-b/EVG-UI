@@ -2,7 +2,7 @@ import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from '../styles'
 import classNames from 'classnames'
-import Ripple from '../Ripple';
+import Ripple from '../Ripple/Ripple';
 
 const styles = {
     base: {

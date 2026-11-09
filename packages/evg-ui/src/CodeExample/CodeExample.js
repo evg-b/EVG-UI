@@ -2,9 +2,9 @@ import React, { useState, useEffect, useRef } from 'react';
 import PropTypes from 'prop-types';
 import { withStyles } from 'react-jss';
 import classNames from 'classnames';
-import IconButton from '../IconButton'
-import Scroll from '../Scroll'
-import Tooltip from '../Tooltip'
+import IconButton from '../IconButton/IconButton'
+import Scroll from '../Scroll/Scroll'
+import Tooltip from '../Tooltip/Tooltip'
 import { Code, Visibility } from '../internal/icons/CodeExample'
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter';
 import SyntaxStyle from 'react-syntax-highlighter/dist/esm/styles/prism/okaidia';

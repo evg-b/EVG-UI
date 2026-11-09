@@ -2,8 +2,8 @@ import React, { useState, useEffect, useRef, useLayoutEffect, useCallback } from
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Color, withStyles } from '../styles'
-import Image from '../Image'
-import TouchDriver from '../TouchDriver';
+import Image from '../Image/Image'
+import TouchDriver from '../TouchDriver/TouchDriver';
 import { ChevronLeft, ChevronRight, } from '../internal/icons/Carousel';
 
 const absolutePosition = {

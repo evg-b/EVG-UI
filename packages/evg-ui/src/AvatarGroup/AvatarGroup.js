@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '../styles'
-import Avatar from '../Avatar'
+import Avatar from '../Avatar/Avatar'
 
 const styles = {
     base: {

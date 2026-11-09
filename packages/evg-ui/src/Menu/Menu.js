@@ -1,8 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { Elevation, withStyles } from '../styles'
-import Popup from '../Popup'
-import List from '../List'
+import Popup from '../Popup/Popup'
+import List from '../List/List'
 
 const styles = {
     base: {

@@ -2,7 +2,7 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { Color, withStyles } from '../styles'
-import Scroll from '../Scroll'
+import Scroll from '../Scroll/Scroll'
 
 const styles = {
     base: {

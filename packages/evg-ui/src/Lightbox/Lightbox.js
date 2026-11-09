@@ -2,11 +2,11 @@ import React, { useState, useEffect, useRef, useCallback } from 'react';
 import PropTypes from 'prop-types';
 import classNames from 'classnames';
 import { withStyles } from '../styles'
-import TouchDriver from '../TouchDriver'
-import Modal from '../Modal'
-import Carousel from '../Carousel'
+import TouchDriver from '../TouchDriver/TouchDriver'
+import Modal from '../Modal/Modal'
+import Carousel from '../Carousel/Carousel'
 import calcMaxSizeRatio from '../utils/calcMaxSizeRatio'
-import Image from '../Image'
+import Image from '../Image/Image'
 
 const absolutePosition = {
     position: 'absolute',
