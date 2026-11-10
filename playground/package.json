@@ -12,6 +12,7 @@
     "@evg-b/evg-tools": "*",
     "@evg-b/evg-ui": "*",
     "react": "^16.8.4",
-    "react-dom": "^16.8.4"
+    "react-dom": "^16.8.4",
+    "styled-components": "^6.6.0"
   }
 }

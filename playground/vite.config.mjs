@@ -5,7 +5,7 @@ export default defineConfig({
     jsx: { runtime: 'classic' }
   },
   resolve: {
-    dedupe: ['react', 'react-dom']
+    dedupe: ['react', 'react-dom', 'styled-components']
   },
   optimizeDeps: {
     // Vite следит за dist пакетов и не сохраняет их в кеше зависимостей.

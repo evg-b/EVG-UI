@@ -14,7 +14,9 @@
 
 ### Установка
 ```sh
-npm install @evg-b/evg-ui --save или yarn add @evg-b/evg-ui
+npm install @evg-b/evg-ui styled-components
+# или
+yarn add @evg-b/evg-ui styled-components
 ```
 
 ### Usage
@@ -99,8 +101,69 @@ yarn dev
 как ES-модули с сохранением структуры файлов, точкой входа `dist/index.js`
 и source maps. JSX в старых `.js` преобразуется в `React.createElement`.
 Цель компиляции — ES2015, полифиллы не добавляются. Зависимости пакетов
-остаются внешними, включая их вложенные импорты. React 16 и JSS сохранены.
+остаются внешними, включая их вложенные импорты. React 16 сохранён,
+стили компонентов используют styled-components 6.
 Старый `docsite` имеет собственную сборку Docusaurus.
+
+### TypeScript
+
+В проект добавлен TypeScript 7.0.2 и типы для React 16. Компоненты,
+содержавшие `propTypes`, перенесены в `.tsx`; их props описаны в соседних
+файлах `ComponentName.types.ts`. Типы публичных компонентов экспортируются
+из `src/index.ts` соответствующего пакета.
+
+Общий `tsconfig.json` допускает оставшиеся JavaScript-файлы через `allowJs`.
+Команда `yarn typecheck` предназначена для отдельной проверки типов;
+Vite выполняет транспиляцию при сборке. Генерация деклараций `.d.ts`
+в текущую сборку не подключена.
+
+### Стили и тема
+
+Стили находятся в `ComponentName.styled.ts` и подключаются в компоненте
+через `import * as Styled`. Стилизация другого React-компонента видна
+в JSX: `<Styled.Action as={Button}>`. Значения только для CSS передаются
+через transient props с префиксом `$`.
+
+`styled-components` — peer dependency библиотек `evg-ui` и `evg-tools`;
+приложение должно использовать общий экземпляр этой зависимости.
+
+Для темы используется цепочка `generateTokens` → `createTheme` → `ThemeProvider`.
+`generateTokens` принимает исходные цвета `primaryColor`, `secondaryColor`,
+`errorColor`, `warningColor` и `successColor`, возвращая полные наборы `light`
+и `dark`. `createTheme` принимает выбранный набор `tokens` и необязательный
+`fontFamily`. В компонентах читается текущая тема из provider; именованные
+цвета `primary`, `secondary`, `default`, `surface`, `warn`, `success` и `fail`
+связаны с её токенами.
+
+```tsx
+import React from 'react'
+import {
+  Button,
+  ThemeProvider,
+  createTheme,
+  generateTokens
+} from '@evg-b/evg-ui'
+
+const tokens = generateTokens({ primaryColor: '#1e88e5' })
+const darkTheme = createTheme({ tokens: tokens.dark })
+
+export const Example = () => (
+  <ThemeProvider theme={darkTheme}>
+    <Button color="primary" variant="contained">Сохранить</Button>
+  </ThemeProvider>
+)
+```
+
+В стенде доступны переключение светлой/тёмной темы и выбор основного цвета.
+Для изменения одного токена передайте полный набор со своим значением:
+`createTheme({ tokens: { ...tokens.light, surface: '#fafafa' } })`.
+Без provider компоненты используют стандартную светлую тему.
+
+JSS API `withStyles`, `classes`, `setTheme` и `useChangeTheme` удалён.
+Для внешней стилизации остаются `className`, нативные атрибуты и композиция
+через `as`; тема переключается передачей нового объекта в `ThemeProvider`.
+Утилиты `Color` и `Elevation` сохранены, `getColor(theme, color)` учитывает тему.
+Старые JSS-примеры в `docsite` требуют отдельного переноса на новый API.
 
 
 ### Сообщить о проблеме

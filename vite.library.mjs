@@ -23,7 +23,7 @@ export const createLibraryConfig = (configUrl) => {
       minify: false,
       reportCompressedSize: false,
       lib: {
-        entry: resolve(root, 'src/index.js'),
+        entry: resolve(root, 'src/index.ts'),
         formats: ['es']
       },
       rolldownOptions: {
