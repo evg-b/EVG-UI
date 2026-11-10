@@ -1,4 +1,5 @@
-import React, { useState, useMemo } from 'react'
+import { useState, useMemo } from 'react'
+
 import { Add, Check, Favorite } from '@evg-b/evg-icons'
 import { CodeExample } from '@evg-b/evg-tools'
 import {
@@ -10,6 +11,7 @@ import {
   createTheme,
   generateTokens
 } from '@evg-b/evg-ui'
+
 import * as Styled from './App.styled'
 
 const App = () => {

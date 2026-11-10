@@ -21,6 +21,8 @@ module.exports = {
         "react-hooks",
     ],
     rules: {
+        "react/react-in-jsx-scope": "off",
+        "react/jsx-uses-react": "off",
         "no-unused-vars": "off",
         // "react/sort-prop-types": "error",
         // "react/jsx-closing-bracket-location": "warn",

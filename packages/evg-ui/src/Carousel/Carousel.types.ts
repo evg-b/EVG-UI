@@ -1,6 +1,8 @@
-import type { HTMLAttributes, ReactNode } from 'react'
+import type { Ref, HTMLAttributes, ReactNode } from 'react'
 
 type CarouselOwnProps = {
+  ref?: Ref<HTMLDivElement>
+
   // Чтобы указать CSS классы, используйте этот атрибут.
   className?: string
 
@@ -38,4 +40,10 @@ export type CarouselStyledProps = {
   $v_zone_comeback?: boolean
   $backgroundColor?: CarouselProps['backgroundColor']
   $duration?: CarouselProps['duration']
+}
+
+export type CarouselImages = {
+  left: ReactNode
+  center: ReactNode
+  right: ReactNode
 }

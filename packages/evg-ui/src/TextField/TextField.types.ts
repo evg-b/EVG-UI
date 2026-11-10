@@ -1,4 +1,5 @@
 import type {
+  Ref,
   ChangeEventHandler,
   ElementType,
   InputHTMLAttributes,
@@ -6,6 +7,8 @@ import type {
 } from 'react'
 
 type TextFieldOwnProps = {
+  ref?: Ref<HTMLInputElement | HTMLTextAreaElement>
+
   // Чтобы указать CSS классы, используйте этот атрибут.
   className?: string
 
@@ -26,6 +29,9 @@ type TextFieldOwnProps = {
 
   // Value - number или string.
   value?: string | number
+
+  // Начальное значение при работе без value.
+  defaultValue?: string | number
 
   // label текст.
   labelText?: string

@@ -1,4 +1,5 @@
 import type {
+  Ref,
   CSSProperties,
   ElementType,
   HTMLAttributes,
@@ -7,6 +8,8 @@ import type {
 } from 'react'
 
 type ScrollOwnProps = {
+  ref?: Ref<HTMLElement>
+
   // Это контент между открывающим и закрывающим тегом компонента.
   children?: ReactNode
 

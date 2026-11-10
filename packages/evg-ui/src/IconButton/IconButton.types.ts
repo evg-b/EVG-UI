@@ -1,8 +1,10 @@
-import type { ElementType, ReactNode } from 'react'
+import type { Ref, ElementType, ReactNode } from 'react'
 
 import type { ButtonBaseProps } from '../ButtonBase/ButtonBase.types'
 
 type IconButtonOwnProps = {
+  ref?: Ref<HTMLElement>
+
   // Это контент между открывающим и закрывающим тегом компонента.
   children?: ReactNode
 

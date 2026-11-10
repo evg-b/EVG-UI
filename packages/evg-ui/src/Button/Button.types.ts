@@ -1,8 +1,11 @@
-import type { ElementType, ReactElement, ReactNode } from 'react'
+import type { Ref, ElementType, ReactElement, ReactNode } from 'react'
 
 import type { ButtonBaseProps } from '../ButtonBase/ButtonBase.types'
+import type { SvgIconProps } from '../SvgIcon/SvgIcon.types'
 
 type ButtonOwnProps = {
+  ref?: Ref<HTMLElement>
+
   // Это контент между открывающим и закрывающим тегом компонента.
   children?: ReactNode
 
@@ -34,10 +37,10 @@ type ButtonOwnProps = {
   loading?: boolean
 
   // Контейнер элементов в начале.
-  startIcon?: ReactElement
+  startIcon?: ReactElement<Pick<SvgIconProps, 'size'>>
 
   // Контейнер элементов в конце.
-  endIcon?: ReactElement
+  endIcon?: ReactElement<Pick<SvgIconProps, 'size'>>
 }
 
 export type ButtonProps = Omit<ButtonBaseProps, keyof ButtonOwnProps> &

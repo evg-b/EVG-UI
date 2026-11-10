@@ -6,7 +6,9 @@ import { defineConfig } from 'vite'
 
 export const createLibraryConfig = (configUrl) => {
   const root = dirname(fileURLToPath(configUrl))
-  const manifest = JSON.parse(readFileSync(resolve(root, 'package.json'), 'utf8'))
+  const manifest = JSON.parse(
+    readFileSync(resolve(root, 'package.json'), 'utf8')
+  )
   const dependencies = Object.keys({
     ...manifest.dependencies,
     ...manifest.peerDependencies
@@ -15,7 +17,7 @@ export const createLibraryConfig = (configUrl) => {
   return defineConfig({
     root,
     oxc: {
-      jsx: { runtime: 'classic' }
+      jsx: { runtime: 'automatic' }
     },
     build: {
       target: 'es2015',
@@ -30,11 +32,10 @@ export const createLibraryConfig = (configUrl) => {
         // Старые компоненты содержат JSX в файлах .js.
         moduleTypes: { '.js': 'jsx' },
         transform: {
-          jsx: { runtime: 'classic' }
+          jsx: { runtime: 'automatic' }
         },
-        external: (id) => dependencies.some(
-          (name) => id === name || id.startsWith(`${name}/`)
-        ),
+        external: (id) =>
+          dependencies.some((name) => id === name || id.startsWith(`${name}/`)),
         output: {
           preserveModules: true,
           preserveModulesRoot: resolve(root, 'src'),

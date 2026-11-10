@@ -87,3 +87,5 @@ export { resolveTheme } from './theme/resolveTheme'
 export { useTheme } from './theme/useTheme'
 export type * from './theme/theme.types'
 export type * from './providers/ThemeProvider/ThemeProvider.types'
+
+export { useMergedRefs } from './hooks/useMergedRefs'

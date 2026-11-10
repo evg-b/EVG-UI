@@ -14,9 +14,9 @@
 
 ### Установка
 ```sh
-npm install @evg-b/evg-ui styled-components
+npm install @evg-b/evg-ui react react-dom styled-components
 # или
-yarn add @evg-b/evg-ui styled-components
+yarn add @evg-b/evg-ui react react-dom styled-components
 ```
 
 ### Usage
@@ -99,15 +99,23 @@ yarn dev
 
 Общая конфигурация Vite находится в `vite.library.mjs`. Библиотеки выпускаются
 как ES-модули с сохранением структуры файлов, точкой входа `dist/index.js`
-и source maps. JSX в старых `.js` преобразуется в `React.createElement`.
+и source maps. JSX, в том числе в старых `.js`, использует automatic runtime
+из `react/jsx-runtime`.
 Цель компиляции — ES2015, полифиллы не добавляются. Зависимости пакетов
-остаются внешними, включая их вложенные импорты. React 16 сохранён,
-стили компонентов используют styled-components 6.
-Старый `docsite` имеет собственную сборку Docusaurus.
+остаются внешними, включая их вложенные импорты. Используются React и React DOM
+19.3.1, стили компонентов — styled-components 6.
+В библиотечных пакетах React и React DOM объявлены как peer dependencies;
+общие экземпляры устанавливаются приложением. В корне они также установлены
+для разработки.
+
+Старый `docsite` имеет собственную сборку Docusaurus 2 alpha. Объявления React
+и React DOM в нём обновлены, но Docusaurus, MDX 1 и ряд его плагинов требуют
+старые версии React и выдают предупреждения peer dependencies при установке.
+Сам сайт документации требует отдельной миграции.
 
 ### TypeScript
 
-В проект добавлен TypeScript 7.0.2 и типы для React 16. Компоненты,
+В проект добавлен TypeScript 7.0.2 и типы React/React DOM 19.3.0. Компоненты,
 содержавшие `propTypes`, перенесены в `.tsx`; их props описаны в соседних
 файлах `ComponentName.types.ts`. Типы публичных компонентов экспортируются
 из `src/index.ts` соответствующего пакета.
@@ -116,6 +124,27 @@ yarn dev
 Команда `yarn typecheck` предназначена для отдельной проверки типов;
 Vite выполняет транспиляцию при сборке. Генерация деклараций `.d.ts`
 в текущую сборку не подключена.
+
+### React API
+
+Функциональные компоненты принимают `ref` как обычный prop, описанный
+в `ComponentName.types.ts`. Значения по умолчанию задаются в параметрах функций.
+Классовый `Cubes` сохраняет свой API экземпляра; его начальные настройки
+задаются в параметрах функции `getCubesOptions`.
+
+В местах, где компоненту нужен собственный DOM-ref, `useMergedRefs` объединяет
+его со ссылкой потребителя и сохраняет cleanup callback refs из React 19.
+У `TouchDriver` стандартный `ref` указывает на DOM-элемент; `innerRef` сохранён
+как совместимый способ получить тот же узел.
+
+Стенд создаёт корень через `createRoot` из `react-dom/client`. TypeScript,
+Vite и корневая конфигурация Babel используют automatic JSX runtime.
+`TextField` создаёт уникальный id через `useId`, если потребитель не передал id.
+`TextField` и `Switch` поддерживают управляемое значение через `value`/`checked`
+и начальное значение через `defaultValue`/`defaultChecked`.
+
+Описание изменений React API — в
+[официальном руководстве по переходу на React 19](https://react.dev/blog/2024/04/25/react-19-upgrade-guide).
 
 ### Стили и тема
 

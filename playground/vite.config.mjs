@@ -2,7 +2,7 @@ import { defineConfig } from 'vite'
 
 export default defineConfig({
   oxc: {
-    jsx: { runtime: 'classic' }
+    jsx: { runtime: 'automatic' }
   },
   resolve: {
     dedupe: ['react', 'react-dom', 'styled-components']

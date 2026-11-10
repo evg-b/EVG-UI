@@ -1,9 +1,10 @@
-import React, { useState, useEffect, useRef, forwardRef } from 'react'
+import { useState, useEffect, useRef } from 'react'
+
 import type { TabsProps } from './Tabs.types'
-const Tabs = forwardRef<HTMLDivElement, TabsProps>(function Tabs(props, ref) {
-  const { className, children, ...otherProps } = props
+
+const Tabs = ({ ref, className, children, ...otherProps }: TabsProps) => {
   return <div ref={ref} className={className} {...otherProps}></div>
-})
-Tabs.defaultProps = {}
+}
+
 Tabs.displayName = 'TabsEVG'
 export default Tabs

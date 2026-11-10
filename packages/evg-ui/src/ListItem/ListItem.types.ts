@@ -1,6 +1,8 @@
-import type { ElementType, HTMLAttributes, ReactNode } from 'react'
+import type { Ref, ElementType, HTMLAttributes, ReactNode } from 'react'
 
 type ListItemOwnProps = {
+  ref?: Ref<HTMLElement>
+
   // Это контент между открывающим и закрывающим тегом компонента.
   children?: ReactNode
 

@@ -1,22 +1,24 @@
-import React, { useEffect, forwardRef } from 'react'
+import { useEffect } from 'react'
+
 import { createPortal } from 'react-dom'
+
 import type { ModalProps } from './Modal.types'
+
 import * as Styled from './Modal.styled'
 
 // Это окно, которое блокирует работу пользователя с родительским приложением до тех пор, пока пользователь это окно не закроет.
-
 // Подходит для создания диалогов и лайтбоксов.
-const Modal = forwardRef<HTMLElement, ModalProps>(function Modal(props, ref) {
-  const {
-    className,
-    children,
-    component: Component = 'div',
-    open,
-    onClose,
-    isEsc,
-    ...otherProps
-  } = props
 
+const Modal = ({
+  ref,
+  className,
+  children,
+  component: Component = 'div',
+  open = false,
+  onClose,
+  isEsc = true,
+  ...otherProps
+}: ModalProps) => {
   const Close = (e) => {
     if (e.target === e.currentTarget && open) {
       onClose && onClose()
@@ -48,11 +50,7 @@ const Modal = forwardRef<HTMLElement, ModalProps>(function Modal(props, ref) {
         document.body
       )
     : null
-})
-Modal.defaultProps = {
-  open: false,
-  component: 'div',
-  isEsc: true
 }
+
 Modal.displayName = 'ModalEVG'
 export default Modal

@@ -1,4 +1,5 @@
 import type {
+  Ref,
   AnchorHTMLAttributes,
   ButtonHTMLAttributes,
   ElementType,
@@ -6,6 +7,8 @@ import type {
 } from 'react'
 
 type ButtonBaseOwnProps = {
+  ref?: Ref<HTMLElement>
+
   // Это контент между открывающим и закрывающим тегом компонента.
   children?: ReactNode
 

@@ -1,6 +1,8 @@
-import type { HTMLAttributes, ReactNode, RefObject } from 'react'
+import type { Ref, HTMLAttributes, ReactNode, RefObject } from 'react'
 
 type PopupOwnProps = {
+  ref?: Ref<HTMLDivElement>
+
   // Это контент между открывающим и закрывающим тегом компонента.
   children?: ReactNode
 
@@ -8,7 +10,7 @@ type PopupOwnProps = {
   className?: string
 
   // Это ref ссылка по которой прицепляется Popup.
-  target?: RefObject<HTMLElement>
+  target?: RefObject<HTMLElement | null>
 
   // Если true, Popup будет виден.
   open?: boolean

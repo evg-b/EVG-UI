@@ -1,4 +1,4 @@
-import type { HTMLAttributes, ReactNode } from 'react'
+import type { Ref, HTMLAttributes, ReactNode } from 'react'
 
 export type PropDocType = {
   name?: string
@@ -20,6 +20,8 @@ export type PropDocPatient = {
 }
 
 type PropDocOwnProps = {
+  ref?: Ref<HTMLDivElement>
+
   // Это контент между открывающим и закрывающим тегом компонента.
   children?: ReactNode
 

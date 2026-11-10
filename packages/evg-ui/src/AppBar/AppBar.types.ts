@@ -1,6 +1,8 @@
-import type { HTMLAttributes, ReactNode } from 'react'
+import type { Ref, HTMLAttributes, ReactNode } from 'react'
 
 type AppBarOwnProps = {
+  ref?: Ref<HTMLDivElement>
+
   // Чтобы указать CSS классы, используйте этот атрибут.
   className?: string
 

@@ -1,8 +1,10 @@
-import type { ReactNode } from 'react'
+import type { Ref, ReactNode } from 'react'
 
 import type { ListItemProps } from '../ListItem/ListItem.types'
 
 type SelectOptionOwnProps = {
+  ref?: Ref<HTMLElement>
+
   // Это контент между открывающим и закрывающим тегом компонента.
   children?: ReactNode
 

@@ -2,6 +2,7 @@ import React from 'react'
 import { ThemeContext } from 'styled-components'
 import { getColor } from '../theme/getColor'
 import { Color } from '../styles'
+import { getCubesOptions } from './Cubes.helpers'
 import type { CubesProps } from './Cubes.types'
 const config = {
   sizeCub: 40,
@@ -482,6 +483,16 @@ class Cubes extends React.Component<CubesProps> {
     // 1) init
     const ctx = this.Canvas_Ref.current
     setTimeout(() => {
+      const {
+        autopilot,
+        color,
+        fillingX,
+        fillingY,
+        levelMin,
+        levelMax,
+        size,
+        speed
+      } = getCubesOptions(this.props)
       let { width, height } = ctx.parentNode.getBoundingClientRect()
       ctx.width = width
       ctx.height = height
@@ -494,28 +505,32 @@ class Cubes extends React.Component<CubesProps> {
         ctx.height
       )
       this.Overseer.filling(
-        this.props.fillingX,
-        this.props.fillingY,
-        this.props.levelMin,
-        this.props.levelMax,
-        this.props.size
+        fillingX,
+        fillingY,
+        levelMin,
+        levelMax,
+        size
       ) // // 2) start requestAnimationFrame
 
-      this.Overseer.autopilot(this.props.autopilot)
-      this.Overseer.setColor(getColor(this.context, this.props.color).Base())
-      this.Overseer.setSpeed(this.props.speed)
+      this.Overseer.autopilot(autopilot)
+      this.Overseer.setColor(getColor(this.context, color).Base())
+      this.Overseer.setSpeed(speed)
       this.start()
     }, 0)
   }
 
-  componentDidUpdate(prevProps) {
-    const { autopilot, color, speed, size } = prevProps
+  componentDidUpdate(prevProps: CubesProps) {
+    const { autopilot, speed, size } = getCubesOptions(prevProps)
     const {
       autopilot: newAutopilot,
       color: newColor,
       speed: newSpeed,
-      size: newSize
-    } = this.props // autopilot
+      size: newSize,
+      fillingX,
+      fillingY,
+      levelMin,
+      levelMax
+    } = getCubesOptions(this.props) // autopilot
 
     if (autopilot !== newAutopilot) {
       this.Overseer.autopilot(newAutopilot)
@@ -530,13 +545,13 @@ class Cubes extends React.Component<CubesProps> {
     if (size !== newSize) {
       this.Overseer.cubs = []
       this.Overseer.filling(
-        this.props.fillingX,
-        this.props.fillingY,
-        this.props.levelMin,
-        this.props.levelMax,
+        fillingX,
+        fillingY,
+        levelMin,
+        levelMax,
         newSize
       )
-      this.Overseer.autopilot(this.props.autopilot)
+      this.Overseer.autopilot(newAutopilot)
     }
   }
 
@@ -586,15 +601,5 @@ class Cubes extends React.Component<CubesProps> {
   }
 }
 
-Cubes.defaultProps = {
-  autopilot: true,
-  color: '#E0E0E0',
-  fillingX: 0,
-  fillingY: 0,
-  levelMin: 30,
-  levelMax: 100,
-  size: 40,
-  speed: 1
-}
 Cubes.displayName = 'CubesEVG'
 export default Cubes

@@ -1,8 +1,10 @@
-import type { ReactNode } from 'react'
+import type { Ref, ReactNode } from 'react'
 
 import type { PopupProps } from '../Popup/Popup.types'
 
 type TooltipOwnProps = {
+  ref?: Ref<HTMLDivElement>
+
   // Это контент между открывающим и закрывающим тегом компонента.
   children?: ReactNode
 

@@ -1,8 +1,10 @@
-import type { ReactNode } from 'react'
+import type { Ref, ReactNode } from 'react'
 
 import type { SwitchBaseProps } from '../SwitchBase/SwitchBase.types'
 
 type RadioOwnProps = {
+  ref?: Ref<HTMLInputElement>
+
   // Чтобы указать CSS классы, используйте этот атрибут.
   className?: string
 

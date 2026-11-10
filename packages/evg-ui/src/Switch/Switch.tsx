@@ -1,4 +1,4 @@
-import React, { forwardRef, useState, useEffect, useRef } from 'react'
+import { useState } from 'react'
 
 import IconButton from '../IconButton/IconButton'
 
@@ -6,24 +6,23 @@ import type { SwitchProps } from './Switch.types'
 
 import * as Styled from './Switch.styled'
 
-const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
-  { className, children, onChange, color = 'default', ...otherProps },
-  ref
-) {
-  let inputRef = useRef<HTMLInputElement>(null)
-  inputRef = ref || inputRef
-
-  const [isActive, setIsActive] = useState(
-    otherProps.defaultChecked || otherProps.checked || false
-  )
-
-  useEffect(() => {
-    setIsActive(inputRef.current.checked)
-  }, [])
+const Switch = ({
+  ref,
+  className,
+  children,
+  onChange,
+  checked,
+  defaultChecked = false,
+  color = 'default',
+  ...otherProps
+}: SwitchProps) => {
+  const [uncontrolledChecked, setUncontrolledChecked] = useState(defaultChecked)
+  const isActive = checked ?? uncontrolledChecked
 
   const onChangeChecked: SwitchProps['onChange'] = (event) => {
+    if (checked === undefined)
+      setUncontrolledChecked(event.currentTarget.checked)
     onChange?.(event)
-    setIsActive(inputRef.current.checked)
   }
 
   return (
@@ -41,17 +40,16 @@ const Switch = forwardRef<HTMLInputElement, SwitchProps>(function Switch(
         $active={isActive}>
         <Styled.Input
           type="checkbox"
-          ref={inputRef}
+          ref={ref}
+          checked={isActive}
           onChange={onChangeChecked}
-          readOnly
           {...otherProps}
         />
         <Styled.ThumbIcon />
       </Styled.Thumb>
     </Styled.Root>
   )
-})
+}
 
 Switch.displayName = 'SwitchEVG'
-
 export default Switch

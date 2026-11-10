@@ -1,6 +1,8 @@
-import type { InputHTMLAttributes, ReactElement, ReactNode } from 'react'
+import type { Ref, InputHTMLAttributes, ReactElement, ReactNode } from 'react'
 
 type SwitchBaseOwnProps = {
+  ref?: Ref<HTMLInputElement>
+
   // Чтобы указать CSS классы, используйте этот атрибут.
   className?: string
 

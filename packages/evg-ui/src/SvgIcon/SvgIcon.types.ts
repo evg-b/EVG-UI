@@ -1,6 +1,8 @@
-import type { ReactNode, SVGAttributes } from 'react'
+import type { Ref, ReactNode, SVGAttributes } from 'react'
 
 type SvgIconOwnProps = {
+  ref?: Ref<SVGSVGElement>
+
   // Это контент между открывающим и закрывающим тегом компонента.
   children?: ReactNode
 

@@ -1,6 +1,8 @@
-import type { ReactNode, SVGAttributes } from 'react'
+import type { Ref, ReactNode, SVGAttributes } from 'react'
 
 type LoaderOwnProps = {
+  ref?: Ref<SVGSVGElement>
+
   // Чтобы указать CSS классы, используйте этот атрибут.
   className?: string
 

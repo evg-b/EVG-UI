@@ -1,5 +1,5 @@
-import React, { forwardRef } from 'react'
 import type { PropDocProps } from './PropDoc.types'
+
 import * as Styled from './PropDoc.styled'
 
 const ValueDetectArr = (value) => {
@@ -19,71 +19,73 @@ const ValueDetectArr = (value) => {
   }
 }
 
-const PropDoc = forwardRef<HTMLDivElement, PropDocProps>(
-  function PropDoc(props, ref) {
-    const { className, children, patient, full, ...otherProps } = props
+const DEFAULT_PATIENT: NonNullable<PropDocProps['patient']> = {}
 
-    const prop = ({ name, type, defaultValue, description }) => {
-      if (!type) return null // defender wrong JSON
+const PropDoc = ({
+  ref,
+  className,
+  children,
+  patient = DEFAULT_PATIENT,
+  full = false,
+  ...otherProps
+}: PropDocProps) => {
+  const prop = ({ name, type, defaultValue, description }) => {
+    if (!type) return null // defender wrong JSON
 
-      let values
+    let values
 
-      if (type.value) {
-        if (type.name === 'arrayOf') {
-          values = `[${type.value.name}]`
-        } else {
-          values = ValueDetectArr(type.value)
-        }
+    if (type.value) {
+      if (type.name === 'arrayOf') {
+        values = `[${type.value.name}]`
       } else {
-        values = type.name
+        values = ValueDetectArr(type.value)
       }
-
-      return (
-        <Styled.PropertyRow key={name}>
-          <td>{name}</td>
-          <td>{values}</td>
-          <td>{defaultValue ? defaultValue.value : null}</td>
-          <td>{description}</td>
-        </Styled.PropertyRow>
-      )
+    } else {
+      values = type.name
     }
 
-    const Description = () => (
-      <Styled.Description>{patient.description}</Styled.Description>
-    )
-
     return (
-      <>
-        {full && Description()}
-
-        <Styled.Root ref={ref} {...otherProps} className={className}>
-          <Styled.Table>
-            <thead>
-              <Styled.HeaderRow>
-                <th>Name</th>
-                <th>Type</th>
-                <th>Default</th>
-                <th>Description</th>
-              </Styled.HeaderRow>
-            </thead>
-            <tbody>
-              {patient.props &&
-                Object.entries(patient.props).map(([name, p]) =>
-                  prop({
-                    name,
-                    ...p
-                  })
-                )}
-            </tbody>
-          </Styled.Table>
-        </Styled.Root>
-      </>
+      <Styled.PropertyRow key={name}>
+        <td>{name}</td>
+        <td>{values}</td>
+        <td>{defaultValue ? defaultValue.value : null}</td>
+        <td>{description}</td>
+      </Styled.PropertyRow>
     )
   }
-)
-PropDoc.defaultProps = {
-  patient: {},
-  full: false
+
+  const Description = () => (
+    <Styled.Description>{patient.description}</Styled.Description>
+  )
+
+  return (
+    <>
+      {full && Description()}
+
+      <Styled.Root ref={ref} {...otherProps} className={className}>
+        <Styled.Table>
+          <thead>
+            <Styled.HeaderRow>
+              <th>Name</th>
+              <th>Type</th>
+              <th>Default</th>
+              <th>Description</th>
+            </Styled.HeaderRow>
+          </thead>
+          <tbody>
+            {patient.props &&
+              Object.entries(patient.props).map(([name, p]) =>
+                prop({
+                  name,
+                  ...p
+                })
+              )}
+          </tbody>
+        </Styled.Table>
+      </Styled.Root>
+    </>
+  )
 }
+
 PropDoc.displayName = 'PropDocEVG'
 export default PropDoc

@@ -1,8 +1,10 @@
-import type { ReactNode } from 'react'
+import type { Ref, ReactNode } from 'react'
 
 import type { TextFieldProps } from '../TextField/TextField.types'
 
 type SelectOwnProps = {
+  ref?: Ref<HTMLInputElement | HTMLTextAreaElement>
+
   // Это контент между открывающим и закрывающим тегом компонента.
   children?: ReactNode
 

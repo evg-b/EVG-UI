@@ -1,6 +1,8 @@
-import type { HTMLAttributes, ReactNode } from 'react'
+import type { Ref, HTMLAttributes, ReactNode } from 'react'
 
 type AvatarGroupOwnProps = {
+  ref?: Ref<HTMLDivElement>
+
   // Это контент между открывающим и закрывающим тегом компонента.
   children?: ReactNode
 

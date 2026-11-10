@@ -11,8 +11,8 @@
     "@evg-b/evg-icons": "*",
     "@evg-b/evg-tools": "*",
     "@evg-b/evg-ui": "*",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
     "styled-components": "^6.6.0"
   }
 }

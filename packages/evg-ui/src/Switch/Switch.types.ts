@@ -1,8 +1,10 @@
-import type { ChangeEventHandler, ReactNode } from 'react'
+import type { Ref, ChangeEventHandler, ReactNode } from 'react'
 
 import type { SwitchBaseProps } from '../SwitchBase/SwitchBase.types'
 
 type SwitchOwnProps = {
+  ref?: Ref<HTMLInputElement>
+
   // Чтобы указать CSS классы, используйте этот атрибут.
   className?: string
 

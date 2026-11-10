@@ -8,7 +8,7 @@ type CubesOwnProps = {
   children?: ReactNode
 
   // ref ссылка компонента.
-  innerRef?: RefObject<HTMLCanvasElement>
+  innerRef?: RefObject<HTMLCanvasElement | null>
 
   // Название цвета в разных форматах.
   color?: string

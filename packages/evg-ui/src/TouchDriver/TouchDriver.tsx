@@ -1,225 +1,203 @@
-import React from 'react';
+import { useEffect, useEffectEvent, useRef } from 'react'
 
-import type { TouchDriverProps } from './TouchDriver.types'
+import { useMergedRefs } from '../hooks/useMergedRefs'
 
-const moveCoordTemp = {
-    startItXorY: '',
-    itXorY: '',
-    startDirection: '', // top | bottom | left | right
-    direction: '', // top | bottom | left | right
-    startX: 0,
-    startY: 0,
-    startTime: 0,
-    nowX: 0,
-    nowY: 0,
-    shiftX: 0,
-    shiftY: 0,
-    deltaX: 0,
-    deltaY: 0,
-    inertia: false,
-}
-const prevDeltaTemp = { x: 0, y: 0 }
-const EventSettings = {
-    capture: true, // запускаемся на погружении
-    passive: false,
-}
-const directionX = { '-1': 'left', '1': 'right' }
-const directionY = { '-1': 'top', '1': 'bottom' }
+import type {
+  TouchDriverCoordinates,
+  TouchDriverEvent,
+  TouchDriverProps
+} from './TouchDriver.types'
 
-/**
- * Вычисляет взаимодействие с компонентом в двумерной координатной плоскости. 
- * С его помощью можно вычислять начало, конец, реальное положение, инерцию жестов. Используется во многих компонентах.
-*/
-
-class TouchDriver extends React.Component<TouchDriverProps> {
-    constructor(props: TouchDriverProps) {
-        super(props);
-        this.slip = 0
-        this.slipSensitivity = 2
-        this.touchRef = this.props.innerRef || React.createRef();
-        this.isTouch = React.createRef(false);
-        this.prevDelta = React.createRef();
-        this.moveCoord = React.createRef();
-        this.moveCoordInit = this.moveCoordInit.bind(this)
-        this.getInCoord = this.getInCoord.bind(this)
-        this.moveStartMouseOrTouch = this.moveStartMouseOrTouch.bind(this)
-        this.move = this.move.bind(this)
-        this.moveDetectEnd = this.moveDetectEnd.bind(this)
-        this.moveHome = this.moveHome.bind(this)
-    }
-    componentDidMount() {
-        this.moveCoordInit()
-        // mouse
-        this.touchRef.current.addEventListener('mousedown', this.moveStartMouseOrTouch, EventSettings)
-        window.addEventListener('mousemove', this.move, EventSettings)
-        window.addEventListener('mouseup', this.moveDetectEnd, EventSettings)
-        // touch
-        this.touchRef.current.addEventListener('touchstart', this.moveStartMouseOrTouch, EventSettings)
-        this.touchRef.current.addEventListener('touchmove', this.move, EventSettings)
-        this.touchRef.current.addEventListener('touchend', this.moveDetectEnd, EventSettings)
-    }
-    componentWillUnmount() {
-        // mouse
-        this.touchRef.current.removeEventListener('mousedown', this.moveStartMouseOrTouch, EventSettings)
-        window.removeEventListener('mousemove', this.move, EventSettings)
-        window.removeEventListener('mouseup', this.moveDetectEnd, EventSettings)
-        // touch
-        this.touchRef.current.removeEventListener('touchstart', this.moveStartMouseOrTouch, EventSettings)
-        this.touchRef.current.removeEventListener('touchmove', this.move, EventSettings)
-        this.touchRef.current.removeEventListener('touchend', this.moveDetectEnd, EventSettings)
-    }
-    moveCoordInit() {
-        this.moveCoord.current = { ...moveCoordTemp }
-        this.prevDelta.current = { ...prevDeltaTemp }
-        this.slip = 0
-    }
-    getInCoord(e) {
-        let tch_ref = this.touchRef.current
-        let clientX = 0, clientY = 0
-
-        // 1 - находим координаты нажатия относительно экрана
-        switch (e.type) {
-            case 'mousedown':
-            case 'mousemove':
-            case 'mouseup':
-                clientX = e.clientX
-                clientY = e.clientY
-                break
-            case 'touchstart':
-            case 'touchmove':
-            case 'touchend':
-                clientX = e.touches[0].clientX
-                clientY = e.touches[0].clientY
-                break;
-            // case 'wheel':
-            //     break
-        }
-
-        // 2 - находим координаты ref родителя относительно экрана
-        let { x, y } = tch_ref.getBoundingClientRect()
-
-        // 3 - в итоге получаем координаты нажатия внутри родительского элемента
-        let nowX, nowY
-        if (this.props.autoMove) {
-            nowX = clientX
-            nowY = clientY
-        } else {
-            nowX = clientX - x
-            nowY = clientY - y
-        }
-        return { nowX, nowY }
-    }
-    moveStartMouseOrTouch(e) {
-        const moveCoord_ref = this.moveCoord.current
-        // if (moveCoord_ref.startTime !== 0) {
-        //     console.log('dubleClick!!!')
-        // }
-        const { moveStart } = this.props
-        this.isTouch.current = true
-        let { nowX, nowY } = this.getInCoord(e)
-        moveCoord_ref.startX = nowX
-        moveCoord_ref.startY = nowY
-        moveCoord_ref.nowX = nowX
-        moveCoord_ref.nowY = nowY
-        moveCoord_ref.startTime = Date.now()
-        moveStart && moveStart(moveCoord_ref)
-    }
-    move(e) {
-        const { moveXY, autoMove, scrollable } = this.props
-        !scrollable && e.preventDefault()
-        const mc = this.moveCoord.current
-        let prevDelta = this.prevDelta.current
-        let tch_ref = this.touchRef.current
-        if (this.isTouch.current) {
-            let { nowX, nowY } = this.getInCoord(e)
-            // формируем дельты
-            if (mc.nowX !== 0) { mc.deltaX = nowX - mc.nowX }
-            if (mc.nowY !== 0) { mc.deltaY = nowY - mc.nowY }
-
-            mc.nowX = nowX
-            mc.nowY = nowY
-
-            if (mc.deltaX === mc.deltaY && mc.nowX !== 0 && mc.nowY !== 0) {
-                mc.deltaY = prevDelta.y
-                mc.deltaX = prevDelta.x
-            }
-            prevDelta = { x: mc.deltaX, y: mc.deltaY }
-
-            mc.itXorY = Math.abs(mc.deltaX) > Math.abs(mc.deltaY) ? 'x' : 'y'
-            mc.direction = mc.itXorY === 'x' ? directionX[Math.sign(mc.deltaX)] : directionY[Math.sign(mc.deltaY)]
-
-            if (this.slip === this.slipSensitivity && mc.startItXorY === '' && mc.startDirection === '') {
-                mc.startItXorY = mc.itXorY
-                mc.startDirection = mc.direction
-            } else if (this.slip < this.slipSensitivity + 1) {
-                this.slip = this.slip + 1
-            }
-
-            mc.shiftX = mc.nowX - mc.startX
-            mc.shiftY = mc.nowY - mc.startY
-            if (autoMove) {
-                tch_ref.style.transform = `translate3d(${mc.shiftX}px, ${mc.shiftY}px, 0px)`
-                tch_ref.style.transition = `transform 0ms`
-            } else {
-                moveXY && moveXY(mc)
-            }
-        }
-    }
-    moveDetectEnd() {
-        const { moveEnd } = this.props
-        let moveCoord_ref = this.moveCoord.current
-        if (moveCoord_ref.startTime === 0) {
-            // выходим если событие End пришло не от нашего объекта
-            return
-        }
-        const sensitivityTime = 300
-        if (Date.now() - moveCoord_ref.startTime < sensitivityTime &&
-            moveCoord_ref.shiftX !== 0 &&
-            moveCoord_ref.shiftY !== 0) {
-            moveCoord_ref.inertia = true
-        }
-        this.isTouch.current = false
-        if (this.props.autoMove) {
-            this.moveHome()
-        } else {
-            moveEnd && moveEnd(moveCoord_ref)
-        }
-        this.moveCoordInit()
-    }
-    moveHome() {
-        let tch_ref = this.touchRef.current
-        tch_ref.style.transform = `translate3d(0px, 0px, 0px)`
-        tch_ref.style.transition = `transform 200ms ease`
-    }
-    render() {
-        const {
-            children,
-            component: Component = 'div',
-            innerRef,
-            autoMove,
-            touchpad,
-            scrollable,
-            moveStart,
-            moveXY,
-            moveEnd,
-            ...otherProps
-        } = this.props
-        return (
-            <Component
-                ref={this.touchRef}
-                {...otherProps}
-            >
-                {children}
-            </Component>
-        )
-    }
+const INITIAL_COORDINATES: TouchDriverCoordinates = {
+  startItXorY: '',
+  itXorY: '',
+  startDirection: '',
+  direction: '',
+  startX: 0,
+  startY: 0,
+  startTime: 0,
+  nowX: 0,
+  nowY: 0,
+  shiftX: 0,
+  shiftY: 0,
+  deltaX: 0,
+  deltaY: 0,
+  inertia: false
 }
 
-TouchDriver.defaultProps = {
-    component: 'div',
-    autoMove: false,
-    touchpad: false,
-    scrollable: false,
+const EVENT_OPTIONS = { capture: true, passive: false }
+const SLIP_SENSITIVITY = 2
+
+// Вычисляет координаты, направление и инерцию жеста внутри компонента.
+const TouchDriver = ({
+  ref,
+  innerRef,
+  children,
+  component: Component = 'div',
+  autoMove = false,
+  touchpad = false,
+  scrollable = false,
+  moveStart,
+  moveXY,
+  moveEnd,
+  ...otherProps
+}: TouchDriverProps) => {
+  const touchRef = useRef<HTMLElement>(null)
+  const mergedRef = useMergedRefs(touchRef, ref, innerRef)
+  const isTouch = useRef(false)
+  const slip = useRef(0)
+  const prevDelta = useRef({ x: 0, y: 0 })
+  const coordinates = useRef({ ...INITIAL_COORDINATES })
+
+  const resetCoordinates = () => {
+    coordinates.current = { ...INITIAL_COORDINATES }
+    prevDelta.current = { x: 0, y: 0 }
+    slip.current = 0
+    isTouch.current = false
+  }
+
+  const getCoordinates = (event: TouchDriverEvent) => {
+    const point =
+      'touches' in event ? event.touches[0] || event.changedTouches[0] : event
+    const node = touchRef.current
+    if (!point || !node) return null
+
+    const { x, y } = node.getBoundingClientRect()
+    return {
+      nowX: point.clientX - (autoMove ? 0 : x),
+      nowY: point.clientY - (autoMove ? 0 : y)
+    }
+  }
+
+  const onMoveStart = useEffectEvent((event: TouchDriverEvent) => {
+    const position = getCoordinates(event)
+    if (!position) return
+
+    isTouch.current = true
+    const current = coordinates.current
+    current.startX = position.nowX
+    current.startY = position.nowY
+    current.nowX = position.nowX
+    current.nowY = position.nowY
+    current.startTime = Date.now()
+    moveStart?.(current)
+  })
+
+  const onMove = useEffectEvent((event: TouchDriverEvent) => {
+    const node = touchRef.current
+    if (!isTouch.current || !node) return
+    const position = getCoordinates(event)
+    if (!position) return
+    if (!scrollable) event.preventDefault()
+
+    const current = coordinates.current
+    if (current.nowX !== 0) current.deltaX = position.nowX - current.nowX
+    if (current.nowY !== 0) current.deltaY = position.nowY - current.nowY
+    current.nowX = position.nowX
+    current.nowY = position.nowY
+
+    if (
+      current.deltaX === current.deltaY &&
+      current.nowX !== 0 &&
+      current.nowY !== 0
+    ) {
+      current.deltaX = prevDelta.current.x
+      current.deltaY = prevDelta.current.y
+    }
+    prevDelta.current = { x: current.deltaX, y: current.deltaY }
+
+    current.itXorY =
+      Math.abs(current.deltaX) > Math.abs(current.deltaY) ? 'x' : 'y'
+    const delta = current.itXorY === 'x' ? current.deltaX : current.deltaY
+    current.direction =
+      delta === 0
+        ? undefined
+        : current.itXorY === 'x'
+          ? delta < 0
+            ? 'left'
+            : 'right'
+          : delta < 0
+            ? 'top'
+            : 'bottom'
+
+    if (
+      slip.current === SLIP_SENSITIVITY &&
+      current.startItXorY === '' &&
+      current.startDirection === ''
+    ) {
+      current.startItXorY = current.itXorY
+      current.startDirection = current.direction
+    } else if (slip.current < SLIP_SENSITIVITY + 1) {
+      slip.current += 1
+    }
+
+    current.shiftX = current.nowX - current.startX
+    current.shiftY = current.nowY - current.startY
+    if (autoMove) {
+      node.style.transform = `translate3d(${current.shiftX}px, ${current.shiftY}px, 0px)`
+      node.style.transition = 'transform 0ms'
+    } else {
+      moveXY?.(current)
+    }
+  })
+
+  const onMoveEnd = useEffectEvent(() => {
+    const current = coordinates.current
+    if (current.startTime === 0) return
+
+    if (
+      Date.now() - current.startTime < 300 &&
+      current.shiftX !== 0 &&
+      current.shiftY !== 0
+    ) {
+      current.inertia = true
+    }
+    if (autoMove) {
+      const node = touchRef.current
+      if (node) {
+        node.style.transform = 'translate3d(0px, 0px, 0px)'
+        node.style.transition = 'transform 200ms ease'
+      }
+    } else {
+      moveEnd?.(current)
+    }
+    resetCoordinates()
+  })
+
+  useEffect(() => {
+    const node = touchRef.current
+    if (!node) return
+
+    const handleStart = (event: TouchDriverEvent) => onMoveStart(event)
+    const handleMove = (event: TouchDriverEvent) => onMove(event)
+    const handleEnd = () => onMoveEnd()
+    node.addEventListener('mousedown', handleStart, EVENT_OPTIONS)
+    window.addEventListener('mousemove', handleMove, EVENT_OPTIONS)
+    window.addEventListener('mouseup', handleEnd, EVENT_OPTIONS)
+    node.addEventListener('touchstart', handleStart, EVENT_OPTIONS)
+    node.addEventListener('touchmove', handleMove, EVENT_OPTIONS)
+    node.addEventListener('touchend', handleEnd, EVENT_OPTIONS)
+    node.addEventListener('touchcancel', handleEnd, EVENT_OPTIONS)
+
+    return () => {
+      node.removeEventListener('mousedown', handleStart, EVENT_OPTIONS)
+      window.removeEventListener('mousemove', handleMove, EVENT_OPTIONS)
+      window.removeEventListener('mouseup', handleEnd, EVENT_OPTIONS)
+      node.removeEventListener('touchstart', handleStart, EVENT_OPTIONS)
+      node.removeEventListener('touchmove', handleMove, EVENT_OPTIONS)
+      node.removeEventListener('touchend', handleEnd, EVENT_OPTIONS)
+      node.removeEventListener('touchcancel', handleEnd, EVENT_OPTIONS)
+      resetCoordinates()
+    }
+  }, [Component])
+
+  return (
+    <Component {...otherProps} ref={mergedRef}>
+      {children}
+    </Component>
+  )
 }
+
+TouchDriver.displayName = 'TouchDriverEVG'
 
 export default TouchDriver

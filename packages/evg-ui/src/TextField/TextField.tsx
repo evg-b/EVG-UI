@@ -1,72 +1,74 @@
-import React, { forwardRef, useState, useEffect, useRef } from 'react'
+import { useState, useRef, useId, type FocusEvent } from 'react'
 
 import type { TextFieldProps } from './TextField.types'
 
 import * as Styled from './TextField.styled'
 
-const TextField = forwardRef<
-  HTMLInputElement | HTMLTextAreaElement,
-  TextFieldProps
->(function TextField(
-  {
-    className,
-    children,
-    component = 'input',
-    id = 'nameInputEVG',
-    color = 'default',
-    placeholder = '',
-    value = '',
-    labelText = '',
-    helperText = '',
-    outlined = false,
-    fullWidth = false,
-    round = false,
-    multiline = false,
-    error = false,
-    rows = 1,
-    maxCount = 0,
-    leadingIcon,
-    trailingIcon,
-    onChange,
-    ...otherProps
-  },
-  ref
-) {
-  let inputRef = useRef<HTMLInputElement | HTMLTextAreaElement>(null)
-  inputRef = ref || inputRef
-  const [inputValue, setInputValue] = useState(value)
+const TextField = ({
+  ref,
+  className,
+  children,
+  component = 'input',
+  id: idProp,
+  color = 'default',
+  placeholder = '',
+  value,
+  defaultValue = '',
+  labelText = '',
+  helperText = '',
+  outlined = false,
+  fullWidth = false,
+  round = false,
+  multiline = false,
+  error = false,
+  rows = 1,
+  maxCount = 0,
+  leadingIcon,
+  trailingIcon,
+  onChange,
+  onFocus,
+  onBlur,
+  ...otherProps
+}: TextFieldProps) => {
+  const generatedId = useId()
+  const id = idProp ?? generatedId
+  const [uncontrolledValue, setUncontrolledValue] = useState(defaultValue)
+  const inputValue = value ?? uncontrolledValue
   const notchRef = useRef<HTMLDivElement>(null)
 
   const handleChange: TextFieldProps['onChange'] = (event) => {
     if (maxCount !== 0 && event.target.value.length > maxCount) {
       event.target.value = String(inputValue)
     } else {
+      if (value === undefined) setUncontrolledValue(event.target.value)
       onChange?.(event)
-      setInputValue(event.target.value)
     }
   }
 
-  const handleFocus = () => {
+  const handleFocus = (
+    event: FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+  ) => {
     const notch = notchRef.current
-    const labelWidth = notch.getBoundingClientRect().width * 0.75 - 4
-    if (notch.style.width === '' && labelText !== '') {
+    if (outlined && notch && notch.style.width === '' && labelText !== '') {
+      const labelWidth = notch.getBoundingClientRect().width * 0.75 - 4
       notch.style.width = `${labelWidth + 8}px`
     }
+    onFocus?.(event)
   }
 
   const handleBlur = (
-    event: React.FocusEvent<HTMLInputElement | HTMLTextAreaElement>
+    event: FocusEvent<HTMLInputElement | HTMLTextAreaElement>
   ) => {
-    if (event.target.value === '' && labelText !== '') {
+    if (
+      outlined &&
+      notchRef.current &&
+      event.target.value === '' &&
+      labelText !== ''
+    ) {
       notchRef.current.style.cssText = ''
     }
+    onBlur?.(event)
   }
-
-  useEffect(() => {
-    inputRef.current.value = String(value)
-    setInputValue(value)
-  }, [value])
-
   return (
     <Styled.Root
       className={className}
@@ -84,12 +86,17 @@ const TextField = forwardRef<
           id={id}
           name="name"
           type="text"
-          ref={inputRef}
+          ref={ref}
+          value={inputValue}
           placeholder={placeholder}
           onChange={handleChange}
-          onFocus={outlined ? handleFocus : undefined}
-          onBlur={outlined ? handleBlur : undefined}
-          {...(multiline ? { rows } : {})}
+          onFocus={handleFocus}
+          onBlur={handleBlur}
+          {...(multiline
+            ? {
+                rows
+              }
+            : {})}
           {...otherProps}
           $outlined={outlined}
           $hasLabel={Boolean(labelText)}
@@ -118,8 +125,7 @@ const TextField = forwardRef<
       )}
     </Styled.Root>
   )
-})
+}
 
 TextField.displayName = 'TextFieldEVG'
-
 export default TextField

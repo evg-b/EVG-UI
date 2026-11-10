@@ -19,8 +19,8 @@
     "@evg-b/evg-ui": "*",
     "@mdx-js/react": "^1.6.21",
     "classnames": "^2.2.6",
-    "react": "^16.8.4",
-    "react-dom": "^16.8.4",
+    "react": "19.3.1",
+    "react-dom": "19.3.1",
     "react-syntax-highlighter": "^15.4.3"
   },
   "browserslist": {

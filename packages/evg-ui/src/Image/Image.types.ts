@@ -1,6 +1,8 @@
-import type { ElementType, ImgHTMLAttributes } from 'react'
+import type { Ref, ElementType, ImgHTMLAttributes } from 'react'
 
 type ImageOwnProps = {
+  ref?: Ref<HTMLImageElement>
+
   // Чтобы указать CSS классы, используйте этот атрибут.
   className?: string
 

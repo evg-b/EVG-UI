@@ -1,6 +1,8 @@
-import type { ElementType, HTMLAttributes, ReactNode } from 'react'
+import type { Ref, ElementType, HTMLAttributes, ReactNode } from 'react'
 
 type RippleOwnProps = {
+  ref?: Ref<HTMLElement>
+
   // Чтобы указать CSS классы, используйте этот атрибут.
   className?: string
 

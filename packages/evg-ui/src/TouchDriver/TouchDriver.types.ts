@@ -1,4 +1,6 @@
-import type { ElementType, HTMLAttributes, ReactNode, RefObject } from 'react'
+import type { ElementType, HTMLAttributes, ReactNode, Ref } from 'react'
+
+export type TouchDriverEvent = MouseEvent | TouchEvent
 
 export type TouchDriverAxis = '' | 'x' | 'y'
 
@@ -22,6 +24,8 @@ export type TouchDriverCoordinates = {
 }
 
 type TouchDriverOwnProps = {
+  ref?: Ref<HTMLElement>
+
   // Это контент между открывающим и закрывающим тегом компонента.
   children?: ReactNode
 
@@ -31,8 +35,8 @@ type TouchDriverOwnProps = {
   // Корневой узел. Это HTML элемент или компонент.
   component?: ElementType
 
-  // ref ссылка компонента.
-  innerRef?: RefObject<HTMLElement>
+  // Ссылка на DOM-узел; для нового кода используйте ref.
+  innerRef?: Ref<HTMLElement>
 
   // Если true, компонент перемещается сам.
   autoMove?: boolean
