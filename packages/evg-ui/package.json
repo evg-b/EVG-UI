@@ -3,6 +3,7 @@
   "version": "0.0.2",
   "description": "EVG-UI library inspired by Material Design.",
   "main": "dist/index.js",
+  "module": "dist/index.js",
   "keywords": [
     "react",
     "react-component",
@@ -15,8 +16,9 @@
     "components"
   ],
   "scripts": {
-    "build": "rollup --config rollup.config.js",
-    "watch": "rollup --config rollup.config.js --watch"
+    "build": "vite build",
+    "watch": "vite build --watch",
+    "dev": "yarn watch"
   },
   "files": [
     "dist"

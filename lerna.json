@@ -3,7 +3,8 @@
     "packages": [
         "packages/*",
         "exboard",
-        "docsite"
+        "docsite",
+        "playground"
     ],
     "npmClient": "yarn",
     "useWorkspaces": true

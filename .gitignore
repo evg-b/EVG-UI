@@ -8,3 +8,4 @@ yarn-error.log*
 
 /exboard
 /packages/evg-*/dist
+/playground/dist

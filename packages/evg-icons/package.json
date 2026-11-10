@@ -3,6 +3,7 @@
   "version": "0.0.2",
   "description": "material icons",
   "main": "dist/index.js",
+  "module": "dist/index.js",
   "keywords": [
     "react",
     "material design",
@@ -14,7 +15,9 @@
     "svg icon"
   ],
   "scripts": {
-    "build": "rollup --config rollup.config.js"
+    "build": "vite build",
+    "watch": "vite build --watch",
+    "dev": "yarn watch"
   },
   "files": [
     "dist"

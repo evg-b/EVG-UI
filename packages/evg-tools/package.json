@@ -3,6 +3,7 @@
   "version": "0.0.2",
   "description": "EVG-TOOLS, tools for doc EVG-UI.",
   "main": "dist/index.js",
+  "module": "dist/index.js",
   "keywords": [
     "react",
     "react-component",
@@ -16,8 +17,9 @@
     "tools"
   ],
   "scripts": {
-    "build": "rollup --config rollup.config.js",
-    "watch": "rollup --config rollup.config.js --watch"
+    "build": "vite build",
+    "watch": "vite build --watch",
+    "dev": "yarn watch"
   },
   "files": [
     "dist"
