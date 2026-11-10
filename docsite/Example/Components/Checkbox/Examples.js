@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-tools';
+import CodeExample from '../../../src/components/CodeExample/CodeExample'
 import Snippets from './snippets'
 import CheckboxBase from './CheckboxBase'
 import CheckboxColor from './CheckboxColor'

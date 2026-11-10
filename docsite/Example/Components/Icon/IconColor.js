@@ -1,12 +1,6 @@
 import React from 'react';
-import { withStyles } from '@evg-b/evg-ui';
-import {
-    ChevronLeft,
-    Check,
-    Close,
-    Cancel,
-    Visibility,
-} from '@evg-b/evg-icons';
+import { withStyles, Icon } from '@evg-b/evg-ui'
+
 
 const styles = {
     base: {
@@ -21,10 +15,10 @@ const IconColor = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <Cancel color='primary' />
-            <ChevronLeft color='warn' />
-            <Close color='fail' />
-            <Check color='success' />
+            <Icon name="Cancel" color='primary' />
+            <Icon name="ChevronLeft" color='warn' />
+            <Icon name="Close" color='fail' />
+            <Icon name="Check" color='success' />
         </div>
     )
 }

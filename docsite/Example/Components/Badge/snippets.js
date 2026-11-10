@@ -1,6 +1,6 @@
 export default {BadgeBase: `import React from 'react';
-import { Badge, withStyles } from '@evg-b/evg-ui';
-import { Notifications } from '@evg-b/evg-icons'
+import { Badge, withStyles, Icon } from '@evg-b/evg-ui'
+
 
 const styles = {
     base: {
@@ -15,9 +15,9 @@ const BadgeBase = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <Notifications />
+            <Icon name="Notifications" />
             <Badge count={3} color='primary' >
-                <Notifications />
+                <Icon name="Notifications" />
             </Badge>
         </div>
     )
@@ -58,8 +58,8 @@ const BadgeDot = (props) => {
 
 export default withStyles(styles)(BadgeDot)`,
 BadgeColor: `import React from 'react';
-import { Badge, withStyles } from '@evg-b/evg-ui';
-import { Notifications } from '@evg-b/evg-icons'
+import { Badge, withStyles, Icon } from '@evg-b/evg-ui'
+
 
 const styles = {
     base: {
@@ -75,16 +75,16 @@ const BadgeColor = (props) => {
     return (
         <div className={classes.base}>
             <Badge count={3} >
-                <Notifications />
+                <Icon name="Notifications" />
             </Badge>
             <Badge count={3} color='primary'>
-                <Notifications />
+                <Icon name="Notifications" />
             </Badge>
             <Badge count={3} color='warn'>
-                <Notifications />
+                <Icon name="Notifications" />
             </Badge>
             <Badge count={3} color='success'>
-                <Notifications />
+                <Icon name="Notifications" />
             </Badge>
         </div>
     )
@@ -92,8 +92,8 @@ const BadgeColor = (props) => {
 
 export default withStyles(styles)(BadgeColor)`,
 BadgeDot: `import React from 'react';
-import { Badge, withStyles } from '@evg-b/evg-ui';
-import { Notifications } from '@evg-b/evg-icons'
+import { Badge, withStyles, Icon } from '@evg-b/evg-ui'
+
 
 const styles = {
     base: {
@@ -109,10 +109,10 @@ const BadgeDot = (props) => {
     return (
         <div className={classes.base}>
             <Badge count={2} >
-                <Notifications />
+                <Icon name="Notifications" />
             </Badge>
             <Badge count={2} dot >
-                <Notifications />
+                <Icon name="Notifications" />
             </Badge>
         </div>
     )
@@ -120,8 +120,8 @@ const BadgeDot = (props) => {
 
 export default withStyles(styles)(BadgeDot)`,
 BadgeMax: `import React from 'react';
-import { Badge, withStyles } from '@evg-b/evg-ui';
-import { Notifications } from '@evg-b/evg-icons'
+import { Badge, withStyles, Icon } from '@evg-b/evg-ui'
+
 
 const styles = {
     base: {
@@ -137,13 +137,13 @@ const BadgeMax = (props) => {
     return (
         <div className={classes.base}>
             <Badge count={1000} max={9} >
-                <Notifications />
+                <Icon name="Notifications" />
             </Badge>
             <Badge count={1000} max={99} >
-                <Notifications />
+                <Icon name="Notifications" />
             </Badge>
             <Badge count={1000} max={999} >
-                <Notifications />
+                <Icon name="Notifications" />
             </Badge>
         </div>
     )
@@ -151,8 +151,8 @@ const BadgeMax = (props) => {
 
 export default withStyles(styles)(BadgeMax)`,
 BadgeRipe: `import React from 'react';
-import { Badge, withStyles } from '@evg-b/evg-ui';
-import { Notifications } from '@evg-b/evg-icons'
+import { Badge, withStyles, Icon } from '@evg-b/evg-ui'
+
 const styles = {
     base: {
         display: 'flex',
@@ -167,7 +167,7 @@ const BadgeRipe = (props) => {
     return (
         <div className={classes.base}>
             <Badge count={3}>
-                <Notifications />
+                <Icon name="Notifications" />
             </Badge>
             <Badge ripe count={3} />
         </div>

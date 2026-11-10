@@ -1,6 +1,6 @@
 import React from 'react';
-import { Badge, withStyles } from '@evg-b/evg-ui';
-import { Notifications } from '@evg-b/evg-icons'
+import { Badge, withStyles, Icon } from '@evg-b/evg-ui'
+
 
 const styles = {
     base: {
@@ -16,13 +16,13 @@ const BadgeMax = (props) => {
     return (
         <div className={classes.base}>
             <Badge count={1000} max={9} >
-                <Notifications />
+                <Icon name="Notifications" />
             </Badge>
             <Badge count={1000} max={99} >
-                <Notifications />
+                <Icon name="Notifications" />
             </Badge>
             <Badge count={1000} max={999} >
-                <Notifications />
+                <Icon name="Notifications" />
             </Badge>
         </div>
     )

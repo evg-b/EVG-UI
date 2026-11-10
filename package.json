@@ -1,24 +1,55 @@
 {
-  "version": "1.0.0",
-  "main": "index.js",
-  "license": "MIT",
+  "name": "@evg-b/evg-ui",
+  "version": "0.0.2",
+  "description": "EVG-UI library inspired by Material Design.",
+  "main": "dist/index.js",
+  "module": "dist/index.js",
+  "keywords": [
+    "react",
+    "react-component",
+    "material design",
+    "material",
+    "evg-ui",
+    "evg",
+    "ui",
+    "components library",
+    "components"
+  ],
   "scripts": {
-    "build": "lerna run --parallel --scope \"@evg-b/evg-*\" build",
-    "watch": "lerna run --parallel --scope \"@evg-b/evg-*\" watch",
-    "dev": "yarn build && lerna run --parallel --stream --scope \"@evg-b/evg-*\" --scope evg-playground dev",
-    "build:playground": "yarn build && yarn workspace evg-playground build",
-    "preview": "yarn workspace evg-playground preview",
+    "build": "vite build",
+    "watch": "vite build --watch",
+    "dev": "node ./scripts/dev.mjs",
+    "build:playground": "yarn build && vite build --config playground/vite.config.mjs",
+    "preview": "vite preview --config playground/vite.config.mjs",
     "typecheck": "tsc --noEmit",
     "lint": "eslint .",
-    "wds": "yarn wds:exboard && yarn wds:evgui && yarn wds:evgtools",
-    "wds:docstart": "lerna run --scope doc start",
-    "wds:exboard": "lerna run --scope exboard wds",
-    "wds:evgui": "lerna run --scope @evg-b/evg-ui watch",
-    "wds:evgtools": "lerna run --scope @evg-b/evg-tools watch",
+    "icons:generate": "go run ./scripts/DownloadIcons.go",
+    "docs:dev": "yarn build && docusaurus start docsite",
+    "docs:build": "yarn build && docusaurus build docsite",
+    "docs:preview": "docusaurus serve docsite",
+    "docs:deploy": "yarn build && docusaurus deploy docsite",
+    "docs:clear": "docusaurus clear docsite",
     "propdoc": "yarn propdoc:jsonAPI && yarn propdoc:APImdx && yarn propdoc:snippet",
     "propdoc:jsonAPI": "yarn node ./scripts/propdoc.js",
     "propdoc:APImdx": "yarn node ./scripts/propGenApi.js",
     "propdoc:snippet": "yarn node ./scripts/GenerationSnippets.js"
+  },
+  "files": [
+    "dist"
+  ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/evg-b/EVG-UI.git"
+  },
+  "author": "evg-b",
+  "license": "MIT",
+  "dependencies": {
+    "@babel/runtime": "^7.12.5"
+  },
+  "peerDependencies": {
+    "styled-components": "^6.6.0",
+    "react": "^19.3.1",
+    "react-dom": "^19.3.1"
   },
   "devDependencies": {
     "@babel/core": "^7.12.10",
@@ -28,30 +59,35 @@
     "@babel/plugin-transform-runtime": "^7.12.10",
     "@babel/preset-env": "^7.12.11",
     "@babel/preset-react": "^7.12.10",
+    "@docusaurus/core": "2.0.0-alpha.70",
+    "@docusaurus/preset-classic": "2.0.0-alpha.70",
+    "@mdx-js/react": "^1.6.21",
     "@types/react": "19.3.0",
     "@types/react-dom": "19.3.0",
     "babel-eslint": "^10.1.0",
+    "classnames": "^2.2.6",
     "eslint": "^7.16.0",
     "eslint-plugin-react": "^7.21.5",
     "eslint-plugin-react-hooks": "^4.2.0",
-    "lerna": "^3.22.1",
+    "glob": "^7.1.4",
+    "react": "19.3.1",
     "react-docgen": "^5.3.1",
+    "react-dom": "19.3.1",
+    "react-syntax-highlighter": "^15.4.3",
     "styled-components": "^6.6.0",
     "typescript": "^7.0.2",
-    "vite": "^8.0.0",
-    "react": "19.3.1",
-    "react-dom": "19.3.1"
+    "vite": "^8.0.0"
   },
-  "private": true,
-  "workspaces": {
-    "packages": [
-      "packages/*",
-      "docsite",
-      "exboard",
-      "playground"
+  "browserslist": {
+    "production": [
+      ">0.5%",
+      "not dead",
+      "not op_mini all"
     ],
-    "nohoist": [
-      "**/html-minifier-terser"
+    "development": [
+      "last 1 chrome version",
+      "last 1 firefox version",
+      "last 1 safari version"
     ]
   },
   "engines": {

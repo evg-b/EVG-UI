@@ -1,8 +1,7 @@
 import { useState, useMemo } from 'react'
 
-import { Add, Check, Favorite } from '@evg-b/evg-icons'
-import { CodeExample } from '@evg-b/evg-tools'
 import {
+  Icon,
   Button,
   Checkbox,
   Modal,
@@ -11,6 +10,8 @@ import {
   createTheme,
   generateTokens
 } from '@evg-b/evg-ui'
+
+import CodeExample from '../../../docsite/src/components/CodeExample/CodeExample'
 
 import * as Styled from './App.styled'
 
@@ -64,7 +65,7 @@ const App = () => {
               type="button"
               variant="contained"
               color="primary"
-              startIcon={<Add />}
+              startIcon={<Icon name="Add" />}
               onClick={() => setCount((value) => value + 1)}>
               Нажатий: {count}
             </Button>
@@ -107,9 +108,9 @@ const App = () => {
         <Styled.Panel aria-labelledby="icons-title">
           <h2 id="icons-title">Иконки</h2>
           <Styled.Row aria-hidden="true">
-            <Add color="primary" />
-            <Check color="success" />
-            <Favorite color="fail" />
+            <Icon name="Add" color="primary" />
+            <Icon name="Check" color="success" />
+            <Icon name="Favorite" color="fail" />
           </Styled.Row>
         </Styled.Panel>
 
@@ -152,12 +153,12 @@ const App = () => {
               <Button
                 type="button"
                 variant="contained"
-                startIcon={<Favorite />}>
+                startIcon={<Icon name="Favorite" />}>
                 Избранное
               </Button>
             }
             snippet={
-              '<Button variant="contained" startIcon={<Favorite />}>\n  Избранное\n</Button>'
+              '<Button variant="contained" startIcon={<Icon name="Favorite" />}>\n  Избранное\n</Button>'
             }
           />
         </Styled.Panel>

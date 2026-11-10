@@ -11,8 +11,8 @@ const CubesBase = () => {
 
 export default CubesBase`,
 CubesSettings: `import React, { useState, useRef } from 'react';
-import { Cubes, Radio, Popup, IconButton, Button, List, ListItem, ListItemText, withStyles } from '@evg-b/evg-ui';
-import { PlayArrow, Pause } from '@evg-b/evg-icons'
+import { Cubes, Radio, Popup, IconButton, Button, List, ListItem, ListItemText, withStyles, Icon } from '@evg-b/evg-ui'
+
 
 const styles = {
     base: {
@@ -78,7 +78,7 @@ const CubesSettings = (props) => {
             <Cubes color={arrColor[colorActive]} speed={speedActive} size={sizeActive} ref={Cubes_ref} />
             <div className={classes.panelSettings}>
                 <IconButton onClick={handlePlay}>
-                    {play ? <Pause /> : <PlayArrow />}
+                    {play ? <Icon name="Pause" /> : <Icon name="PlayArrow" />}
                 </IconButton>
                 <Button onClick={handleRipple}>Ripple</Button>
                 <Button ref={Color_ref}>Color</Button>

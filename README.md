@@ -52,59 +52,80 @@ Material Design разрабатывался основываясь на шри�
 
 ### Icon
 
-Так же вы можете использовать все 1.440+ svg иконок от Material Design в своих проектах. [@evg-b/evg-icons](https://github.com/evg-b/EVG-UI/tree/main/packages/evg-icons)
+В `evg-ui` входит 1317 SVG-иконок Material. Компонент `Icon` выбирает иконку
+по типизированному свойству `name` и использует размеры, цвета и тему `SvgIcon`.
 
-```sh
-npm install @evg-b/evg-icons --save или yarn add @evg-b/evg-icons
+```tsx
+import { Icon } from '@evg-b/evg-ui'
+
+<Icon name="Check" />
+<Icon name="Close" color="primary" />
+<Icon name="Favorite" size={48} />
 ```
 
-Пример:
-```jsx
-import { Check, Close, Favorite } from '@evg-b/evg-icons';
-```
+Имена перечислены в `IconName`. Иконки находятся в
+`src/components/Icon/material`, реестр — в `Icon.constants.ts`.
+Общий реестр синхронно импортирует весь набор: использование `Icon` включает
+его в сборку приложения.
+
+Генератор находится в `scripts/DownloadIcons.go`.
+Команда `yarn icons:generate` обновляет файлы и реестр;
+для неё нужен Go. Главный `src/index.ts` генератор не перезаписывает.
 
 ### Документация
 Загляните на [сайт](https://evg-b.github.io/EVG-UI/).
 
+`CodeExample` и `PropDoc` находятся в `docsite/src/components` вместе со своими
+типами и стилями. Документация импортирует их напрямую; стенд `playground`
+использует тот же `CodeExample`. Эти компоненты не входят в библиотеку `evg-ui`.
+
 ### Разработка
 
 Нужны Node.js 20.19+ в ветке 20 или 22.12+ и Yarn Classic (1.x).
-Зависимости устанавливаются из корня монорепозитория:
+Репозиторий содержит один пакет `@evg-b/evg-ui`. Его `package.json`, `yarn.lock`
+и `vite.config.mjs` находятся в корне, исходники библиотеки — в `src`.
+`docsite` и `playground` — локальные инструменты с общими зависимостями.
+Все команды выполняются из корня репозитория:
 
 ```sh
 yarn install
 yarn dev
 ```
 
-`yarn dev` сначала собирает все три пакета, затем запускает их `watch`
-и стенд на http://127.0.0.1:5173. Остановка всех процессов — `Ctrl+C`.
+`yarn dev` запускает Vite в режиме наблюдения за библиотекой. После первой
+сборки запускается стенд на http://127.0.0.1:5173. Остановка — `Ctrl+C`.
 При изменении компонентов Vite пересобирает пакет, а стенд перезагружается;
 локальное состояние примеров при этом сбрасывается.
 
 | Команда из корня | Назначение |
 | --- | --- |
-| `yarn build` | Сборка `evg-ui`, `evg-icons` и `evg-tools` в их папки `dist` |
-| `yarn watch` | Первичная сборка и наблюдение за исходниками всех трёх пакетов |
+| `yarn build` | Сборка `evg-ui` в `dist` |
+| `yarn watch` | Первичная сборка и наблюдение за исходниками `evg-ui` |
 | `yarn dev` | Сборка, наблюдение и локальный стенд |
-| `yarn build:playground` | Сборка пакетов и production-версии стенда в `playground/dist` |
+| `yarn build:playground` | Сборка `evg-ui` и production-версии стенда в `playground/dist` |
 | `yarn preview` | Просмотр собранного стенда на http://127.0.0.1:4173 |
+| `yarn docs:dev` | Сборка `evg-ui` и запуск сайта документации |
+| `yarn docs:build` | Сборка `evg-ui` и документации в `docsite/build` |
+| `yarn docs:preview` | Просмотр собранного сайта документации |
+| `yarn docs:deploy` | Сборка `evg-ui` и публикация документации в GitHub Pages |
+| `yarn icons:generate` | Обновление SVG-иконок и реестра `Icon` через Go |
 
-Один пакет можно собрать командой `yarn workspace @evg-b/evg-ui build`
-или запустить с наблюдением через `yarn workspace @evg-b/evg-ui watch`.
-Те же команды доступны для `@evg-b/evg-icons` и `@evg-b/evg-tools`.
-
-Стенд в `playground` импортирует пакеты по именам из их `dist`, чтобы проверять
-результат библиотечной сборки. На нём можно проверить счётчик и disabled-кнопку,
+Стенд и документация разрешают импорт `@evg-b/evg-ui` через локальный
+`dist/index.js`. Стенд использует результат библиотечной сборки.
+На нём можно проверить счётчик и disabled-кнопку,
 ввод текста, чекбокс, иконки, открытие и закрытие окна, раскрытие примера кода.
 
-Общая конфигурация Vite находится в `vite.library.mjs`. Библиотеки выпускаются
+Конфигурация библиотечной сборки находится в `vite.config.mjs`, стенда —
+в `playground/vite.config.mjs`. Скрипт `scripts/dev.mjs` запускает наблюдение
+и стенд через API Vite и завершает их при остановке команды.
+`evg-ui` выпускается
 как ES-модули с сохранением структуры файлов, точкой входа `dist/index.js`
 и source maps. JSX, в том числе в старых `.js`, использует automatic runtime
 из `react/jsx-runtime`.
-Цель компиляции — ES2015, полифиллы не добавляются. Зависимости пакетов
+Цель компиляции — ES2015, полифиллы не добавляются. Зависимости библиотеки
 остаются внешними, включая их вложенные импорты. Используются React и React DOM
 19.3.1, стили компонентов — styled-components 6.
-В библиотечных пакетах React и React DOM объявлены как peer dependencies;
+В `evg-ui` React и React DOM объявлены как peer dependencies;
 общие экземпляры устанавливаются приложением. В корне они также установлены
 для разработки.
 
@@ -118,7 +139,7 @@ yarn dev
 В проект добавлен TypeScript 7.0.2 и типы React/React DOM 19.3.0. Компоненты,
 содержавшие `propTypes`, перенесены в `.tsx`; их props описаны в соседних
 файлах `ComponentName.types.ts`. Типы публичных компонентов экспортируются
-из `src/index.ts` соответствующего пакета.
+из `src/index.ts`.
 
 Общий `tsconfig.json` допускает оставшиеся JavaScript-файлы через `allowJs`.
 Команда `yarn typecheck` предназначена для отдельной проверки типов;
@@ -138,7 +159,7 @@ Vite выполняет транспиляцию при сборке. Генер
 как совместимый способ получить тот же узел.
 
 Стенд создаёт корень через `createRoot` из `react-dom/client`. TypeScript,
-Vite и корневая конфигурация Babel используют automatic JSX runtime.
+Vite и конфигурации Babel в корне и `docsite` используют automatic JSX runtime.
 `TextField` создаёт уникальный id через `useId`, если потребитель не передал id.
 `TextField` и `Switch` поддерживают управляемое значение через `value`/`checked`
 и начальное значение через `defaultValue`/`defaultChecked`.
@@ -153,7 +174,7 @@ Vite и корневая конфигурация Babel используют aut
 в JSX: `<Styled.Action as={Button}>`. Значения только для CSS передаются
 через transient props с префиксом `$`.
 
-`styled-components` — peer dependency библиотек `evg-ui` и `evg-tools`;
+`styled-components` — peer dependency библиотеки `evg-ui`;
 приложение должно использовать общий экземпляр этой зависимости.
 
 Для темы используется цепочка `generateTokens` → `createTheme` → `ThemeProvider`.

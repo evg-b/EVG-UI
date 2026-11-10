@@ -15,11 +15,13 @@
     "forceConsistentCasingInFileNames": true,
     "types": ["react", "react-dom"],
     "paths": {
-      "@evg-b/evg-ui": ["./packages/evg-ui/src/index.ts"],
-      "@evg-b/evg-icons": ["./packages/evg-icons/src/index.ts"],
-      "@evg-b/evg-tools": ["./packages/evg-tools/src/index.ts"]
+      "@evg-b/evg-ui": ["./src/index.ts"]
     }
   },
-  "include": ["packages/*/src/**/*", "playground/src/**/*"],
+  "include": [
+    "src/**/*",
+    "docsite/src/components/**/*",
+    "playground/src/**/*"
+  ],
   "exclude": ["node_modules", "**/dist"]
 }

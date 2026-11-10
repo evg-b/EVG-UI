@@ -1,6 +1,6 @@
 import React from 'react';
-import { Badge, withStyles } from '@evg-b/evg-ui';
-import { Notifications } from '@evg-b/evg-icons'
+import { Badge, withStyles, Icon } from '@evg-b/evg-ui'
+
 const styles = {
     base: {
         display: 'flex',
@@ -15,7 +15,7 @@ const BadgeRipe = (props) => {
     return (
         <div className={classes.base}>
             <Badge count={3}>
-                <Notifications />
+                <Icon name="Notifications" />
             </Badge>
             <Badge ripe count={3} />
         </div>

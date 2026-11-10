@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, withStyles } from '@evg-b/evg-ui';
-import { Check, Cancel } from '@evg-b/evg-icons';
+import { Button, withStyles, Icon } from '@evg-b/evg-ui'
+
 
 const styles = {
     base: {
@@ -16,14 +16,14 @@ const ButtonStartIconAndEndIcon = (props) => {
     return (
         <div className={classes.base}>
             <Button
-                startIcon={<Check />}
+                startIcon={<Icon name="Check" />}
             >
                 default
             </Button>
             <Button
                 variant='contained'
                 color='primary'
-                endIcon={<Cancel />}
+                endIcon={<Icon name="Cancel" />}
             >
                 Button
             </Button>
@@ -31,8 +31,8 @@ const ButtonStartIconAndEndIcon = (props) => {
                 variant='outlined'
                 color='fail'
                 round
-                startIcon={<Check />}
-                endIcon={<Cancel />}
+                startIcon={<Icon name="Check" />}
+                endIcon={<Icon name="Cancel" />}
             >
                 outlined
             </Button>

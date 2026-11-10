@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-tools';
+import CodeExample from '../../../src/components/CodeExample/CodeExample'
 import Snippets from './snippets'
 import CubesBase from './CubesBase'
 import CubesSettings from './CubesSettings'

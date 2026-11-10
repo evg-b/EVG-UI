@@ -1,3 +1,5 @@
+const { resolve } = require('path')
+
 module.exports = {
   title: 'EVG-UI',
   tagline: 'React компоненты основанные на идеях Material Design.',
@@ -7,6 +9,22 @@ module.exports = {
   favicon: 'img/favicon.ico',
   organizationName: 'evg-b',
   projectName: 'EVG-UI',
+  plugins: [
+    function localEvgUi() {
+      return {
+        name: 'local-evg-ui',
+        configureWebpack() {
+          return {
+            resolve: {
+              alias: {
+                '@evg-b/evg-ui$': resolve(__dirname, '../dist/index.js')
+              }
+            }
+          }
+        }
+      }
+    }
+  ],
   themeConfig: {
     navbar: {
       title: 'EVG-UI',

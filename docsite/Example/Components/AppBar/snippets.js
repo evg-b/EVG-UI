@@ -42,8 +42,8 @@ const AppBarColor = (props) => {
 
 export default withStyles(styles)(AppBarColor)`,
 AppBarLeftAndRight: `import React from 'react';
-import { AppBar, IconButton } from '@evg-b/evg-ui';
-import { Menu, MoreVert, Fullscreen } from '@evg-b/evg-icons';
+import { AppBar, IconButton, Icon } from '@evg-b/evg-ui'
+
 
 const AppBarLeftAndRight = () => {
     return (
@@ -51,11 +51,11 @@ const AppBarLeftAndRight = () => {
             title='EVG-UI left/right'
             position='static'
             color='primary'
-            left={<IconButton><Menu /></IconButton>}
+            left={<IconButton><Icon name="Menu" /></IconButton>}
             right={
                 <>
-                    <IconButton><Fullscreen /></IconButton>
-                    <IconButton><MoreVert /></IconButton>
+                    <IconButton><Icon name="Fullscreen" /></IconButton>
+                    <IconButton><Icon name="MoreVert" /></IconButton>
                 </>
             }
         />
@@ -66,8 +66,8 @@ export default AppBarLeftAndRight
 
 `,
 AppBarTitleCenter: `import React from 'react';
-import { AppBar, IconButton } from '@evg-b/evg-ui';
-import { Menu } from '@evg-b/evg-icons';
+import { AppBar, IconButton, Icon } from '@evg-b/evg-ui'
+
 
 const AppBarTitleCenter = () => {
     return (
@@ -76,7 +76,7 @@ const AppBarTitleCenter = () => {
             position='static'
             color='primary'
             titleCenter
-            left={<IconButton><Menu /></IconButton>}
+            left={<IconButton><Icon name="Menu" /></IconButton>}
         />
     )
 }

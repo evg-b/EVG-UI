@@ -1,5 +1,5 @@
 import React from 'react';
-import { CodeExample } from '@evg-b/evg-tools';
+import CodeExample from '../../../src/components/CodeExample/CodeExample'
 import Snippets from './snippets'
 import custom_state from './custom_state'
 import RippleBase from './RippleBase'

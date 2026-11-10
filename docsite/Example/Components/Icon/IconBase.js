@@ -1,16 +1,6 @@
 import React from 'react';
-import { withStyles } from '@evg-b/evg-ui';
-import {
-    ChevronLeft,
-    Check,
-    Close,
-    Cancel,
-    Menu,
-    Fullscreen,
-    MoreVert,
-    ExpandMore,
-    ArrowUpward,
-} from '@evg-b/evg-icons';
+import { withStyles, Icon } from '@evg-b/evg-ui'
+
 
 const styles = {
     base: {
@@ -25,15 +15,15 @@ const IconBase = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <ChevronLeft />
-            <Close />
-            <Check />
-            <Cancel />
-            <Fullscreen />
-            <Menu />
-            <MoreVert />
-            <ExpandMore />
-            <ArrowUpward />
+            <Icon name="ChevronLeft" />
+            <Icon name="Close" />
+            <Icon name="Check" />
+            <Icon name="Cancel" />
+            <Icon name="Fullscreen" />
+            <Icon name="Menu" />
+            <Icon name="MoreVert" />
+            <Icon name="ExpandMore" />
+            <Icon name="ArrowUpward" />
         </div>
     )
 }

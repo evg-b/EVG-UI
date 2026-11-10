@@ -1,6 +1,6 @@
 import React from 'react';
-import { withStyles } from '@evg-b/evg-ui';
-import { Cancel } from '@evg-b/evg-icons';
+import { withStyles, Icon } from '@evg-b/evg-ui'
+
 
 const styles = {
     base: {
@@ -15,10 +15,10 @@ const IconSize = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <Cancel size='small' />
-            <Cancel size='medium' />
-            <Cancel size='large' />
-            <Cancel size='extra' />
+            <Icon name="Cancel" size='small' />
+            <Icon name="Cancel" size='medium' />
+            <Icon name="Cancel" size='large' />
+            <Icon name="Cancel" size='extra' />
         </div>
     )
 }

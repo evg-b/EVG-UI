@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Button, withStyles } from '@evg-b/evg-ui';
-import { Check } from '@evg-b/evg-icons';
+import { Button, withStyles, Icon } from '@evg-b/evg-ui'
+
 
 const styles = {
     base: {
@@ -31,7 +31,7 @@ const ButtonLoading = (props) => {
                 loading={loading[1]}
                 variant='contained'
                 color='primary'
-                startIcon={<Check />}
+                startIcon={<Icon name="Check" />}
                 onClick={() => handleLoad(1)}
             >
                 Click Me!

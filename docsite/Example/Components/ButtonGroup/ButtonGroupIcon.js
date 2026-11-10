@@ -1,10 +1,6 @@
 import React from 'react';
-import { Button, ButtonGroup, withStyles } from '@evg-b/evg-ui';
-import {
-    Close,
-    Menu,
-    Notifications,
-} from '@evg-b/evg-icons';
+import { Button, ButtonGroup, withStyles, Icon } from '@evg-b/evg-ui'
+
 
 const styles = {
     base: {
@@ -19,9 +15,9 @@ const ButtonGroupIcon = (props) => {
     const { classes } = props
     return (
         <ButtonGroup>
-            <Button><Menu /></Button>
-            <Button><Close /></Button>
-            <Button><Notifications /></Button>
+            <Button><Icon name="Menu" /></Button>
+            <Button><Icon name="Close" /></Button>
+            <Button><Icon name="Notifications" /></Button>
         </ButtonGroup>
     )
 }

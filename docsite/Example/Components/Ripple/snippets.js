@@ -211,7 +211,7 @@ const RippleContrast = (props) => {
 
 export default withStyles(styles)(RippleContrast)`,
 RippleExample: `import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import CodeExample from '../../../src/components/CodeExample/CodeExample'
 import RippleBase from './RippleBase'
 import RippleColor from './RippleColor'
 import RippleContrast from './RippleContrast'

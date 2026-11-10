@@ -3,14 +3,14 @@ const { resolve, basename } = require('path');
 const docgen = require('react-docgen');
 const glob = require('glob');
 
-const FILES = glob.sync('./packages/evg-ui/src/**/*.js',
+const FILES = glob.sync('./src/**/*.js',
     {
         "ignore": [
-            './packages/evg-ui/src/**/index.js',
-            './packages/evg-ui/src/colors/**',
-            './packages/evg-ui/src/utils/**',
-            './packages/evg-ui/src/internal/**',
-            './packages/evg-ui/src/styles/**',
+            './src/**/index.js',
+            './src/colors/**',
+            './src/utils/**',
+            './src/internal/**',
+            './src/styles/**',
         ]
     });
 

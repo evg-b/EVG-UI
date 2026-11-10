@@ -1,33 +1,38 @@
-# Website
+# Документация EVG-UI
 
-This website is built using [Docusaurus 2](https://v2.docusaurus.io/), a modern static website generator.
+Сайт использует Docusaurus 2 alpha. Это локальная часть репозитория `evg-ui`:
+зависимости, scripts и lock-файл находятся в корне. Все команды ниже нужно
+выполнять из корня репозитория.
 
-## Installation
+## Установка и запуск
 
-```console
+```sh
 yarn install
+yarn docs:dev
 ```
 
-## Local Development
+Команда сначала собирает библиотеку в `dist`, затем запускает документацию.
+Импорты `@evg-b/evg-ui` направлены в локальный `dist/index.js`.
+Для пересборки библиотеки при изменениях запусти `yarn watch` во втором терминале.
 
-```console
-yarn start
+`CodeExample` и `PropDoc` находятся в `docsite/src/components`;
+тот же `CodeExample` используется в стенде `playground`.
+
+## Сборка и просмотр
+
+```sh
+yarn docs:build
+yarn docs:preview
 ```
 
-This command starts a local development server and open up a browser window. Most changes are reflected live without having to restart the server.
+Результат находится в `docsite/build`. Команда `yarn docs:clear` удаляет кеши
+сборки документации.
 
-## Build
+## Публикация
 
-```console
-yarn build
+```sh
+GIT_USER=<Your GitHub username> USE_SSH=true yarn docs:deploy
 ```
 
-This command generates static content into the `build` directory and can be served using any static contents hosting service.
-
-## Deployment
-
-```console
-GIT_USER=<Your GitHub username> USE_SSH=true yarn deploy
-```
-
-If you are using GitHub pages for hosting, this command is a convenient way to build the website and push to the `gh-pages` branch.
+Команда собирает библиотеку и публикует сайт в ветку `gh-pages`.
+Обновление старого Docusaurus и его плагинов под React 19 остаётся отдельной задачей.

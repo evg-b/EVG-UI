@@ -1,6 +1,6 @@
 import React from 'react';
-import { Button, withStyles } from '@evg-b/evg-ui';
-import { Check } from '@evg-b/evg-icons'
+import { Button, withStyles, Icon } from '@evg-b/evg-ui'
+
 
 const styles = {
     base: {
@@ -16,7 +16,7 @@ const brightChange = (props) => {
     return (
         <div className={classes.base}>
             <Button color='primary' variant='contained'>Button</Button>
-            <Button color='primary' variant='contained' startIcon={<Check />}>Button</Button>
+            <Button color='primary' variant='contained' startIcon={<Icon name="Check" />}>Button</Button>
             <Button color='primary' variant='contained' loading >Button</Button>
         </div >
     )

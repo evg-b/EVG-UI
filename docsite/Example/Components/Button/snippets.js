@@ -73,14 +73,8 @@ const ButtonElevation = (props) => {
 
 export default withStyles(styles)(ButtonElevation)`,
 ButtonIconButton: `import React from 'react';
-import { IconButton, withStyles } from '@evg-b/evg-ui';
-import {
-    Close,
-    Cancel,
-    Menu,
-    Visibility,
-    Fullscreen,
-} from '@evg-b/evg-icons';
+import { IconButton, withStyles, Icon } from '@evg-b/evg-ui'
+
 
 const styles = {
     base: {
@@ -95,19 +89,19 @@ const ButtonIconButton = (props) => {
     const { classes } = props
     return (
         <div className={classes.base}>
-            <IconButton><Close /></IconButton>
-            <IconButton color='primary'><Cancel /></IconButton>
-            <IconButton color='warn'><Menu /></IconButton>
-            <IconButton color='success'><Fullscreen /></IconButton>
-            <IconButton disabled><Visibility /></IconButton>
+            <IconButton><Icon name="Close" /></IconButton>
+            <IconButton color='primary'><Icon name="Cancel" /></IconButton>
+            <IconButton color='warn'><Icon name="Menu" /></IconButton>
+            <IconButton color='success'><Icon name="Fullscreen" /></IconButton>
+            <IconButton disabled><Icon name="Visibility" /></IconButton>
         </div>
     )
 }
 
 export default withStyles(styles)(ButtonIconButton)`,
 ButtonLoading: `import React, { useState } from 'react';
-import { Button, withStyles } from '@evg-b/evg-ui';
-import { Check } from '@evg-b/evg-icons';
+import { Button, withStyles, Icon } from '@evg-b/evg-ui'
+
 
 const styles = {
     base: {
@@ -138,7 +132,7 @@ const ButtonLoading = (props) => {
                 loading={loading[1]}
                 variant='contained'
                 color='primary'
-                startIcon={<Check />}
+                startIcon={<Icon name="Check" />}
                 onClick={() => handleLoad(1)}
             >
                 Click Me!
@@ -206,8 +200,8 @@ const ButtonSize = (props) => {
 
 export default withStyles(styles)(ButtonSize)`,
 ButtonStartIconAndEndIcon: `import React from 'react';
-import { Button, withStyles } from '@evg-b/evg-ui';
-import { Check, Cancel } from '@evg-b/evg-icons';
+import { Button, withStyles, Icon } from '@evg-b/evg-ui'
+
 
 const styles = {
     base: {
@@ -223,14 +217,14 @@ const ButtonStartIconAndEndIcon = (props) => {
     return (
         <div className={classes.base}>
             <Button
-                startIcon={<Check />}
+                startIcon={<Icon name="Check" />}
             >
                 default
             </Button>
             <Button
                 variant='contained'
                 color='primary'
-                endIcon={<Cancel />}
+                endIcon={<Icon name="Cancel" />}
             >
                 Button
             </Button>
@@ -238,8 +232,8 @@ const ButtonStartIconAndEndIcon = (props) => {
                 variant='outlined'
                 color='fail'
                 round
-                startIcon={<Check />}
-                endIcon={<Cancel />}
+                startIcon={<Icon name="Check" />}
+                endIcon={<Icon name="Cancel" />}
             >
                 outlined
             </Button>

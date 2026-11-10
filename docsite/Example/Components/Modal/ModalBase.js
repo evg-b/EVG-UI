@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
-import { Modal, Button, IconButton, withStyles } from '@evg-b/evg-ui';
-import { Close } from '@evg-b/evg-icons'
+import { Modal, Button, IconButton, withStyles, Icon } from '@evg-b/evg-ui'
+
 
 const styles = {
     modalBackground: {
@@ -37,7 +37,7 @@ const ModalBase = (props) => {
                 className={classes.btnClose}
                 onClick={handleClose}
             >
-                <Close />
+                <Icon name="Close" />
             </IconButton>
             modal
         </div>

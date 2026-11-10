@@ -80,7 +80,7 @@ const %s = () => {
 func CreateTemplateExamplesFile(imports,contents,exports string) string {
 	miT := template.New("Examples")
 	TemplSnippetsfile := `import React from 'react';
-import { CodeExample } from '@evg-b/evg-ui';
+import CodeExample from '../../../src/components/CodeExample/CodeExample'
 import Snippets from './snippets'
 {{.Imports}}
 {{.Contents}}
