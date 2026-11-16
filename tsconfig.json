@@ -1,27 +1,56 @@
 {
   "compilerOptions": {
     "target": "ES2015",
-    "lib": ["DOM", "DOM.Iterable", "ESNext"],
+    "lib": [
+      "DOM",
+      "DOM.Iterable",
+      "ESNext"
+    ],
     "module": "ESNext",
     "moduleResolution": "Bundler",
     "jsx": "react-jsx",
-    "allowJs": true,
-    "checkJs": false,
     "strict": true,
     "noEmit": true,
     "esModuleInterop": true,
     "skipLibCheck": true,
     "resolveJsonModule": true,
     "forceConsistentCasingInFileNames": true,
-    "types": ["react", "react-dom"],
+    "types": [
+      "node",
+      "react",
+      "react-dom",
+      "vite/client",
+      "@docusaurus/module-type-aliases",
+      "@docusaurus/theme-classic"
+    ],
     "paths": {
-      "@evg-b/evg-ui": ["./src/index.ts"]
-    }
+      "@evg-b/evg-ui": [
+        "./src/index.ts"
+      ]
+    },
+    "allowImportingTsExtensions": true
   },
   "include": [
-    "src/**/*",
-    "docsite/src/components/**/*",
-    "playground/src/**/*"
+    "src/**/*.ts",
+    "src/**/*.tsx",
+    "docsite/**/*.ts",
+    "docsite/**/*.tsx",
+    "playground/**/*.ts",
+    "playground/**/*.tsx",
+    "playground/**/*.mts",
+    "scripts/**/*.ts",
+    "scripts/**/*.mts",
+    "*.mts",
+    ".storybook/**/*.ts",
+    ".storybook/**/*.tsx",
+    ".storybook/**/*.mts"
   ],
-  "exclude": ["node_modules", "**/dist"]
+  "exclude": [
+    "node_modules",
+    "**/node_modules",
+    "**/dist",
+    "docsite/build",
+    "docsite/.docusaurus",
+    "storybook-static"
+  ]
 }

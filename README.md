@@ -68,7 +68,7 @@ import { Icon } from '@evg-b/evg-ui'
 Общий реестр синхронно импортирует весь набор: использование `Icon` включает
 его в сборку приложения.
 
-Генератор находится в `scripts/DownloadIcons.go`.
+Генератор находится в `scripts/DownloadIcons.go` и создаёт иконки в `.tsx`.
 Команда `yarn icons:generate` обновляет файлы и реестр;
 для неё нужен Go. Главный `src/index.ts` генератор не перезаписывает.
 
@@ -79,12 +79,21 @@ import { Icon } from '@evg-b/evg-ui'
 типами и стилями. Документация импортирует их напрямую; стенд `playground`
 использует тот же `CodeExample`. Эти компоненты не входят в библиотеку `evg-ui`.
 
+`yarn propdoc` обновляет JSON с описанием props, страницы API и исходники примеров.
+Генератор использует `react-docgen-typescript`, публичные экспорты `src/index.ts`
+и типы компонентов из `.types.ts`. Описания props берутся из комментариев `//`
+над свойствами, значения по умолчанию — из параметров функций.
+`scripts/GenerationSnippets.mts` читает примеры `.tsx` и создаёт
+`Examples.tsx` и `snippets.ts`.
+Подробности — в [README документации](docsite/README.md#генерация-документации-props).
+
 ### Разработка
 
 Нужны Node.js 20.19+ в ветке 20 или 22.12+ и Yarn Classic (1.x).
 Репозиторий содержит один пакет `@evg-b/evg-ui`. Его `package.json`, `yarn.lock`
-и `vite.config.mjs` находятся в корне, исходники библиотеки — в `src`.
+и `vite.config.mts` находятся в корне, исходники библиотеки — в `src`.
 `docsite` и `playground` — локальные инструменты с общими зависимостями.
+Служебные TypeScript-скрипты запускаются через `tsx`.
 Все команды выполняются из корня репозитория:
 
 ```sh
@@ -104,23 +113,28 @@ yarn dev
 | `yarn dev` | Сборка, наблюдение и локальный стенд |
 | `yarn build:playground` | Сборка `evg-ui` и production-версии стенда в `playground/dist` |
 | `yarn preview` | Просмотр собранного стенда на http://127.0.0.1:4173 |
+| `yarn storybook` | Storybook с примерами компонентов на http://127.0.0.1:6006 |
+| `yarn build:storybook` | Статическая сборка Storybook в `storybook-static` |
 | `yarn docs:dev` | Сборка `evg-ui` и запуск сайта документации |
 | `yarn docs:build` | Сборка `evg-ui` и документации в `docsite/build` |
 | `yarn docs:preview` | Просмотр собранного сайта документации |
 | `yarn docs:deploy` | Сборка `evg-ui` и публикация документации в GitHub Pages |
 | `yarn icons:generate` | Обновление SVG-иконок и реестра `Icon` через Go |
+| `yarn propdoc` | Генерация описаний props, страниц API и сниппетов |
+| `yarn lint` | ESLint для JavaScript, TypeScript и TSX |
+| `yarn typecheck` | Отдельная проверка типов через TypeScript 7 |
 
 Стенд и документация разрешают импорт `@evg-b/evg-ui` через локальный
 `dist/index.js`. Стенд использует результат библиотечной сборки.
 На нём можно проверить счётчик и disabled-кнопку,
 ввод текста, чекбокс, иконки, открытие и закрытие окна, раскрытие примера кода.
 
-Конфигурация библиотечной сборки находится в `vite.config.mjs`, стенда —
-в `playground/vite.config.mjs`. Скрипт `scripts/dev.mjs` запускает наблюдение
+Конфигурация библиотечной сборки находится в `vite.config.mts`, стенда —
+в `playground/vite.config.mts`. Скрипт `scripts/dev.mts` запускает наблюдение
 и стенд через API Vite и завершает их при остановке команды.
 `evg-ui` выпускается
 как ES-модули с сохранением структуры файлов, точкой входа `dist/index.js`
-и source maps. JSX, в том числе в старых `.js`, использует automatic runtime
+и source maps. Исходники с JSX находятся в `.tsx` и используют automatic runtime
 из `react/jsx-runtime`.
 Цель компиляции — ES2015, полифиллы не добавляются. Зависимости библиотеки
 остаются внешними, включая их вложенные импорты. Используются React и React DOM
@@ -129,22 +143,75 @@ yarn dev
 общие экземпляры устанавливаются приложением. В корне они также установлены
 для разработки.
 
-Старый `docsite` имеет собственную сборку Docusaurus 2 alpha. Объявления React
-и React DOM в нём обновлены, но Docusaurus, MDX 1 и ряд его плагинов требуют
-старые версии React и выдают предупреждения peer dependencies при установке.
-Сам сайт документации требует отдельной миграции.
+`docsite` использует Docusaurus 3.10.2 и MDX 3.1.1. Core, classic preset и
+Babel-пресет Docusaurus закреплены на одной версии; их зависимости объявлены
+в корневом `package.json`. Эта версия Docusaurus поддерживает React 19.
+Старые примеры документации ещё используют JSS API `withStyles` и требуют
+отдельного переноса на текущий API `evg-ui`.
+
+### Storybook
+
+Для компонентов подключён Storybook 10.6.7 с `@storybook/react-vite` и
+`@storybook/addon-docs`. Запуск из корня репозитория:
+
+```sh
+yarn storybook
+```
+
+Истории находятся рядом с компонентами в `ComponentName.stories.tsx`.
+Для каждого из 40 компонентов добавлен файл с примерами; `Tabs`, `Slider`
+и `Notify` пока остаются заготовками и вынесены в раздел «Черновики».
+В истории `Icon` показаны только `Check`, `Close` и `Favorite`.
+
+Панель Storybook позволяет выбирать светлую или тёмную тему, основной цвет
+и props через Controls. Примеры полей, переключателей, меню и окон
+управляют состоянием через `useArgs`; события доступны в Actions.
+У `ThemeProvider` есть отдельный пример смены режима и исходного цвета.
+Изображения для галерей хранятся локально в `.storybook/assets`.
+
+Конфигурация находится в `.storybook/main.ts`, общий декоратор темы —
+в `.storybook/preview.tsx`. Отдельный `.storybook/vite.config.mts` подключает
+исходники библиотеки напрямую, без предварительной сборки `dist`.
+Автодокументация props использует TypeScript-контракты компонентов.
+
+`yarn build:storybook` создаёт статическую версию в `storybook-static`.
+Эта папка и диагностические логи Storybook исключены из Git.
 
 ### TypeScript
 
-В проект добавлен TypeScript 7.0.2 и типы React/React DOM 19.3.0. Компоненты,
+Компилятор проекта — TypeScript 7.0.2, типы React/React DOM — 19.3.0. Компоненты,
 содержавшие `propTypes`, перенесены в `.tsx`; их props описаны в соседних
 файлах `ComponentName.types.ts`. Типы публичных компонентов экспортируются
 из `src/index.ts`.
 
-Общий `tsconfig.json` допускает оставшиеся JavaScript-файлы через `allowJs`.
+TypeScript 7 установлен под alias `@typescript/native`; его команда `tsc`
+используется в `yarn typecheck`. Для `typescript-eslint` и `react-docgen-typescript`
+нужен прежний JavaScript API компилятора, поэтому пакет `typescript` указывает
+на `@typescript/typescript6`. У него отдельная команда `tsc6`, которая не заменяет
+`tsc` версии 7. Это [официальная схема совместной установки TypeScript 6 и 7](https://devblogs.microsoft.com/typescript/announcing-typescript-7-0/).
+
+Исходники библиотеки, иконки, утилиты, примеры документации и стенд перенесены
+в `.ts` и `.tsx`; служебные ESM-скрипты и конфигурации Vite/ESLint — в `.mts`.
+В `tsconfig.json` убран `allowJs`, в область проверки включены скрипты и документация.
 Команда `yarn typecheck` предназначена для отдельной проверки типов;
 Vite выполняет транспиляцию при сборке. Генерация деклараций `.d.ts`
 в текущую сборку не подключена.
+
+### ESLint
+
+Конфигурация находится в `eslint.config.mts` и использует flat config ESLint 9,
+`typescript-eslint`, `eslint-plugin-react` и `eslint-plugin-react-hooks`.
+Ветка ESLint 9 выбрана по поддерживаемому диапазону `eslint-plugin-react`.
+Загрузку TypeScript-конфигурации ESLint обеспечивает `jiti`.
+Старые `.eslintrc.js`, `.eslintignore` и `babel-eslint` больше не используются.
+
+Для `.ts` и `.tsx` включены рекомендуемые правила TypeScript, предупреждения
+о неиспользуемых переменных и импортах типов. Правила React учитывают automatic
+JSX runtime, а правила Hooks проверяют порядок вызовов и зависимости.
+Проверка типов остаётся отдельной командой `yarn typecheck`.
+
+Из ESLint исключены сборки, кеши, сгенерированные SVG-иконки, реестр `Icon`,
+список API-страниц и файлы примеров, которые создаёт генератор сниппетов.
 
 ### React API
 

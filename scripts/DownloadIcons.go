@@ -85,7 +85,7 @@ func CreateSVGIconFile(name,svg string,wg *sync.WaitGroup)  {
 	parseSVGresult := ParseSVG(svg)
 	templateSVGFileresult := CreateTemplateSVGFile(name,parseSVGresult)
 
-	CreateFile(fmt.Sprintf("./src/components/Icon/material/%s.js", name),templateSVGFileresult)
+	CreateFile(fmt.Sprintf("./src/components/Icon/material/%s.tsx", name),templateSVGFileresult)
 	fmt.Println("Done CreateFile.",name)
 	defer wg.Done()
 }
@@ -100,12 +100,11 @@ func ParseSVG(body string) string {
 }
 func CreateTemplateSVGFile(name ,svg string) string {
 	miT := template.New("Material Icon")
-	TemplSVGfile := `import React from 'react';
-import CreateSvgIcon from '../../../utils/CreateSvgIcon'
+	TemplSVGfile := `import CreateSvgIcon from '../../../utils/CreateSvgIcon'
 
 export default CreateSvgIcon({
-    path: <React.Fragment>{{.Svg}}</React.Fragment>,
-    name: '{{.Name}}',
+    path: <>{{.Svg}}</>,
+    name: '{{.Name}}'
 })`
 	miT.Parse(TemplSVGfile)
 	var tpl bytes.Buffer

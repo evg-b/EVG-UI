@@ -1,0 +1,37 @@
+import type { RippleContrastProps } from './RippleContrast.types'
+
+import { Ripple, Elevation, Color, withStyles } from '@evg-b/evg-ui'
+
+const styles = {
+  base: {
+    display: 'flex'
+  },
+  stand: {
+    ...Elevation(2),
+    width: '150px',
+    height: '150px',
+    position: 'relative',
+    margin: '5px'
+  }
+}
+
+const RippleContrast = (props: RippleContrastProps) => {
+  const { classes } = props
+
+  const purple600 = Color('purple600').Base()
+
+  return (
+    <div className={classes.base}>
+      <span className={classes.stand} style={{ backgroundColor: purple600 }}>
+        <Ripple color={purple600} />
+      </span>
+      <span className={classes.stand}>
+        <Ripple color={purple600} contrast={false} />
+      </span>
+    </div>
+  )
+}
+
+RippleContrast.displayName = 'RippleContrast'
+
+export default withStyles(styles)(RippleContrast)

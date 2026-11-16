@@ -1,0 +1,56 @@
+import type { TextFieldMultilineProps } from './TextFieldMultiline.types'
+
+import { TextField, withStyles } from '@evg-b/evg-ui'
+
+const styles = {
+  base: {
+    display: 'flex',
+    flexWrap: 'wrap',
+    '&>*,&>div>*': {
+      margin: '10px'
+    }
+  }
+}
+const TextFieldMultiline = (props: TextFieldMultilineProps) => {
+  const { classes } = props
+  return (
+    <div className={classes.base}>
+      <div>
+        <TextField
+          multiline
+          labelText="multiline base"
+          placeholder="placeholder"
+          color="primary"
+        />
+        <TextField
+          rows={4}
+          multiline
+          labelText="multiline base"
+          placeholder="placeholder"
+          color="primary"
+        />
+      </div>
+      <div>
+        <TextField
+          multiline
+          labelText="multiline outlined"
+          placeholder="placeholder"
+          color="primary"
+          outlined
+        />
+        <TextField
+          rows={4}
+          multiline
+          labelText="multiline outlined"
+          placeholder="placeholder"
+          color="primary"
+          outlined
+        />
+      </div>
+    </div>
+  )
+}
+
+TextFieldMultiline.displayName = 'TextFieldMultiline'
+
+export default withStyles(styles)(TextFieldMultiline)

@@ -1,10 +1,35 @@
 # Dependencies
-node_modules
+node_modules/
 
+# Build output
+/dist/
+/playground/dist/
+/docsite/build/
+/storybook-static/
+/*.tgz
+
+# Generated files and caches
+.docusaurus/
+.cache/
+.cache-loader/
+.vite/
+.vite-temp/
+.eslintcache
+*.tsbuildinfo
+
+# Local environment
+.env
+.env.*
+!.env.example
+!.env.*.example
+
+# Logs
 debug.log
+storybook-debug.log
+build-storybook.log
 npm-debug.log*
 yarn-debug.log*
 yarn-error.log*
 
-/dist
-/playground/dist
+# macOS
+.DS_Store

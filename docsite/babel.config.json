@@ -1,0 +1,5 @@
+{
+  "presets": [
+    "@docusaurus/babel/preset"
+  ]
+}

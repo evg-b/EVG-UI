@@ -11,6 +11,8 @@ import {
 
 import { PrismLight as SyntaxHighlighter } from 'react-syntax-highlighter'
 import jsx from 'react-syntax-highlighter/dist/esm/languages/prism/jsx'
+import tsx from 'react-syntax-highlighter/dist/esm/languages/prism/tsx'
+import typescript from 'react-syntax-highlighter/dist/esm/languages/prism/typescript'
 import SyntaxStyle from 'react-syntax-highlighter/dist/esm/styles/prism/okaidia'
 
 import type { CodeExampleProps } from './CodeExample.types'
@@ -18,6 +20,8 @@ import type { CodeExampleProps } from './CodeExample.types'
 import * as Styled from './CodeExample.styled'
 
 SyntaxHighlighter.registerLanguage('jsx', jsx)
+SyntaxHighlighter.registerLanguage('tsx', tsx)
+SyntaxHighlighter.registerLanguage('typescript', typescript)
 
 const CodeExample = ({
   ref,
@@ -26,7 +30,7 @@ const CodeExample = ({
   title = 'Title',
   demo,
   snippet = '',
-  language = 'jsx',
+  language = 'tsx',
   ...otherProps
 }: CodeExampleProps) => {
   const CodeExample_ref = useRef<HTMLDivElement>(null)
@@ -36,7 +40,7 @@ const CodeExample = ({
   const Syntax_ref = useRef<HTMLElement>(null)
   const btnCode_ref = useRef<HTMLElement>(null)
 
-  const snippetPanel = (snippet) => (
+  const snippetPanel = (snippet: string) => (
     <Styled.CodePanel>
       <Styled.CodeScroll
         as={Scroll}
@@ -45,7 +49,7 @@ const CodeExample = ({
         color="#FFFFFF">
         <Styled.SourceCode
           as={SyntaxHighlighter}
-          language="jsx"
+          language={language}
           style={SyntaxStyle}
           customStyle={Styled.sourceCodeStyle}>
           {snippet.trim()}

@@ -1,0 +1,5 @@
+const snippets = {
+  "LightboxBase": "import type { LightboxBaseProps } from './LightboxBase.types'\n\nimport { Lightbox, withStyles } from '@evg-b/evg-ui'\nimport useBaseUrl from '@docusaurus/useBaseUrl'\nconst styles = {\n  base: {\n    display: 'flex',\n    flexWrap: 'wrap',\n    '&>*': {\n      margin: '5px'\n    }\n  }\n}\nconst LightboxBase = (props: LightboxBaseProps) => {\n  const { classes } = props\n  const imgs = [\n    useBaseUrl('/source/Carousel/1.jpg'),\n    useBaseUrl('/source/Carousel/2.jpg'),\n    useBaseUrl('/source/Carousel/3.jpg'),\n    useBaseUrl('/source/Carousel/4.jpg'),\n    useBaseUrl('/source/Carousel/5.jpg'),\n    useBaseUrl('/source/Carousel/6.jpg'),\n    useBaseUrl('/source/Carousel/7.jpg'),\n    useBaseUrl('/source/Carousel/8.jpg'),\n    useBaseUrl('/source/Carousel/9.jpg')\n  ]\n  return (\n    <div className={classes.base}>\n      <Lightbox imgs={imgs} />\n    </div>\n  )\n}\n\nLightboxBase.displayName = 'LightboxBase'\n\nexport default withStyles(styles)(LightboxBase)\n"
+}
+
+export default snippets
