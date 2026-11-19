@@ -3,7 +3,7 @@ import { useState } from 'react'
 import type { Meta, StoryObj } from '@storybook/react-vite'
 import { fn } from 'storybook/test'
 
-import { STORY_IMAGES } from '../../../.storybook/fixtures'
+import { CAROUSEL_IMAGES } from '../../../.storybook/fixtures'
 
 import Carousel from './Carousel'
 
@@ -13,7 +13,7 @@ const meta = {
   title: 'Компоненты/Carousel',
   component: Carousel,
   args: {
-    imgs: STORY_IMAGES,
+    imgs: CAROUSEL_IMAGES,
     imgStart: 0,
     duration: 300,
     sensitivity: 0.5,

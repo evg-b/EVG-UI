@@ -69,11 +69,17 @@ export const Backdrop = styled.div`
   padding: 24px;
 `
 
+export const ImageSample = styled.div`
+  width: min(100%, 200px);
+  aspect-ratio: 1;
+  object-fit: cover;
+  border-radius: 6%;
+`
+
 export const ImageFrame = styled.div`
   display: block;
   width: min(100%, 560px);
   height: 280px;
-  object-fit: cover;
   border-radius: 12px;
   overflow: hidden;
 `

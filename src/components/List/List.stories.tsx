@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+import { LIST_USERS } from '../../../.storybook/fixtures'
 import ListItem from '../ListItem/ListItem'
 import ListItemText from '../ListItemText/ListItemText'
 import ListItemAvatar from '../ListItemAvatar/ListItemAvatar'
@@ -39,10 +40,10 @@ export const WithActions: Story = {
   render: (args) => (
     <Styled.Panel>
       <List {...args}>
-        {['Анна', 'Борис', 'Вера'].map((name) => (
+        {LIST_USERS.map(({ name, avatar }) => (
           <ListItem key={name} button={false}>
             <ListItemAvatar>
-              <Avatar alt={name} color="primary" />
+              <Avatar src={avatar} alt={name} color="primary" />
             </ListItemAvatar>
             <ListItemText secondaryText="Участник команды">{name}</ListItemText>
             <ListItemAction>

@@ -1,7 +1,5 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { STORY_IMAGES } from '../../../.storybook/fixtures'
-
 import Avatar from './Avatar'
 
 import * as Styled from '../../../.storybook/StoryLayout.styled'
@@ -24,14 +22,20 @@ type Story = StoryObj<typeof meta>
 export const Initials: Story = { name: 'Инициалы' }
 export const WithImage: Story = {
   name: 'Изображение',
-  args: { src: STORY_IMAGES[0] }
+  args: { src: './source/Avatar/1.jpg', alt: 'Луффи в соломенной шляпе' }
 }
 export const Online: Story = {
   name: 'Статус',
-  args: { status: true, statusColor: 'success' }
+  args: {
+    src: './source/Avatar/4.jpg',
+    alt: 'Рик',
+    status: true,
+    statusColor: 'success'
+  }
 }
 export const Sizes: Story = {
   name: 'Размеры',
+  args: { src: './source/Avatar/3.jpg', alt: 'Девушка в неоновом свете' },
   render: (args) => (
     <Styled.Row>
       {[32, 48, 64, 96].map((size) => (

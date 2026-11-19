@@ -167,7 +167,8 @@ yarn storybook
 и props через Controls. Примеры полей, переключателей, меню и окон
 управляют состоянием через `useArgs`; события доступны в Actions.
 У `ThemeProvider` есть отдельный пример смены режима и исходного цвета.
-Изображения для галерей хранятся локально в `.storybook/assets`.
+Storybook использует те же изображения, что и примеры Docusaurus. Каталог
+`docsite/static/source` доступен в Storybook по пути `./source/`.
 
 Конфигурация находится в `.storybook/main.ts`, общий декоратор темы —
 в `.storybook/preview.tsx`. Отдельный `.storybook/vite.config.mts` подключает

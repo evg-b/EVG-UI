@@ -5,14 +5,14 @@ import SvgIcon from './SvgIcon'
 const meta = {
   title: 'Компоненты/SvgIcon',
   component: SvgIcon,
-  args: { size: 48, color: 'primary', viewBox: 24, 'aria-label': 'Звезда' },
+  args: { size: 48, color: 'primary', viewBox: 24, 'aria-label': 'Галочка' },
   argTypes: {
     size: { control: { type: 'range', min: 16, max: 96, step: 8 } },
     color: { control: 'text' }
   },
   render: (args) => (
     <SvgIcon {...args}>
-      <path d="m12 2 3.09 6.26L22 9.27l-5 4.87L18.18 21 12 17.77 5.82 21 7 14.14 2 9.27l6.91-1.01Z" />
+      <path d="M9 16.17L4.83 12l-1.42 1.41L9 19 21 7l-1.41-1.41z" />
     </SvgIcon>
   )
 } satisfies Meta<typeof SvgIcon>

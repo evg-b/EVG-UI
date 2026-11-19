@@ -1,6 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
-import { STORY_IMAGES } from '../../../.storybook/fixtures'
+import { CAROUSEL_IMAGES } from '../../../.storybook/fixtures'
 
 import Lightbox from './Lightbox'
 
@@ -9,7 +9,7 @@ import * as Styled from '../../../.storybook/StoryLayout.styled'
 const meta = {
   title: 'Компоненты/Lightbox',
   component: Lightbox,
-  args: { imgs: STORY_IMAGES, duration: 300 },
+  args: { imgs: CAROUSEL_IMAGES.slice(0, 9), duration: 300 },
   argTypes: {
     imgs: { control: false },
     duration: { control: { type: 'range', min: 100, max: 1000, step: 100 } }
@@ -32,5 +32,5 @@ type Story = StoryObj<typeof meta>
 export const Gallery: Story = { name: 'Галерея' }
 export const SingleImage: Story = {
   name: 'Одно изображение',
-  args: { imgs: [STORY_IMAGES[0]] }
+  args: { imgs: [CAROUSEL_IMAGES[0]] }
 }

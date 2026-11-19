@@ -1,5 +1,6 @@
 import type { Meta, StoryObj } from '@storybook/react-vite'
 
+import { LIST_USERS } from '../../../.storybook/fixtures'
 import List from '../List/List'
 import ListItem from '../ListItem/ListItem'
 import ListItemText from '../ListItemText/ListItemText'
@@ -10,17 +11,23 @@ import ListItemAvatar from './ListItemAvatar'
 
 import * as Styled from '../../../.storybook/StoryLayout.styled'
 
+const [user] = LIST_USERS
+
 const meta = {
   title: 'Компоненты/ListItemAvatar',
   component: ListItemAvatar,
-  args: { children: <Avatar alt="Анна" color="primary" /> },
+  args: {
+    children: <Avatar src={user.avatar} alt={user.name} color="primary" />
+  },
   argTypes: { children: { control: false } },
   render: (args) => (
     <Styled.Panel>
       <List>
         <ListItem button={false}>
           <ListItemAvatar {...args} />
-          <ListItemText secondaryText="Участник команды">Анна</ListItemText>
+          <ListItemText secondaryText="Участник команды">
+            {user.name}
+          </ListItemText>
         </ListItem>
       </List>
     </Styled.Panel>
