@@ -91,10 +91,8 @@ Core, classic preset и Babel-пресет Docusaurus закреплены на 
 статическая конфигурация Babel — в `babel.config.json`.
 Плагин `babel-plugin-styled-components` задаёт одинаковые идентификаторы стилей
 при сборке HTML и клиентского кода.
-Страницы установки и Quick start редактируются в `docs/GettingStarted`.
+Страницы «Установка» и «Быстрый запуск» редактируются в `docs/GettingStarted`.
 Короткие адреса `/docs/` и `/docs/quick_start` используют те же MDX-файлы.
-Живое приложение для Quick start и его стили находятся в
-`Example/Components/QuickStart` и входят в обычную генерацию сниппетов.
 
 Примеры EVG-UI получают светлую или тёмную тему из режима Docusaurus.
 На странице `Styles/Theme` можно отдельно изменить режим и основной цвет примера.

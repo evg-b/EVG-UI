@@ -1,41 +1,23 @@
 ---
 id: quick_start
 title: Быстрый запуск
-description: Кнопка со счётчиком в React и пример переключения темы.
+description: Как подключить ThemeProvider в React-приложении.
 ---
 
-import { AppExample } from '../../Example/Components/QuickStart/Examples'
+После [установки EVG-UI](./Installation.mdx) оберните `<App />` в `ThemeProvider`. Так тема библиотеки будет доступна во всём приложении. В проекте на Vite это можно сделать в `src/main.tsx`.
 
-Нажмите «Добавить», затем включите тёмную тему. Кнопка «Показать код» открывает исходники примера.
+```tsx title="src/main.tsx"
+import { createRoot } from 'react-dom/client'
 
-<AppExample />
+import { ThemeProvider } from '@evg-b/evg-ui'
 
-## Первая кнопка в приложении {#first-button}
+import App from './App'
 
-После [установки EVG-UI](./Installation.mdx) вставьте пример в `src/App.tsx`. `ThemeProvider` задаёт светлую тему, а кнопка считает нажатия.
-
-```tsx title="src/App.tsx"
-import { useState } from 'react'
-
-import { Button, ThemeProvider } from '@evg-b/evg-ui'
-
-export default function App() {
-  const [count, setCount] = useState(0)
-
-  return (
-    <ThemeProvider>
-      <Button
-        type="button"
-        variant="contained"
-        color="primary"
-        onClick={() => setCount((value) => value + 1)}>
-        Нажатий — {count}
-      </Button>
-    </ThemeProvider>
-  )
-}
+createRoot(document.getElementById('root')!).render(
+  <ThemeProvider>
+    <App />
+  </ThemeProvider>
+)
 ```
 
-В проекте на Vite запустите `yarn dev` и откройте адрес из терминала. Нажмите кнопку — число нажатий увеличится.
-
-[Как изменить цвет кнопок и включить тёмную тему](../Styles/Theme.mdx)
+Запустите приложение командой `npm run dev` или `yarn dev`. Выбрать компонент и посмотреть, как им пользоваться, можно в [каталоге компонентов](../Components/All.mdx).

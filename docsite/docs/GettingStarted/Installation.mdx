@@ -1,31 +1,29 @@
 ---
 id: Installation
 title: Установка
-description: Как подключить EVG-UI к проекту на React.
+description: Установка пакета @evg-b/evg-ui в React-приложение.
 ---
 
-Чтобы попробовать EVG-UI без установки, откройте [пример с кнопками и переключением темы](/docs/GettingStarted/quick_start).
+import Tabs from '@theme/Tabs'
+import TabItem from '@theme/TabItem'
 
-## Соберите пакет
+Для EVG-UI нужны React и React DOM версии 19.3.1. В папке приложения установите библиотеку и styled-components.
 
-В npm пока опубликована предыдущая версия. Чтобы установить версию со styled-components, склонируйте EVG-UI рядом с папкой вашего приложения и соберите архив.
-
-```sh
-git clone https://github.com/evg-b/EVG-UI.git
-cd EVG-UI
-yarn
-yarn build
-yarn pack --filename evg-ui.tgz
-```
-
-## Добавьте EVG-UI в приложение
-
-Откройте терминал в папке приложения и установите архив вместе с React и styled-components.
+<Tabs>
+<TabItem value="npm" label="npm" default>
 
 ```sh
-yarn add file:../EVG-UI/evg-ui.tgz react@19.3.1 react-dom@19.3.1 styled-components@6.6.0
+npm install @evg-b/evg-ui styled-components@6.6.0
 ```
 
-Типы для TypeScript пока доступны только в исходниках EVG-UI.
+</TabItem>
+<TabItem value="yarn" label="Yarn">
 
-Теперь можно [добавить первую кнопку](/docs/GettingStarted/quick_start#first-button).
+```sh
+yarn add @evg-b/evg-ui styled-components@6.6.0
+```
+
+</TabItem>
+</Tabs>
+
+Дальше [подключите EVG-UI к приложению](/docs/GettingStarted/quick_start).

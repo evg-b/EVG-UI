@@ -8,31 +8,15 @@
 
 <p align="center">React-компоненты в стиле Material Design с динамической темой.</p>
 
-### Быстрый старт
+### Быстрый запуск
 
-Текущую версию UI-kit можно попробовать в локальной документации. Запустите её из корня репозитория.
+В проекте с React и React DOM 19.3.1 установите EVG-UI и styled-components.
 
 ```sh
-nvm install
-yarn install
-yarn docs:dev
+npm install @evg-b/evg-ui styled-components@6.6.0
 ```
 
-В [Quick start](docsite/docs/GettingStarted/quick%20start.mdx) есть приложение на React с кнопками, светлой и тёмной темой и исходниками на TypeScript и styled-components. Для подключения к другому приложению соберите локальный архив по [инструкции установки](docsite/docs/GettingStarted/Installation.mdx). Опубликованный в npm `@evg-b/evg-ui@0.0.2` использует React 16 и JSS.
-
-```tsx
-import { Button, ThemeProvider } from '@evg-b/evg-ui'
-
-export default function App() {
-  return (
-    <ThemeProvider>
-      <Button type="button" variant="contained" color="primary">
-        Сохранить
-      </Button>
-    </ThemeProvider>
-  )
-}
-```
+[Установка](https://evg-b.github.io/EVG-UI/docs/GettingStarted/Installation/) · [Подключение к приложению](https://evg-b.github.io/EVG-UI/docs/GettingStarted/quick_start/)
 
 ### Icon
 
