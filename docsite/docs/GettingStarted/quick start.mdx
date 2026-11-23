@@ -1,32 +1,41 @@
 ---
 id: quick_start
-title: Quick start
-description: Первое приложение на EVG-UI с кнопками, styled-components и переключением темы.
+title: Быстрый запуск
+description: Кнопка со счётчиком в React и пример переключения темы.
 ---
 
 import { AppExample } from '../../Example/Components/QuickStart/Examples'
 
-После [установки EVG-UI](./Installation.mdx) создайте в приложении два файла — `App.tsx` и `App.styled.ts`. В первом находятся кнопки и состояние React, во втором — оформление карточки.
-
-## Кнопки и тема
-
-Нажмите «Добавить», затем переключите тему. Карточка и кнопки поменяют цвета, а значение счётчика сохранится. Откройте «Показать код» и выберите нужный файл.
+Нажмите «Добавить», затем включите тёмную тему. Кнопка «Показать код» открывает исходники примера.
 
 <AppExample />
 
-`generateTokens({ primaryColor })` создаёт светлый и тёмный наборы токенов. `createTheme` собирает из каждого набора тему, а `ThemeProvider` передаёт выбранную тему и кнопкам EVG-UI, и карточке из `styled-components`. Фон карточки берётся из `theme.surface`, цвет текста — из `theme.onSurface`.
+## Первая кнопка в приложении {#first-button}
 
-## Запуск в приложении
+После [установки EVG-UI](./Installation.mdx) вставьте пример в `src/App.tsx`. `ThemeProvider` задаёт светлую тему, а кнопка считает нажатия.
 
-В шаблоне Vite для React и TypeScript замените `src/App.tsx`, положите рядом `App.styled.ts` и запустите dev-сервер командой `npm run dev`. Если вы подключаете React к пустой странице, добавьте `<div id="root"></div>` в HTML и отрисуйте приложение в точке входа.
+```tsx title="src/App.tsx"
+import { useState } from 'react'
 
-```tsx title="main.tsx"
-import { createRoot } from 'react-dom/client'
+import { Button, ThemeProvider } from '@evg-b/evg-ui'
 
-import App from './App'
+export default function App() {
+  const [count, setCount] = useState(0)
 
-const root = document.getElementById('root')
-if (root) createRoot(root).render(<App />)
+  return (
+    <ThemeProvider>
+      <Button
+        type="button"
+        variant="contained"
+        color="primary"
+        onClick={() => setCount((value) => value + 1)}>
+        Нажатий — {count}
+      </Button>
+    </ThemeProvider>
+  )
+}
 ```
 
-Чтобы изменить цвет бренда, замените `primaryColor`. Остальные параметры разобраны в [руководстве по теме](../Styles/Theme.mdx), а варианты и размеры кнопок — в [разделе Button](../Components/Button.mdx).
+В проекте на Vite запустите `yarn dev` и откройте адрес из терминала. Нажмите кнопку — число нажатий увеличится.
+
+[Как изменить цвет кнопок и включить тёмную тему](../Styles/Theme.mdx)

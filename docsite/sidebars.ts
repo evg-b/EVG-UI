@@ -3,7 +3,7 @@ import type { SidebarsConfig } from '@docusaurus/plugin-content-docs'
 import APIdocs from './APIdocs'
 const sidebars: SidebarsConfig = {
   someSidebar: {
-    'Getting Started': [
+    'Начало работы': [
       'GettingStarted/Installation',
       'GettingStarted/quick_start'
     ],

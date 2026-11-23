@@ -60,7 +60,7 @@ const Home = () => {
             color="primary"
             onMouseEnter={() => setCubesSpeed(3)}
             onMouseLeave={() => setCubesSpeed(1)}>
-            Быстрый старт
+            Быстрый запуск
           </Button>
         </Styled.Intro>
       </Styled.Hero>

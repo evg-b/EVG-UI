@@ -49,7 +49,7 @@ const config: Config = {
         {
           to: 'docs/GettingStarted/Installation',
           activeBasePath: 'docs/GettingStarted/Installation',
-          label: 'Installation',
+          label: 'Установка',
           position: 'left'
         },
         {
