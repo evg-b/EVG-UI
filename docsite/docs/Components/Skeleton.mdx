@@ -1,37 +1,38 @@
 ---
 id: Skeleton
 title: Skeleton
-sidebar_label: Skeleton
 ---
 
 import {
-	SkeletonAnimationExample,
-	SkeletonAvatarExample,
-	SkeletonBaseExample,
-	SkeletonTextExample,
+  SkeletonBaseExample,
+  SkeletonTextExample,
+  SkeletonAvatarExample,
+  SkeletonAnimationExample
 } from '../../Example/Components/Skeleton/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Скелет интерфейса дает понять пользователю что контент еще загружается. При этом знакомя пользователя к предварительному расположению элементов на странице.
+`Skeleton` обозначает место для контента, который загружается. Форму и размеры можно подобрать под текст, фотографию или другой элемент.
 
-## Base Skeleton
+## Размеры {#base-skeleton}
 
 <SkeletonBaseExample />
 
-## Text
+## Текст {#text}
+
+`type="text,h2"` задаёт заглушку для строки заголовка.
 
 <SkeletonTextExample />
 
-## Avatar
+## Аватар {#avatar}
 
 <SkeletonAvatarExample />
 
-## Animation
+## Анимация {#animation}
 
-Если `animation={false}` анимация волны будет выключена.
+`animation={false}` отключает волну.
 
 <SkeletonAnimationExample />
 
 ## API
 
-<ApiDoc name='Skeleton' />
+<ApiDoc name="Skeleton" />

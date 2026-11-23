@@ -1,18 +1,6 @@
-import type { ButtonGroupIconProps } from './ButtonGroupIcon.types'
+import { Button, ButtonGroup, Icon } from '@evg-b/evg-ui'
 
-import { Button, ButtonGroup, withStyles, Icon } from '@evg-b/evg-ui'
-
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const ButtonGroupIcon = (props: ButtonGroupIconProps) => {
-  const { classes } = props
+const ButtonGroupIcon = () => {
   return (
     <ButtonGroup>
       <Button>
@@ -30,4 +18,4 @@ const ButtonGroupIcon = (props: ButtonGroupIconProps) => {
 
 ButtonGroupIcon.displayName = 'ButtonGroupIcon'
 
-export default withStyles(styles)(ButtonGroupIcon)
+export default ButtonGroupIcon

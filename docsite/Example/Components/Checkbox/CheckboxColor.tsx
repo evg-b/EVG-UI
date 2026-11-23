@@ -1,29 +1,19 @@
-import type { CheckboxColorProps } from './CheckboxColor.types'
+import { Checkbox } from '@evg-b/evg-ui'
 
-import { Checkbox, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const CheckboxColor = (props: CheckboxColorProps) => {
-  const { classes } = props
+const CheckboxColor = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Checkbox color="default" defaultChecked />
       <Checkbox color="primary" defaultChecked />
       <Checkbox color="warn" defaultChecked />
       <Checkbox color="success" defaultChecked />
       <Checkbox color="fail" defaultChecked />
-    </div>
+    </Styled.Row>
   )
 }
 
 CheckboxColor.displayName = 'CheckboxColor'
 
-export default withStyles(styles)(CheckboxColor)
+export default CheckboxColor

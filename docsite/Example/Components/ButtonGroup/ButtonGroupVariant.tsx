@@ -1,21 +1,10 @@
-import type { ButtonGroupVariantProps } from './ButtonGroupVariant.types'
+import { Button, ButtonGroup } from '@evg-b/evg-ui'
 
-import { Button, ButtonGroup, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const ButtonGroupVariant = (props: ButtonGroupVariantProps) => {
-  const { classes } = props
+const ButtonGroupVariant = () => {
   return (
-    <div className={classes.base}>
+    <Styled.CenteredColumn>
       <ButtonGroup variant="text">
         <Button>default 1</Button>
         <Button>default 2</Button>
@@ -31,10 +20,10 @@ const ButtonGroupVariant = (props: ButtonGroupVariantProps) => {
         <Button>outlined 2</Button>
         <Button>outlined 3</Button>
       </ButtonGroup>
-    </div>
+    </Styled.CenteredColumn>
   )
 }
 
 ButtonGroupVariant.displayName = 'ButtonGroupVariant'
 
-export default withStyles(styles)(ButtonGroupVariant)
+export default ButtonGroupVariant

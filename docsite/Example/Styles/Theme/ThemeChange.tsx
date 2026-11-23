@@ -1,114 +1,115 @@
-import type { ListMetaProps } from './ListMeta.types'
+import { useState } from 'react'
 
 import {
-  Elevation,
-  setTheme,
   Avatar,
   Badge,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemAvatar,
   Button,
   ButtonGroup,
-  withStyles
+  List,
+  ListItem,
+  ListItemAvatar,
+  ListItemText,
+  TextField,
+  ThemeProvider,
+  colors,
+  createTheme,
+  generateTokens,
+  useTheme,
+  type ThemeMode
 } from '@evg-b/evg-ui'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center'
-  }
-}
-const ListMeta = (props: ListMetaProps) => {
-  const { classes } = props
-  const Users = [
-    {
-      name: 'Albus Dumbledore',
-      text: 'Gryffindor',
-      time: '12:35',
-      count: 10
-    },
-    {
-      name: 'Hermione Granger',
-      text: 'Gryffindor',
-      time: '00:11',
-      count: 1
-    },
-    {
-      name: 'Ronald Weasley',
-      text: 'Gryffindor',
-      time: '20:01',
-      count: 1
-    },
-    {
-      name: 'Rubeus Hagrid',
-      text: 'Gryffindor',
-      time: '20:00',
-      count: 0
-    },
-    {
-      name: 'Draco Lucius Malfoy',
-      text: 'Slytherin',
-      time: '20:00',
-      count: 0
-    },
-    {
-      name: 'Minerva McGonagall',
-      text: 'Gryffindor',
-      time: '20:00',
-      count: 0
-    },
-    {
-      name: 'Harry Potter',
-      text: 'Gryffindor',
-      time: '15:15',
-      count: 110
-    },
-    {
-      name: 'Luna Lovegood',
-      text: 'Ravenclaw',
-      time: '20:00',
-      count: 0
-    },
-    {
-      name: 'Voldemort',
-      text: 'Slytherin',
-      time: '13:13',
-      count: 100
-    }
-  ]
+import * as Styled from './ThemeChange.styled'
+
+const contacts = [
+  { name: 'Albus Dumbledore', house: 'Gryffindor', count: 10 },
+  { name: 'Hermione Granger', house: 'Gryffindor', count: 1 },
+  { name: 'Ronald Weasley', house: 'Gryffindor', count: 1 },
+  { name: 'Rubeus Hagrid', house: 'Gryffindor', count: 0 },
+  { name: 'Draco Lucius Malfoy', house: 'Slytherin', count: 0 },
+  { name: 'Minerva McGonagall', house: 'Gryffindor', count: 0 },
+  { name: 'Harry Potter', house: 'Gryffindor', count: 110 },
+  { name: 'Luna Lovegood', house: 'Ravenclaw', count: 0 },
+  { name: 'Voldemort', house: 'Slytherin', count: 100 }
+]
+
+const Contacts = () => {
+  const [query, setQuery] = useState('')
+  const visible = contacts.filter(({ name }) =>
+    name.toLowerCase().includes(query.trim().toLowerCase())
+  )
+
   return (
-    <div className={classes.base}>
-      <div>
-        <ButtonGroup variant="outlined">
-          <Button onClick={() => setTheme()}>light</Button>
-          <Button onClick={() => setTheme('dark')}>dark</Button>
-        </ButtonGroup>
-      </div>
-      <List
+    <>
+      <TextField
+        labelText="Найти в списке"
         color="primary"
-        autoHide={false}
-        style={{ margin: 40, width: 400, maxHeight: 300, ...Elevation(2) }}>
-        {Users.map((user, i) => (
-          <ListItem key={i} button>
-            <ListItemAvatar>
-              <Avatar alt={user.name} color="primary" />
-            </ListItemAvatar>
-            <ListItemText
-              secondaryText={user.text}
-              meta={user.time}
-              secondaryMeta={<Badge color="primary" ripe count={user.count} />}>
-              {user.name}
-            </ListItemText>
-          </ListItem>
-        ))}
-      </List>
-    </div>
+        value={query}
+        onChange={(event) => setQuery(event.currentTarget.value)}
+      />
+      {visible.length > 0 ? (
+        <Styled.Contacts as={List} autoHide={false}>
+          {visible.map(({ name, house, count }) => (
+            <ListItem key={name} button={false}>
+              <ListItemAvatar>
+                <Avatar alt={name} color="primary" />
+              </ListItemAvatar>
+              <ListItemText secondaryText={house}>{name}</ListItemText>
+              <Badge color="primary" ripe count={count} />
+            </ListItem>
+          ))}
+        </Styled.Contacts>
+      ) : (
+        <span>Совпадений нет</span>
+      )}
+    </>
   )
 }
 
-ListMeta.displayName = 'ListMeta'
+const ThemeChange = () => {
+  const siteTheme = useTheme()
+  const [selectedMode, setMode] = useState<ThemeMode>()
+  const [primaryColor, setPrimaryColor] = useState<string>(colors.purple[700])
+  const mode = selectedMode ?? siteTheme.mode
+  const tokens = generateTokens({ primaryColor })
+  const theme = createTheme({ tokens: tokens[mode] })
 
-export default withStyles(styles)(ListMeta)
+  return (
+    <ThemeProvider theme={theme}>
+      <Styled.Preview aria-label="Пример динамической темы">
+        <Styled.Controls>
+          <ButtonGroup color="primary" aria-label="Режим примера" role="group">
+            <Button
+              variant={mode === 'light' ? 'contained' : 'outlined'}
+              aria-pressed={mode === 'light'}
+              onClick={() => setMode('light')}>
+              Светлая
+            </Button>
+            <Button
+              variant={mode === 'dark' ? 'contained' : 'outlined'}
+              aria-pressed={mode === 'dark'}
+              onClick={() => setMode('dark')}>
+              Тёмная
+            </Button>
+          </ButtonGroup>
+          <label>
+            Исходный цвет
+            <input
+              type="color"
+              value={primaryColor}
+              onChange={(event) => setPrimaryColor(event.currentTarget.value)}
+            />
+          </label>
+        </Styled.Controls>
+        <span>
+          Текущий токен <code>primary</code> — {theme.primary}
+        </span>
+        <Contacts />
+      </Styled.Preview>
+    </ThemeProvider>
+  )
+}
+
+Contacts.displayName = 'Contacts'
+ThemeChange.displayName = 'ThemeChange'
+
+export default ThemeChange

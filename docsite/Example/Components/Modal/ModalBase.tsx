@@ -1,30 +1,9 @@
-import type { ModalBaseProps } from './ModalBase.types'
-
 import { useState } from 'react'
-import { Modal, Button, IconButton, withStyles, Icon } from '@evg-b/evg-ui'
+import { Modal, Button, IconButton, Icon } from '@evg-b/evg-ui'
 
-const styles = {
-  modalBackground: {
-    backgroundColor: 'rgba(0,0,0,.6)'
-  },
-  modal: {
-    position: 'relative',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '200px',
-    height: '200px',
-    borderRadius: '20px',
-    backgroundColor: 'white'
-  },
-  btnClose: {
-    position: 'absolute',
-    top: 0,
-    right: 0
-  }
-}
-const ModalBase = (props: ModalBaseProps) => {
-  const { classes } = props
+import * as Styled from './Modal.styled'
+
+const ModalBase = () => {
   const [open, setOpen] = useState(false)
   const handleOpen = () => {
     setOpen(true)
@@ -33,28 +12,28 @@ const ModalBase = (props: ModalBaseProps) => {
     setOpen(false)
   }
   const ModalBlock = (
-    <div className={classes.modal}>
-      <IconButton className={classes.btnClose} onClick={handleClose}>
+    <Styled.Dialog>
+      <Styled.CloseButton as={IconButton} onClick={handleClose}>
         <Icon name="Close" />
-      </IconButton>
+      </Styled.CloseButton>
       modal
-    </div>
+    </Styled.Dialog>
   )
   return (
     <div>
       <Button variant="contained" onClick={handleOpen}>
         Open Modal
       </Button>
-      <Modal
-        className={classes.modalBackground}
+      <Styled.Backdrop
+        as={Modal}
         open={open}
         onClose={handleClose}>
         {ModalBlock}
-      </Modal>
+      </Styled.Backdrop>
     </div>
   )
 }
 
 ModalBase.displayName = 'ModalBase'
 
-export default withStyles(styles)(ModalBase)
+export default ModalBase

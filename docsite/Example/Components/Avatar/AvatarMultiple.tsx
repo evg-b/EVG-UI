@@ -1,23 +1,11 @@
-import type { AvatarMultipleProps } from './AvatarMultiple.types'
-
-import { Avatar, withStyles } from '@evg-b/evg-ui'
+import { Avatar } from '@evg-b/evg-ui'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: 10
-    }
-  }
-}
+import * as Styled from '../../ExampleLayout.styled'
 
-const AvatarMultiple = (props: AvatarMultipleProps) => {
-  const { classes } = props
-
+const AvatarMultiple = () => {
   return (
-    <div className={classes.base}>
+    <Styled.SpaciousRow>
       <Avatar
         size={55}
         srcs={[
@@ -43,10 +31,10 @@ const AvatarMultiple = (props: AvatarMultipleProps) => {
         ]}
       />
       <Avatar size={55} srcs={[useBaseUrl('/source/Avatar/3.jpg')]} />
-    </div>
+    </Styled.SpaciousRow>
   )
 }
 
 AvatarMultiple.displayName = 'AvatarMultiple'
 
-export default withStyles(styles)(AvatarMultiple)
+export default AvatarMultiple

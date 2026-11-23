@@ -1,40 +1,17 @@
-import type { ElevationsProps } from './Elevations.types'
+import * as Styled from './Elevations.styled'
 
-import { Elevation, withStyles } from '@evg-b/evg-ui'
+const levels = Array.from({ length: 25 }, (_, level) => level)
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between'
-  },
-  ElevationBox: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    margin: '10px',
-    width: '100px',
-    height: '100px',
-    borderRadius: '9px',
-    color: '#797979',
-    fontSize: '20px'
-  }
-}
-
-const Elevations = (props: ElevationsProps) => {
-  const { classes } = props
-
-  return (
-    <div className={classes.base}>
-      {Array.from(new Array(25)).map((n, i) => (
-        <div key={i} className={classes.ElevationBox} style={Elevation(i)}>
-          {i}
-        </div>
-      ))}
-    </div>
-  )
-}
+const Elevations = () => (
+  <Styled.Grid>
+    {levels.map((level) => (
+      <Styled.Tile key={level} $level={level}>
+        {level}
+      </Styled.Tile>
+    ))}
+  </Styled.Grid>
+)
 
 Elevations.displayName = 'Elevations'
 
-export default withStyles(styles)(Elevations)
+export default Elevations

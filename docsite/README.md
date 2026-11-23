@@ -59,8 +59,9 @@ export type ExampleProps = {
 Для генератора и ESLint используется совместимый JS API TypeScript 6 через alias
 `typescript`; команда `yarn typecheck` по-прежнему запускает компилятор TypeScript 7.
 Генерация запускается отдельно от сборки сайта. Скрипты находятся в `scripts/*.mts`
-и запускаются через `tsx`; генератор примеров читает `.tsx` и записывает
-`Examples.tsx` и `snippets.ts`. Старый Go-запуск перенаправлен на эту же команду.
+и запускаются через `tsx`. Генератор примеров записывает `Examples.tsx` и
+`snippets.ts`. После изменения примера или его модулей `.styled.ts` и `.types.ts`
+обновите код для просмотра на сайте командой `yarn propdoc:snippet`.
 
 ## Сборка и просмотр
 
@@ -74,15 +75,26 @@ yarn docs:preview
 
 ## Публикация
 
-```sh
-GIT_USER=<Your GitHub username> USE_SSH=true yarn docs:deploy
-```
+В настройках репозитория откройте `Settings → Pages → Build and deployment`
+и выберите `GitHub Actions` в поле `Source`. Это разовая настройка.
 
-Команда собирает библиотеку и публикует сайт в ветку `gh-pages`.
+В pull request в `main` GitHub Actions устанавливает зависимости по `yarn.lock`,
+генерирует API и примеры командой `yarn propdoc` и собирает библиотеку и сайт
+командой `yarn docs:build`. После пуша в `main` тот же workflow собирает сайт
+и публикует содержимое `docsite/build` по адресу [EVG-UI](https://evg-b.github.io/EVG-UI/).
+
+## Конфигурация сайта
+
 Core, classic preset и Babel-пресет Docusaurus закреплены на версии 3.10.2,
 которая поддерживает React 19. Babel подключается через `@docusaurus/babel/preset`.
 Конфигурация сайта находится в `docusaurus.config.ts`, меню — в `sidebars.ts`,
 статическая конфигурация Babel — в `babel.config.json`.
-Главная страница документации задаётся через `slug: /` в `docs/Installation.mdx`.
+Плагин `babel-plugin-styled-components` задаёт одинаковые идентификаторы стилей
+при сборке HTML и клиентского кода.
+Страницы установки и Quick start редактируются в `docs/GettingStarted`.
+Короткие адреса `/docs/` и `/docs/quick_start` используют те же MDX-файлы.
+Живое приложение для Quick start и его стили находятся в
+`Example/Components/QuickStart` и входят в обычную генерацию сниппетов.
 
-Старые примеры с JSS API `withStyles` ещё требуют переноса на текущий API `evg-ui`.
+Примеры EVG-UI получают светлую или тёмную тему из режима Docusaurus.
+На странице `Styles/Theme` можно отдельно изменить режим и основной цвет примера.

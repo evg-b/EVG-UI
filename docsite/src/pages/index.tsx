@@ -1,154 +1,101 @@
-import type { HomeProps } from './Home.types'
+import { useEffect, useRef, useState } from 'react'
 
-import { useRef, useState, useEffect } from 'react'
-import Layout from '@theme/Layout'
-import Link from '@docusaurus/Link'
+import { useBaseUrlUtils } from '@docusaurus/useBaseUrl'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
-import useBaseUrl from '@docusaurus/useBaseUrl'
-import classNames from 'classnames'
-import { Image, Button, Cubes, Elevation, withStyles } from '@evg-b/evg-ui'
+import Layout from '@theme/Layout'
+import { Button, Cubes, Image } from '@evg-b/evg-ui'
+
+import DocLink from '../components/DocLink'
 import SecretMessage from '../secretMessage'
+
+import * as Styled from './_Home.styled'
+
 SecretMessage()
 
-const showComponents = [
-  { src: 'docs/components/Button', name: 'Button' },
-  { src: 'docs/components/Lightbox', name: 'Lightbox' },
-  { src: 'docs/components/Skeleton', name: 'Skeleton' }
-]
-const showStyles = [
-  { src: 'docs/styles/Palettes', name: 'Palettes' },
-  { src: 'docs/styles/Theme', name: 'Theme' },
-  { src: 'docs/components/Icon', name: 'Icons' }
-]
-const styles = {
-  listComponents: {
-    marginBottom: '50px'
+const sections = [
+  {
+    title: 'Компоненты',
+    previews: [
+      { path: 'Components/Button', image: 'Button' },
+      { path: 'Components/Lightbox', image: 'Lightbox' },
+      { path: 'Components/Skeleton', image: 'Skeleton' },
+      { path: 'Components/Icon', image: 'Icons' }
+    ],
+    more: '/docs/Components/All'
   },
-  titelList: {
-    display: 'flex',
-    margin: '15px'
-  },
-  list: {
-    position: 'relative',
-    display: 'flex',
-    flexDirection: 'row',
-    justifyContent: 'space-around'
-  },
-  listItem: {
-    ...Elevation(2),
-    margin: '15px',
-    borderRadius: '10%',
-    overflow: 'hidden',
-    '&:hover': {
-      ...Elevation(4)
-    }
-  },
-  moreBtn: {
-    position: 'absolute',
-    bottom: '-30px',
-    right: '0px'
-  },
-  '@media (max-width: 720px)': {
-    list: {
-      flexDirection: 'column'
-    }
+  {
+    title: 'Стили',
+    previews: [
+      { path: 'Styles/Palettes', image: 'Palettes' },
+      { path: 'Styles/Theme', image: 'Theme' }
+    ]
   }
-}
-const Home = (props: HomeProps) => {
-  const { classes } = props
+]
 
-  const context = useDocusaurusContext()
-  const { siteConfig = {} } = context
-
+const Home = () => {
+  const { siteConfig } = useDocusaurusContext()
+  const { withBaseUrl } = useBaseUrlUtils()
   const [cubesSpeed, setCubesSpeed] = useState(1)
-  const Cubes_ref = useRef<InstanceType<typeof Cubes> | null>(null)
+  const cubesRef = useRef<InstanceType<typeof Cubes>>(null)
 
   useEffect(() => {
-    let cubs = Cubes_ref.current
-    setTimeout(() => {
-      cubs?.ripple(100, 18)
-    }, 1000)
-    // setTimeout(() => {
-    //   setCubesSpeed(2)
-    // }, 1000)
-    // setTimeout(() => {
-    //   setCubesSpeed(1)
-    // }, 2000)
-    setInterval(() => {
-      cubs?.ripple(150, 14)
-    }, 18000)
+    const first = setTimeout(() => cubesRef.current?.ripple(100, 18), 1000)
+    const repeat = setInterval(() => cubesRef.current?.ripple(150, 14), 18000)
+    return () => {
+      clearTimeout(first)
+      clearInterval(repeat)
+    }
   }, [])
 
-  const listComponents = (
-    titel: string,
-    arr: Array<{ src: string; name: string }>,
-    more = ''
-  ) => {
-    return (
-      <div className={classes.listComponents}>
-        <h2 className={classes.titelList}>{titel}</h2>
-        <div className={classes.list}>
-          {arr.map((Component, index) => {
-            return (
-              <Link
-                key={index}
-                to={useBaseUrl(`${Component.src}`)}
-                className={classNames(classes.listItem, 'component')}
-                style={{ textDecoration: 'none' }}>
-                <Image
-                  className="show-video"
-                  src={useBaseUrl(`/preview/${Component.name}.png`)}
-                />
-              </Link>
-            )
-          })}
-          {more && (
-            <Link
-              to={useBaseUrl(`docs/components/all`)}
-              className={classes.moreBtn}
-              style={{ textDecoration: 'none' }}>
-              <Button>{'Больше >'}</Button>
-            </Link>
-          )}
-        </div>
-      </div>
-    )
-  }
   return (
     <Layout title={siteConfig.title}>
-      <div className="section_titel">
-        <Cubes ref={Cubes_ref} speed={cubesSpeed} />
-        <div className="box_center">
-          <img src={useBaseUrl(`/img/logo.svg`)} />
-          <h1 className="section_titel__titel">{siteConfig.title}</h1>
-          <Link
-            style={{ textDecoration: 'none' }}
-            to={useBaseUrl('docs/GettingStarted/Installation')}>
-            <Button
-              variant="outlined"
-              onMouseEnter={() => setCubesSpeed(3)}
-              onMouseLeave={() => setCubesSpeed(1)}
-              color="primary">
-              Начать
-            </Button>
-          </Link>
-        </div>
-      </div>
-      <main className="container">
-        <div className="content-box">
-          <h2>{siteConfig.tagline}</h2>
-          <p className="billboard">
-            Библиотека вдохновлена интересными техническими и дизайнерскими
-            решениями Material Design.
-          </p>
-          {listComponents('Components', showComponents, 'more link')}
-          {listComponents('Styles', showStyles)}
-        </div>
-      </main>
+      <Styled.Hero>
+        <Cubes ref={cubesRef} speed={cubesSpeed} />
+        <Styled.Intro>
+          <img src={withBaseUrl('/img/logo.svg')} alt="" />
+          <Styled.Name>{siteConfig.title}</Styled.Name>
+          <Button
+            href={withBaseUrl('/docs/GettingStarted/quick_start')}
+            variant="outlined"
+            color="primary"
+            onMouseEnter={() => setCubesSpeed(3)}
+            onMouseLeave={() => setCubesSpeed(1)}>
+            Быстрый старт
+          </Button>
+        </Styled.Intro>
+      </Styled.Hero>
+      <Styled.Content className="container">
+        <h2>{siteConfig.tagline}</h2>
+        {sections.map(({ title, previews, more }) => (
+          <Styled.Section key={title}>
+            <Styled.Title>{title}</Styled.Title>
+            <Styled.Previews>
+              {previews.map(({ path, image }) => (
+                <Styled.PreviewLink
+                  as={DocLink}
+                  key={path}
+                  to={`/docs/${path}`}
+                  aria-label={image}>
+                  <Styled.Preview
+                    as={Image}
+                    alt=""
+                    src={withBaseUrl(`/preview/${image}.png`)}
+                  />
+                </Styled.PreviewLink>
+              ))}
+              {more && (
+                <Styled.More>
+                  <Button href={withBaseUrl(more)}>Все компоненты</Button>
+                </Styled.More>
+              )}
+            </Styled.Previews>
+          </Styled.Section>
+        ))}
+      </Styled.Content>
     </Layout>
   )
 }
 
 Home.displayName = 'Home'
 
-export default withStyles(styles)(Home)
+export default Home

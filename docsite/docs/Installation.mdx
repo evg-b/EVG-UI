@@ -1,39 +1,11 @@
 ---
 id: Installation
 title: Installation
-sidebar_label: Installation
+description: Как запустить текущую версию EVG-UI в репозитории и подключить её к React-приложению.
 slug: /
+displayed_sidebar: someSidebar
 ---
 
+import Installation from './GettingStarted/Installation.mdx'
 
-
-```sh
-npm install @evg-b/evg-ui --save или yarn install @evg-b/evg-ui
-```
-
-Чтобы сделать сборку компактнее вы можете импортировать в проект только нужные компоненты.
-```jsx
-import { Avatar, Badge, Button } from '@evg-b/evg-ui';
-```
-
-
-### Шрифт
-
-Material Design разрабатывался основываясь на шрифте `Roboto`.
-Подключите шрифт к вашему проекту чтобы все компоненты выглядили так как задумывалось. 
-
-```html
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
-```
-
-### Icon
-
-Иконки Material входят в `evg-ui` и доступны через компонент `Icon`.
-
-```jsx
-import { Icon } from '@evg-b/evg-ui'
-
-<Icon name="Check" color="primary" />
-```
-
-Подробнее про [Icon](/docs/Components/Icon).
+<Installation />

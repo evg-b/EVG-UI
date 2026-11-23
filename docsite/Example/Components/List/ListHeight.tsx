@@ -1,16 +1,6 @@
-import type { ListHeightProps } from './ListHeight.types'
+import { List, ListItem, ListItemText } from '@evg-b/evg-ui'
 
-import { List, ListItem, ListItemText, withStyles } from '@evg-b/evg-ui'
-
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
+import * as Styled from './List.styled'
 
 const Items = [
   'Captain Shepard',
@@ -34,24 +24,20 @@ const Items = [
   'David Edvard Anderson'
 ]
 
-const ListHeight = (props: ListHeightProps) => {
-  const { classes } = props
+const ListHeight = () => {
   return (
-    <div className={classes.base}>
-      <List
-        autoHide={false}
-        color="primary"
-        style={{ width: 300, height: 400 }}>
-        {Items.map((item, i) => (
-          <ListItem key={i} button>
+    <Styled.Row>
+      <Styled.ScrollableItems as={List} autoHide={false} color="primary">
+        {Items.map((item) => (
+          <ListItem key={item} button>
             <ListItemText>{item}</ListItemText>
           </ListItem>
         ))}
-      </List>
-    </div>
+      </Styled.ScrollableItems>
+    </Styled.Row>
   )
 }
 
 ListHeight.displayName = 'ListHeight'
 
-export default withStyles(styles)(ListHeight)
+export default ListHeight

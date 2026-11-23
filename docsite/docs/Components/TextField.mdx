@@ -1,76 +1,79 @@
 ---
 id: TextField
 title: TextField
-sidebar_label: TextField
 ---
 
 import {
-	TextFieldBaseExample,
-	TextFieldColorExample,
-	TextFieldErrorExample,
-	TextFieldFullWidthExample,
-	TextFieldHelperTextExample,
-	TextFieldIconExample,
-	TextFieldMaxCountExample,
-	TextFieldMultilineExample,
-	TextFieldOutlinedExample,
-	TextFieldPlaceholderAndLabelTextExample,
-	TextFieldRoundExample,
+  TextFieldBaseExample,
+  TextFieldOutlinedExample,
+  TextFieldColorExample,
+  TextFieldPlaceholderAndLabelTextExample,
+  TextFieldHelperTextExample,
+  TextFieldMaxCountExample,
+  TextFieldErrorExample,
+  TextFieldRoundExample,
+  TextFieldIconExample,
+  TextFieldMultilineExample,
+  TextFieldFullWidthExample
 } from '../../Example/Components/TextField/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Текстовые поля позволяют пользователям вводить и редактировать текст.
+`TextField` принимает начальный текст через `defaultValue`. В управляемом поле передавайте `value` и читайте введённый текст из `event.currentTarget.value` в `onChange`.
 
-## Base TextField
+## Текстовое поле {#base-textfield}
 
 <TextFieldBaseExample />
 
-## Outlined
+## Рамка {#outlined}
 
 <TextFieldOutlinedExample />
 
-## Color
+## Цвет {#color}
 
-Цвет компонента меняется через свойство `color`. Более подробно про цвет в этой [статье](/docs/styles/color#props-color).
+Акцент поля можно задать ролью активной темы. [Цветовые роли](../Styles/Color.mdx#props-color).
 
 <TextFieldColorExample />
 
-## Placeholder и LabelText
+## Подпись и подсказка {#placeholder-и-labeltext}
+
+`labelText` задаёт подпись поля, `placeholder` — текст внутри пустого поля.
 
 <TextFieldPlaceholderAndLabelTextExample />
 
-## HelperText
+## Пояснение {#helpertext}
 
 <TextFieldHelperTextExample />
 
-## MaxCount
+## Ограничение длины {#maxcount}
 
 <TextFieldMaxCountExample />
 
-## Error
+## Ошибка {#error}
+
+Передайте `error` для состояния ошибки и `helperText` для пояснения.
 
 <TextFieldErrorExample />
 
-## Round
+## Скругление {#round}
 
 <TextFieldRoundExample />
 
-## Icon
+## Иконки {#icon}
 
-Свойства `leadingIcon` и `trailingIcon` это контейнеры для размещения `node` элементов, таких как `Icons` и д.р.
+Разместите `<Icon name="Search" />` в `leadingIcon` или `trailingIcon`.
 
 <TextFieldIconExample />
 
-## Multiline
+## Несколько строк {#multiline}
 
-Многострочный режим.
+`multiline` включает многострочный ввод. Количество строк задаёт `rows`.
 
 <TextFieldMultilineExample />
 
-## FullWidth
+## На всю ширину {#fullwidth}
 
 <TextFieldFullWidthExample />
 
 ## API
 
-<ApiDoc name='TextField' />
+<ApiDoc name="TextField" />

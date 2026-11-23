@@ -69,6 +69,57 @@ class PropsParser extends Parser {
       : comment
   }
 
+  getPropsInfo(parameter: ts.Symbol, defaults: Record<string, string> = {}) {
+    const props = super.getPropsInfo(parameter, defaults)
+    const location = parameter.valueDeclaration
+    if (!location) return props
+
+    const propsType = this.typeChecker.getTypeOfSymbolAtLocation(
+      parameter,
+      location
+    )
+    for (const [name, prop] of Object.entries(props)) {
+      const member = propsType.getProperty(name)
+      const declarations = member?.getDeclarations() ??
+        (propsType.isUnion()
+          ? propsType.types.flatMap((variant) =>
+              variant.getProperty(name)?.getDeclarations() ?? [])
+          : [])
+      if (!declarations.length) continue
+
+      // The compiler keeps the original paths even when docgen shortens them.
+      const local = declarations.find((node) =>
+        isInside(sourceDirectory, node.getSourceFile().fileName)
+      )
+      if (!local) {
+        delete props[name]
+        continue
+      }
+
+      // A local declaration can narrow an inherited DOM attribute, e.g. Icon.name.
+      if (
+        !member ||
+        declarations.length === 1 ||
+        !ts.isPropertySignature(local) ||
+        !local.type
+      ) continue
+      const type = this.typeChecker.getTypeOfSymbolAtLocation(member, location)
+      const required =
+        !(member.flags & ts.SymbolFlags.Optional) && !(name in defaults)
+      props[name] = {
+        ...prop,
+        required,
+        type:
+          type === this.typeChecker.getTypeFromTypeNode(local.type)
+            ? { name: local.type.getText() }
+            : this.getDocgenType(type, required),
+        description: getLineComment(local) || prop.description,
+        defaultValue: name in defaults ? { value: defaults[name] } : null
+      }
+    }
+    return props
+  }
+
   getDefaultValue(
     expression: ts.Expression,
     visited = new Set<ts.Symbol>()
@@ -156,14 +207,13 @@ class PropsParser extends Parser {
         isPropsArgument(node.arguments[0])
       ) {
         const helper = this.typeChecker.getResolvedSignature(node)?.declaration
+        const parameter = helper?.parameters[0]
         if (
-          helper &&
-          isInside(sourceDirectory, helper.getSourceFile().fileName)
+          parameter &&
+          ts.isParameter(parameter) &&
+          isInside(sourceDirectory, parameter.getSourceFile().fileName)
         ) {
-          Object.assign(
-            defaults,
-            this.getParameterDefaults(helper.parameters[0])
-          )
+          Object.assign(defaults, this.getParameterDefaults(parameter))
         }
       }
 
@@ -208,14 +258,7 @@ if (!entrySymbol)
 
 const parser = new PropsParser(program, {
   shouldRemoveUndefinedFromOptional: true,
-  skipChildrenPropWithoutDoc: false,
-  propFilter: (prop) => {
-    const declarations = prop.declarations || (prop.parent ? [prop.parent] : [])
-    return (
-      !declarations.length ||
-      declarations.some(({ fileName }) => isInside(sourceDirectory, fileName))
-    )
-  }
+  skipChildrenPropWithoutDoc: false
 })
 
 const metadata: Record<string, PropDocPatient> = {}
@@ -266,6 +309,9 @@ for (const exportedSymbol of publicExports) {
 }
 
 if (!Object.keys(metadata).length) throw new Error('No public components found')
+if (!Object.values(metadata).some(({ props }) => Object.keys(props).length)) {
+  throw new Error('No public component props found. Check the declaration paths.')
+}
 
 mkdirSync(dirname(outputPath), { recursive: true })
 writeFileSync(outputPath, `${JSON.stringify(metadata, null, 2)}\n`)

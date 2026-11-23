@@ -1,30 +1,20 @@
-import type { BadgeDotProps } from './BadgeDot.types'
+import { Badge, Icon } from '@evg-b/evg-ui'
 
-import { Badge, withStyles, Icon } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const BadgeDot = (props: BadgeDotProps) => {
-  const { classes } = props
+const BadgeDot = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Badge count={2}>
         <Icon name="Notifications" />
       </Badge>
       <Badge count={2} dot>
         <Icon name="Notifications" />
       </Badge>
-    </div>
+    </Styled.Row>
   )
 }
 
 BadgeDot.displayName = 'BadgeDot'
 
-export default withStyles(styles)(BadgeDot)
+export default BadgeDot

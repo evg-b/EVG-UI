@@ -1,3 +1,3 @@
-export type ElevationsProps = {
-  classes: Record<'base' | 'ElevationBox', string>
+export type ElevationTileProps = {
+  $level: number
 }

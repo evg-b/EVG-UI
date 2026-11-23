@@ -1,17 +1,27 @@
 import { resolve } from 'node:path'
 
+import { getBabelOptions } from '@docusaurus/babel'
 import type { Config } from '@docusaurus/types'
 import type { Options, ThemeConfig } from '@docusaurus/preset-classic'
 
 const config: Config = {
   title: 'EVG-UI',
-  tagline: 'React компоненты основанные на идеях Material Design.',
+  tagline: 'React-компоненты в стиле Material Design с динамической темой',
   url: 'https://evg-b.github.io',
   baseUrl: '/EVG-UI/',
   onBrokenLinks: 'throw',
   favicon: 'img/favicon.ico',
   organizationName: 'evg-b',
   projectName: 'EVG-UI',
+  webpack: {
+    jsLoader: (isServer) => ({
+      loader: require.resolve('babel-loader'),
+      options: getBabelOptions({
+        isServer,
+        babelOptions: resolve(__dirname, 'babel.config.json')
+      })
+    })
+  },
   plugins: [
     function localEvgUi() {
       return {

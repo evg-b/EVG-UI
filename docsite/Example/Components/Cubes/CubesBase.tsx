@@ -1,10 +1,12 @@
 import { Cubes } from '@evg-b/evg-ui'
 
+import * as Styled from './Cubes.styled'
+
 const CubesBase = () => {
   return (
-    <div style={{ width: 300, height: 300 }}>
+    <Styled.Preview>
       <Cubes />
-    </div>
+    </Styled.Preview>
   )
 }
 

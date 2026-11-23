@@ -1,28 +1,18 @@
-import type { SwitchBaseProps } from './SwitchBase.types'
+import { Switch } from '@evg-b/evg-ui'
 
-import { Switch, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '10px'
-    }
-  }
-}
-const SwitchBase = (props: SwitchBaseProps) => {
-  const { classes } = props
+const SwitchBase = () => {
   return (
-    <div className={classes.base}>
+    <Styled.SpaciousRow>
       <Switch />
       <Switch defaultChecked />
       <Switch checked />
       <Switch disabled checked />
-    </div>
+    </Styled.SpaciousRow>
   )
 }
 
 SwitchBase.displayName = 'SwitchBase'
 
-export default withStyles(styles)(SwitchBase)
+export default SwitchBase

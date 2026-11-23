@@ -1,180 +1,94 @@
-import type { MouseEvent } from 'react'
+import { useRef, useState } from 'react'
 
-import type { CubesSettingsProps } from './CubesSettings.types'
-
-import { useState, useRef } from 'react'
 import {
-  Cubes,
-  Radio,
-  Popup,
-  IconButton,
   Button,
+  Cubes,
+  Icon,
+  IconButton,
   List,
   ListItem,
   ListItemText,
-  withStyles,
-  Icon
+  Popup,
+  Radio
 } from '@evg-b/evg-ui'
 
-const styles = {
-  base: {
-    display: 'flex',
-    position: 'relative',
-    width: '800px',
-    height: '800px',
-    backgroundColor: '#3d3d3d'
-  },
-  panelSettings: {
-    position: 'absolute',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    bottom: 10,
-    left: '50%',
-    transform: 'translateX(-50%)',
-    padding: 10,
-    backgroundColor: '#FFFFFF',
-    borderRadius: '15px',
-    '& > *': {
-      margin: '0 5px'
-    }
-  },
-  colorPanel: {
-    padding: 10,
-    backgroundColor: '#FFFFFF',
-    borderRadius: '15px'
+import * as Styled from './Cubes.styled'
+
+const colors = [
+  { label: 'Серый', value: '#e0e0e0' },
+  { label: 'Красный', value: 'red700' },
+  { label: 'Основной', value: 'primary' }
+]
+
+const CubesSettings = () => {
+  const canvas = useRef<InstanceType<typeof Cubes>>(null)
+  const colorTarget = useRef<HTMLElement>(null)
+  const speedTarget = useRef<HTMLElement>(null)
+  const sizeTarget = useRef<HTMLElement>(null)
+  const [playing, setPlaying] = useState(true)
+  const [color, setColor] = useState(colors[0].value)
+  const [speed, setSpeed] = useState(1)
+  const [size, setSize] = useState(40)
+
+  const toggleAnimation = () => {
+    if (playing) canvas.current?.stop()
+    else canvas.current?.start()
+    setPlaying(!playing)
   }
-}
-const CubesSettings = (props: CubesSettingsProps) => {
-  const { classes } = props
-  const Cubes_ref = useRef<InstanceType<typeof Cubes> | null>(null)
-  const Color_ref = useRef<HTMLElement | null>(null)
-  const Speed_ref = useRef<HTMLElement | null>(null)
-  const Size_ref = useRef<HTMLElement | null>(null)
-  const [play, setPlay] = useState(true)
-  const [colorActive, setColorActive] = useState(0)
-  const [speedActive, setSpeedActive] = useState(1)
-  const [sizeActive, setSizeActive] = useState(40)
-  const arrColor = ['', 'red700', 'primary']
-  const handlePlay = () => {
-    setPlay((prev) => {
-      prev ? Cubes_ref.current?.stop() : Cubes_ref.current?.start()
-      return !prev
-    })
-  }
-  const handleRipple = () => {
-    Cubes_ref.current?.ripple(150, 18)
-  }
-  const handleChangeColor = (event: MouseEvent<HTMLInputElement>) => {
-    setColorActive(+event.currentTarget.value)
-  }
-  const handleChangeSpeed = ({ currentTarget }: MouseEvent<HTMLElement>) => {
-    setSpeedActive(Number(currentTarget.getAttribute('value')))
-  }
-  const handleChangeSize = ({ currentTarget }: MouseEvent<HTMLElement>) => {
-    setSizeActive(Number(currentTarget.getAttribute('value')))
-  }
+
   return (
-    <div className={classes.base}>
-      <Cubes
-        color={arrColor[colorActive]}
-        speed={speedActive}
-        size={sizeActive}
-        ref={Cubes_ref}
-      />
-      <div className={classes.panelSettings}>
-        <IconButton onClick={handlePlay}>
-          {play ? <Icon name="Pause" /> : <Icon name="PlayArrow" />}
+    <Styled.Canvas>
+      <Cubes ref={canvas} color={color} speed={speed} size={size} />
+      <Styled.Controls>
+        <IconButton
+          aria-label={playing ? 'Приостановить' : 'Продолжить'}
+          onClick={toggleAnimation}>
+          <Icon name={playing ? 'Pause' : 'PlayArrow'} />
         </IconButton>
-        <Button onClick={handleRipple}>Ripple</Button>
-        <Button ref={Color_ref}>Color</Button>
-        <Popup
-          target={Color_ref}
+        <Button onClick={() => canvas.current?.ripple(150, 18)}>Волна</Button>
+        <Button ref={colorTarget}>Цвет</Button>
+        <Styled.ColorPanel
+          as={Popup}
+          target={colorTarget}
           shift={15}
           position="top"
-          mode="click"
-          className={classes.colorPanel}>
-          <Radio
-            value={0}
-            checked={colorActive === 0}
-            onClick={handleChangeColor}
-          />
-          <Radio
-            value={1}
-            checked={colorActive === 1}
-            onClick={handleChangeColor}
-            color={arrColor[1]}
-          />
-          <Radio
-            value={2}
-            checked={colorActive === 2}
-            onClick={handleChangeColor}
-            color={arrColor[2]}
-          />
-        </Popup>
-        <Button ref={Speed_ref}>Speed</Button>
-        <Popup target={Speed_ref} shift={15} position="top" mode="click">
+          mode="click">
+          {colors.map((option) => (
+            <Radio
+              key={option.value}
+              name="cube-color"
+              aria-label={option.label}
+              color={option.value}
+              checked={color === option.value}
+              onChange={() => setColor(option.value)}
+            />
+          ))}
+        </Styled.ColorPanel>
+        <Button ref={speedTarget}>Скорость</Button>
+        <Popup target={speedTarget} shift={15} position="top" mode="click">
           <List>
-            <ListItem
-              value={10}
-              active={speedActive === 10}
-              onClick={handleChangeSpeed}>
-              <ListItemText>x 10</ListItemText>
-            </ListItem>
-            <ListItem
-              value={5}
-              active={speedActive === 5}
-              onClick={handleChangeSpeed}>
-              <ListItemText>x 5</ListItemText>
-            </ListItem>
-            <ListItem
-              value={2}
-              active={speedActive === 2}
-              onClick={handleChangeSpeed}>
-              <ListItemText>x 2</ListItemText>
-            </ListItem>
-            <ListItem
-              value={1}
-              active={speedActive === 1}
-              onClick={handleChangeSpeed}>
-              <ListItemText>x 1</ListItemText>
-            </ListItem>
+            {[10, 5, 2, 1].map((value) => (
+              <ListItem key={value} active={speed === value} onClick={() => setSpeed(value)}>
+                <ListItemText>×{value}</ListItemText>
+              </ListItem>
+            ))}
           </List>
         </Popup>
-        <Button ref={Size_ref}>Size</Button>
-        <Popup target={Size_ref} shift={15} position="top" mode="click">
+        <Button ref={sizeTarget}>Размер</Button>
+        <Popup target={sizeTarget} shift={15} position="top" mode="click">
           <List>
-            <ListItem
-              value={100}
-              active={sizeActive === 100}
-              onClick={handleChangeSize}>
-              <ListItemText>100px</ListItemText>
-            </ListItem>
-            <ListItem
-              value={80}
-              active={sizeActive === 80}
-              onClick={handleChangeSize}>
-              <ListItemText>80px</ListItemText>
-            </ListItem>
-            <ListItem
-              value={40}
-              active={sizeActive === 40}
-              onClick={handleChangeSize}>
-              <ListItemText>40px</ListItemText>
-            </ListItem>
-            <ListItem
-              value={20}
-              active={sizeActive === 20}
-              onClick={handleChangeSize}>
-              <ListItemText>20px</ListItemText>
-            </ListItem>
+            {[100, 80, 40, 20].map((value) => (
+              <ListItem key={value} active={size === value} onClick={() => setSize(value)}>
+                <ListItemText>{value} px</ListItemText>
+              </ListItem>
+            ))}
           </List>
         </Popup>
-      </div>
-    </div>
+      </Styled.Controls>
+    </Styled.Canvas>
   )
 }
 
 CubesSettings.displayName = 'CubesSettings'
 
-export default withStyles(styles)(CubesSettings)
+export default CubesSettings

@@ -1,39 +1,23 @@
-import type { ImageLoaderProps } from './ImageLoader.types'
-
 import { useState } from 'react'
-import { Image, Button, withStyles } from '@evg-b/evg-ui'
+import { Image, Button } from '@evg-b/evg-ui'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignItems: 'center'
-  },
-  img: {
-    margin: '5px',
-    width: 200,
-    height: 200,
-    borderRadius: '6%',
-    objectFit: 'cover'
-  }
-}
+import * as Styled from './Image.styled'
 
-const ImageLoader = (props: ImageLoaderProps) => {
-  const { classes } = props
+const ImageLoader = () => {
   const [hash, setHash] = useState('')
   const newHash = () => {
-    setHash(Date.now())
+    setHash(String(Date.now()))
   }
   const url = useBaseUrl(`/source/Image/2.jpg?${hash}`)
   return (
-    <div className={classes.base}>
-      <Image className={classes.img} src={url} />
+    <Styled.CenteredRow>
+      <Styled.Preview as={Image} src={url} />
       <Button onClick={newHash}>reload</Button>
-    </div>
+    </Styled.CenteredRow>
   )
 }
 
 ImageLoader.displayName = 'ImageLoader'
 
-export default withStyles(styles)(ImageLoader)
+export default ImageLoader

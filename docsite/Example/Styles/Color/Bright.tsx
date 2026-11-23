@@ -1,61 +1,26 @@
-import type { brightChangeProps } from './brightChange.types'
+import { Color } from '@evg-b/evg-ui'
 
-import { Color, withStyles } from '@evg-b/evg-ui'
+import * as Styled from './Color.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    margin: '10px 0'
-  },
-  tone: {
-    height: '60px',
-    width: '60px',
-    display: 'inline-flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    flexGrow: 1
-  }
-}
+const orange = Color('orange')
+const percentages = Array.from({ length: 13 }, (_, index) => index * 5)
 
-const brightChange = (props: brightChangeProps) => {
-  const { classes } = props
+const Bright = () => (
+  <>
+    {[1, -1].map((direction) => (
+      <Styled.Scale key={direction}>
+        {percentages.map((step) => (
+          <Styled.Tone
+            key={step}
+            $background={orange.Bright('HEX', direction * step)}>
+            {direction * step}%
+          </Styled.Tone>
+        ))}
+      </Styled.Scale>
+    ))}
+  </>
+)
 
-  return (
-    <div>
-      <div className={classes.base}>
-        {Array.from(new Array(13)).map((n, index) => {
-          let ColorEVG = Color('orange').Bright('hex', index * 5)
-          return (
-            <div
-              key={index}
-              className={classes.tone}
-              style={{
-                backgroundColor: ColorEVG,
-                color: Color(ColorEVG).Contrast()
-              }}>
-              {index * 5}
-            </div>
-          )
-        })}
-      </div>
-      <div className={classes.base}>
-        {Array.from(new Array(13)).map((n, index) => {
-          let ColorEVG = Color('orange').Bright('hex', -index * 5)
-          return (
-            <div
-              key={index}
-              className={classes.tone}
-              style={{
-                backgroundColor: ColorEVG,
-                color: Color(ColorEVG).Contrast()
-              }}>
-              {-index * 5}
-            </div>
-          )
-        })}
-      </div>
-    </div>
-  )
-}
+Bright.displayName = 'Bright'
 
-export default withStyles(styles)(brightChange)
+export default Bright

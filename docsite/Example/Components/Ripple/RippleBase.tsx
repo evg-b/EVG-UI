@@ -1,26 +1,15 @@
-import type { RippleBaseProps } from './RippleBase.types'
+import { Ripple } from '@evg-b/evg-ui'
 
-import { Elevation, Ripple, withStyles } from '@evg-b/evg-ui'
+import * as Styled from './Ripple.styled'
 
-const styles = {
-  base: {
-    ...Elevation(2),
-    width: '300px',
-    height: '300px',
-    position: 'relative'
-  }
-}
-
-const RippleBase = (props: RippleBaseProps) => {
-  const { classes } = props
-
+const RippleBase = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Surface>
       <Ripple />
-    </div>
+    </Styled.Surface>
   )
 }
 
 RippleBase.displayName = 'RippleBase'
 
-export default withStyles(styles)(RippleBase)
+export default RippleBase

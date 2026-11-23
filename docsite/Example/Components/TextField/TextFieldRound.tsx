@@ -1,20 +1,10 @@
-import type { TextFieldRoundProps } from './TextFieldRound.types'
+import { TextField } from '@evg-b/evg-ui'
 
-import { TextField, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const TextFieldRound = (props: TextFieldRoundProps) => {
-  const { classes } = props
+const TextFieldRound = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <TextField
         round
         labelText="round base"
@@ -28,10 +18,10 @@ const TextFieldRound = (props: TextFieldRoundProps) => {
         color="primary"
         outlined
       />
-    </div>
+    </Styled.Row>
   )
 }
 
 TextFieldRound.displayName = 'TextFieldRound'
 
-export default withStyles(styles)(TextFieldRound)
+export default TextFieldRound

@@ -7,6 +7,21 @@ export const CodePanel = styled.div`
   background-color: #272822;
 `
 
+export const FilePicker = styled.label`
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  gap: 8px;
+  padding: 12px 16px;
+  background-color: ${({ theme }) => resolveTheme(theme).surfaceContainer};
+  color: ${({ theme }) => resolveTheme(theme).onSurface};
+
+  select {
+    max-width: 100%;
+    font: inherit;
+  }
+`
+
 export const SourceCode = styled.pre`
   display: inline-block;
 `

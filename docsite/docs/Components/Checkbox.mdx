@@ -1,34 +1,33 @@
 ---
 id: Checkbox
 title: Checkbox
-sidebar_label: Checkbox
 ---
 
 import {
-    CheckboxBaseExample,
-	CheckboxColorExample,
-	CheckboxSizeExample,
+  CheckboxBaseExample,
+  CheckboxColorExample,
+  CheckboxSizeExample
 } from '../../Example/Components/Checkbox/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Компонент позволяющий управлять параметром с двумя состояниями. Полное соответствие функционала что и у нативной версии.
+`Checkbox` использует `input` с типом `checkbox`. Задайте начальное состояние через `defaultChecked` или управляйте им через `checked` и `onChange`.
 
-## Base Checkbox
+## Флажок {#base-checkbox}
 
 <CheckboxBaseExample />
 
-## Color
+## Цвет {#color}
 
-Цвет компонента меняется через свойство `color`. Более подробно про цвет в этой [статье](/docs/styles/color#props-color).
+Свойство `color` принимает роль темы. [Цветовые роли](../Styles/Color.mdx#props-color).
 
 <CheckboxColorExample />
 
-## Size
+## Размер {#size}
 
-Размер компонента изменяется через свойство `size`.
+Размер флажка задаёт `size`.
 
 <CheckboxSizeExample />
 
 ## API
 
-<ApiDoc name='Checkbox' />
+<ApiDoc name="Checkbox" />

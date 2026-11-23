@@ -1,32 +1,7 @@
-import type { StatesRippleProps } from './StatesRipple.types'
+import { Color } from '@evg-b/evg-ui'
 
-import { Elevation, Color, withStyles } from '@evg-b/evg-ui'
-import classNames from 'classnames'
+import * as Styled from './Ripple.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    justifyContent: 'space-between'
-  },
-  stateStand: {
-    width: '250px',
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    padding: '15px',
-    ...Elevation(1)
-  },
-  state: {
-    margin: '15px',
-    padding: '10px',
-    width: '80%',
-    height: '50px',
-    display: 'flex',
-    justifyContent: 'space-between',
-    alignItems: 'center',
-    borderRadius: '4px'
-  }
-}
 const StatesColor: Record<string, string> = {
   White: '#FFFFFF',
   Contrast: 'purple600',
@@ -61,55 +36,37 @@ const ArrayStates: Record<string, Record<string, number>> = {
     // 'Dragged': 0.16,
   }
 }
-const StatesRipple = (props: StatesRippleProps) => {
-  const { classes } = props
-
+const StatesRipple = () => {
   return (
-    <div className={classNames(classes.base)}>
+    <Styled.States>
       {Object.keys(ArrayStates).map((state, index) => {
         let colorState =
           index !== 2
             ? Color(StatesColor[state]).Base()
             : Color(StatesColor[state]).Contrast()
         return (
-          <div
-            key={index}
-            className={classes.stateStand}
-            style={{
-              backgroundColor: colorState,
-              color: Color(colorState).Contrast()
-            }}>
-            <div
-              style={{
-                padding: '10px'
-              }}>
-              {state}
-            </div>
-            {Object.entries(ArrayStates[state]).map((config, i) => {
+          <Styled.StateGroup key={state} $background={colorState}>
+            <Styled.StateTitle>{state}</Styled.StateTitle>
+            {Object.entries(ArrayStates[state]).map((config) => {
               let colorRipple =
                 index === 2
                   ? Color(StatesColor[state]).Base()
                   : Color(StatesColor[state]).Contrast()
               let colorRippleState = Color(colorRipple).Base('rgba', config[1])
               return (
-                <div
-                  key={i}
-                  className={classes.state}
-                  style={{
-                    backgroundColor: colorRippleState
-                  }}>
+                <Styled.State key={config[0]} $background={colorRippleState}>
                   <span>{config[0]}</span>
                   <span>{config[1] * 100}%</span>
-                </div>
+                </Styled.State>
               )
             })}
-          </div>
+          </Styled.StateGroup>
         )
       })}
-    </div>
+    </Styled.States>
   )
 }
 
 StatesRipple.displayName = 'StatesRipple'
 
-export default withStyles(styles)(StatesRipple)
+export default StatesRipple

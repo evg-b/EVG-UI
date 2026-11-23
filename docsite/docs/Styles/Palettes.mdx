@@ -3,18 +3,24 @@ id: Palettes
 title: Palettes
 sidebar_label: Palettes
 ---
+
 import Palettes from '../../Example/Styles/Palettes/Palettes'
 
-Эти цветовые палитры, изначально созданные [Material Design](https://material.io/design/color/the-color-system.html#tools-for-picking-colors) в 2014 году, состоят из цветов, гармонично сочетающихся друг с другом.
+## Выбор оттенка
 
-```js
-import { colors } from '@evg-b/evg-ui';
-colors.red['700'] // #D32F2F
+Палитры Material Design экспортируются из EVG-UI по имени и через объект `colors`. Номер оттенка служит ключом. Например, `red[700]` и `colors.red[700]` возвращают `#D32F2F`.
 
-или
+```ts
+import { colors, createTheme, generateTokens, red } from '@evg-b/evg-ui'
 
-const { red } from '@evg-b/evg-ui'
-red['700'] // #D32F2F
+const tokens = generateTokens({
+  primaryColor: colors.purple[700],
+  errorColor: red[700]
+})
+const lightTheme = createTheme({ tokens: tokens.light })
+const darkTheme = createTheme({ tokens: tokens.dark })
 ```
+
+Для элемента, который должен менять цвет вместе с режимом, используйте роль темы, например `theme.primary`. Ниже приведены исходные оттенки и их HEX-значения.
 
 <Palettes />

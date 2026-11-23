@@ -1,21 +1,10 @@
-import type { ButtonGroupColorProps } from './ButtonGroupColor.types'
+import { Button, ButtonGroup } from '@evg-b/evg-ui'
 
-import { Button, ButtonGroup, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const ButtonGroupColor = (props: ButtonGroupColorProps) => {
-  const { classes } = props
+const ButtonGroupColor = () => {
   return (
-    <div className={classes.base}>
+    <Styled.CenteredColumn>
       <ButtonGroup variant="text" color="primary">
         <Button>primary 1</Button>
         <Button>primary 2</Button>
@@ -28,10 +17,10 @@ const ButtonGroupColor = (props: ButtonGroupColorProps) => {
         <Button>fail 1</Button>
         <Button>fail 2</Button>
       </ButtonGroup>
-    </div>
+    </Styled.CenteredColumn>
   )
 }
 
 ButtonGroupColor.displayName = 'ButtonGroupColor'
 
-export default withStyles(styles)(ButtonGroupColor)
+export default ButtonGroupColor

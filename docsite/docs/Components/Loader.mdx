@@ -1,41 +1,40 @@
 ---
 id: Loader
 title: Loader
-sidebar_label: Loader
 ---
 
 import {
-	LoaderBaseExample,
-    LoaderColorExample,
-    LoaderSizeExample,
-    LoaderDepthExample,
+  LoaderBaseExample,
+  LoaderColorExample,
+  LoaderSizeExample,
+  LoaderDepthExample
 } from '../../Example/Components/Loader/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Индикатор прогресса указывающий неопределенное время ожидания.
+`Loader` показывает, что операция выполняется и точный процент выполнения неизвестен.
 
-## Base Loader
+## Индикатор {#base-loader}
 
 <LoaderBaseExample />
 
-## Color
+## Цвет {#color}
 
-Цвет компонента меняется через свойство `color`. Более подробно про цвет в этой [статье](/docs/styles/color#props-color).
+Выберите цвет через `color`. [Цветовые роли](../Styles/Color.mdx#props-color).
 
 <LoaderColorExample />
 
-## Size
+## Размер {#size}
 
-Размер компонента изменяется через свойство `size`.
+Диаметр индикатора задаёт `size`.
 
 <LoaderSizeExample />
 
-## Depth
+## Толщина линии {#depth}
 
-Толщина линии изменяется через свойство `depth`.
+Передайте толщину в `depth`.
 
 <LoaderDepthExample />
 
 ## API
 
-<ApiDoc name='Loader' />
+<ApiDoc name="Loader" />

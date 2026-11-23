@@ -1,27 +1,17 @@
-import type { LoaderColorProps } from './LoaderColor.types'
+import { Loader } from '@evg-b/evg-ui'
 
-import { Loader, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const LoaderColor = (props: LoaderColorProps) => {
-  const { classes } = props
+const LoaderColor = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Loader />
       <Loader color="primary" />
       <Loader color="warn" />
-    </div>
+    </Styled.Row>
   )
 }
 
 LoaderColor.displayName = 'LoaderColor'
 
-export default withStyles(styles)(LoaderColor)
+export default LoaderColor

@@ -1,33 +1,18 @@
-import type { ImageBaseProps } from './ImageBase.types'
-
-import { Image, withStyles } from '@evg-b/evg-ui'
+import { Image } from '@evg-b/evg-ui'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  },
-  img: {
-    margin: '5px',
-    width: 200,
-    height: 200,
-    borderRadius: '6%',
-    objectFit: 'cover'
-  }
-}
+import * as Styled from './Image.styled'
 
-const ImageBase = (props: ImageBaseProps) => {
-  const { classes } = props
+const ImageBase = () => {
   return (
-    <div className={classes.base}>
-      <Image className={classes.img} src={useBaseUrl('/source/Image/1.jpg')} />
-      <Image className={classes.img} src={useBaseUrl('/source/Image/2.jpg')} />
-      <Image className={classes.img} src={useBaseUrl('/source/Image/3.jpg')} />
-    </div>
+    <Styled.Row>
+      <Styled.Preview as={Image} src={useBaseUrl('/source/Image/1.jpg')} />
+      <Styled.Preview as={Image} src={useBaseUrl('/source/Image/2.jpg')} />
+      <Styled.Preview as={Image} src={useBaseUrl('/source/Image/3.jpg')} />
+    </Styled.Row>
   )
 }
 
 ImageBase.displayName = 'ImageBase'
 
-export default withStyles(styles)(ImageBase)
+export default ImageBase

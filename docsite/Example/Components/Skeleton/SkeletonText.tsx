@@ -1,35 +1,20 @@
-import type { SkeletonTextProps } from './SkeletonText.types'
+import { Skeleton } from '@evg-b/evg-ui'
 
-import { Skeleton, withStyles } from '@evg-b/evg-ui'
+import * as Styled from './Skeleton.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexDirection: 'column',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const SkeletonText = (props: SkeletonTextProps) => {
-  const { classes } = props
-  const flexStyle = {
-    display: 'flex',
-    alignItems: 'center'
-  }
-  const variants = ['h1', 'h2', 'h3', 'text']
-  return (
-    <div className={classes.base}>
-      {variants.map((variant, id) => (
-        <div key={id} style={flexStyle}>
-          <Skeleton width={100} type={'text,' + variant} />
-          <span style={{ marginLeft: '6px' }}>{variant}</span>
-        </div>
-      ))}
-    </div>
-  )
-}
+const variants = ['h1', 'h2', 'h3', 'text']
+
+const SkeletonText = () => (
+  <Styled.Column>
+    {variants.map((variant) => (
+      <Styled.TextSample key={variant}>
+        <Skeleton width={100} type={`text,${variant}`} />
+        <span>{variant}</span>
+      </Styled.TextSample>
+    ))}
+  </Styled.Column>
+)
 
 SkeletonText.displayName = 'SkeletonText'
 
-export default withStyles(styles)(SkeletonText)
+export default SkeletonText

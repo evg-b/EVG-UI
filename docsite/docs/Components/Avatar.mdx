@@ -1,67 +1,68 @@
 ---
 id: Avatar
 title: Avatar
-sidebar_label: Avatar
 ---
 
 import {
-    AvatarBaseExample,
-	AvatarColorExample,
-	AvatarNotImageExample,
-	AvatarSizeExample,
-	AvatarStatusExample,
-	AvatarStatusColorExample,
-	AvatarGroupAndSizeExample,
-	AvatarMultipleExample,
+  AvatarBaseExample,
+  AvatarNotImageExample,
+  AvatarColorExample,
+  AvatarSizeExample,
+  AvatarStatusExample,
+  AvatarStatusColorExample,
+  AvatarMultipleExample,
+  AvatarGroupAndSizeExample
 } from '../../Example/Components/Avatar/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Этот компонент обычно используют для отображения изображения профиля пользователей. Так же отображает первую букву в имени контакта если изображение еще не загрузилось.
+`Avatar` показывает изображение профиля из `src`. В `alt` передайте имя пользователя.
 
-## Base Avatar
+## Изображение профиля {#base-avatar}
 
 <AvatarBaseExample />
 
-## Avatar not image
+## Пока изображение недоступно {#avatar-not-image}
 
-Если нету картинки, отображается первая буква `alt`. Если `alt` не определен то отображается иконка по умолчанию. 
-
-Свойство `altMax={number}` определяет количество букв для показа.
+До загрузки отображаются первые символы `alt`. По умолчанию виден один символ, количество задаёт `altMax`. Для пустого имени есть встроенная иконка.
 
 <AvatarNotImageExample />
 
-## Color
+## Цвет {#color}
 
-Цвет компонента меняется через свойство `color`. Более подробно про цвет в этой [статье](/docs/styles/color#props-color).
+Для фона аватара можно выбрать одну из ролей темы. [Цветовые роли](../Styles/Color.mdx#props-color).
 
 <AvatarColorExample />
 
-## Size
+## Размер {#size}
 
-Размер компонента изменяется через свойство `size`.
+`size` задаёт диаметр в пикселях.
 
 <AvatarSizeExample />
 
-## Status
+## Индикатор статуса {#status}
 
-Можно отображать онлайн статус если `status={true}`
+`status` добавляет индикатор рядом с изображением.
 
 <AvatarStatusExample />
 
-## StatusColor
+## Цвет индикатора {#statuscolor}
+
+`statusColor` принимает цвет или роль темы.
 
 <AvatarStatusColorExample />
 
-## Multiple avatar
+## Несколько изображений {#multiple-avatar}
 
-Свойство `srcs={[string]}` принимает массив ссылок на изображения.
+Передайте в `srcs` массив адресов, чтобы объединить изображения в одном аватаре.
 
 <AvatarMultipleExample />
 
-## AvatarGroup
+## Группа аватаров {#avatargroup}
+
+`AvatarGroup` объединяет несколько компонентов `Avatar`. Количество видимых аватаров задаёт `max`.
 
 <AvatarGroupAndSizeExample />
 
 ## API
 
-<ApiDoc name='Avatar' />
+<ApiDoc name="Avatar" />

@@ -9,13 +9,13 @@ type PopupOwnProps = {
   // Чтобы указать CSS классы, используйте этот атрибут.
   className?: string
 
-  // Это ref ссылка по которой прицепляется Popup.
+  // Ссылка на элемент, относительно которого размещается окно.
   target?: RefObject<HTMLElement | null>
 
   // Если true, Popup будет виден.
   open?: boolean
 
-  // Если есть onClose(), onClose
+  // Обработчик запроса на закрытие окна.
   onClose?: () => void
 
   // Позиционирование относительно target.
@@ -33,7 +33,7 @@ type PopupOwnProps = {
     | 'right-top'
     | 'right-bottom'
 
-  // Если true, Popup закроется сам если убрать курсор.
+  // Зарезервированное свойство. При наведении видимость определяется режимом hover.
   autoHide?: boolean
 
   // Смещение в px от target.

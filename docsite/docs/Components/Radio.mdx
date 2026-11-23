@@ -1,34 +1,31 @@
 ---
 id: Radio
 title: Radio
-sidebar_label: Radio
 ---
 
 import {
-    RadioBaseExample,
-	RadioColorExample,
-	RadioSizeExample,
+  RadioBaseExample,
+  RadioColorExample,
+  RadioSizeExample
 } from '../../Example/Components/Radio/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Радиокнопки позволяют пользователю выбрать один вариант из набора. Используйте для исключительного выбора, если вы считаете, что пользователю нужно видеть все доступные варианты. 
+`Radio` позволяет выбрать один вариант из группы. Передайте всем кнопкам группы одинаковый `name` и свяжите каждую с подписью.
 
-## Base Radio
+## Группа вариантов {#base-radio}
 
 <RadioBaseExample />
 
-## Color
+## Цвет {#color}
 
-Цвет компонента меняется через свойство `color`. Более подробно про цвет в этой [статье](/docs/styles/color#props-color).
+Акцент выбора задаёт `color`. [Цветовые роли](../Styles/Color.mdx#props-color).
 
 <RadioColorExample />
 
-## Size
-
-Размер компонента изменяется через свойство `size`.
+## Размер {#size}
 
 <RadioSizeExample />
 
 ## API
 
-<ApiDoc name='Radio' />
+<ApiDoc name="Radio" />

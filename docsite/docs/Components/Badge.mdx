@@ -1,55 +1,54 @@
 ---
 id: Badge
 title: Badge
-sidebar_label: Badge
 ---
 
 import {
-	BadgeBaseExample,
-	BadgeCircleExample,
-	BadgeColorExample,
-	BadgeDotExample,
-	BadgeMaxExample,
-	BadgeRipeExample,
+  BadgeBaseExample,
+  BadgeColorExample,
+  BadgeMaxExample,
+  BadgeDotExample,
+  BadgeCircleExample,
+  BadgeRipeExample
 } from '../../Example/Components/Badge/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Это маленький значок обычно используется в паре с другими компонентами. Используется для привлечения внимание к этим компонентам.
+`Badge` добавляет к дочернему элементу счётчик `count` или точку-индикатор.
 
-## Base Badge
+## Счётчик {#base-badge}
 
 <BadgeBaseExample />
 
-## Color
+## Цвет {#color}
 
-Цвет компонента меняется через свойство `color`. Более подробно про цвет в этой [статье](/docs/styles/color#props-color).
+По умолчанию значок использует роль `fail`. [Цветовые роли](../Styles/Color.mdx#props-color).
 
 <BadgeColorExample />
 
-## Max
+## Предел счётчика {#max}
 
-Свойство `max={number}` определяет максимальный предел точного отображения.
+При `max={99}` для сотни и более элементов отображается `99+`.
 
 <BadgeMaxExample />
 
-## Dot
+## Точка {#dot}
 
-Если вы хотите минималистичный режим отображения, то используйте свойство `dot={true}`.
+`dot` скрывает число и оставляет цветовой индикатор.
 
 <BadgeDotExample />
 
-## Circle
+## Круглый элемент {#circle}
 
-Свойство `сircle={true}` помогает корректно позиционироваться относительно цели круглой формы.
+Для круглого аватара или кнопки передайте `circle`, чтобы сместить значок к краю окружности.
 
 <BadgeCircleExample />
 
-## Ripe
+## Отдельный значок {#ripe}
 
-Свойство `ripe={true}`, badge становиться самостоятельным элементом.
+`ripe` выводит значок самостоятельно.
 
 <BadgeRipeExample />
 
 ## API
 
-<ApiDoc name='Badge' />
+<ApiDoc name="Badge" />

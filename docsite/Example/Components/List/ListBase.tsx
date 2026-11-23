@@ -1,34 +1,23 @@
-import type { ListBaseProps } from './ListBase.types'
+import { List, ListItem, ListItemText } from '@evg-b/evg-ui'
 
-import { List, ListItem, ListItemText, withStyles } from '@evg-b/evg-ui'
-
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
+import * as Styled from './List.styled'
 
 const Items = ['Notifications', 'Security', 'Storage', 'Settings', 'Folders']
 
-const ListBase = (props: ListBaseProps) => {
-  const { classes } = props
+const ListBase = () => {
   return (
-    <div className={classes.base}>
-      <List style={{ width: '300px' }}>
-        {Items.map((item, i) => (
-          <ListItem key={i} button>
+    <Styled.Row>
+      <Styled.Items as={List}>
+        {Items.map((item) => (
+          <ListItem key={item} button>
             <ListItemText>{item}</ListItemText>
           </ListItem>
         ))}
-      </List>
-    </div>
+      </Styled.Items>
+    </Styled.Row>
   )
 }
 
 ListBase.displayName = 'ListBase'
 
-export default withStyles(styles)(ListBase)
+export default ListBase

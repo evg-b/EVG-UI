@@ -1,41 +1,40 @@
 ---
 id: AppBar
 title: AppBar
-sidebar_label: AppBar
 ---
 
 import {
-    AppBarBaseExample,
-    AppBarColorExample,
-    AppBarLeftAndRightExample,
-    AppBarTitleCenterExample,
+  AppBarBaseExample,
+  AppBarColorExample,
+  AppBarLeftAndRightExample,
+  AppBarTitleCenterExample
 } from '../../Example/Components/AppBar/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Это верхняя панель управления обычно используется для заголовков, навигации и действий связанных с текущим экраном.
+`AppBar` размещает заголовок экрана между навигацией и действиями. Передайте заголовок в `title`. Для панели внутри страницы задайте `position="static"`.
 
-## Base AppBar
+## Панель с заголовком {#base-appbar}
 
 <AppBarBaseExample />
 
-## Color
+## Цвет {#color}
 
-Цвет компонента меняется через свойство `color`. Более подробно про цвет в этой [статье](/docs/styles/color#props-color).
+[Цветовые роли](../Styles/Color.mdx#props-color) можно передавать в `color`, например `primary`.
 
 <AppBarColorExample />
 
-## left/right components
+## Действия слева и справа {#leftright-components}
 
-Свойства `left` и `right` это контейнеры для размещения `node` элементов, таких как `Button`, `Icons` и д.р.
+`left` и `right` принимают React-элементы, например `IconButton` для навигации и `Button` для действия.
 
 <AppBarLeftAndRightExample />
 
-## titelCenter
+## Заголовок по центру {#titelcenter}
 
-Если свойство `titleCenter={true}`, titel будет отображаться в центре. 
+Передайте `titleCenter`, чтобы выровнять заголовок по центру панели.
 
 <AppBarTitleCenterExample />
 
 ## API
 
-<ApiDoc name='AppBar' />
+<ApiDoc name="AppBar" />

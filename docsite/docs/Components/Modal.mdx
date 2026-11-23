@@ -1,27 +1,26 @@
 ---
 id: Modal
 title: Modal
-sidebar_label: Modal
 ---
 
 import {
-    ModalBaseExample,
-    ModalEscExample,
+  ModalBaseExample,
+  ModalEscExample
 } from '../../Example/Components/Modal/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Это окно, которое блокирует работу пользователя с родительским приложением до тех пор, пока пользователь это окно не закроет. Подходит для создания диалогов и лайтбоксов.
+`Modal` выводит содержимое поверх приложения. Храните видимость окна в состоянии React, передавайте её в `open` и закрывайте окно в `onClose`.
 
-## Base Modal
+## Диалог {#base-modal}
 
 <ModalBaseExample />
 
-## Esc
+## Клавиша Escape {#esc}
 
-Если `isEsc={true}`, modal можно закрыть клавишей Esc.
+По умолчанию Escape вызывает `onClose`. Чтобы отключить закрытие с клавиатуры по Escape, передайте `isEsc={false}`.
 
 <ModalEscExample />
 
 ## API
 
-<ApiDoc name='Modal' />
+<ApiDoc name="Modal" />

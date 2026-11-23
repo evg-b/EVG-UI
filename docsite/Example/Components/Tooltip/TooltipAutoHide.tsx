@@ -1,19 +1,7 @@
-import type { TooltipAutoHideProps } from './TooltipAutoHide.types'
-
 import { useRef } from 'react'
-import { Button, Tooltip, withStyles } from '@evg-b/evg-ui'
+import { Button, Tooltip } from '@evg-b/evg-ui'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const TooltipAutoHide = (props: TooltipAutoHideProps) => {
-  const { classes } = props
+const TooltipAutoHide = () => {
   const btn_ref = useRef<HTMLElement | null>(null)
   return (
     <>
@@ -27,4 +15,4 @@ const TooltipAutoHide = (props: TooltipAutoHideProps) => {
 
 TooltipAutoHide.displayName = 'TooltipAutoHide'
 
-export default withStyles(styles)(TooltipAutoHide)
+export default TooltipAutoHide

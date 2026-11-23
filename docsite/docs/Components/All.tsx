@@ -1,120 +1,72 @@
-import type { AllProps } from './All.types'
-
 import { useEffect } from 'react'
-import useBaseUrl from '@docusaurus/useBaseUrl'
-import Link from '@docusaurus/Link'
-import { Image, Elevation, Color, withStyles } from '@evg-b/evg-ui'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    justifyContent: 'space-between'
-  },
-  component: {
-    cursor: 'pointer',
-    width: '280px',
-    margin: '20px',
-    height: '200px',
-    overflow: 'hidden',
-    borderRadius: '6px',
-    border: '1px solid rgba(0, 0, 0, 0.05)',
-    display: 'flex',
-    flexDirection: 'column',
-    '&:hover': {
-      ...Elevation(1)
-    },
-    '&:hover $title': {
-      color: Color('primary').Base(),
-      transition: 'color 400ms cubic-bezier(0.4, 0, 0.2, 1)'
-    }
-  },
-  preview: {
-    height: '160px',
-    objectFit: 'contain'
-  },
-  title: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    backgroundColor: 'rgba(0, 0, 0, 0.05)',
-    fontFamily: 'var(--ifm-font-family-base)',
-    fontWeight: 'var(--ifm-font-weight-semibold)',
-    lineHeight: '20px',
-    height: '40px',
-    color: '#606770'
-  }
-}
+import { useBaseUrlUtils } from '@docusaurus/useBaseUrl'
+import { Icon, Image } from '@evg-b/evg-ui'
 
-const ComponentsArr = [
-  { src: 'AppBar', name: 'AppBar' },
-  { src: 'Avatar', name: 'Avatar' },
-  { src: 'Badge', name: 'Badge' },
-  { src: 'Button', name: 'Button' },
-  { src: 'ButtonGroup', name: 'ButtonGroup' },
-  { src: 'Ripple', name: 'Ripple' },
-  { src: 'Cubes', name: 'Cubes' },
-  { src: 'Carousel', name: 'Carousel' },
-  { src: 'Image', name: 'Image' },
-  { src: 'Lightbox', name: 'Lightbox' },
-  { src: 'Checkbox', name: 'Checkbox' },
-  { src: 'Icon', name: 'Icon' },
-  { src: 'List', name: 'List' },
-  { src: 'Loader', name: 'Loader' },
-  { src: 'Modal', name: 'Modal' },
-  { src: 'Popup', name: 'Popup' },
-  { src: 'Radio', name: 'Radio' },
-  { src: 'Scroll', name: 'Scroll' },
-  { src: 'Skeleton', name: 'Skeleton' },
-  { src: 'Select', name: 'Select' },
-  { src: 'Switch', name: 'Switch' },
-  { src: 'TextField', name: 'TextField' },
-  { src: 'Tooltip', name: 'Tooltip' },
-  { src: 'TouchDriver', name: 'TouchDriver' }
+import DocLink from '../../src/components/DocLink'
+
+import * as Styled from './All.styled'
+
+const components = [
+  'AppBar',
+  'Avatar',
+  'Badge',
+  'Button',
+  'ButtonGroup',
+  'Ripple',
+  'Cubes',
+  'Carousel',
+  'Image',
+  'Lightbox',
+  'Checkbox',
+  'Icon',
+  'List',
+  'Loader',
+  'Menu',
+  'Modal',
+  'Popup',
+  'Radio',
+  'Scroll',
+  'Skeleton',
+  'Select',
+  'Switch',
+  'TextField',
+  'Tooltip',
+  'TouchDriver'
 ]
 
-const All = (props: AllProps) => {
-  const { classes } = props
+const All = () => {
+  const { withBaseUrl } = useBaseUrlUtils()
 
   useEffect(() => {
-    let container = document.getElementById('__docusaurus')
+    const container = document.getElementById('__docusaurus')
     if (!container) return
     container.classList.add('all-components')
-    container.style.setProperty('--ifm-container-width', `${100}%`)
+    container.style.setProperty('--ifm-container-width', '100%')
     return () => {
       container.style.removeProperty('--ifm-container-width')
       container.classList.remove('all-components')
     }
   }, [])
 
-  const Component = (
-    { src, name }: { src: string; name: string },
-    key: number
-  ) => {
-    return (
-      <Link
-        key={key}
-        className={classes.component}
-        to={useBaseUrl(`docs/components/${src}`)}
-        style={{ textDecoration: 'none' }}>
-        <Image
-          className={classes.preview}
-          src={useBaseUrl(`/preview/${src}.png`)}
-        />
-        <div className={classes.title}>{name}</div>
-      </Link>
-    )
-  }
-
   return (
-    <div className={classes.base}>
-      {ComponentsArr.map((comp, index) => Component(comp, index))}
-    </div>
+    <Styled.Grid>
+      {components.map((name) => (
+        <Styled.Card as={DocLink} key={name} to={`/docs/Components/${name}`}>
+          {name === 'Menu' ? (
+            <Styled.MenuPreview>
+              <Icon name="Menu" size={48} color="primary" />
+            </Styled.MenuPreview>
+          ) : (
+            <Styled.Preview as={Image} src={withBaseUrl(`/preview/${name}.png`)} />
+          )}
+          <Styled.Title>{name}</Styled.Title>
+        </Styled.Card>
+      ))}
+    </Styled.Grid>
   )
 }
 
 All.displayName = 'All'
 
-Component.displayName = 'Component'
-
-export default withStyles(styles)(All)
+export default All

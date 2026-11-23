@@ -1,20 +1,10 @@
-import type { BadgeColorProps } from './BadgeColor.types'
+import { Badge, Icon } from '@evg-b/evg-ui'
 
-import { Badge, withStyles, Icon } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const BadgeColor = (props: BadgeColorProps) => {
-  const { classes } = props
+const BadgeColor = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Badge count={3}>
         <Icon name="Notifications" />
       </Badge>
@@ -27,10 +17,10 @@ const BadgeColor = (props: BadgeColorProps) => {
       <Badge count={3} color="success">
         <Icon name="Notifications" />
       </Badge>
-    </div>
+    </Styled.Row>
   )
 }
 
 BadgeColor.displayName = 'BadgeColor'
 
-export default withStyles(styles)(BadgeColor)
+export default BadgeColor

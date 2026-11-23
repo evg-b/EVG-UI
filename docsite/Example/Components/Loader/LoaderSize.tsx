@@ -1,27 +1,17 @@
-import type { LoaderSizeProps } from './LoaderSize.types'
+import { Loader } from '@evg-b/evg-ui'
 
-import { Loader, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const LoaderSize = (props: LoaderSizeProps) => {
-  const { classes } = props
+const LoaderSize = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Loader size={30} />
       <Loader />
       <Loader size={60} />
-    </div>
+    </Styled.Row>
   )
 }
 
 LoaderSize.displayName = 'LoaderSize'
 
-export default withStyles(styles)(LoaderSize)
+export default LoaderSize

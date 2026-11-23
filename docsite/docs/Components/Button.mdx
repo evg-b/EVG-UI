@@ -1,81 +1,82 @@
 ---
 id: Button
 title: Button
-sidebar_label: Button
 ---
 
 import {
-    ButtonBaseExample,
-	ButtonColorExample,
-	ButtonElevationExample,
-	ButtonIconButtonExample,
-	ButtonLoadingExample,
-	ButtonRoundExample,
-	ButtonSizeExample,
-	ButtonStartIconAndEndIconExample,
-	ButtonUppercaseExample,
-	ButtonVariantExample,
+  ButtonBaseExample,
+  ButtonSizeExample,
+  ButtonVariantExample,
+  ButtonColorExample,
+  ButtonIconButtonExample,
+  ButtonRoundExample,
+  ButtonStartIconAndEndIconExample,
+  ButtonUppercaseExample,
+  ButtonElevationExample,
+  ButtonLoadingExample
 } from '../../Example/Components/Button/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Кнопки позволяют пользователям выполнять действия и делать выбор одним нажатием. Является `<button>` или `<a>` элементом с ripple эффектом от Material Design.
+По умолчанию `Button` рендерит HTML-кнопку. Для перехода по ссылке передайте `href`.
 
-## Base Button
+## Кнопка {#base-button}
 
 <ButtonBaseExample />
 
-## Size
+## Размер {#size}
 
-Размер компонента изменяется через свойство `size`.
+Доступны `small`, `medium`, `large` и `extra`.
 
 <ButtonSizeExample />
 
-## Variant
+## Вариант {#variant}
 
-Варианты кнопки `text`, `contained`, `outlined`.
+`text` показывает текст, `outlined` добавляет рамку, `contained` — заливку.
 
 <ButtonVariantExample />
 
-## Color
+## Цвет {#color}
 
-Цвет компонента меняется через свойство `color`. Более подробно про цвет в этой [статье](/docs/styles/color#props-color).
+Передайте в `color` роль активной темы, например `primary` или `success`. [Цветовые роли](../Styles/Color.mdx#props-color).
 
 <ButtonColorExample />
 
-## IconButton
+## Кнопка с одной иконкой {#iconbutton}
 
-`IconButton` чтобы сделать из иконки кнопку.
+Передайте `Icon` внутрь `IconButton`. Если у кнопки нет текста, задайте ей доступное имя через `aria-label`.
 
 <ButtonIconButtonExample />
 
-## Round
+## Скругление {#round}
+
+Свойство `round` скругляет края.
 
 <ButtonRoundExample />
 
-## StartIcon и EndIcon
+## Иконка рядом с текстом {#starticon-и-endicon}
 
-Свойства `StartIcon` и `EndIcon` это контейнеры для размещения `node` элементов, таких как `Icons` и д.р.
+Свойства `startIcon` и `endIcon` принимают элемент, например `startIcon={<Icon name="Check" />}`.
 
 <ButtonStartIconAndEndIconExample />
 
-## Uppercase
+## Регистр текста {#uppercase}
 
-Если `uppercase={false}`, выключить верхний регистр текста.
+Передайте `uppercase={false}`, чтобы сохранить регистр подписи.
 
 <ButtonUppercaseExample />
 
-## LevelShadow
+## Тень {#levelshadow}
 
-Если `elevation={false}`, убрать тень если есть.
+У варианта `contained` тень отключается через `elevation={false}`.
 
 <ButtonElevationExample />
 
-## Loading
+## Загрузка {#loading}
 
-Loader будет занимать место текста. Если есть `startIcon` то Loader займет только его место.
+`loading` показывает индикатор. Если задан `startIcon`, индикатор занимает его место и текст остаётся видимым.
 
 <ButtonLoadingExample />
 
 ## API
 
-<ApiDoc name='Button' />
+<ApiDoc name="Button" />

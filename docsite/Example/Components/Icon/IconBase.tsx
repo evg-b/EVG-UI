@@ -1,20 +1,10 @@
-import type { IconBaseProps } from './IconBase.types'
+import { Icon } from '@evg-b/evg-ui'
 
-import { withStyles, Icon } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const IconBase = (props: IconBaseProps) => {
-  const { classes } = props
+const IconBase = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Icon name="ChevronLeft" />
       <Icon name="Close" />
       <Icon name="Check" />
@@ -24,10 +14,10 @@ const IconBase = (props: IconBaseProps) => {
       <Icon name="MoreVert" />
       <Icon name="ExpandMore" />
       <Icon name="ArrowUpward" />
-    </div>
+    </Styled.Row>
   )
 }
 
 IconBase.displayName = 'IconBase'
 
-export default withStyles(styles)(IconBase)
+export default IconBase

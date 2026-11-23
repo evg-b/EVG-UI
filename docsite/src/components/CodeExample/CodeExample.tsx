@@ -36,12 +36,28 @@ const CodeExample = ({
   const CodeExample_ref = useRef<HTMLDivElement>(null)
   const mergedRef = useMergedRefs(CodeExample_ref, ref)
   const [openCode, setOpenCode] = useState(false)
+  const [selectedFile, setSelectedFile] = useState('')
+  const files = typeof snippet === 'string' ? [] : Object.keys(snippet)
+  const file = files.includes(selectedFile) ? selectedFile : files[0]
+  const source = typeof snippet === 'string' ? snippet : snippet[file] ?? ''
   const [mountNode, setMountNode] = useState(false)
   const Syntax_ref = useRef<HTMLElement>(null)
   const btnCode_ref = useRef<HTMLElement>(null)
 
-  const snippetPanel = (snippet: string) => (
+  const snippetPanel = () => (
     <Styled.CodePanel>
+      {files.length > 1 && (
+        <Styled.FilePicker>
+          Файл примера
+          <select
+            value={file}
+            onChange={(event) => setSelectedFile(event.target.value)}>
+            {files.map((path) => (
+              <option key={path}>{path}</option>
+            ))}
+          </select>
+        </Styled.FilePicker>
+      )}
       <Styled.CodeScroll
         as={Scroll}
         autoHide={false}
@@ -49,10 +65,10 @@ const CodeExample = ({
         color="#FFFFFF">
         <Styled.SourceCode
           as={SyntaxHighlighter}
-          language={language}
+          language={file?.endsWith('.ts') ? 'typescript' : language}
           style={SyntaxStyle}
           customStyle={Styled.sourceCodeStyle}>
-          {snippet.trim()}
+          {source.trim()}
         </Styled.SourceCode>
       </Styled.CodeScroll>
     </Styled.CodePanel>
@@ -75,12 +91,14 @@ const CodeExample = ({
         <Styled.HeaderRight>
           <IconButton
             ref={btnCode_ref}
+            aria-label={openCode ? 'Скрыть код' : 'Показать код'}
+            aria-expanded={openCode}
             onClick={() => setOpenCode((prev) => !prev)}
             color={openCode ? 'primary' : 'default'}>
             <Icon name="Code" />
           </IconButton>
           <Tooltip target={btnCode_ref}>
-            {openCode ? 'hide code' : 'show code'}
+            {openCode ? 'Скрыть код' : 'Показать код'}
           </Tooltip>
         </Styled.HeaderRight>
       </Styled.Header>
@@ -89,7 +107,7 @@ const CodeExample = ({
           {mountNode ? demo : <Loader color="primary" />}
         </Styled.DemoPanel>
       </Styled.Body>
-      {openCode && snippetPanel(snippet)}
+      {openCode && snippetPanel()}
     </Styled.Root>
   )
 }

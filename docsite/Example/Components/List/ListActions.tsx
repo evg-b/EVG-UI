@@ -1,54 +1,36 @@
-import type { ListActionProps } from './ListAction.types'
+import { Checkbox, List, ListItem, ListItemText, ListItemAction } from '@evg-b/evg-ui'
 
-import {
-  Checkbox,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemAction,
-  withStyles
-} from '@evg-b/evg-ui'
-
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
+import * as Styled from './List.styled'
 
 const Items = ['Notifications', 'Security', 'Storage', 'Settings', 'Folders']
 
-const ListAction = (props: ListActionProps) => {
-  const { classes } = props
+const ListAction = () => {
   return (
-    <div className={classes.base}>
-      <List style={{ width: '300px' }}>
-        {Items.map((item, i) => (
-          <ListItem key={i}>
+    <Styled.Row>
+      <Styled.Items as={List}>
+        {Items.map((item) => (
+          <ListItem key={item}>
             <ListItemAction position="start">
               <Checkbox defaultChecked />
             </ListItemAction>
             <ListItemText>{item}</ListItemText>
           </ListItem>
         ))}
-      </List>
-      <List style={{ width: '300px' }}>
-        {Items.map((item, i) => (
-          <ListItem key={i}>
+      </Styled.Items>
+      <Styled.Items as={List}>
+        {Items.map((item) => (
+          <ListItem key={item}>
             <ListItemAction>
               <Checkbox defaultChecked />
             </ListItemAction>
             <ListItemText>{item}</ListItemText>
           </ListItem>
         ))}
-      </List>
-    </div>
+      </Styled.Items>
+    </Styled.Row>
   )
 }
 
 ListAction.displayName = 'ListAction'
 
-export default withStyles(styles)(ListAction)
+export default ListAction

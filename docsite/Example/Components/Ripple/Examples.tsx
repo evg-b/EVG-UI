@@ -3,7 +3,6 @@ import Snippets from './snippets'
 import RippleBase from './RippleBase'
 import RippleColor from './RippleColor'
 import RippleContrast from './RippleContrast'
-import RippleExample from './RippleExample'
 
 export const RippleBaseExample = () => (
   <CodeExample
@@ -31,12 +30,3 @@ export const RippleContrastExample = () => (
 )
 
 RippleContrastExample.displayName = 'RippleContrastExample'
-
-export const RippleExampleExample = () => (
-  <CodeExample
-    title="Example"
-    demo={<RippleExample />}
-    snippet={Snippets.RippleExample} />
-)
-
-RippleExampleExample.displayName = 'RippleExampleExample'

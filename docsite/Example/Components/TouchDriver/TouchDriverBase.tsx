@@ -1,33 +1,11 @@
 import type { TouchDriverCoordinates } from '@evg-b/evg-ui'
 
-import type { TouchDriverBaseProps } from './TouchDriverBase.types'
-
 import { useEffect, useRef } from 'react'
-import { Elevation, Color, TouchDriver, withStyles } from '@evg-b/evg-ui'
+import { TouchDriver } from '@evg-b/evg-ui'
 
-const styles = {
-  touch: {
-    width: '500px',
-    height: '400px',
-    overflow: 'hidden',
-    ...Elevation(2)
-  },
-  touchCircle: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '150px',
-    height: '150px',
-    borderRadius: '50%',
-    backgroundColor: Color('primary').Base(),
-    color: Color('primary').Contrast(),
-    cursor: 'pointer',
-    userSelect: 'none'
-  }
-}
+import * as Styled from './TouchDriver.styled'
 
-const TouchDriverBase = (props: TouchDriverBaseProps) => {
-  const { classes } = props
+const TouchDriverBase = () => {
   const circle_ref = useRef<HTMLDivElement | null>(null)
   const sizeCircke = 150 / 2
   const onMoveStar = ({ startX, startY }: TouchDriverCoordinates) => {
@@ -51,17 +29,17 @@ const TouchDriverBase = (props: TouchDriverBaseProps) => {
     circle_S.style.transform = `translate3d(${250 - sizeCircke}px, ${200 - sizeCircke}px, 0px)`
   }, [])
   return (
-    <TouchDriver
-      className={classes.touch}
+    <Styled.Area
+      as={TouchDriver}
       moveStart={onMoveStar}
       moveXY={onMove}>
-      <div ref={circle_ref} className={classes.touchCircle}>
+      <Styled.Circle ref={circle_ref}>
         MOVE
-      </div>
-    </TouchDriver>
+      </Styled.Circle>
+    </Styled.Area>
   )
 }
 
 TouchDriverBase.displayName = 'TouchDriverBase'
 
-export default withStyles(styles)(TouchDriverBase)
+export default TouchDriverBase

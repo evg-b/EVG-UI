@@ -1,76 +1,72 @@
 ---
 id: List
 title: List
-sidebar_label: List
 ---
 
 import {
-	ListBaseExample,
-	ListColorExample,
-	ListHeightExample,
-	ListSecondaryTextExample,
-	ListAvatarExample,
-    ListActionsExample,
-	ListMetaExample,
+  ListBaseExample,
+  ListColorExample,
+  ListHeightExample,
+  ListSecondaryTextExample,
+  ListAvatarExample,
+  ListActionsExample,
+  ListMetaExample
 } from '../../Example/Components/List/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Списки представляют собой множество компонентов с однородными типами данных в вертикальной плоскости. Элементы списка поддерживают события взаимодействия мыши и жестов.
+В `List` помещают строки `ListItem`. Изображение, основной текст, дополнительные сведения и действия задаются отдельными компонентами.
 
-## Base List
+## Строки списка {#base-list}
 
 <ListBaseExample />
 
-## Color
+## Цвет {#color}
 
-Цвет компонента меняется через свойство `color`. Более подробно про цвет в этой [статье](/docs/styles/color#props-color).
+[Цветовые роли](../Styles/Color.mdx#props-color) доступны через `color`.
 
 <ListColorExample />
 
-## Height
+## Ограничение высоты {#height}
 
-`List` содержит в нутри себя компонент `Scroll`
+Ограничьте высоту списка в styled-компоненте. Встроенный `Scroll` позволяет прокрутить остальные строки.
 
 <ListHeightExample />
 
-## SecondaryText
+## Вторая строка {#secondarytext}
+
+Передайте пояснение в `secondaryText` компонента `ListItemText`.
 
 <ListSecondaryTextExample />
 
-## Avatar
+## Аватар {#avatar}
 
 <ListAvatarExample />
 
-## Actions
+## Действия {#actions}
 
-`ListItemAction` это контейнер для размещения `node` элементов, таких как `Button`, `Icons` и д.р. 
+Положение действия задаёт `position` компонента `ListItemAction`.
 
-```jsx
-<ListItem>
-
-	<ListItemAction position='start'>
-		<Icon />
-	</ListItemAction>
-
-	<ListItemAction position='end'>
-		<Icon />
-	</ListItemAction>
-
+```tsx
+<ListItem button={false}>
+  <ListItemAction position="start">
+    <Icon name="Favorite" />
+  </ListItemAction>
+  <ListItemText>Избранное</ListItemText>
 </ListItem>
 ```
 
 <ListActionsExample />
 
-## Meta
+## Дополнительные сведения {#meta}
 
-Мета информация полезна для показа времени или количества сообщений.
+В `meta` можно вывести время, а в `secondaryMeta` — счётчик рядом со второй строкой.
 
-```jsx
+```tsx
 <ListItemText
-	meta='12:35'
-	secondaryMeta={<Badge ripe count={2} />}
->
-	Message
+  meta="12:35"
+  secondaryText="Новое сообщение"
+  secondaryMeta={<Badge ripe count={2} />}>
+  Анна
 </ListItemText>
 ```
 
@@ -78,4 +74,4 @@ import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
 ## API
 
-<ApiDoc name='List' />
+<ApiDoc name="List" />

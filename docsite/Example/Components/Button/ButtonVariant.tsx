@@ -1,20 +1,10 @@
-import type { ButtonVariantProps } from './ButtonVariant.types'
+import { Button } from '@evg-b/evg-ui'
 
-import { Button, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const ButtonVariant = (props: ButtonVariantProps) => {
-  const { classes } = props
+const ButtonVariant = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Button variant="text" color="primary">
         default
       </Button>
@@ -24,10 +14,10 @@ const ButtonVariant = (props: ButtonVariantProps) => {
       <Button variant="outlined" color="primary">
         outlined
       </Button>
-    </div>
+    </Styled.Row>
   )
 }
 
 ButtonVariant.displayName = 'ButtonVariant'
 
-export default withStyles(styles)(ButtonVariant)
+export default ButtonVariant

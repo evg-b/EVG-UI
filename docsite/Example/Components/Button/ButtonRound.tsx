@@ -1,20 +1,10 @@
-import type { ButtonRoundProps } from './ButtonRound.types'
+import { Button } from '@evg-b/evg-ui'
 
-import { Button, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const ButtonRound = (props: ButtonRoundProps) => {
-  const { classes } = props
+const ButtonRound = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Button variant="text" color="primary" round>
         default
       </Button>
@@ -24,10 +14,10 @@ const ButtonRound = (props: ButtonRoundProps) => {
       <Button variant="outlined" color="primary" round>
         outlined
       </Button>
-    </div>
+    </Styled.Row>
   )
 }
 
 ButtonRound.displayName = 'ButtonRound'
 
-export default withStyles(styles)(ButtonRound)
+export default ButtonRound

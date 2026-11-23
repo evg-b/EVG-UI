@@ -1,24 +1,14 @@
-import type { TooltipAnimationProps } from './TooltipAnimation.types'
-
 import { useRef } from 'react'
-import { Button, Tooltip, withStyles } from '@evg-b/evg-ui'
+import { Button, Tooltip } from '@evg-b/evg-ui'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const TooltipAnimation = (props: TooltipAnimationProps) => {
-  const { classes } = props
+import * as Styled from '../../ExampleLayout.styled'
+
+const TooltipAnimation = () => {
   const btn1_ref = useRef<HTMLElement | null>(null)
   const btn2_ref = useRef<HTMLElement | null>(null)
   const btn3_ref = useRef<HTMLElement | null>(null)
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Button ref={btn1_ref} variant="outlined">
         fade
       </Button>
@@ -37,10 +27,10 @@ const TooltipAnimation = (props: TooltipAnimationProps) => {
       <Tooltip target={btn3_ref} animation="docking">
         docking
       </Tooltip>
-    </div>
+    </Styled.Row>
   )
 }
 
 TooltipAnimation.displayName = 'TooltipAnimation'
 
-export default withStyles(styles)(TooltipAnimation)
+export default TooltipAnimation

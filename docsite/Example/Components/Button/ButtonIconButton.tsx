@@ -1,39 +1,29 @@
-import type { ButtonIconButtonProps } from './ButtonIconButton.types'
+import { IconButton, Icon } from '@evg-b/evg-ui'
 
-import { IconButton, withStyles, Icon } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const ButtonIconButton = (props: ButtonIconButtonProps) => {
-  const { classes } = props
+const ButtonIconButton = () => {
   return (
-    <div className={classes.base}>
-      <IconButton>
+    <Styled.Row>
+      <IconButton aria-label="Закрыть">
         <Icon name="Close" />
       </IconButton>
-      <IconButton color="primary">
+      <IconButton color="primary" aria-label="Отменить">
         <Icon name="Cancel" />
       </IconButton>
-      <IconButton color="warn">
+      <IconButton color="warn" aria-label="Меню">
         <Icon name="Menu" />
       </IconButton>
-      <IconButton color="success">
+      <IconButton color="success" aria-label="Во весь экран">
         <Icon name="Fullscreen" />
       </IconButton>
-      <IconButton disabled>
+      <IconButton disabled aria-label="Показать">
         <Icon name="Visibility" />
       </IconButton>
-    </div>
+    </Styled.Row>
   )
 }
 
 ButtonIconButton.displayName = 'ButtonIconButton'
 
-export default withStyles(styles)(ButtonIconButton)
+export default ButtonIconButton

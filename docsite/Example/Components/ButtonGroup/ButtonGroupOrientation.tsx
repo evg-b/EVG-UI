@@ -1,21 +1,10 @@
-import type { ButtonGroupOrientationProps } from './ButtonGroupOrientation.types'
+import { Button, ButtonGroup } from '@evg-b/evg-ui'
 
-import { Button, ButtonGroup, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const ButtonGroupOrientation = (props: ButtonGroupOrientationProps) => {
-  const { classes } = props
+const ButtonGroupOrientation = () => {
   return (
-    <div className={classes.base}>
+    <Styled.CenteredColumn>
       <ButtonGroup orientation="horizontal" variant="contained" color="primary">
         <Button>horizont 1</Button>
         <Button>horizont 2</Button>
@@ -24,10 +13,10 @@ const ButtonGroupOrientation = (props: ButtonGroupOrientationProps) => {
         <Button>vertical 1</Button>
         <Button>vertical 2</Button>
       </ButtonGroup>
-    </div>
+    </Styled.CenteredColumn>
   )
 }
 
 ButtonGroupOrientation.displayName = 'ButtonGroupOrientation'
 
-export default withStyles(styles)(ButtonGroupOrientation)
+export default ButtonGroupOrientation

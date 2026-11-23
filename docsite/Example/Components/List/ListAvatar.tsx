@@ -1,23 +1,6 @@
-import type { ListAvatarProps } from './ListAvatar.types'
+import { Avatar, List, ListItem, ListItemText, ListItemAvatar } from '@evg-b/evg-ui'
 
-import {
-  Avatar,
-  List,
-  ListItem,
-  ListItemText,
-  ListItemAvatar,
-  withStyles
-} from '@evg-b/evg-ui'
-
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
+import * as Styled from './List.styled'
 
 const Items = [
   'Captain Shepard',
@@ -28,24 +11,23 @@ const Items = [
   'Urdnot Wrex'
 ]
 
-const ListAvatar = (props: ListAvatarProps) => {
-  const { classes } = props
+const ListAvatar = () => {
   return (
-    <div className={classes.base}>
-      <List style={{ width: '300px' }}>
-        {Items.map((item, i) => (
-          <ListItem key={i} button>
+    <Styled.Row>
+      <Styled.Items as={List}>
+        {Items.map((item) => (
+          <ListItem key={item} button>
             <ListItemAvatar>
               <Avatar />
             </ListItemAvatar>
             <ListItemText>{item}</ListItemText>
           </ListItem>
         ))}
-      </List>
-    </div>
+      </Styled.Items>
+    </Styled.Row>
   )
 }
 
 ListAvatar.displayName = 'ListAvatar'
 
-export default withStyles(styles)(ListAvatar)
+export default ListAvatar

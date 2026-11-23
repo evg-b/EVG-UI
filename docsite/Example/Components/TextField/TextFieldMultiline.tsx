@@ -1,20 +1,10 @@
-import type { TextFieldMultilineProps } from './TextFieldMultiline.types'
+import { TextField } from '@evg-b/evg-ui'
 
-import { TextField, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*,&>div>*': {
-      margin: '10px'
-    }
-  }
-}
-const TextFieldMultiline = (props: TextFieldMultilineProps) => {
-  const { classes } = props
+const TextFieldMultiline = () => {
   return (
-    <div className={classes.base}>
+    <Styled.FieldGroups>
       <div>
         <TextField
           multiline
@@ -47,10 +37,10 @@ const TextFieldMultiline = (props: TextFieldMultilineProps) => {
           outlined
         />
       </div>
-    </div>
+    </Styled.FieldGroups>
   )
 }
 
 TextFieldMultiline.displayName = 'TextFieldMultiline'
 
-export default withStyles(styles)(TextFieldMultiline)
+export default TextFieldMultiline

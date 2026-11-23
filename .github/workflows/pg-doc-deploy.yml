@@ -1,48 +1,58 @@
-name: documentation deploy
+name: Docusaurus
 
 on:
   push:
-    branches: [ main ]
+    branches: [main]
   pull_request:
-    branches: [ main ]
+    branches: [main]
+
+permissions:
+  contents: read
+
+concurrency:
+  group: pages-${{ github.ref }}
+  cancel-in-progress: ${{ github.event_name == 'pull_request' }}
 
 jobs:
-  checks:
-    if: github.event_name != 'push'
+  build:
+    name: Build documentation
     runs-on: ubuntu-latest
     steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+      - uses: actions/checkout@v7
         with:
-          node-version: '22'
-      - name: Install dependencies
-        run: yarn install --frozen-lockfile
-      - name: Build evg-ui
-        run: yarn build
-  gh-release:
-    if: github.event_name != 'pull_request'
-    runs-on: ubuntu-latest
-    steps:
-      - uses: actions/checkout@v4
-      - uses: actions/setup-node@v4
+          persist-credentials: false
+
+      - uses: actions/setup-node@v7
         with:
-          node-version: '22'
-      - uses: webfactory/ssh-agent@v0.5.0
-        with:
-          ssh-private-key: ${{ secrets.GH_PAGES_DEPLOY }}
-      - name: Set Git config
-        run: |
-          git config --global user.name $GIT_USER
-          git config --global user.email $USER_EMAIL
-        env:
-          GIT_USER: 'evg-b'
-          USER_EMAIL: 'seber.bobilev@gmail.com'
+          node-version-file: .nvmrc
+          cache: yarn
 
       - name: Install dependencies
         run: yarn install --frozen-lockfile
 
-      - name: Release to GitHub Pages
-        run: yarn docs:deploy
-        env:
-          GIT_USER: 'evg-b'
-          USE_SSH: true
+      - name: Generate API docs and examples
+        run: yarn propdoc
+
+      - name: Build Docusaurus
+        run: yarn docs:build
+
+      - name: Upload Pages artifact
+        if: github.event_name == 'push'
+        uses: actions/upload-pages-artifact@v4
+        with:
+          path: docsite/build
+
+  deploy:
+    name: Deploy to GitHub Pages
+    if: github.event_name == 'push'
+    needs: build
+    runs-on: ubuntu-latest
+    permissions:
+      pages: write
+      id-token: write
+    environment:
+      name: github-pages
+      url: ${{ steps.deployment.outputs.page_url }}
+    steps:
+      - id: deployment
+        uses: actions/deploy-pages@v4

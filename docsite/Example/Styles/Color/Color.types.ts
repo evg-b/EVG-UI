@@ -1,3 +1,3 @@
-export type ColorProps = {
-  classes: Record<'base' | 'tone', string>
+export type SwatchProps = {
+  $background?: string
 }

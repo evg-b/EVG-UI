@@ -1,27 +1,17 @@
-import type { SwitchVariantProps } from './SwitchVariant.types'
+import { Switch } from '@evg-b/evg-ui'
 
-import { Switch, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const SwitchVariant = (props: SwitchVariantProps) => {
-  const { classes } = props
+const SwitchVariant = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Switch />
       <Switch />
       <Switch />
-    </div>
+    </Styled.Row>
   )
 }
 
 SwitchVariant.displayName = 'SwitchVariant'
 
-export default withStyles(styles)(SwitchVariant)
+export default SwitchVariant

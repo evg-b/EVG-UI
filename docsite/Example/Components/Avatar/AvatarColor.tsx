@@ -1,26 +1,17 @@
-import type { AvatarColorProps } from './AvatarColor.types'
+import { Avatar } from '@evg-b/evg-ui'
 
-import { Avatar, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  }
-}
-
-const AvatarColor = (props: AvatarColorProps) => {
-  const { classes } = props
-
+const AvatarColor = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Wrap>
       <Avatar alt="evg b" />
       <Avatar alt="Alira" color="primary" />
       <Avatar alt="Rick" color="success" />
-    </div>
+    </Styled.Wrap>
   )
 }
 
 AvatarColor.displayName = 'AvatarColor'
 
-export default withStyles(styles)(AvatarColor)
+export default AvatarColor

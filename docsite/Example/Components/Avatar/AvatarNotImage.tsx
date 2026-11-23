@@ -1,26 +1,17 @@
-import type { AvatarNotImageProps } from './AvatarNotImage.types'
+import { Avatar } from '@evg-b/evg-ui'
 
-import { Avatar, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  }
-}
-
-const AvatarNotImage = (props: AvatarNotImageProps) => {
-  const { classes } = props
-
+const AvatarNotImage = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Wrap>
       <Avatar alt="evg b" />
       <Avatar />
       <Avatar alt="Alira" altMax={2} />
-    </div>
+    </Styled.Wrap>
   )
 }
 
 AvatarNotImage.displayName = 'AvatarNotImage'
 
-export default withStyles(styles)(AvatarNotImage)
+export default AvatarNotImage

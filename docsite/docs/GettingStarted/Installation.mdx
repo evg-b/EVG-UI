@@ -1,37 +1,54 @@
 ---
 id: Installation
 title: Installation
-sidebar_label: Installation
+description: Как запустить текущую версию EVG-UI в репозитории и подключить её к React-приложению.
 ---
 
-Для установки библиотеки в ваш проект запустите в консоли.
+## Попробовать в репозитории
+
+Из корня EVG-UI установите зависимости и запустите документацию. Проект использует Yarn Classic, а `nvm install` выбирает версию Node.js из `.nvmrc`.
 
 ```sh
-npm install @evg-b/evg-ui --save или yarn add @evg-b/evg-ui
+nvm install
+yarn install
+yarn docs:dev
 ```
 
-Чтобы сделать сборку компактнее вы можете импортировать в проект только нужные компоненты.
-```jsx
-import { Avatar, Badge, Button } from '@evg-b/evg-ui';
+Откройте [Quick start](/docs/GettingStarted/quick_start), чтобы попробовать кнопки и переключение темы. Для отдельного стенда с компонентами есть команда `yarn dev`.
+
+## Подключить к своему приложению
+
+В npm версия `@evg-b/evg-ui@0.0.2` использует React 16 и JSS. Чтобы подключить компоненты и тему из этой документации, соберите пакет из текущего репозитория.
+
+```sh
+yarn build
+yarn pack --filename evg-ui.tgz
 ```
 
-### Шрифт
+В каталоге приложения установите архив и peer-зависимости. В примере клон EVG-UI лежит рядом с каталогом приложения.
 
-Material Design разрабатывался основываясь на шрифте `Roboto`.
-Подключите шрифт к вашему проекту чтобы все компоненты выглядели так как задумывалось. 
-
-```html
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
+```sh
+npm install ../EVG-UI/evg-ui.tgz react@19.3.1 react-dom@19.3.1 styled-components@6.6.0
 ```
 
-### Icon
+Архив содержит JavaScript из `dist`. Типы компонентов доступны в исходниках репозитория. Для проверки типов в отдельном приложении пакету пока не хватает деклараций `.d.ts`.
 
-Иконки Material входят в `evg-ui` и доступны через компонент `Icon`.
+## Тема и иконки
 
-```jsx
-import { Icon } from '@evg-b/evg-ui'
+Компоненты, иконки и `ThemeProvider` импортируются из `@evg-b/evg-ui`. По умолчанию провайдер включает светлую тему.
 
-<Icon name="Check" color="primary" />
+```tsx
+import { Button, Icon, ThemeProvider } from '@evg-b/evg-ui'
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <Button variant="contained" color="primary" startIcon={<Icon name="Check" />}>
+        Сохранить
+      </Button>
+    </ThemeProvider>
+  )
+}
 ```
 
-Подробнее про [Icon](/docs/Components/Icon).
+Шрифт по умолчанию — `Roboto, Helvetica, Arial, sans-serif`. Чтобы задать свой стек, передайте `fontFamily` в `createTheme`. Настройка цветов и шрифта показана в [разделе Theme](../Styles/Theme.mdx), выбор иконки по имени — в [разделе Icon](../Components/Icon.mdx).

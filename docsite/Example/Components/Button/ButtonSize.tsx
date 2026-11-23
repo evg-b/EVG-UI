@@ -1,20 +1,10 @@
-import type { ButtonSizeProps } from './ButtonSize.types'
+import { Button } from '@evg-b/evg-ui'
 
-import { Button, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const ButtonSize = (props: ButtonSizeProps) => {
-  const { classes } = props
+const ButtonSize = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Button variant="contained" color="primary" size="small">
         small
       </Button>
@@ -27,10 +17,10 @@ const ButtonSize = (props: ButtonSizeProps) => {
       <Button variant="contained" color="primary" size="extra">
         extra
       </Button>
-    </div>
+    </Styled.Row>
   )
 }
 
 ButtonSize.displayName = 'ButtonSize'
 
-export default withStyles(styles)(ButtonSize)
+export default ButtonSize

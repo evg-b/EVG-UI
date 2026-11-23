@@ -1,21 +1,10 @@
-import type { ButtonGroupRoundProps } from './ButtonGroupRound.types'
+import { Button, ButtonGroup } from '@evg-b/evg-ui'
 
-import { Button, ButtonGroup, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const ButtonGroupRound = (props: ButtonGroupRoundProps) => {
-  const { classes } = props
+const ButtonGroupRound = () => {
   return (
-    <div className={classes.base}>
+    <Styled.CenteredColumn>
       <ButtonGroup round variant="text" color="primary">
         <Button>primary 1</Button>
         <Button>primary 2</Button>
@@ -28,10 +17,10 @@ const ButtonGroupRound = (props: ButtonGroupRoundProps) => {
         <Button>fail 1</Button>
         <Button>fail 2</Button>
       </ButtonGroup>
-    </div>
+    </Styled.CenteredColumn>
   )
 }
 
 ButtonGroupRound.displayName = 'ButtonGroupRound'
 
-export default withStyles(styles)(ButtonGroupRound)
+export default ButtonGroupRound

@@ -1,28 +1,18 @@
-import type { IconSizeProps } from './IconSize.types'
+import { Icon } from '@evg-b/evg-ui'
 
-import { withStyles, Icon } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const IconSize = (props: IconSizeProps) => {
-  const { classes } = props
+const IconSize = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Icon name="Cancel" size="small" />
       <Icon name="Cancel" size="medium" />
       <Icon name="Cancel" size="large" />
       <Icon name="Cancel" size="extra" />
-    </div>
+    </Styled.Row>
   )
 }
 
 IconSize.displayName = 'IconSize'
 
-export default withStyles(styles)(IconSize)
+export default IconSize

@@ -1,19 +1,7 @@
-import type { TooltipBaseProps } from './TooltipBase.types'
-
 import { useRef } from 'react'
-import { Button, Tooltip, withStyles } from '@evg-b/evg-ui'
+import { Button, Tooltip } from '@evg-b/evg-ui'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const TooltipBase = (props: TooltipBaseProps) => {
-  const { classes } = props
+const TooltipBase = () => {
   const btn_ref = useRef<HTMLElement | null>(null)
   return (
     <>
@@ -27,4 +15,4 @@ const TooltipBase = (props: TooltipBaseProps) => {
 
 TooltipBase.displayName = 'TooltipBase'
 
-export default withStyles(styles)(TooltipBase)
+export default TooltipBase

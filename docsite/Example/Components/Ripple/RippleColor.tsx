@@ -1,41 +1,26 @@
-import type { RippleColorProps } from './RippleColor.types'
+import { colors, Ripple } from '@evg-b/evg-ui'
 
-import { Elevation, Color, Ripple, withStyles } from '@evg-b/evg-ui'
+import * as Styled from './Ripple.styled'
 
-const styles = {
-  base: {
-    display: 'flex'
-  },
-  stand: {
-    ...Elevation(2),
-    width: '150px',
-    height: '150px',
-    position: 'relative',
-    margin: '5px'
-  }
-}
-
-const RippleColor = (props: RippleColorProps) => {
-  const { classes } = props
-
-  const gray400 = Color('gray400').Base()
-  const purple600 = Color('purple600').Base()
+const RippleColor = () => {
+  const gray400 = colors.gray[400]
+  const purple600 = colors.purple[600]
 
   return (
-    <div className={classes.base}>
-      <span className={classes.stand}>
+    <Styled.Row>
+      <Styled.Sample>
         <Ripple />
-      </span>
-      <span className={classes.stand} style={{ backgroundColor: gray400 }}>
+      </Styled.Sample>
+      <Styled.Sample $background={gray400}>
         <Ripple color={gray400} />
-      </span>
-      <span className={classes.stand} style={{ backgroundColor: purple600 }}>
+      </Styled.Sample>
+      <Styled.Sample $background={purple600}>
         <Ripple color={purple600} />
-      </span>
-    </div>
+      </Styled.Sample>
+    </Styled.Row>
   )
 }
 
 RippleColor.displayName = 'RippleColor'
 
-export default withStyles(styles)(RippleColor)
+export default RippleColor

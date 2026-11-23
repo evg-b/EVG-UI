@@ -1,23 +1,13 @@
-import type { PopupModeProps } from './PopupMode.types'
-
 import { useRef } from 'react'
-import { Button, Popup, withStyles } from '@evg-b/evg-ui'
+import { Button, Popup } from '@evg-b/evg-ui'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const PopupMode = (props: PopupModeProps) => {
-  const { classes } = props
+import * as Styled from '../../ExampleLayout.styled'
+
+const PopupMode = () => {
   const btn1_ref = useRef<HTMLElement | null>(null)
   const btn2_ref = useRef<HTMLElement | null>(null)
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Button ref={btn1_ref} variant="outlined">
         hover
       </Button>
@@ -30,10 +20,10 @@ const PopupMode = (props: PopupModeProps) => {
       <Popup target={btn2_ref} mode="click">
         Popup
       </Popup>
-    </div>
+    </Styled.Row>
   )
 }
 
 PopupMode.displayName = 'PopupMode'
 
-export default withStyles(styles)(PopupMode)
+export default PopupMode

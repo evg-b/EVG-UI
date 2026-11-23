@@ -1,24 +1,14 @@
-import type { TooltipBaseProps } from './TooltipBase.types'
-
 import { useRef } from 'react'
-import { Button, Popup, withStyles } from '@evg-b/evg-ui'
+import { Button, Popup } from '@evg-b/evg-ui'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
+import * as Styled from '../../ExampleLayout.styled'
+
 // TODO: переосмыслить autiHide
-const TooltipBase = (props: TooltipBaseProps) => {
-  const { classes } = props
+const TooltipBase = () => {
   const btn1_ref = useRef<HTMLElement | null>(null)
   const btn2_ref = useRef<HTMLElement | null>(null)
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Button ref={btn1_ref} variant="outlined">
         Popup
       </Button>
@@ -29,10 +19,10 @@ const TooltipBase = (props: TooltipBaseProps) => {
       <Popup target={btn2_ref} autoHide={false}>
         Popup
       </Popup>
-    </div>
+    </Styled.Row>
   )
 }
 
 TooltipBase.displayName = 'TooltipBase'
 
-export default withStyles(styles)(TooltipBase)
+export default TooltipBase

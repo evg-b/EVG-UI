@@ -1,20 +1,10 @@
-import type { ButtonBaseProps } from './ButtonBase.types'
+import { Button } from '@evg-b/evg-ui'
 
-import { Button, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const ButtonBase = (props: ButtonBaseProps) => {
-  const { classes } = props
+const ButtonBase = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Button>text</Button>
       <Button variant="contained" color="primary">
         contained
@@ -25,10 +15,10 @@ const ButtonBase = (props: ButtonBaseProps) => {
       <Button variant="contained" href="#base-button">
         Link
       </Button>
-    </div>
+    </Styled.Row>
   )
 }
 
 ButtonBase.displayName = 'ButtonBase'
 
-export default withStyles(styles)(ButtonBase)
+export default ButtonBase

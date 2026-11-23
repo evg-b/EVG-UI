@@ -1,49 +1,47 @@
 ---
 id: Scroll
 title: Scroll
-sidebar_label: Scroll
 ---
 
 import {
-	ScrollAutoHideExample,
-	ScrollBaseExample,
-	ScrollTrackSizeAndColorExample,
-	ScrollVerticalAndHorizontalExample,
-	ScrollMaxHeightExample,
+  ScrollBaseExample,
+  ScrollVerticalAndHorizontalExample,
+  ScrollAutoHideExample,
+  ScrollTrackSizeAndColorExample,
+  ScrollMaxHeightExample
 } from '../../Example/Components/Scroll/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Кроссбраузерный скроллбар.
+`Scroll` добавляет полосы прокрутки к содержимому. Размер области и цвета элементов в примерах задаются через styled-components.
 
-## Base Scroll
+## Прокрутка {#base-scroll}
 
 <ScrollBaseExample />
 
-## Vertical и Horizontal
+## Две оси {#vertical-и-horizontal}
 
-Вертикальный и горизонтальный Scrollbar отображается по умолчанию, если контент можно проскролить. 
+Полосы появляются, если содержимое выходит за доступную ширину или высоту. Оси задаются свойствами `horizontal` и `vertical`.
 
 <ScrollVerticalAndHorizontalExample />
 
-## AutoHide
+## Автоскрытие {#autohide}
 
-Автоматическое скрытие Scrollbar если свойство `autoHide={true}`.
+При `autoHide` полосы скрываются после паузы. `autoHideTimeout` задаёт длительность паузы в миллисекундах.
 
 <ScrollAutoHideExample />
 
-## TrackSize and Color
+## Толщина и цвет {#tracksize-and-color}
 
-Цвет компонента меняется через свойство `color`. Более подробно про цвет в этой [статье](/docs/styles/color#props-color). 
+В этом примере `trackSize={20}` задаёт толщину, а `color="primary"` — цвет из темы. [Цветовые роли](../Styles/Color.mdx#props-color).
 
 <ScrollTrackSizeAndColorExample />
 
-## MaxHeight
+## Максимальная высота {#maxheight}
 
-Если указать только `maxHeight`, Scrollbar будет появляться и исчезать по мере заполнения контейнера. 
-Так же как и нативный.
+Добавляйте элементы. Область растёт до `max-height: 400px`, затем её можно прокручивать.
 
 <ScrollMaxHeightExample />
 
 ## API
 
-<ApiDoc name='Scroll' />
+<ApiDoc name="Scroll" />

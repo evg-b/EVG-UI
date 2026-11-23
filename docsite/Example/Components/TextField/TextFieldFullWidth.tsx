@@ -1,20 +1,10 @@
-import type { TextFieldFullWidthProps } from './TextFieldFullWidth.types'
+import { TextField } from '@evg-b/evg-ui'
 
-import { TextField, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const TextFieldFullWidth = (props: TextFieldFullWidthProps) => {
-  const { classes } = props
+const TextFieldFullWidth = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <TextField
         fullWidth
         labelText="multiline fullWidth"
@@ -28,10 +18,10 @@ const TextFieldFullWidth = (props: TextFieldFullWidthProps) => {
         color="primary"
         outlined
       />
-    </div>
+    </Styled.Row>
   )
 }
 
 TextFieldFullWidth.displayName = 'TextFieldFullWidth'
 
-export default withStyles(styles)(TextFieldFullWidth)
+export default TextFieldFullWidth

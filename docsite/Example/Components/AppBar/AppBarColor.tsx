@@ -1,21 +1,11 @@
 import type { ChangeEvent } from 'react'
 
-import type { AppBarColorProps } from './AppBarColor.types'
-
 import { useState } from 'react'
-import { AppBar, Radio, withStyles } from '@evg-b/evg-ui'
+import { AppBar, Radio } from '@evg-b/evg-ui'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flex: '1 0 auto',
-    flexDirection: 'column',
-    alignItems: 'center'
-  }
-}
+import * as Styled from '../../ExampleLayout.styled'
 
-const AppBarColor = (props: AppBarColorProps) => {
-  const { classes } = props
+const AppBarColor = () => {
   const [color, setColor] = useState('default')
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +13,7 @@ const AppBarColor = (props: AppBarColorProps) => {
   }
 
   return (
-    <div className={classes.base}>
+    <Styled.AppBarColumn>
       <AppBar title="EVG-UI Color" color={color} position="static" />
       <div>
         <Radio
@@ -45,10 +35,10 @@ const AppBarColor = (props: AppBarColorProps) => {
           color="primary"
         />
       </div>
-    </div>
+    </Styled.AppBarColumn>
   )
 }
 
 AppBarColor.displayName = 'AppBarColor'
 
-export default withStyles(styles)(AppBarColor)
+export default AppBarColor

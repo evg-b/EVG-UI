@@ -1,21 +1,10 @@
-import type { ButtonGroupSizeProps } from './ButtonGroupSize.types'
+import { Button, ButtonGroup } from '@evg-b/evg-ui'
 
-import { Button, ButtonGroup, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexDirection: 'column',
-    alignItems: 'center',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const ButtonGroupSize = (props: ButtonGroupSizeProps) => {
-  const { classes } = props
+const ButtonGroupSize = () => {
   return (
-    <div className={classes.base}>
+    <Styled.CenteredColumn>
       <ButtonGroup size="small" variant="contained" color="primary">
         <Button>small 1</Button>
         <Button>small 2</Button>
@@ -31,10 +20,10 @@ const ButtonGroupSize = (props: ButtonGroupSizeProps) => {
         <Button>large 2</Button>
         <Button>large 3</Button>
       </ButtonGroup>
-    </div>
+    </Styled.CenteredColumn>
   )
 }
 
 ButtonGroupSize.displayName = 'ButtonGroupSize'
 
-export default withStyles(styles)(ButtonGroupSize)
+export default ButtonGroupSize

@@ -1,18 +1,22 @@
 ---
 id: Menu
 title: Menu
-sidebar_label: -Menu
+sidebar_label: Menu
 ---
 
-import {MenuBaseExample} from '../../Example/Components/Menu/Examples'
+import { MenuBaseExample } from '../../Example/Components/Menu/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Это компонент со списком вариантов выбора который может появляться и исчезать у прикрепленных элементов интерфейса.
+`Menu` открывает список рядом с элементом, на который указывает `target`. Каждый пункт — отдельный `MenuItem`.
 
-## Base Menu
+## Выбор пункта {#base-menu}
+
+Откройте «Сортировка» и выберите порядок. Пример хранит выбранное значение в состоянии React и закрывает меню через `open`.
 
 <MenuBaseExample />
 
 ## API
 
-<ApiDoc name='Menu' />
+<ApiDoc name="Menu" />
+
+Свойства отдельного пункта перечислены в [API MenuItem](../API/MenuItem.mdx).

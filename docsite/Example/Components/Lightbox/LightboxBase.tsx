@@ -1,18 +1,9 @@
-import type { LightboxBaseProps } from './LightboxBase.types'
-
-import { Lightbox, withStyles } from '@evg-b/evg-ui'
+import { Lightbox } from '@evg-b/evg-ui'
 import useBaseUrl from '@docusaurus/useBaseUrl'
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const LightboxBase = (props: LightboxBaseProps) => {
-  const { classes } = props
+
+import * as Styled from '../../ExampleLayout.styled'
+
+const LightboxBase = () => {
   const imgs = [
     useBaseUrl('/source/Carousel/1.jpg'),
     useBaseUrl('/source/Carousel/2.jpg'),
@@ -25,12 +16,12 @@ const LightboxBase = (props: LightboxBaseProps) => {
     useBaseUrl('/source/Carousel/9.jpg')
   ]
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Lightbox imgs={imgs} />
-    </div>
+    </Styled.Row>
   )
 }
 
 LightboxBase.displayName = 'LightboxBase'
 
-export default withStyles(styles)(LightboxBase)
+export default LightboxBase

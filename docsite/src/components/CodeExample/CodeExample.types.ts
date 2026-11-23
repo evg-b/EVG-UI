@@ -15,8 +15,8 @@ type CodeExampleOwnProps = {
   // Демка с компонентом.
   demo?: ReactNode
 
-  // Исходный код компонента в в виде текста.
-  snippet?: string
+  // Исходный код примера или несколько файлов по относительным путям.
+  snippet?: string | Record<string, string>
 
   // Язык разметки для react-syntax-highlighter.
   language?: string

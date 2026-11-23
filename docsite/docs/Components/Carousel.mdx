@@ -1,21 +1,26 @@
 ---
 id: Carousel
 title: Carousel
-sidebar_label: Carousel
 ---
 
 import {
-    CarouselBaseExample,
-    CarouselOnChangeImgExample,
+  CarouselBaseExample,
+  CarouselOnChangeImgExample
 } from '../../Example/Components/Carousel/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Компонент карусель для отображения изображений. Поддерживает жесты и оптимизирован для N-количества элементов. 
+`Carousel` листает изображения из массива `imgs`. Перетащите слайд или воспользуйтесь кнопкой со стрелкой.
 
-## Base Carousel
+## Карусель {#base-carousel}
 
 <CarouselBaseExample />
 
+## Текущий слайд
+
+`onChangeImg` получает индекс активного изображения. В примере нумерация для пользователя начинается с единицы.
+
+<CarouselOnChangeImgExample />
+
 ## API
 
-<ApiDoc name='Carousel' />
+<ApiDoc name="Carousel" />

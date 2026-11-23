@@ -1,28 +1,18 @@
-import type { BadgeRipeProps } from './BadgeRipe.types'
+import { Badge, Icon } from '@evg-b/evg-ui'
 
-import { Badge, withStyles, Icon } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const BadgeRipe = (props: BadgeRipeProps) => {
-  const { classes } = props
+const BadgeRipe = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Badge count={3}>
         <Icon name="Notifications" />
       </Badge>
       <Badge ripe count={3} />
-    </div>
+    </Styled.Row>
   )
 }
 
 BadgeRipe.displayName = 'BadgeRipe'
 
-export default withStyles(styles)(BadgeRipe)
+export default BadgeRipe

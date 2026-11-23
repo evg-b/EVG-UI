@@ -2,92 +2,12 @@ import type { ChangeEvent } from 'react'
 
 import type { TouchDriverCoordinates } from '@evg-b/evg-ui'
 
-import type { TouchDriverInertiaProps } from './TouchDriverInertia.types'
-
 import { useState, useRef } from 'react'
-import classNames from 'classnames'
-import {
-  Elevation,
-  Color,
-  TouchDriver,
-  Switch,
-  withStyles
-} from '@evg-b/evg-ui'
+import { TouchDriver, Switch } from '@evg-b/evg-ui'
 
-const styles = {
-  touch: {
-    position: 'relative',
-    width: '500px',
-    height: '400px',
-    overflow: 'hidden',
-    ...Elevation(2)
-  },
-  touchCircle: {
-    zIndex: 9,
-    position: 'absolute',
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '100px',
-    height: '100px',
-    borderRadius: '50%',
-    backgroundColor: Color('primary').Base(),
-    color: Color('primary').Contrast(),
-    cursor: 'pointer',
-    userSelect: 'none',
-    left: 0,
-    top: '50%',
-    transform: 'translateY(-50%)',
-    transition: 'transform 300ms cubic-bezier(0.4, 0, 0.2, 1)'
-  },
-  hole: {
-    position: 'absolute',
-    top: '50%',
-    transform: 'translateY(-50%)',
-    width: '100px',
-    height: '100px',
-    borderRadius: '50%',
-    border: `4px dashed ${Color('primary').Base()}`
-  },
-  holeLeft: {
-    left: 0
-  },
-  holeRight: {
-    right: 0
-  },
-  rubicon: {
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%,-50%)',
-    width: '5px',
-    height: '170px',
-    backgroundColor: Color('gray300').Base(),
-    transition: 'background-color 300ms ease'
-  },
-  active: {
-    backgroundColor: Color('primary').Base()
-  },
-  controlPanel: {
-    display: 'flex',
-    alignItems: 'center',
-    position: 'absolute',
-    left: '50%',
-    transform: 'translateX(-50%)',
-    bottom: 20,
-    color: Color('gray300').Base(),
-    '&>label': {
-      marginLeft: '10px',
-      fontWeight: 500
-    }
-  },
-  controlPanelActive: {
-    color: Color('primary').Base()
-  }
-}
+import * as Styled from './TouchDriver.styled'
 
-const TouchDriverInertia = (props: TouchDriverInertiaProps) => {
-  const { classes } = props
+const TouchDriverInertia = () => {
   const touch_ref = useRef<HTMLElement | null>(null)
   const circle_ref = useRef<HTMLDivElement | null>(null)
   const position = useRef(0)
@@ -130,31 +50,25 @@ const TouchDriverInertia = (props: TouchDriverInertiaProps) => {
     setActive(false)
   }
   return (
-    <TouchDriver
-      innerRef={touch_ref}
-      className={classes.touch}
+    <Styled.Area
+      as={TouchDriver}
+      ref={touch_ref}
       moveXY={onMove}
       moveEnd={onMoveEnd}>
-      <div ref={circle_ref} className={classes.touchCircle}>
+      <Styled.InertiaCircle ref={circle_ref}>
         MOVE
-      </div>
-      <div className={classNames(classes.hole, classes.holeLeft)}></div>
-      <div className={classNames(classes.hole, classes.holeRight)}></div>
-      <div
-        className={classNames(classes.rubicon, {
-          [classes.active]: active
-        })}></div>
-      <div
-        className={classNames(classes.controlPanel, {
-          [classes.controlPanelActive]: useInertia
-        })}>
+      </Styled.InertiaCircle>
+      <Styled.LeftTarget />
+      <Styled.RightTarget />
+      <Styled.Threshold $active={active} />
+      <Styled.Controls $active={useInertia}>
         <Switch onChange={onChangeInertia} id="switch" color="primary" />
         <label htmlFor="switch">INERTIA</label>
-      </div>
-    </TouchDriver>
+      </Styled.Controls>
+    </Styled.Area>
   )
 }
 
 TouchDriverInertia.displayName = 'TouchDriverInertia'
 
-export default withStyles(styles)(TouchDriverInertia)
+export default TouchDriverInertia

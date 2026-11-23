@@ -1,6 +1,8 @@
 import { readFileSync, readdirSync, writeFileSync } from 'node:fs'
-import { basename, dirname, resolve } from 'node:path'
+import { basename, dirname, relative, resolve, sep } from 'node:path'
 import { fileURLToPath } from 'node:url'
+
+import ts from 'typescript'
 
 const examplesDirectory = resolve(
   dirname(fileURLToPath(import.meta.url)),
@@ -23,12 +25,35 @@ for (const directory of readdirSync(examplesDirectory, {
     .map((file) => file.name)
     .sort()
   const componentNames = files.map((file) => basename(file, '.tsx'))
-  const snippets = Object.fromEntries(
-    files.map((file, index) => [
-      componentNames[index],
-      readFileSync(resolve(componentDirectory, file), 'utf8')
-    ])
-  )
+  const sources = new Map<string, string>()
+
+  function collectSource(file: string, related: Set<string>) {
+    if (related.has(file)) return
+    related.add(file)
+
+    const path = resolve(componentDirectory, file)
+    const source = sources.get(file) ?? readFileSync(path, 'utf8')
+    sources.set(file, source)
+    for (const { fileName } of ts.preProcessFile(source).importedFiles) {
+      if (fileName.startsWith('.') && /\.(styled|types)$/.test(fileName)) {
+        const dependency = resolve(dirname(path), fileName + '.ts')
+        const key = relative(componentDirectory, dependency)
+          .split(sep)
+          .join('/')
+        collectSource(key, related)
+      }
+    }
+  }
+
+  const entries = files.map((file, index) => {
+    const related = new Set<string>()
+    collectSource(file, related)
+    const fields = Array.from(related, (path) => {
+      const key = JSON.stringify(path)
+      return `    ${key}: sources[${key}]`
+    })
+    return `  ${componentNames[index]}: {\n${fields.join(',\n')}\n  }`
+  })
 
   const imports = componentNames
     .map((name) => `import ${name} from './${name}'`)
@@ -51,7 +76,9 @@ ${name}Example.displayName = '${name}Example'`
 
   writeFileSync(
     resolve(componentDirectory, 'snippets.ts'),
-    `const snippets = ${JSON.stringify(snippets, null, 2)}\n\nexport default snippets\n`
+    files.length
+      ? `const sources = ${JSON.stringify(Object.fromEntries(sources), null, 2)}\n\nconst snippets = {\n${entries.join(',\n')}\n}\n\nexport default snippets\n`
+      : 'const snippets = {}\n\nexport default snippets\n'
   )
   writeFileSync(
     resolve(componentDirectory, 'Examples.tsx'),

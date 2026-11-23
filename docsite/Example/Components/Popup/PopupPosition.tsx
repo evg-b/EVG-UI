@@ -1,25 +1,20 @@
 import { useRef } from 'react'
+
 import { Button, Popup } from '@evg-b/evg-ui'
 
+import * as Styled from './Popup.styled'
+
 const PopupPosition = () => {
-  const btn_ref = useRef<HTMLElement | null>(null)
+  const target = useRef<HTMLElement>(null)
+
   return (
     <>
-      <Button
-        ref={btn_ref}
-        variant="outlined"
-        style={{ width: 250, margin: 30 }}>
-        Position
-      </Button>
-      <Popup open position="top" target={btn_ref}>
-        top
-      </Popup>
-      <Popup open position="top-left" target={btn_ref}>
-        top-left
-      </Popup>
-      <Popup open position="top-right" target={btn_ref}>
-        top-right
-      </Popup>
+      <Styled.WideTarget as={Button} ref={target} type="button" variant="outlined">
+        Положение
+      </Styled.WideTarget>
+      <Popup open position="top" target={target}>top</Popup>
+      <Popup open position="top-left" target={target}>top-left</Popup>
+      <Popup open position="top-right" target={target}>top-right</Popup>
     </>
   )
 }

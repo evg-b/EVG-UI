@@ -1,29 +1,19 @@
-import type { SwitchColorProps } from './SwitchColor.types'
+import { Switch } from '@evg-b/evg-ui'
 
-import { Switch, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const SwitchColor = (props: SwitchColorProps) => {
-  const { classes } = props
+const SwitchColor = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Switch color="default" defaultChecked />
       <Switch color="primary" defaultChecked />
       <Switch color="warn" defaultChecked />
       <Switch color="success" defaultChecked />
       <Switch color="fail" defaultChecked />
-    </div>
+    </Styled.Row>
   )
 }
 
 SwitchColor.displayName = 'SwitchColor'
 
-export default withStyles(styles)(SwitchColor)
+export default SwitchColor

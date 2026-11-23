@@ -1,63 +1,64 @@
 ---
 id: ButtonGroup
 title: ButtonGroup
-sidebar_label: ButtonGroup
 ---
 
 import {
-	ButtonGroupBaseExample,
-	ButtonGroupColorExample,
-	ButtonGroupOrientationExample,
-	ButtonGroupRoundExample,
-	ButtonGroupSizeExample,
-	ButtonGroupIconExample,
-	ButtonGroupUppercaseExample,
-	ButtonGroupVariantExample,
+  ButtonGroupBaseExample,
+  ButtonGroupSizeExample,
+  ButtonGroupVariantExample,
+  ButtonGroupColorExample,
+  ButtonGroupRoundExample,
+  ButtonGroupOrientationExample,
+  ButtonGroupUppercaseExample,
+  ButtonGroupIconExample
 } from '../../Example/Components/ButtonGroup/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Этот компонент группирует Button.
+`ButtonGroup` задаёт общее оформление дочерних кнопок `Button` и `IconButton`.
 
-## Base ButtonGroup
+## Группа {#base-buttongroup}
 
 <ButtonGroupBaseExample />
 
-## Size
+## Размер {#size}
 
-Размер компонента в группе изменяется через свойство `size`.
+Передайте `size` на группу.
 
 <ButtonGroupSizeExample />
 
-## Variant
+## Вариант {#variant}
+
+Для группы доступны те же варианты, что и для `Button`.
 
 <ButtonGroupVariantExample />
 
-## Color
+## Цвет {#color}
 
-Цвет компонентов в группе меняется через свойство `color`. Более подробно про цвет в этой [статье](/docs/styles/color#props-color).
+Общий цвет задаёт `color` группы. [Цветовые роли](../Styles/Color.mdx#props-color).
 
 <ButtonGroupColorExample />
 
-## Round
+## Скругление {#round}
 
 <ButtonGroupRoundExample />
 
-## Orientation
+## Ориентация {#orientation}
 
-Горизонтальная и вертикальная ориентация группы кнопок.
+По умолчанию кнопки расположены в строку. Для столбца укажите `orientation="vertical"`.
 
 <ButtonGroupOrientationExample />
 
-## Uppercase
+## Регистр текста {#uppercase}
 
-Если `uppercase={false}`, выключить верхний регистр текста.
+`uppercase={false}` сохраняет регистр подписей.
 
 <ButtonGroupUppercaseExample />
 
-## Group Icon
+## Группа иконок {#group-icon}
 
 <ButtonGroupIconExample />
 
 ## API
 
-<ApiDoc name='ButtonGroup' />
+<ApiDoc name="ButtonGroup" />

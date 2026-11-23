@@ -1,18 +1,6 @@
-import type { ButtonGroupBaseProps } from './ButtonGroupBase.types'
+import { Button, ButtonGroup } from '@evg-b/evg-ui'
 
-import { Button, ButtonGroup, withStyles } from '@evg-b/evg-ui'
-
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const ButtonGroupBase = (props: ButtonGroupBaseProps) => {
-  const { classes } = props
+const ButtonGroupBase = () => {
   return (
     <ButtonGroup variant="contained" color="primary">
       <Button>Button 1</Button>
@@ -24,4 +12,4 @@ const ButtonGroupBase = (props: ButtonGroupBaseProps) => {
 
 ButtonGroupBase.displayName = 'ButtonGroupBase'
 
-export default withStyles(styles)(ButtonGroupBase)
+export default ButtonGroupBase

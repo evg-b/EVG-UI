@@ -1,20 +1,10 @@
-import type { SelectColorProps } from './SelectColor.types'
+import { Select, SelectOption } from '@evg-b/evg-ui'
 
-import { Select, SelectOption, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const SelectColor = (props: SelectColorProps) => {
-  const { classes } = props
+const SelectColor = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Select labelText="Select">
         <SelectOption value={10}>Item - 1</SelectOption>
         <SelectOption value={20}>Item - 2</SelectOption>
@@ -30,10 +20,10 @@ const SelectColor = (props: SelectColorProps) => {
         <SelectOption value={20}>Item - 2</SelectOption>
         <SelectOption value={30}>Item - 3</SelectOption>
       </Select>
-    </div>
+    </Styled.Row>
   )
 }
 
 SelectColor.displayName = 'SelectColor'
 
-export default withStyles(styles)(SelectColor)
+export default SelectColor

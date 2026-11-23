@@ -1,71 +1,32 @@
+import { Color, getColor, useTheme } from '@evg-b/evg-ui'
+
 import type { ColorInfoProps } from './ColorInfo.types'
 
-import {
-  Elevation,
-  Color,
-  ListItem,
-  ListItemText,
-  ListItemAvatar,
-  withStyles
-} from '@evg-b/evg-ui'
+import * as Styled from './Color.styled'
 
-const styles = {
-  base: {
-    display: 'grid',
-    gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))',
-    marginTop: 35,
-    marginBottom: 60
-  },
-  tone: {
-    ...Elevation(1),
-    width: 50,
-    height: 50,
-    borderRadius: 6
-  },
-  textColor: {
-    color: Color('green600').Base()
-  }
-}
-
-const ColorInfo = (props: ColorInfoProps) => {
-  const {
-    classes,
-    colors = ['red700', 'red300'], // [color,color,...]
-    full = false
-  } = props
-
-  const ColorBase = (color: string) => (
-    <span>
-      Color(<span className={classes.textColor}>{color}</span>).Base()
-    </span>
-  )
+const ColorInfo = ({ colors, themed = false }: ColorInfoProps) => {
+  const theme = useTheme()
 
   return (
-    <div className={classes.base}>
-      {colors.map((color, index) => {
-        let colorFix = color === 'primary' ? 'blue600' : color
-        let colorObject = Color(colorFix).Base()
+    <Styled.Values>
+      {colors.map((name) => {
+        const color = themed ? getColor(theme, name) : Color(name)
+        const hex = color.Base('HEX')
+
         return (
-          <ListItem key={index} button={false}>
-            <ListItemAvatar>
-              <span
-                className={classes.tone}
-                style={{ backgroundColor: colorObject }}></span>
-            </ListItemAvatar>
-            <ListItemText
-              secondaryText={colorObject}
-              style={{ fontWeight: 500 }}>
-              {full ? ColorBase(color) : color}
-            </ListItemText>
-          </ListItem>
+          <Styled.Value key={name}>
+            <dt>
+              <Styled.Chip $background={hex} />
+              {name}
+            </dt>
+            <dd>{hex}</dd>
+          </Styled.Value>
         )
       })}
-    </div>
+    </Styled.Values>
   )
 }
 
 ColorInfo.displayName = 'ColorInfo'
 
-ColorBase.displayName = 'ColorBase'
-
-export default withStyles(styles)(ColorInfo)
+export default ColorInfo

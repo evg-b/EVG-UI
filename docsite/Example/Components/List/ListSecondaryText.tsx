@@ -1,34 +1,23 @@
-import type { ListSecondaryTextProps } from './ListSecondaryText.types'
+import { List, ListItem, ListItemText } from '@evg-b/evg-ui'
 
-import { List, ListItem, ListItemText, withStyles } from '@evg-b/evg-ui'
-
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
+import * as Styled from './List.styled'
 
 const Items = ['Notifications', 'Security', 'Storage', 'Settings', 'Folders']
 
-const ListSecondaryText = (props: ListSecondaryTextProps) => {
-  const { classes } = props
+const ListSecondaryText = () => {
   return (
-    <div className={classes.base}>
-      <List style={{ width: '300px' }}>
-        {Items.map((item, i) => (
-          <ListItem key={i} button>
+    <Styled.Row>
+      <Styled.Items as={List}>
+        {Items.map((item) => (
+          <ListItem key={item} button>
             <ListItemText secondaryText={'secondaryText'}>{item}</ListItemText>
           </ListItem>
         ))}
-      </List>
-    </div>
+      </Styled.Items>
+    </Styled.Row>
   )
 }
 
 ListSecondaryText.displayName = 'ListSecondaryText'
 
-export default withStyles(styles)(ListSecondaryText)
+export default ListSecondaryText

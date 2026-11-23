@@ -1,37 +1,27 @@
-import type { CarouselOnChangeImgProps } from './CarouselOnChangeImg.types'
+import { useState } from 'react'
 
-import { Carousel, withStyles } from '@evg-b/evg-ui'
 import useBaseUrl from '@docusaurus/useBaseUrl'
+import { Carousel } from '@evg-b/evg-ui'
 
-const styles = {
-  base: {
-    width: '600px',
-    height: '400px',
-    borderRadius: '6px',
-    overflow: 'hidden'
-  }
-}
-const CarouselOnChangeImg = (props: CarouselOnChangeImgProps) => {
-  const { classes } = props
+import * as Styled from './Carousel.styled'
+
+const CarouselOnChangeImg = () => {
+  const [index, setIndex] = useState(0)
   const imgs = [
     useBaseUrl('/source/Carousel/1.jpg'),
     useBaseUrl('/source/Carousel/2.jpg'),
-    useBaseUrl('/source/Carousel/3.jpg'),
-    useBaseUrl('/source/Carousel/4.jpg'),
-    useBaseUrl('/source/Carousel/5.jpg'),
-    useBaseUrl('/source/Carousel/6.jpg'),
-    useBaseUrl('/source/Carousel/7.jpg'),
-    useBaseUrl('/source/Carousel/8.jpg'),
-    useBaseUrl('/source/Carousel/9.jpg'),
-    useBaseUrl('/source/Carousel/10.jpg')
+    useBaseUrl('/source/Carousel/3.jpg')
   ]
   return (
-    <div className={classes.base}>
-      <Carousel imgs={imgs} />
+    <div>
+      <Styled.Frame>
+        <Carousel imgs={imgs} onChangeImg={setIndex} />
+      </Styled.Frame>
+      <output>Слайд {index + 1} из {imgs.length}</output>
     </div>
   )
 }
 
 CarouselOnChangeImg.displayName = 'CarouselOnChangeImg'
 
-export default withStyles(styles)(CarouselOnChangeImg)
+export default CarouselOnChangeImg

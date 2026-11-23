@@ -1,23 +1,11 @@
-import type { AvatarGroupAndSizeProps } from './AvatarGroupAndSize.types'
-
-import { Avatar, AvatarGroup, withStyles } from '@evg-b/evg-ui'
+import { Avatar, AvatarGroup } from '@evg-b/evg-ui'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: 10
-    }
-  }
-}
+import * as Styled from '../../ExampleLayout.styled'
 
-const AvatarGroupAndSize = (props: AvatarGroupAndSizeProps) => {
-  const { classes } = props
-
+const AvatarGroupAndSize = () => {
   return (
-    <div className={classes.base}>
+    <Styled.SpaciousRow>
       <AvatarGroup size={25} max={3}>
         <Avatar src={useBaseUrl('/source/Avatar/3.jpg')} />
         <Avatar src={useBaseUrl('/source/Avatar/12.jpg')} />
@@ -39,10 +27,10 @@ const AvatarGroupAndSize = (props: AvatarGroupAndSizeProps) => {
         <Avatar src={useBaseUrl('/source/Avatar/4.jpg')} />
         <Avatar src={useBaseUrl('/source/Avatar/9.jpg')} />
       </AvatarGroup>
-    </div>
+    </Styled.SpaciousRow>
   )
 }
 
 AvatarGroupAndSize.displayName = 'AvatarGroupAndSize'
 
-export default withStyles(styles)(AvatarGroupAndSize)
+export default AvatarGroupAndSize

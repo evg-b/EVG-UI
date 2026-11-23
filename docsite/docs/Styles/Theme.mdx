@@ -3,98 +3,102 @@ id: Theme
 title: Theme
 sidebar_label: Theme
 ---
-import ColorInfo from '../../Example/Styles/Color/ColorInfo'
+
 import ThemeChange from '../../Example/Styles/Theme/ThemeChange'
-import { Radio,Checkbox,Button  } from '@evg-b/evg-ui'
+import ColorInfo from '../../Example/Styles/Color/ColorInfo'
 
-Темы важны, так же важен способ взаимодействия с ними. Давайте с вами рассмотрим несколько популярных подходов использования тем.
+## Подключение темы
 
-## EVG-Theme
+`generateTokens` строит два набора токенов из исходных цветов бренда. Выберите `light` или `dark`, передайте этот набор в `createTheme` и оберните приложение в `ThemeProvider` из EVG-UI. Компоненты библиотеки и ваши styled-компоненты получают одну тему.
 
-Есть тема по умолчанию, с помощью которой вы можете использовать заготовленные цвета.
+```tsx title="App.tsx"
+import { useState } from 'react'
 
-<ColorInfo colors={['default','primary','secondary','warn','success','fail','background','surface']} />
+import { Button, ThemeProvider, createTheme, generateTokens, type ThemeMode } from '@evg-b/evg-ui'
 
-```jsx
-import { Button } from '@evg-b/evg-ui'
-
-<Button color='default' variant='contained'>default</Button>
-<Button color='primary' variant='contained'>primary</Button>
-<Button color='secondary' variant='contained'>secondary</Button>
-<Button color='warn' variant='contained'>warn</Button>
-<Button color='success' variant='contained'>success</Button>
-<Button color='fail' variant='contained'>fail</Button>
-```
-
-<div style={{display: 'grid', gridTemplateColumns: 'repeat(auto-fill, minmax(250px, 1fr))', gridGap: '20px', margin: '40px 0'}}>
-    <Button color='default' variant='contained'>default</Button>
-    <Button color='blue600' variant='contained'>primary</Button>
-    <Button color='secondary' variant='contained'>secondary</Button>
-    <Button color='warn' variant='contained'>warn</Button>
-    <Button color='success' variant='contained'>success</Button>
-    <Button color='fail' variant='contained'>fail</Button>
-</div>
-
-
-
-## Custom Theme
-
-В каждый компонент встроен объект `Color` который так же работает с темами в вашем приложении буквально за вас.
-
-Всего лишь нужно создать --css-var определенного вида: `--evg-${themeColor}`
-
-```jsx
-// css
-:root {
-    --evg-primary: #7B1FA2;
-    --evg-success: rgb(85, 139, 47);
-    --evg-warn: 'orange900';
+const tokens = generateTokens({ primaryColor: '#7B1FA2' })
+const themes = {
+  light: createTheme({ tokens: tokens.light }),
+  dark: createTheme({ tokens: tokens.dark })
 }
-// css
 
-// jsx
-<Button color='primary' variant='contained'>primary</Button>
-<Button color='success' variant='contained'>success</Button>
-<Button color='warn' variant='contained'>warn</Button>
-// jsx
-```
+export default function App() {
+  const [mode, setMode] = useState<ThemeMode>('light')
 
-<div style={{display: 'flex', justifyContent: 'space-around', margin: '40px 0'}}>
-    <Button color='primary' variant='contained'>primary</Button>
-    <Button color='rgb(85, 139, 47)' variant='contained'>success</Button>
-    <Button color='orange900' variant='contained'>warn</Button>
-</div>
-
-Это все? Да, именно. 
-
-## Несколько Theme
-
-Давайте с вами создадим несколько тем. Для этого нам нужно так же создать --css-var с названием темы: `--evg-${themeName}-${themeColor}`
-
-```css
-:root {
-    // default - мы переопределяем тему по умолчанию
-    --evg-primary: #7B1FA2;
-
-    // dark
-    --evg-dark-primary: #7B1FA2;
-    --evg-dark-surface: #292d3e;
+  return (
+    <ThemeProvider theme={themes[mode]}>
+      <Button
+        color="primary"
+        variant="contained"
+        onClick={() => setMode(mode === 'light' ? 'dark' : 'light')}>
+        {mode === 'light' ? 'Включить тёмную тему' : 'Включить светлую тему'}
+      </Button>
+    </ThemeProvider>
+  )
 }
 ```
 
-Активируйте тему прямо на ходу из любого метса с помощью пользовательского хука `setTheme(themeName)`.
-Если хук `setTheme` запустить без аргумента, то активной станет тема по умолчанию.
+## Смена режима и основного цвета
 
-```jsx
-<Button onClick={() => setTheme()}>light</Button>
-<Button onClick={() => setTheme('dark')}>dark</Button>
+Введите имя в поиск, переключите режим и выберите другой исходный цвет. Фон, кнопки и аватары обновляются, а введённый запрос сохраняется. Переключатели в этом примере действуют только внутри его `ThemeProvider`.
+
+<ThemeChange />
+
+Если пользователь выбирает цвет во время работы, храните `primaryColor` в состоянии и пересчитывайте тему при изменении цвета или режима.
+
+```tsx
+const tokens = generateTokens({ primaryColor })
+const theme = createTheme({ tokens: tokens[mode] })
 ```
 
+## Токены в styled-components
 
-<iframe 
-    src="https://codesandbox.io/embed/evg-ui-theme-yohew?autoresize=1&fontsize=12&theme=dark"
-    style={{width:'100%', height:'600px', border:0, borderRadius: '4px', overflow:'hidden'}}
-    title="evg-ui-theme"
-    allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-    sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-></iframe>
+Для фона карточки возьмите `surface`, для текста на этом фоне — `onSurface`. Поля объекта `theme` доступны в шаблоне styled-components.
+
+```ts title="Card.styled.ts"
+import styled from 'styled-components'
+
+export const Surface = styled.section`
+  padding: 16px;
+  border: 1px solid ${({ theme }) => theme.outline};
+  border-radius: 8px;
+  background-color: ${({ theme }) => theme.surface};
+  color: ${({ theme }) => theme.onSurface};
+  font-family: ${({ theme }) => theme.fontFamily};
+`
+```
+
+В React-компоненте текущую тему возвращает `useTheme()` из EVG-UI.
+
+```tsx title="Card.tsx"
+import { useTheme } from '@evg-b/evg-ui'
+
+import * as Styled from './Card.styled'
+
+export default function Card() {
+  const theme = useTheme()
+  return <Styled.Surface>Основной цвет — {theme.primary}</Styled.Surface>
+}
+```
+
+## Свой цвет поверхности и шрифт
+
+У генератора есть пять исходных цветов — `primaryColor`, `secondaryColor`, `successColor`, `warningColor` и `errorColor`. Для точечной настройки возьмите готовый набор нужного режима и замените отдельные токены.
+
+```ts
+import { createTheme, generateTokens } from '@evg-b/evg-ui'
+
+const { dark } = generateTokens({ primaryColor: '#7B1FA2' })
+const theme = createTheme({
+  tokens: { ...dark, surface: '#292D3E', onSurface: '#F5F5F5' },
+  fontFamily: 'Arial, sans-serif'
+})
+```
+
+## Цветовые роли компонентов
+
+Свойство `color` принимает роли темы. Например, `default` использует токен `surface`, `warn` — `warning`, а `fail` — `error`. Здесь показаны значения текущей темы документации.
+
+<ColorInfo themed colors={['default', 'primary', 'secondary', 'warn', 'success', 'fail', 'background', 'surface']} />
+
+О форматах и преобразовании цветов читайте в [разделе Color](./Color.mdx).

@@ -1,38 +1,28 @@
-import type { ImageBrokenProps } from './ImageBroken.types'
-
 import { useState } from 'react'
-import { Image, Button, withStyles } from '@evg-b/evg-ui'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    alignItems: 'center'
-  },
-  img: {
-    margin: '5px',
-    width: 200,
-    height: 200,
-    borderRadius: '6%',
-    objectFit: 'cover'
-  }
-}
+import useBaseUrl from '@docusaurus/useBaseUrl'
+import { Button, Image } from '@evg-b/evg-ui'
 
-const ImageBroken = (props: ImageBrokenProps) => {
-  const { classes } = props
-  const [hash, setHash] = useState('')
-  const newHash = () => {
-    setHash(Date.now())
-  }
-  const url = `/source/Image/2broke.jpg?${hash}`
+import * as Styled from './Image.styled'
+
+const ImageBroken = () => {
+  const [attempt, setAttempt] = useState(0)
+  const source = useBaseUrl('/source/Image/missing.jpg')
+
   return (
-    <div className={classes.base}>
-      <Image className={classes.img} src={url} />
-      <Button onClick={newHash}>reload</Button>
-    </div>
+    <Styled.CenteredRow>
+      <Styled.Preview
+        as={Image}
+        src={`${source}?attempt=${attempt}`}
+        alt="Пример ошибки загрузки"
+      />
+      <Button type="button" onClick={() => setAttempt((value) => value + 1)}>
+        Повторить
+      </Button>
+    </Styled.CenteredRow>
   )
 }
 
 ImageBroken.displayName = 'ImageBroken'
 
-export default withStyles(styles)(ImageBroken)
+export default ImageBroken

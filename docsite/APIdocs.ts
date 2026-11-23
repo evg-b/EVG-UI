@@ -8,6 +8,8 @@ const apiDocs = [
   'API/ButtonGroup',
   'API/Carousel',
   'API/Checkbox',
+  'API/Cubes',
+  'API/Icon',
   'API/IconButton',
   'API/Image',
   'API/Lightbox',
@@ -16,8 +18,9 @@ const apiDocs = [
   'API/ListItemAction',
   'API/ListItemAvatar',
   'API/ListItemText',
-  'API/Cubes',
   'API/Loader',
+  'API/Menu',
+  'API/MenuItem',
   'API/Modal',
   'API/Popup',
   'API/Radio',
@@ -30,6 +33,7 @@ const apiDocs = [
   'API/Switch',
   'API/SwitchBase',
   'API/TextField',
+  'API/ThemeProvider',
   'API/Tooltip',
   'API/TouchDriver'
 ]

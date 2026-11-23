@@ -1,28 +1,18 @@
-import type { IconColorProps } from './IconColor.types'
+import { Icon } from '@evg-b/evg-ui'
 
-import { withStyles, Icon } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const IconColor = (props: IconColorProps) => {
-  const { classes } = props
+const IconColor = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Icon name="Cancel" color="primary" />
       <Icon name="ChevronLeft" color="warn" />
       <Icon name="Close" color="fail" />
       <Icon name="Check" color="success" />
-    </div>
+    </Styled.Row>
   )
 }
 
 IconColor.displayName = 'IconColor'
 
-export default withStyles(styles)(IconColor)
+export default IconColor

@@ -1,28 +1,18 @@
-import type { BadgeBaseProps } from './BadgeBase.types'
+import { Badge, Icon } from '@evg-b/evg-ui'
 
-import { Badge, withStyles, Icon } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const BadgeBase = (props: BadgeBaseProps) => {
-  const { classes } = props
+const BadgeBase = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Icon name="Notifications" />
       <Badge count={3} color="primary">
         <Icon name="Notifications" />
       </Badge>
-    </div>
+    </Styled.Row>
   )
 }
 
 BadgeBase.displayName = 'BadgeBase'
 
-export default withStyles(styles)(BadgeBase)
+export default BadgeBase

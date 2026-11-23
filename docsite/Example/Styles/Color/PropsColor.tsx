@@ -1,34 +1,24 @@
-import type { brightChangeProps } from './brightChange.types'
+import { Button, Icon } from '@evg-b/evg-ui'
 
-import { Button, withStyles, Icon } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    justifyContent: 'space-around',
-    margin: '40px 0'
-  }
-}
+const PropsColor = () => (
+  <Styled.Row>
+    <Button color="primary" variant="contained">
+      Сохранить
+    </Button>
+    <Button
+      color="success"
+      variant="contained"
+      startIcon={<Icon name="Check" />}>
+      Готово
+    </Button>
+    <Button color="primary" variant="contained" loading>
+      Загрузка
+    </Button>
+  </Styled.Row>
+)
 
-const brightChange = (props: brightChangeProps) => {
-  const { classes } = props
+PropsColor.displayName = 'PropsColor'
 
-  return (
-    <div className={classes.base}>
-      <Button color="primary" variant="contained">
-        Button
-      </Button>
-      <Button
-        color="primary"
-        variant="contained"
-        startIcon={<Icon name="Check" />}>
-        Button
-      </Button>
-      <Button color="primary" variant="contained" loading>
-        Button
-      </Button>
-    </div>
-  )
-}
-
-export default withStyles(styles)(brightChange)
+export default PropsColor

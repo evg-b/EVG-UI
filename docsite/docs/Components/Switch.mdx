@@ -1,27 +1,26 @@
 ---
 id: Switch
 title: Switch
-sidebar_label: Switch
 ---
 
 import {
-	SwitchBaseExample,
-	SwitchColorExample,
+  SwitchBaseExample,
+  SwitchColorExample
 } from '../../Example/Components/Switch/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Включает или выключает состояние отдельного параметра настроек.
+`Switch` переключает настройку между двумя состояниями. Для начального значения используйте `defaultChecked`, для управляемого переключателя — `checked` и `onChange`.
 
-## Base Switch
+## Переключатель {#base-switch}
 
 <SwitchBaseExample />
 
-## Color
+## Цвет {#color}
 
-Цвет компонента меняется через свойство `color`. Более подробно про цвет в этой [статье](/docs/styles/color#props-color).
+Цвет активного состояния задаёт `color`. [Цветовые роли](../Styles/Color.mdx#props-color).
 
 <SwitchColorExample />
 
 ## API
 
-<ApiDoc name='Switch' />
+<ApiDoc name="Switch" />

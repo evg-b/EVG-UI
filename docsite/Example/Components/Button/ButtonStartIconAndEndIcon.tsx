@@ -1,20 +1,10 @@
-import type { ButtonStartIconAndEndIconProps } from './ButtonStartIconAndEndIcon.types'
+import { Button, Icon } from '@evg-b/evg-ui'
 
-import { Button, withStyles, Icon } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const ButtonStartIconAndEndIcon = (props: ButtonStartIconAndEndIconProps) => {
-  const { classes } = props
+const ButtonStartIconAndEndIcon = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Button startIcon={<Icon name="Check" />}>default</Button>
       <Button
         variant="contained"
@@ -30,10 +20,10 @@ const ButtonStartIconAndEndIcon = (props: ButtonStartIconAndEndIconProps) => {
         endIcon={<Icon name="Cancel" />}>
         outlined
       </Button>
-    </div>
+    </Styled.Row>
   )
 }
 
 ButtonStartIconAndEndIcon.displayName = 'ButtonStartIconAndEndIcon'
 
-export default withStyles(styles)(ButtonStartIconAndEndIcon)
+export default ButtonStartIconAndEndIcon

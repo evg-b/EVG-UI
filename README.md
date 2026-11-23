@@ -1,53 +1,37 @@
 <p align="center">
-  <a href="">
+  <a href="https://evg-b.github.io/EVG-UI/">
     <img height="200" src="https://raw.githubusercontent.com/evg-b/EVG-UI/main/docsite/static/img/logo.svg">
   </a>
 </p>
 
 <h1 align="center">EVG-UI</h1>
 
-<p align="center">React компоненты основанные на идеях Material Design.</p>
+<p align="center">React-компоненты в стиле Material Design с динамической темой.</p>
 
-<p align="center">
-Библиотека вдохновлена интересными техническими и дизайнерскими решениями Material Design.
-</p>
+### Быстрый старт
 
-### Установка
+Текущую версию UI-kit можно попробовать в локальной документации. Запустите её из корня репозитория.
+
 ```sh
-npm install @evg-b/evg-ui react react-dom styled-components
-# или
-yarn add @evg-b/evg-ui react react-dom styled-components
+nvm install
+yarn install
+yarn docs:dev
 ```
 
-### Usage
-```jsx
-import React from 'react';
-import { Button } from '@evg-b/evg-ui';
+В [Quick start](docsite/docs/GettingStarted/quick%20start.mdx) есть приложение на React с кнопками, светлой и тёмной темой и исходниками на TypeScript и styled-components. Для подключения к другому приложению соберите локальный архив по [инструкции установки](docsite/docs/GettingStarted/Installation.mdx). Опубликованный в npm `@evg-b/evg-ui@0.0.2` использует React 16 и JSS.
 
-const HelloWorld = () => {
-    return (
-        <Button variant='contained' color='primary'>
-            Hello World
-        </Button>
-    );
+```tsx
+import { Button, ThemeProvider } from '@evg-b/evg-ui'
+
+export default function App() {
+  return (
+    <ThemeProvider>
+      <Button type="button" variant="contained" color="primary">
+        Сохранить
+      </Button>
+    </ThemeProvider>
+  )
 }
-
-export default HelloWorld
-```
-
-Чтобы сделать сборку компактнее вы можете импортировать в проект только нужные компоненты.
-
-```jsx
-import { Avatar, Badge, Button } from '@evg-b/evg-ui';
-```
-
-### Шрифт
-
-Material Design разрабатывался основываясь на шрифте `Roboto`.
-Подключите шрифт к вашему проекту чтобы все компоненты выглядели так как задумывалось. 
-
-```html
-<link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Roboto:300,400,500,600,700" />
 ```
 
 ### Icon
@@ -58,9 +42,15 @@ Material Design разрабатывался основываясь на шри�
 ```tsx
 import { Icon } from '@evg-b/evg-ui'
 
-<Icon name="Check" />
-<Icon name="Close" color="primary" />
-<Icon name="Favorite" size={48} />
+export default function Icons() {
+  return (
+    <>
+      <Icon name="Check" />
+      <Icon name="Close" color="primary" />
+      <Icon name="Favorite" size={48} />
+    </>
+  )
+}
 ```
 
 Имена перечислены в `IconName`. Иконки находятся в
@@ -73,7 +63,9 @@ import { Icon } from '@evg-b/evg-ui'
 для неё нужен Go. Главный `src/index.ts` генератор не перезаписывает.
 
 ### Документация
-Загляните на [сайт](https://evg-b.github.io/EVG-UI/).
+
+GitHub Actions собирает документацию в каждом PR в `main` и публикует её
+после успешной сборки при пуше в `main`. [Сайт EVG-UI](https://evg-b.github.io/EVG-UI/).
 
 `CodeExample` и `PropDoc` находятся в `docsite/src/components` вместе со своими
 типами и стилями. Документация импортирует их напрямую; стенд `playground`
@@ -89,7 +81,10 @@ import { Icon } from '@evg-b/evg-ui'
 
 ### Разработка
 
-Нужны Node.js 20.19+ в ветке 20 или 22.12+ и Yarn Classic (1.x).
+Для разработки нужен Yarn Classic (1.x). Поддерживаются Node.js 20.x начиная
+с 20.19.0, 22.x начиная с 22.13.0, а также 24.0.0 и новее.
+Версия Node.js для локальной разработки и CI закреплена в `.nvmrc`.
+Чтобы установить и активировать её, выполните `nvm install` в корне репозитория.
 Репозиторий содержит один пакет `@evg-b/evg-ui`. Его `package.json`, `yarn.lock`
 и `vite.config.mts` находятся в корне, исходники библиотеки — в `src`.
 `docsite` и `playground` — локальные инструменты с общими зависимостями.
@@ -118,7 +113,6 @@ yarn dev
 | `yarn docs:dev` | Сборка `evg-ui` и запуск сайта документации |
 | `yarn docs:build` | Сборка `evg-ui` и документации в `docsite/build` |
 | `yarn docs:preview` | Просмотр собранного сайта документации |
-| `yarn docs:deploy` | Сборка `evg-ui` и публикация документации в GitHub Pages |
 | `yarn icons:generate` | Обновление SVG-иконок и реестра `Icon` через Go |
 | `yarn propdoc` | Генерация описаний props, страниц API и сниппетов |
 | `yarn lint` | ESLint для JavaScript, TypeScript и TSX |
@@ -146,8 +140,7 @@ yarn dev
 `docsite` использует Docusaurus 3.10.2 и MDX 3.1.1. Core, classic preset и
 Babel-пресет Docusaurus закреплены на одной версии; их зависимости объявлены
 в корневом `package.json`. Эта версия Docusaurus поддерживает React 19.
-Старые примеры документации ещё используют JSS API `withStyles` и требуют
-отдельного переноса на текущий API `evg-ui`.
+В разделе «Стили» можно переключить тему и основной цвет в живом примере.
 
 ### Storybook
 
@@ -254,7 +247,6 @@ Vite и конфигурации Babel в корне и `docsite` использ
 связаны с её токенами.
 
 ```tsx
-import React from 'react'
 import {
   Button,
   ThemeProvider,
@@ -281,7 +273,7 @@ JSS API `withStyles`, `classes`, `setTheme` и `useChangeTheme` удалён.
 Для внешней стилизации остаются `className`, нативные атрибуты и композиция
 через `as`; тема переключается передачей нового объекта в `ThemeProvider`.
 Утилиты `Color` и `Elevation` сохранены, `getColor(theme, color)` учитывает тему.
-Старые JSS-примеры в `docsite` требуют отдельного переноса на новый API.
+Примеры компонентов в Docusaurus используют styled-components и тему сайта.
 
 
 ### Сообщить о проблеме

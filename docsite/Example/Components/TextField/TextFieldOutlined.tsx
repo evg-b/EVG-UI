@@ -1,20 +1,10 @@
-import type { TextFieldOutlinedProps } from './TextFieldOutlined.types'
+import { TextField } from '@evg-b/evg-ui'
 
-import { TextField, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const TextFieldOutlined = (props: TextFieldOutlinedProps) => {
-  const { classes } = props
+const TextFieldOutlined = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <TextField labelText="Outlined" placeholder="Outlined" outlined />
       <TextField
         disabled
@@ -23,10 +13,10 @@ const TextFieldOutlined = (props: TextFieldOutlinedProps) => {
         outlined
         value="Disabled"
       />
-    </div>
+    </Styled.Row>
   )
 }
 
 TextFieldOutlined.displayName = 'TextFieldOutlined'
 
-export default withStyles(styles)(TextFieldOutlined)
+export default TextFieldOutlined

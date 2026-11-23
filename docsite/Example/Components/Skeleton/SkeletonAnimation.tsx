@@ -1,26 +1,16 @@
-import type { SkeletonAnimationProps } from './SkeletonAnimation.types'
+import { Skeleton } from '@evg-b/evg-ui'
 
-import { Skeleton, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const SkeletonAnimation = (props: SkeletonAnimationProps) => {
-  const { classes } = props
+const SkeletonAnimation = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Skeleton animation={true} />
       <Skeleton animation={false} />
-    </div>
+    </Styled.Row>
   )
 }
 
 SkeletonAnimation.displayName = 'SkeletonAnimation'
 
-export default withStyles(styles)(SkeletonAnimation)
+export default SkeletonAnimation

@@ -5,9 +5,10 @@
 ```tsx
 import { Icon, type IconName } from '@evg-b/evg-ui'
 
-const name: IconName = 'Favorite'
-
-<Icon name={name} color="primary" size="large" />
+export default function FavoriteIcon() {
+  const name: IconName = 'Favorite'
+  return <Icon name={name} color="primary" size="large" />
+}
 ```
 
 `name` — обязательное имя из `IconName`. Остальные свойства наследуются от

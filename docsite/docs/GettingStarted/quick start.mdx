@@ -1,24 +1,32 @@
 ---
 id: quick_start
 title: Quick start
-sidebar_label: Quick start
+description: Первое приложение на EVG-UI с кнопками, styled-components и переключением темы.
 ---
 
-Если вы новичок в `React`, рекомендую к прочтению [статью](https://ru.reactjs.org/docs/getting-started.html) на официальном сайте.
+import { AppExample } from '../../Example/Components/QuickStart/Examples'
 
-Давайте создадим простой пример с кнопками разных цветов.
+После [установки EVG-UI](./Installation.mdx) создайте в приложении два файла — `App.tsx` и `App.styled.ts`. В первом находятся кнопки и состояние React, во втором — оформление карточки.
 
-### Simple example
+## Кнопки и тема
 
-<iframe src="https://codesandbox.io/embed/divine-feather-yv9il?autoresize=1&fontsize=14&hidenavigation=1&theme=dark"
-    style={{width:'100%', height:'500px', border:0, borderRadius: '4px', overflow:'hidden'}}
-    title="divine-feather-yv9il"
-    allow="accelerometer; ambient-light-sensor; camera; encrypted-media; geolocation; gyroscope; hid; microphone; midi; payment; usb; vr; xr-spatial-tracking"
-    sandbox="allow-forms allow-modals allow-popups allow-presentation allow-same-origin allow-scripts"
-></iframe>
+Нажмите «Добавить», затем переключите тему. Карточка и кнопки поменяют цвета, а значение счётчика сохранится. Откройте «Показать код» и выберите нужный файл.
 
-### Далее
+<AppExample />
 
-- Как взаимодействовать с [Цветом](/docs/Styles/Color) в компонентах.
-- Работа с [Темой](/docs/Styles/Theme).
- 
+`generateTokens({ primaryColor })` создаёт светлый и тёмный наборы токенов. `createTheme` собирает из каждого набора тему, а `ThemeProvider` передаёт выбранную тему и кнопкам EVG-UI, и карточке из `styled-components`. Фон карточки берётся из `theme.surface`, цвет текста — из `theme.onSurface`.
+
+## Запуск в приложении
+
+В шаблоне Vite для React и TypeScript замените `src/App.tsx`, положите рядом `App.styled.ts` и запустите dev-сервер командой `npm run dev`. Если вы подключаете React к пустой странице, добавьте `<div id="root"></div>` в HTML и отрисуйте приложение в точке входа.
+
+```tsx title="main.tsx"
+import { createRoot } from 'react-dom/client'
+
+import App from './App'
+
+const root = document.getElementById('root')
+if (root) createRoot(root).render(<App />)
+```
+
+Чтобы изменить цвет бренда, замените `primaryColor`. Остальные параметры разобраны в [руководстве по теме](../Styles/Theme.mdx), а варианты и размеры кнопок — в [разделе Button](../Components/Button.mdx).

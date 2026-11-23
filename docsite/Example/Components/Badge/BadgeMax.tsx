@@ -1,20 +1,10 @@
-import type { BadgeMaxProps } from './BadgeMax.types'
+import { Badge, Icon } from '@evg-b/evg-ui'
 
-import { Badge, withStyles, Icon } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const BadgeMax = (props: BadgeMaxProps) => {
-  const { classes } = props
+const BadgeMax = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Badge count={1000} max={9}>
         <Icon name="Notifications" />
       </Badge>
@@ -24,10 +14,10 @@ const BadgeMax = (props: BadgeMaxProps) => {
       <Badge count={1000} max={999}>
         <Icon name="Notifications" />
       </Badge>
-    </div>
+    </Styled.Row>
   )
 }
 
 BadgeMax.displayName = 'BadgeMax'
 
-export default withStyles(styles)(BadgeMax)
+export default BadgeMax

@@ -1,30 +1,18 @@
-import type { TextFieldPlaceholderAndLabelTextProps } from './TextFieldPlaceholderAndLabelText.types'
+import { TextField } from '@evg-b/evg-ui'
 
-import { TextField, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const TextFieldPlaceholderAndLabelText = (
-  props: TextFieldPlaceholderAndLabelTextProps
-) => {
-  const { classes } = props
+const TextFieldPlaceholderAndLabelText = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <TextField />
       <TextField labelText="labelText" />
       <TextField placeholder="placeholder" />
-    </div>
+    </Styled.Row>
   )
 }
 
 TextFieldPlaceholderAndLabelText.displayName =
   'TextFieldPlaceholderAndLabelText'
 
-export default withStyles(styles)(TextFieldPlaceholderAndLabelText)
+export default TextFieldPlaceholderAndLabelText

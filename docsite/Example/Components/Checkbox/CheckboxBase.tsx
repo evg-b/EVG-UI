@@ -1,29 +1,19 @@
-import type { CheckboxBaseProps } from './CheckboxBase.types'
+import { Checkbox } from '@evg-b/evg-ui'
 
-import { Checkbox, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const CheckboxBase = (props: CheckboxBaseProps) => {
-  const { classes } = props
+const CheckboxBase = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Checkbox />
       <Checkbox defaultChecked />
       <Checkbox checked />
       <Checkbox defaultChecked disabled />
       <Checkbox defaultChecked indeterminate />
-    </div>
+    </Styled.Row>
   )
 }
 
 CheckboxBase.displayName = 'CheckboxBase'
 
-export default withStyles(styles)(CheckboxBase)
+export default CheckboxBase

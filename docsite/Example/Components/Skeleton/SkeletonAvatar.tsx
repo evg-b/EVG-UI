@@ -1,27 +1,17 @@
-import type { SkeletonAvatarProps } from './SkeletonAvatar.types'
+import { Skeleton } from '@evg-b/evg-ui'
 
-import { Skeleton, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const SkeletonAvatar = (props: SkeletonAvatarProps) => {
-  const { classes } = props
+const SkeletonAvatar = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Skeleton type="avatar" size={20} />
       <Skeleton type="avatar" />
       <Skeleton type="avatar" size={100} />
-    </div>
+    </Styled.Row>
   )
 }
 
 SkeletonAvatar.displayName = 'SkeletonAvatar'
 
-export default withStyles(styles)(SkeletonAvatar)
+export default SkeletonAvatar

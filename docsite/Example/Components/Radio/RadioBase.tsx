@@ -1,27 +1,24 @@
-import type { RadioBaseProps } from './RadioBase.types'
+import { useId } from 'react'
 
-import { Radio, withStyles } from '@evg-b/evg-ui'
+import { Radio } from '@evg-b/evg-ui'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const RadioBase = (props: RadioBaseProps) => {
-  const { classes } = props
+import * as Styled from '../../ExampleLayout.styled'
+
+const RadioBase = () => {
+  const group = useId()
+
   return (
-    <div className={classes.base}>
-      <Radio />
-      <Radio defaultChecked />
-      <Radio disabled />
-    </div>
+    <Styled.Row>
+      <Radio id={`${group}-day`} name={group} defaultChecked />
+      <label htmlFor={`${group}-day`}>День</label>
+      <Radio id={`${group}-week`} name={group} />
+      <label htmlFor={`${group}-week`}>Неделя</label>
+      <Radio id={`${group}-month`} name={group} disabled />
+      <label htmlFor={`${group}-month`}>Месяц</label>
+    </Styled.Row>
   )
 }
 
 RadioBase.displayName = 'RadioBase'
 
-export default withStyles(styles)(RadioBase)
+export default RadioBase

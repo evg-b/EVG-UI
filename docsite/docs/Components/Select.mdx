@@ -1,34 +1,33 @@
 ---
 id: Select
 title: Select
-sidebar_label: Select
 ---
 
 import {
-	SelectBaseExample,
-    SelectColorExample,
-    SelectEmptyOptionExample,
+  SelectBaseExample,
+  SelectColorExample,
+  SelectEmptyOptionExample
 } from '../../Example/Components/Select/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Select позволяет пользователям выбирать из меню с одним параметром.
+`Select` показывает подписи дочерних `SelectOption`. При выборе `onChange` получает значение `value` пункта.
 
-## Base Select
+## Выбор значения {#base-select}
 
 <SelectBaseExample />
 
-## Color
+## Цвет {#color}
 
-Цвет компонента меняется через свойство `color`. Более подробно про цвет в этой [статье](/docs/styles/color#props-color).
+Акцент поля задаётся через `color`. [Цветовые роли](../Styles/Color.mdx#props-color).
 
 <SelectColorExample />
 
-## Empty Option
+## Пустой пункт {#empty-option}
 
-Если `emptyOption={true}`, в начало списка добавиться пустой SelectOption.
+Свойство `emptyOption` добавляет в начало списка пункт со значением пустой строки. Его выбор очищает поле.
 
 <SelectEmptyOptionExample />
 
 ## API
 
-<ApiDoc name='Select' />
+<ApiDoc name="Select" />

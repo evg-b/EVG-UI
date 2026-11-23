@@ -1,20 +1,11 @@
-import type { AvatarStatusColorProps } from './AvatarStatusColor.types'
-
-import { Avatar, withStyles } from '@evg-b/evg-ui'
+import { Avatar } from '@evg-b/evg-ui'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  }
-}
+import * as Styled from '../../ExampleLayout.styled'
 
-const AvatarStatusColor = (props: AvatarStatusColorProps) => {
-  const { classes } = props
-
+const AvatarStatusColor = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Wrap>
       <Avatar
         src={useBaseUrl('/source/Avatar/1.jpg')}
         status
@@ -40,10 +31,10 @@ const AvatarStatusColor = (props: AvatarStatusColorProps) => {
         status
         statusColor="fail"
       />
-    </div>
+    </Styled.Wrap>
   )
 }
 
 AvatarStatusColor.displayName = 'AvatarStatusColor'
 
-export default withStyles(styles)(AvatarStatusColor)
+export default AvatarStatusColor

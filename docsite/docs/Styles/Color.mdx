@@ -3,103 +3,79 @@ id: Color
 title: Color
 sidebar_label: Color
 ---
-import Contrast from '../../Example/Styles/Color/Contrast'
-import ColorInfo from '../../Example/Styles/Color/ColorInfo'
+
 import Bright from '../../Example/Styles/Color/Bright'
+import ColorInfo from '../../Example/Styles/Color/ColorInfo'
+import Contrast from '../../Example/Styles/Color/Contrast'
 import PropsColor from '../../Example/Styles/Color/PropsColor'
 
-## Color vs Palettes
+## Цвет палитры и цвет темы
 
-Цвет, один из самых недооцененных элементов в плане функциональности во многих UI библиотеках.
-Объект `Color` является мощным инструментом по манипуляции с цветом.
+`Color` принимает значение цвета или имя оттенка из [палитры](./Palettes.mdx). Чтобы получить цвет кнопки из активной [темы](./Theme.mdx), передайте тему и роль в `getColor`. Оба вызова возвращают объект с методами `Base`, `Contrast` и `Bright`.
 
-Например мы можете использовать цвет из Palettes набора напрямую или с помощью `Color`.
+```tsx
+import { Color, getColor, useTheme } from '@evg-b/evg-ui'
 
-<ColorInfo full colors={['pink700','purple700','blue700']} />
+export default function ColorValue() {
+  const theme = useTheme()
+  const palette = Color('purple700').Base('HEX')
+  const primary = getColor(theme, 'primary').Base('HEX')
 
-Объект `Color` умеет работать с цветами из темы.
-
-<ColorInfo full colors={['primary','success','fail']} />
-
-Так же можно использовать `--css-var`. 
-
-```css
-:root {
-    --css-var-color-hex: #7B1FA2;
-    --css-var-color-purple: purple300;
+  return <span>purple700 — {palette}, primary — {primary}</span>
 }
 ```
 
-<ColorInfo colors={['--css-var-color-hex','--css-var-color-purple']} />
+Оттенки палитры фиксированы. Переключите режим сайта, чтобы увидеть, как меняются роли во втором ряду.
 
-Метод `Base()` по умолчанию возвращает цвет в том формате в котором он был передан.
+<ColorInfo colors={['pink700', 'purple700', 'blue700']} />
+<ColorInfo themed colors={['primary', 'success', 'fail']} />
 
-```js
-Color('#7B1FA2').Base() -> '#7B1FA2'
-Color('rgb(123,31,162)').Base() -> 'rgb(123,31,162)'
-Color('hsl(282,68%,38%)').Base() -> 'hsl(282,68%,38%)'
+## Формат и прозрачность
+
+`Base(format, alpha)` возвращает цвет в выбранном формате. Доступны `HEX`, `HEXA`, `RGB`, `RGBA`, `HSL` и `HSLA`. Для форматов с прозрачностью можно указать альфа-канал от 0 до 1.
+
+```ts
+import { Color } from '@evg-b/evg-ui'
+
+const purple = Color('purple700')
+const hex = purple.Base('HEX')
+const overlay = purple.Base('RGBA', 0.2)
 ```
 
-Но так же, метод `Base()` умеет конвертировать цвет в другой формат.
+## Контрастный текст
 
-```js
-Color('#7B1FA2').Base('rgb') -> 'rgb(123,31,162)'
-Color('rgb(123,31,162)').Base('hsl') -> 'hsl(282,68%,38%)'
-Color('hsl(282,68%,38%)').Base('hex') -> '#7B1FA2'
-```
-
-Доступные форматы:
-- hex
-- hexa
-- rgb
-- rgba
-- hsl
-- hsla
-
-## Alpha
-
-Что на счет прозрачности(альфа-канал)? Вы так же можете использовать форматы поддерживающие альфа-канал.
-
-```js
-Color('#7b1fa221').Base('rgba') -> 'rgba(123,31,162,0.13)'
-Color('rgba(123,31,162,0.13)').Base('hsla') -> 'hsl(282,68%,38%,0.13)'
-Color('hsla(282,68%,38%,0.13)').Base('hexa') -> '#7b1fa221'
-```
-
-В форматах `hexa/rgba/hsla` всегда будет alpha равен 1, если не указано другое значение вторым параметром, в функции `Base(format,alpha)`.
-```js
-Color('#7B1FA2').Base('rgba') -> 'rgba(123,31,162,1)' // alpha = 1
-Color('#7B1FA2').Base('rgba',0.78) -> 'rgba(123,31,162,0.78)' // alpha = 0.78
-```
-
-## Contrast
-
-Метод `Contrast(format,alpha)` возвращает цвет(черный или белый) который лучше воспринимается человеком на фоне основного цвета.
+`Contrast` выбирает чёрный или белый цвет текста по яркости фона. Каждая плашка использует `Color(background).Contrast('HEX')`. Для текста на тематической поверхности можно взять готовую пару токенов, например `theme.primary` и `theme.onPrimary`.
 
 <Contrast />
 
-## Bright
+## Яркость
 
-Метод `Bright(format,bright,alpha)` позволяет регулировать яркость. 
+Положительный процент в `Bright` осветляет оттенок, отрицательный — затемняет. Подпись каждой плашки показывает процент изменения.
 
-Параметр `bright` принимает положительное или отрицательное число.
+```ts
+import { Color } from '@evg-b/evg-ui'
 
-```js
-Color('orange').Bright('hex',20)  // увеличить яркость
-Color('orange').Bright('hex',-20) // уменьшить яркость
+const orange = Color('orange')
+const lighter = orange.Bright('HEX', 20)
+const darker = orange.Bright('HEX', -20)
 ```
 
 <Bright />
 
-## Props color
+## Свойство color {#props-color}
 
-Более того, в каждый компонент EVG-UI встроен объект `Color`. 
-Так что вы уже используете все его преимущества.
+Передайте роль напрямую в `color`. При смене темы кнопка получит новое значение роли, в том числе в состояниях с иконкой и индикатором загрузки.
 
-Например в компоненте `<Button>` текст, icon и loader принимает контрастный цвет относительно основного, переданного в свойстве `color`.
+```tsx
+import { Button, Icon } from '@evg-b/evg-ui'
 
-```jsx
-<Button color='primary'>Text</Button>
+export default function DoneButton() {
+  return (
+    <Button color="success" variant="contained" startIcon={<Icon name="Check" />}>
+      Готово
+    </Button>
+  )
+}
 ```
 
 <PropsColor />

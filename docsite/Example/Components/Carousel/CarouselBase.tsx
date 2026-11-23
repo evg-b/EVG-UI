@@ -1,18 +1,9 @@
-import type { CarouselBaseProps } from './CarouselBase.types'
-
-import { Carousel, withStyles } from '@evg-b/evg-ui'
+import { Carousel } from '@evg-b/evg-ui'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 
-const styles = {
-  base: {
-    width: '600px',
-    height: '400px',
-    borderRadius: '6px',
-    overflow: 'hidden'
-  }
-}
-const CarouselBase = (props: CarouselBaseProps) => {
-  const { classes } = props
+import * as Styled from './Carousel.styled'
+
+const CarouselBase = () => {
   const imgs = [
     useBaseUrl('/source/Carousel/1.jpg'),
     useBaseUrl('/source/Carousel/2.jpg'),
@@ -26,12 +17,12 @@ const CarouselBase = (props: CarouselBaseProps) => {
     useBaseUrl('/source/Carousel/10.jpg')
   ]
   return (
-    <div className={classes.base}>
+    <Styled.Frame>
       <Carousel imgs={imgs} />
-    </div>
+    </Styled.Frame>
   )
 }
 
 CarouselBase.displayName = 'CarouselBase'
 
-export default withStyles(styles)(CarouselBase)
+export default CarouselBase

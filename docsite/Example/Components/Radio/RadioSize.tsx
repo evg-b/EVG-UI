@@ -1,26 +1,18 @@
-import type { RadioSizeProps } from './RadioSize.types'
+import { Radio } from '@evg-b/evg-ui'
 
-import { Radio, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const RadioSize = (props: RadioSizeProps) => {
-  const { classes } = props
+const RadioSize = () => {
   return (
-    <div className={classes.base}>
+    <Styled.InlineGroup>
       <Radio size="small" color="primary" />
       <Radio size="medium" color="primary" />
       <Radio size="large" color="primary" />
       <Radio size="extra" color="primary" />
-    </div>
+    </Styled.InlineGroup>
   )
 }
 
 RadioSize.displayName = 'RadioSize'
 
-export default withStyles(styles)(RadioSize)
+export default RadioSize

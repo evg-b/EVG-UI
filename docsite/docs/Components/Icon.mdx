@@ -1,39 +1,35 @@
 ---
 id: Icon
 title: Icon
-sidebar_label: Icon
 ---
 
 import {
-	IconColorExample,
-	IconSizeExample,
-	IconBaseExample,
+  IconBaseExample,
+  IconColorExample,
+  IconSizeExample
 } from '../../Example/Components/Icon/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-1317 иконок Material доступны через `Icon` из `@evg-b/evg-ui`. Свойство `name` выбирает иконку, например `<Icon name="Check" />`.
+Встроенные SVG-иконки Material доступны через `Icon` из `@evg-b/evg-ui`. Обязательное свойство `name` принимает имя из `IconName`, например `Check`, `Close` или `Favorite`.
 
-## Base Icon
+## Иконка по имени {#base-icon}
 
 <IconBaseExample />
 
-## Color
+## Цвет {#color}
 
-Цвет компонента меняется через свойство `color`. Более подробно про цвет в этой [статье](/docs/styles/color#props-color).
+Например, `<Icon name="Check" color="success" />` использует цвет успеха текущей темы. [Цветовые роли](../Styles/Color.mdx#props-color).
 
 <IconColorExample />
 
-## Size
+## Размер {#size}
 
-Размер компонента изменяется через свойство `size`.
-
-```jsx
-<Icon name="Check" size="medium" /> // small, medium, large, extra.
-<Icon name="Check" size={68} />    // Для более точного контроля размера.
-```
+`size` принимает `small`, `medium`, `large`, `extra` или размер в пикселях, например `size={48}`.
 
 <IconSizeExample />
 
 ## API
 
-<ApiDoc name='SvgIcon' />
+<ApiDoc name="Icon" />
+
+Для собственной SVG-разметки используйте [SvgIcon](../API/SvgIcon.mdx).

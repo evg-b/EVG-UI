@@ -1,20 +1,10 @@
-import type { TextFieldErrorProps } from './TextFieldError.types'
+import { TextField } from '@evg-b/evg-ui'
 
-import { TextField, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const TextFieldError = (props: TextFieldErrorProps) => {
-  const { classes } = props
+const TextFieldError = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <TextField
         error
         helperText="Error helper text"
@@ -31,10 +21,10 @@ const TextFieldError = (props: TextFieldErrorProps) => {
         color="primary"
         value="Error"
       />
-    </div>
+    </Styled.Row>
   )
 }
 
 TextFieldError.displayName = 'TextFieldError'
 
-export default withStyles(styles)(TextFieldError)
+export default TextFieldError

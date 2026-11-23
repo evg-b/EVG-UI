@@ -1,44 +1,11 @@
 import type { TouchDriverCoordinates } from '@evg-b/evg-ui'
 
-import type { TouchDriverParamsProps } from './TouchDriverParams.types'
-
 import { useEffect, useRef, useState } from 'react'
-import { Color, Elevation, TouchDriver, withStyles } from '@evg-b/evg-ui'
+import { TouchDriver } from '@evg-b/evg-ui'
 
-const styles = {
-  touch: {
-    width: '500px',
-    height: '400px',
-    overflow: 'hidden',
-    ...Elevation(2)
-  },
-  touchCircle: {
-    display: 'flex',
-    justifyContent: 'center',
-    alignItems: 'center',
-    width: '150px',
-    height: '150px',
-    borderRadius: '50%',
-    backgroundColor: Color('primary').Base(),
-    color: Color('primary').Contrast(),
-    cursor: 'pointer',
-    userSelect: 'none'
-  },
-  info: {
-    display: 'grid',
-    gridTemplateColumns: '1fr 1fr',
-    gridTemplateRows: '1fr 1fr 1fr',
-    padding: '10px',
-    boxSizing: 'border-box',
-    '& >* span': {
-      color: Color('primary').Base(),
-      fontWeight: 'bold'
-    }
-  }
-}
+import * as Styled from './TouchDriver.styled'
 
-const TouchDriverParams = (props: TouchDriverParamsProps) => {
-  const { classes } = props
+const TouchDriverParams = () => {
   const circle_ref = useRef<HTMLDivElement | null>(null)
   const [params, setParams] = useState<Partial<TouchDriverCoordinates>>({})
   const sizeCircke = 150 / 2
@@ -62,7 +29,7 @@ const TouchDriverParams = (props: TouchDriverParamsProps) => {
 
   return (
     <div>
-      <div className={classes.info}>
+      <Styled.Info>
         <div>
           <span>startX: </span>
           {params.startX}
@@ -95,19 +62,19 @@ const TouchDriverParams = (props: TouchDriverParamsProps) => {
           <span>deltaY: </span>
           {params.deltaY}
         </div>
-      </div>
-      <TouchDriver
-        className={classes.touch}
+      </Styled.Info>
+      <Styled.Area
+        as={TouchDriver}
         moveStart={onMoveStar}
         moveXY={onMove}>
-        <div ref={circle_ref} className={classes.touchCircle}>
+        <Styled.Circle ref={circle_ref}>
           MOVE
-        </div>
-      </TouchDriver>
+        </Styled.Circle>
+      </Styled.Area>
     </div>
   )
 }
 
 TouchDriverParams.displayName = 'TouchDriverParams'
 
-export default withStyles(styles)(TouchDriverParams)
+export default TouchDriverParams

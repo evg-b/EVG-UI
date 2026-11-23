@@ -32,6 +32,7 @@ const sidebars: SidebarsConfig = {
         label: 'LiveBackground',
         items: ['Components/Cubes']
       },
+      'Components/Menu',
       'Components/Modal',
       'Components/Popup',
       'Components/Radio',

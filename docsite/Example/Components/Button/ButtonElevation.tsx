@@ -1,30 +1,20 @@
-import type { ButtonElevationProps } from './ButtonElevation.types'
+import { Button } from '@evg-b/evg-ui'
 
-import { Button, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const ButtonElevation = (props: ButtonElevationProps) => {
-  const { classes } = props
+const ButtonElevation = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Button variant="contained" color="primary">
         elevation
       </Button>
       <Button variant="contained" color="primary" elevation={false}>
         no elevation
       </Button>
-    </div>
+    </Styled.Row>
   )
 }
 
 ButtonElevation.displayName = 'ButtonElevation'
 
-export default withStyles(styles)(ButtonElevation)
+export default ButtonElevation

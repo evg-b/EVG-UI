@@ -1,43 +1,40 @@
 ---
 id: Ripple
 title: Ripple
-sidebar_label: Ripple
 ---
 
 import {
-    RippleBaseExample,
-    RippleColorExample,
-    RippleContrastExample,
+  RippleBaseExample,
+  RippleColorExample,
+  RippleContrastExample
 } from '../../Example/Components/Ripple/Examples'
 import StatesRipple from '../../Example/Components/Ripple/custom_state'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Ripple сигнализирует пользователю что его взаимодействие с компонентом было получено, используя эффект ряби в точке касания. 
-Так же помогает понять с каким именно компонентом произошло взаимодействие если они расположены слишком близко друг к другу.
+`Ripple` показывает волну в точке нажатия. Поместите его внутрь элемента с относительным позиционированием, как в примере.
 
-## Base
+## Нажатие {#base}
+
 <RippleBaseExample />
 
-## Color 
+## Цвет фона {#color}
 
-Для лучшего визуального восприятия вы можете передать цвет фона в компонент Ripple чтобы
-он окрасился в контрастный цвет переданному цвету.
+При `contrast` компонент подбирает цвет волны с учётом переданного `color`.
 
 <RippleColorExample />
 
-## Contrast
+## Цвет волны {#contrast}
 
-Цвет Ripple также может принимать свой изначальный цвет который ему был передан. 
-Нужно выключить автоопределение контрастного цвета.
+Передайте `contrast={false}`, чтобы использовать сам `color` для волны.
 
 <RippleContrastExample />
 
-## States
+## Состояния {#states}
 
-Состояние Ripple эффекта подбирается автоматически в зависимости от цвета фона для лучшей видимости.
+Прозрачность наложения зависит от состояния. Плашки показывают значения для наведения, фокуса и нажатия на разных фонах.
 
 <StatesRipple />
 
 ## API
 
-<ApiDoc name='Ripple' />
+<ApiDoc name="Ripple" />

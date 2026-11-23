@@ -1,20 +1,10 @@
-import type { TextFieldBaseProps } from './TextFieldBase.types'
+import { TextField } from '@evg-b/evg-ui'
 
-import { TextField, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const TextFieldBase = (props: TextFieldBaseProps) => {
-  const { classes } = props
+const TextFieldBase = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <TextField labelText="Base TextField" placeholder="placeholder" />
       <TextField
         disabled
@@ -22,10 +12,10 @@ const TextFieldBase = (props: TextFieldBaseProps) => {
         placeholder="placeholder"
         value="Disabled"
       />
-    </div>
+    </Styled.Row>
   )
 }
 
 TextFieldBase.displayName = 'TextFieldBase'
 
-export default withStyles(styles)(TextFieldBase)
+export default TextFieldBase

@@ -1,20 +1,10 @@
-import type { TextFieldIconProps } from './TextFieldIcon.types'
+import { TextField, Icon } from '@evg-b/evg-ui'
 
-import { TextField, withStyles, Icon } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*,&>div>*': {
-      margin: '10px'
-    }
-  }
-}
-const TextFieldIcon = (props: TextFieldIconProps) => {
-  const { classes } = props
+const TextFieldIcon = () => {
   return (
-    <div className={classes.base}>
+    <Styled.FieldGroups>
       <div>
         <TextField
           leadingIcon={<Icon name="Check" />}
@@ -60,10 +50,10 @@ const TextFieldIcon = (props: TextFieldIconProps) => {
           outlined
         />
       </div>
-    </div>
+    </Styled.FieldGroups>
   )
 }
 
 TextFieldIcon.displayName = 'TextFieldIcon'
 
-export default withStyles(styles)(TextFieldIcon)
+export default TextFieldIcon

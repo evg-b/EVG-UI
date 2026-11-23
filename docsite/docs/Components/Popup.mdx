@@ -1,63 +1,56 @@
 ---
 id: Popup
 title: Popup
-sidebar_label: Popup
 ---
+
 import {
-    PopupBaseExample,
-    PopupPositionExample,
-    PopupShiftExample,
-	PopupAnimationExample,
-    PopupAutoHideExample,
-    PopupModeExample,
-    PopupScrollableExample,
+  PopupBaseExample,
+  PopupPositionExample,
+  PopupShiftExample,
+  PopupAnimationExample,
+  PopupModeExample,
+  PopupScrollableExample
 } from '../../Example/Components/Popup/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Popup - компонент для создания всплывающего окна.
+`Popup` привязывает всплывающий блок к DOM-элементу. Создайте `ref`, передайте его кнопке и укажите тот же объект в `target`.
 
-## Base
+## Привязка к элементу {#base}
 
 <PopupBaseExample />
 
-## Position
+## Положение {#position}
 
-Вот все позиции которые может принимать `Popup` относительно `target`.
-
-`top`, `top-left`, `top-right`,
-
-`bottom`, `bottom-left`, `bottom-right`,
-
-`left`, `left-top`, `left-bottom`,
-
-`right`, `right-top`, `right-bottom`.
+`position` задаёт сторону (`top`, `bottom`, `left`, `right`) и при необходимости выравнивание, например `top-left` или `right-bottom`.
 
 <PopupPositionExample />
 
-## Shift
+## Смещение {#shift}
 
-Сдвиг от `target`, положительное или отрицательное число.
+`shift` задаёт расстояние от цели в пикселях. Отрицательное значение сдвигает блок в обратную сторону.
 
 <PopupShiftExample />
 
-## animation
+## Анимация {#animation}
 
-Виды анимации появления `fade`, `docking`, `zoom`.
+Доступны `fade`, `docking` и `zoom`.
 
 <PopupAnimationExample />
 
-## Hover или Click
+## Наведение и нажатие {#hover-или-click}
 
-`Popup` может открываться как при наведении так и при нажатии указателя.
+`mode="hover"` открывает блок при наведении, `mode="click"` — при нажатии. Чтобы управлять видимостью из приложения, передайте `open`.
 
 <PopupModeExample />
 
-## Scrollable
+## Прокручиваемая область {#scrollable}
 
-`Popup` устойчив к перемещению своей цели, несмотря на то что они находятся в разных DOM-узлах.
+Прокрутите область с кнопкой. Блок привязан к её положению, в том числе когда сама кнопка находится в контейнере `Scroll`.
 
 <PopupScrollableExample />
 
 ## API
 
-<ApiDoc name='Popup' />
+<ApiDoc name="Popup" />
+
+Для списка действий используйте [Menu](./Menu.mdx), а для текстовой подсказки — [Tooltip](./Tooltip.mdx).

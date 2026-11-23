@@ -1,42 +1,19 @@
-import type { Ref, HTMLAttributes, ReactNode } from 'react'
-
-export type PropDocType = {
-  name?: string
-  value?: string | number | boolean | PropDocType | Array<PropDocType>
-  computed?: boolean
-}
+import type { ComponentPropsWithRef } from 'react'
 
 export type PropDocProperty = {
-  type?: PropDocType
-  defaultValue?: { value: string; computed?: boolean }
-  description?: string
-  required?: boolean
+  type: { name: string }
+  defaultValue?: { value: string }
+  required: boolean
+  description: string
 }
 
 export type PropDocPatient = {
-  displayName?: string
-  description?: string
-  props?: Record<string, PropDocProperty>
+  displayName: string
+  description: string
+  props: Record<string, PropDocProperty>
 }
 
-type PropDocOwnProps = {
-  ref?: Ref<HTMLDivElement>
-
-  // Это контент между открывающим и закрывающим тегом компонента.
-  children?: ReactNode
-
-  // Чтобы указать CSS классы, используйте этот атрибут.
-  className?: string
-
-  // JSON объект с информацией о props компонента.
-  patient?: PropDocPatient
-
-  // true - показывает description.
+export type PropDocProps = Omit<ComponentPropsWithRef<'div'>, 'children'> & {
+  patient: PropDocPatient
   full?: boolean
 }
-
-export type PropDocProps = Omit<
-  HTMLAttributes<HTMLDivElement>,
-  keyof PropDocOwnProps
-> &
-  PropDocOwnProps

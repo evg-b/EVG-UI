@@ -1,30 +1,20 @@
-import type { TextFieldHelperTextProps } from './TextFieldHelperText.types'
+import { TextField } from '@evg-b/evg-ui'
 
-import { TextField, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const TextFieldHelperText = (props: TextFieldHelperTextProps) => {
-  const { classes } = props
+const TextFieldHelperText = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <TextField
         helperText="helperText"
         labelText="helperText"
         placeholder="placeholder"
         color="primary"
       />
-    </div>
+    </Styled.Row>
   )
 }
 
 TextFieldHelperText.displayName = 'TextFieldHelperText'
 
-export default withStyles(styles)(TextFieldHelperText)
+export default TextFieldHelperText

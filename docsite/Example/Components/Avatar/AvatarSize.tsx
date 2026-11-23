@@ -1,29 +1,20 @@
-import type { AvatarSizeProps } from './AvatarSize.types'
-
-import { Avatar, withStyles } from '@evg-b/evg-ui'
+import { Avatar } from '@evg-b/evg-ui'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  }
-}
+import * as Styled from '../../ExampleLayout.styled'
 
-const AvatarSize = (props: AvatarSizeProps) => {
-  const { classes } = props
-
+const AvatarSize = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Wrap>
       <Avatar src={useBaseUrl('/source/Avatar/3.jpg')} size={20} />
       <Avatar src={useBaseUrl('/source/Avatar/3.jpg')} size={30} />
       <Avatar src={useBaseUrl('/source/Avatar/3.jpg')} />
       <Avatar src={useBaseUrl('/source/Avatar/3.jpg')} size={50} />
       <Avatar src={useBaseUrl('/source/Avatar/3.jpg')} size={60} />
-    </div>
+    </Styled.Wrap>
   )
 }
 
 AvatarSize.displayName = 'AvatarSize'
 
-export default withStyles(styles)(AvatarSize)
+export default AvatarSize

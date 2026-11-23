@@ -1,26 +1,17 @@
-import type { AvatarStatusProps } from './AvatarStatus.types'
-
-import { Avatar, withStyles } from '@evg-b/evg-ui'
+import { Avatar } from '@evg-b/evg-ui'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap'
-  }
-}
+import * as Styled from '../../ExampleLayout.styled'
 
-const AvatarStatus = (props: AvatarStatusProps) => {
-  const { classes } = props
-
+const AvatarStatus = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Wrap>
       <Avatar src={useBaseUrl('/source/Avatar/7.jpg')} />
       <Avatar src={useBaseUrl('/source/Avatar/4.jpg')} status />
-    </div>
+    </Styled.Wrap>
   )
 }
 
 AvatarStatus.displayName = 'AvatarStatus'
 
-export default withStyles(styles)(AvatarStatus)
+export default AvatarStatus

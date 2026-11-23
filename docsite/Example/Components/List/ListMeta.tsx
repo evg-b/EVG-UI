@@ -1,27 +1,16 @@
-import type { ListMetaProps } from './ListMeta.types'
-
 import {
   Avatar,
   Badge,
   List,
   ListItem,
   ListItemText,
-  ListItemAvatar,
-  withStyles
+  ListItemAvatar
 } from '@evg-b/evg-ui'
 import useBaseUrl from '@docusaurus/useBaseUrl'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const ListMeta = (props: ListMetaProps) => {
-  const { classes } = props
+import * as Styled from './List.styled'
+
+const ListMeta = () => {
   const Users = [
     {
       avatar: useBaseUrl('/source/Avatar/11.jpg'),
@@ -53,10 +42,10 @@ const ListMeta = (props: ListMetaProps) => {
     }
   ]
   return (
-    <div className={classes.base}>
-      <List style={{ width: '300px' }}>
-        {Users.map((user, i) => (
-          <ListItem key={i} button>
+    <Styled.Row>
+      <Styled.Items as={List}>
+        {Users.map((user) => (
+          <ListItem key={user.name} button>
             <ListItemAvatar>
               <Avatar src={user.avatar} />
             </ListItemAvatar>
@@ -68,11 +57,11 @@ const ListMeta = (props: ListMetaProps) => {
             </ListItemText>
           </ListItem>
         ))}
-      </List>
-    </div>
+      </Styled.Items>
+    </Styled.Row>
   )
 }
 
 ListMeta.displayName = 'ListMeta'
 
-export default withStyles(styles)(ListMeta)
+export default ListMeta

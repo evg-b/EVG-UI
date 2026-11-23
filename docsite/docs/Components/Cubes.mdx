@@ -1,24 +1,26 @@
 ---
 id: Cubes
 title: Cubes
-sidebar_label: Cubes
 ---
 
 import {
-    CubesBaseExample,
-    CubesSettingsExample,
+  CubesBaseExample,
+  CubesSettingsExample
 } from '../../Example/Components/Cubes/Examples'
 import ApiDoc from '../../Example/ApiDoc/ApiDoc'
 
-Cubes - интерактивный живой фон из кубов. Работает все с помощью `canvas` 2d без сторонних зависимостей. 
-Удивляйте своих пользователей красивой фоновой анимацией.
+`Cubes` рисует интерактивный фон на `canvas`. Размер доступной области задаёт родительский контейнер.
 
-<h6>Эксперементальный компонент</h6>
+## Фон
 
-## Settings
+<CubesBaseExample />
 
-<CubesSettingsExample/>
+## Настройки {#settings}
+
+Измените размер кубов или цвет в примере.
+
+<CubesSettingsExample />
 
 ## API
 
-<ApiDoc name='Cubes' />
+<ApiDoc name="Cubes" />

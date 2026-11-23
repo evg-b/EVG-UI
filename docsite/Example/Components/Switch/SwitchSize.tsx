@@ -1,28 +1,18 @@
-import type { SwitchSizeProps } from './SwitchSize.types'
+import { Switch } from '@evg-b/evg-ui'
 
-import { Switch, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const SwitchSize = (props: SwitchSizeProps) => {
-  const { classes } = props
+const SwitchSize = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Switch size="small" color="primary" defaultChecked />
       <Switch size="medium" color="primary" defaultChecked />
       <Switch size="large" color="primary" defaultChecked />
       <Switch size="extra" color="primary" defaultChecked />
-    </div>
+    </Styled.Row>
   )
 }
 
 SwitchSize.displayName = 'SwitchSize'
 
-export default withStyles(styles)(SwitchSize)
+export default SwitchSize

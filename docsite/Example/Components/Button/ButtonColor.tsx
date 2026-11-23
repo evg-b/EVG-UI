@@ -1,29 +1,19 @@
-import type { ButtonColorProps } from './ButtonColor.types'
+import { Button } from '@evg-b/evg-ui'
 
-import { Button, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const ButtonColor = (props: ButtonColorProps) => {
-  const { classes } = props
+const ButtonColor = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Button>text</Button>
       <Button color="primary">primary</Button>
       <Button color="warn">warn</Button>
       <Button color="success">success</Button>
       <Button color="fail">fail</Button>
-    </div>
+    </Styled.Row>
   )
 }
 
 ButtonColor.displayName = 'ButtonColor'
 
-export default withStyles(styles)(ButtonColor)
+export default ButtonColor

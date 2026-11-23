@@ -1,21 +1,11 @@
 import type { ChangeEvent } from 'react'
 
-import type { RadioColorProps } from './RadioColor.types'
-
 import { useState } from 'react'
-import { Radio, withStyles } from '@evg-b/evg-ui'
+import { Radio } from '@evg-b/evg-ui'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const RadioColor = (props: RadioColorProps) => {
-  const { classes } = props
+import * as Styled from '../../ExampleLayout.styled'
+
+const RadioColor = () => {
   const [checkName, setCheckName] = useState('radio1')
 
   const handleChange = (e: ChangeEvent<HTMLInputElement>) => {
@@ -23,7 +13,7 @@ const RadioColor = (props: RadioColorProps) => {
   }
 
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <Radio
         onChange={handleChange}
         checked={checkName === 'radio1'}
@@ -54,10 +44,10 @@ const RadioColor = (props: RadioColorProps) => {
         name="radio5"
         color="fail"
       />
-    </div>
+    </Styled.Row>
   )
 }
 
 RadioColor.displayName = 'RadioColor'
 
-export default withStyles(styles)(RadioColor)
+export default RadioColor

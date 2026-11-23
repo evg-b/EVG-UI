@@ -1,20 +1,10 @@
-import type { TextFieldMaxCountProps } from './TextFieldMaxCount.types'
+import { TextField } from '@evg-b/evg-ui'
 
-import { TextField, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const TextFieldMaxCount = (props: TextFieldMaxCountProps) => {
-  const { classes } = props
+const TextFieldMaxCount = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <TextField
         maxCount={5}
         helperText="maxCount"
@@ -22,10 +12,10 @@ const TextFieldMaxCount = (props: TextFieldMaxCountProps) => {
         placeholder="placeholder"
         color="primary"
       />
-    </div>
+    </Styled.Row>
   )
 }
 
 TextFieldMaxCount.displayName = 'TextFieldMaxCount'
 
-export default withStyles(styles)(TextFieldMaxCount)
+export default TextFieldMaxCount

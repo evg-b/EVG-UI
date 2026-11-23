@@ -1,20 +1,10 @@
-import type { TextFieldColorProps } from './TextFieldColor.types'
+import { TextField } from '@evg-b/evg-ui'
 
-import { TextField, withStyles } from '@evg-b/evg-ui'
+import * as Styled from '../../ExampleLayout.styled'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const TextFieldColor = (props: TextFieldColorProps) => {
-  const { classes } = props
+const TextFieldColor = () => {
   return (
-    <div className={classes.base}>
+    <Styled.Row>
       <TextField
         color="primary"
         labelText="primary"
@@ -26,10 +16,10 @@ const TextFieldColor = (props: TextFieldColorProps) => {
         placeholder="placeholder"
         outlined
       />
-    </div>
+    </Styled.Row>
   )
 }
 
 TextFieldColor.displayName = 'TextFieldColor'
 
-export default withStyles(styles)(TextFieldColor)
+export default TextFieldColor

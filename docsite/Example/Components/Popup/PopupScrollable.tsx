@@ -1,39 +1,22 @@
-import type { TooltipBaseProps } from './TooltipBase.types'
-
 import { useRef } from 'react'
-import { Button, Popup, Scroll, withStyles } from '@evg-b/evg-ui'
 
-const styles = {
-  base: {
-    display: 'flex',
-    flexWrap: 'wrap',
-    '&>*': {
-      margin: '5px'
-    }
-  }
-}
-const TooltipBase = (props: TooltipBaseProps) => {
-  const { classes } = props
-  const btn_ref = useRef<HTMLElement | null>(null)
+import { Button, Popup, Scroll } from '@evg-b/evg-ui'
+
+import * as Styled from './Popup.styled'
+
+const PopupScrollable = () => {
+  const target = useRef<HTMLElement>(null)
+
   return (
-    <Scroll
-      autoHide={false}
-      style={{ width: 200, maxHeight: 200, backgroundColor: 'rgba(0,0,0,.1)' }}>
-      <div style={{ height: 600, width: 600 }}>
-        <Button
-          ref={btn_ref}
-          variant="outlined"
-          style={{ margin: '75px 0 0 60px' }}>
-          Popup
-        </Button>
-        <Popup open target={btn_ref}>
-          Popup
-        </Popup>
-      </div>
-    </Scroll>
+    <Styled.Viewport as={Scroll} autoHide={false}>
+      <Styled.ScrollContent>
+        <Button ref={target} type="button" variant="outlined">Цель</Button>
+        <Popup open target={target}>Popup</Popup>
+      </Styled.ScrollContent>
+    </Styled.Viewport>
   )
 }
 
-TooltipBase.displayName = 'TooltipBase'
+PopupScrollable.displayName = 'PopupScrollable'
 
-export default withStyles(styles)(TooltipBase)
+export default PopupScrollable
