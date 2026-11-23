@@ -1,11 +1,11 @@
 import { useEffect, useRef, useState } from 'react'
 
+import Link from '@docusaurus/Link'
 import { useBaseUrlUtils } from '@docusaurus/useBaseUrl'
 import useDocusaurusContext from '@docusaurus/useDocusaurusContext'
 import Layout from '@theme/Layout'
 import { Button, Cubes, Image } from '@evg-b/evg-ui'
 
-import DocLink from '../components/DocLink'
 import SecretMessage from '../secretMessage'
 
 import * as Styled from './_Home.styled'
@@ -72,7 +72,7 @@ const Home = () => {
             <Styled.Previews>
               {previews.map(({ path, image }) => (
                 <Styled.PreviewLink
-                  as={DocLink}
+                  as={Link}
                   key={path}
                   to={`/docs/${path}`}
                   aria-label={image}>

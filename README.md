@@ -10,10 +10,10 @@
 
 ### Быстрый запуск
 
-В проекте с React и React DOM 19.3.1 установите EVG-UI и styled-components.
+В проекте с React и React DOM 19.3.1 установите EVG-UI.
 
 ```sh
-npm install @evg-b/evg-ui styled-components@6.6.0
+yarn add @evg-b/evg-ui
 ```
 
 [Установка](https://evg-b.github.io/EVG-UI/docs/GettingStarted/Installation/) · [Подключение к приложению](https://evg-b.github.io/EVG-UI/docs/GettingStarted/quick_start/)
@@ -204,7 +204,7 @@ JSX runtime, а правила Hooks проверяют порядок вызо�
 как совместимый способ получить тот же узел.
 
 Стенд создаёт корень через `createRoot` из `react-dom/client`. TypeScript,
-Vite и конфигурации Babel в корне и `docsite` используют automatic JSX runtime.
+Vite и Babel в `docsite` используют automatic JSX runtime.
 `TextField` создаёт уникальный id через `useId`, если потребитель не передал id.
 `TextField` и `Switch` поддерживают управляемое значение через `value`/`checked`
 и начальное значение через `defaultValue`/`defaultChecked`.
@@ -219,8 +219,9 @@ Vite и конфигурации Babel в корне и `docsite` использ
 в JSX: `<Styled.Action as={Button}>`. Значения только для CSS передаются
 через transient props с префиксом `$`.
 
-`styled-components` — peer dependency библиотеки `evg-ui`;
-приложение должно использовать общий экземпляр этой зависимости.
+`styled-components` устанавливается вместе с EVG-UI. Если приложение
+создаёт свои styled-компоненты и использует тему EVG-UI, ему нужен тот же
+экземпляр `styled-components`, что и библиотеке.
 
 Для темы используется цепочка `generateTokens` → `createTheme` → `ThemeProvider`.
 `generateTokens` принимает исходные цвета `primaryColor`, `secondaryColor`,

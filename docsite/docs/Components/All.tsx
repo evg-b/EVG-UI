@@ -1,9 +1,8 @@
 import { useEffect } from 'react'
 
+import Link from '@docusaurus/Link'
 import { useBaseUrlUtils } from '@docusaurus/useBaseUrl'
 import { Icon, Image } from '@evg-b/evg-ui'
-
-import DocLink from '../../src/components/DocLink'
 
 import * as Styled from './All.styled'
 
@@ -52,7 +51,7 @@ const All = () => {
   return (
     <Styled.Grid>
       {components.map((name) => (
-        <Styled.Card as={DocLink} key={name} to={`/docs/Components/${name}`}>
+        <Styled.Card as={Link} key={name} to={`/docs/Components/${name}`}>
           {name === 'Menu' ? (
             <Styled.MenuPreview>
               <Icon name="Menu" size={48} color="primary" />
